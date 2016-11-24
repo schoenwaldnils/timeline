@@ -21,9 +21,6 @@ url: http://timeline.schoenwald.media # the base hostname & protocol for your si
 permalink: :title/
 
 # Build settings
-gems:
-  - jekyll-assets
-
 exclude:
   - vendor
   - package.json
@@ -37,10 +34,3 @@ exclude:
   - npm-debug.log
   - node_modules
   - deploy.sh
-
-assets:
-  assets:
-    - 'index.css'
-    - 'index.js'
-  sources:
-    - lib
