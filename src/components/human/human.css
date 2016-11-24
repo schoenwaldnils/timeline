@@ -1,0 +1,12 @@
+/** @define Human */
+
+.Human {
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  padding-left: .25em;
+  margin-bottom: 1px;
+  font-family: monospace;
+  color: #fff;
+  background-color: var(--cb8);
+}

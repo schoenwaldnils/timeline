@@ -1,0 +1,17 @@
+---
+layout: base
+---
+<style>
+{% for human in site.data.people %}
+  .Human--{{ human.name}} {
+    width: calc({{ human.deathyear }}px - {{ human.birthyear }}px);
+    margin-left: calc({{ human.birthyear }}px + 4026px);
+  }
+{% endfor %}
+</style>
+{% for human in site.data.people %}
+  {% include Human.html
+    name=human.name
+    birthyear=human.birthyear
+    deathyear=human.deathyear %}
+{% endfor %}

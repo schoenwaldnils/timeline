@@ -1,6 +1,5 @@
 _site
 node_modules
-/build
 .publish
 .sass-cache
 .asset-cache
