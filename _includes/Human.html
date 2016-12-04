@@ -1,1 +1,2 @@
-<div class="Human Human--{{ include.name}}">{{ include.name | capitalize }}</div>
+{% assign human = include.human %}
+<a class="Human Human--{{ human.name}}" href="{{ human.id }}">{{ human.name }}</a>

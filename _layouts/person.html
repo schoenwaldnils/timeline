@@ -1,0 +1,25 @@
+---
+layout: base
+---
+
+<h1>{{page.name}}</h1>
+{% if page.childs %}
+  <h2>Childs</h2>
+  <ul>
+    {% for child in page.childs %}
+      {% capture child_hash %}/persons/{{child}}{% endcapture %}
+      {% assign childInCollection = site.persons | where:"id", child_hash | first %}
+      {% if childInCollection %}
+        <li><a href="/persons/{{child}}">{{ childInCollection.name }}</a></li>
+      {% else %}
+        <li>{{ child | capitalize }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}
+{% if page.wol_link %}
+  <a href="{{page.wol_link}}" target="_blank">Watchtower Library Entry: {{ page.name }}</a>
+{% endif %}
+{{content}}
+
+

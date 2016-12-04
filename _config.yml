@@ -27,10 +27,21 @@ exclude:
   - README.md
   - .gitignore
   - .env
-  - source
+  - src
   - Gemfile
   - Gemfile.lock
   - gulpfile.babel.js
   - npm-debug.log
   - node_modules
   - deploy.sh
+
+collections:
+  persons:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: persons
+    values:
+      layout: person
