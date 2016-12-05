@@ -1,21 +1,20 @@
 ---
-layout: base
+layout: boxed
 ---
-<h1>{{page.name}}</h1>
-{% if page.childs %}
-  <h2>Childs</h2>
-  <ul>
-    {% for child in page.childs %}
-      {% assign childInCollection = site.persons | where:"slug", child | first %}
-      {% if childInCollection %}
-        <li><a href="{{childInCollection.id}}">{{ childInCollection.name }}</a></li>
-      {% else %}
-        <li>{{ child | capitalize }}</li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-{% endif %}
-{% if page.wol_link %}
-  <a href="{{page.wol_link}}" target="_blank">Watchtower Library Entry: {{ page.name }}</a>
-{% endif %}
-{{content}}
+<div class="Person u-richText">
+  <h1>{{page.name}}</h1>
+  {% if page.childs %}
+    <h3>Childs</h3>
+    <ul>
+      {% for child in page.childs %}
+        {% assign childInCollection = site.persons | where:"slug", child | first %}
+        {% if childInCollection %}
+          <li><a href="{{childInCollection.id}}">{{ childInCollection.name }}</a></li>
+        {% else %}
+          <li>{{ child | capitalize }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {{content}}
+</div>

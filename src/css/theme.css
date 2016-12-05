@@ -93,6 +93,7 @@
    * Custom
    */
 
+  --max-width: 30rem;
   --time-animation: 300ms;
   --time-transition: 150ms;
 }
