@@ -10,18 +10,21 @@ layout: base
   }
 {% endfor %}
 {% for person in sorted_persons %}
+  {% if person.deathyear %}
+    {% assign deathyear = person.deathyear %}
+  {% else %}
+    {% capture deathyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
+  {% endif %}
   .Human--{{ person.name }} {
-    width: calc({{ person.deathyear }}px - {{ person.birthyear }}px);
+    width: calc({{ deathyear }}px - {{ person.birthyear }}px);
     margin-left: calc({{ person.birthyear }}px + 4026px);
   }
 {% endfor %}
 </style>
-<div class="Events">
+<div class="Timeline">
   {% for event in sorted_events %}
     {% include Event.html event=event %}
   {% endfor %}
-</div>
-<div class="Persons">
   {% for person in sorted_persons %}
     {% include Human.html human=person %}
   {% endfor %}
