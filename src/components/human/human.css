@@ -10,4 +10,8 @@
   font-family: monospace;
   color: #000;
   background-color: var(--cb6);
+
+  &:hover {
+    color: var(--cb2);
+  };
 }
