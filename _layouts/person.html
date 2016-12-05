@@ -1,16 +1,14 @@
 ---
 layout: base
 ---
-
 <h1>{{page.name}}</h1>
 {% if page.childs %}
   <h2>Childs</h2>
   <ul>
     {% for child in page.childs %}
-      {% capture child_hash %}/persons/{{child}}{% endcapture %}
-      {% assign childInCollection = site.persons | where:"id", child_hash | first %}
+      {% assign childInCollection = site.persons | where:"slug", child | first %}
       {% if childInCollection %}
-        <li><a href="/persons/{{child}}">{{ childInCollection.name }}</a></li>
+        <li><a href="{{childInCollection.id}}">{{ childInCollection.name }}</a></li>
       {% else %}
         <li>{{ child | capitalize }}</li>
       {% endif %}

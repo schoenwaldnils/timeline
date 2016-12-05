@@ -1,15 +1,28 @@
 ---
 layout: base
 ---
+{% assign sorted_events = (site.data.events | sort:"date") %}
 {% assign sorted_persons = (site.persons | sort:"birthyear") %}
 <style>
+{% for event in sorted_events %}
+  .Event--{{ event.name | downcase }} {
+    left: calc({{ event.year }}px + 4026px);
+  }
+{% endfor %}
 {% for person in sorted_persons %}
-  .Human--{{ person.name}} {
+  .Human--{{ person.name }} {
     width: calc({{ person.deathyear }}px - {{ person.birthyear }}px);
     margin-left: calc({{ person.birthyear }}px + 4026px);
   }
 {% endfor %}
 </style>
-{% for person in sorted_persons %}
-  {% include Human.html human=person %}
-{% endfor %}
+<div class="Events">
+  {% for event in sorted_events %}
+    {% include Event.html event=event %}
+  {% endfor %}
+</div>
+<div class="Persons">
+  {% for person in sorted_persons %}
+    {% include Human.html human=person %}
+  {% endfor %}
+</div>

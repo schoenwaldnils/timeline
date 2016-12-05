@@ -38,6 +38,7 @@ exclude:
 collections:
   persons:
     output: true
+    permalink: /person/:path/
 
 defaults:
   - scope:
