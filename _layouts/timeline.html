@@ -15,7 +15,7 @@ layout: base
   {% else %}
     {% capture deathyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
   {% endif %}
-  .Human--{{ person.name }} {
+  .Human--{{ person.slug }} {
     width: calc({{ deathyear }}px - {{ person.birthyear }}px);
     margin-left: calc({{ person.birthyear }}px + 4026px);
   }
