@@ -5,7 +5,7 @@ layout: base
 {% assign sorted_persons = (site.persons | sort:"birthyear") %}
 <style>
 {% for event in sorted_events %}
-  .Event--{{ event.name | downcase }} {
+  .Event--{{ event.name | pascalize }} {
     left: {{ event.year | yearcc }}px;
   }
 {% endfor %}
