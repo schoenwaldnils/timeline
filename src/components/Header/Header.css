@@ -1,0 +1,23 @@
+/** @define Header */
+
+.Header {
+  flex-shrink: 0;
+  height: 2.5rem;
+  margin-bottom: 3px;
+  color: var(--Header-color, #0ff);
+  background-color: var(--Header-background, #000);
+}
+
+.Header-content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.Header-title {
+  font-family: monospace;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}

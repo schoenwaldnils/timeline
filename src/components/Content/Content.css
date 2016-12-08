@@ -1,0 +1,8 @@
+/** @define Content */
+
+.Content {
+  flex-grow: 1;
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+}

@@ -31,4 +31,6 @@
    * Components
    */
 
+  --Header-color: var(--text-color);
+  --Header-background: #fff;
 }

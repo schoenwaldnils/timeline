@@ -3,8 +3,28 @@ layout: boxed
 ---
 <div class="Person u-richText">
   <h1>{{page.name}}</h1>
+  <p>Born: {{ page.birthyear }}</p>
+  {% if page.deathyear %}
+    <p>Died: {{ page.deathyear }}</p>
+  {% endif %}
+  {% if page.father %}
+    {% assign fatherInCollection = site.persons | where:"slug", page.father | first %}
+    {% if fatherInCollection %}
+      <p>Father: <a href="/person/{{ fatherInCollection.slug }}">{{ fatherInCollection.name }}</a></p>
+    {% else %}
+      <p>Father: {{ page.father }}</p>
+    {% endif %}
+  {% endif %}
+  {% if page.mother %}
+    {% assign motherInCollection = site.persons | where:"slug", page.mother | first %}
+    {% if motherInCollection %}
+      <p>Mother: <a href="/person/{{ motherInCollection.slug }}">{{ motherInCollection.name }}</a></p>
+    {% else %}
+      <p>Mother: {{ page.mother }}</p>
+    {% endif %}
+  {% endif %}
   {% if page.childs %}
-    <h3>Childs</h3>
+    <p>Childs</p>
     <ul>
       {% for child in page.childs %}
         {% assign childInCollection = site.persons | where:"slug", child | first %}
