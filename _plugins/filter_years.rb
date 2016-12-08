@@ -13,6 +13,17 @@ module Jekyll
       end
     end
 
+    # http://wol.jw.org/en/wol/d/r1/lp-e/102009094#h=2:0-4:1032
+    def bce(year)
+      year = year.to_i
+      if year < 0
+        year = year * -1
+        "#{year} B.C.E."
+      else
+        "#{year} C.E."
+      end
+    end
+
     def age(birthyear, deathyear)
       deathyear.to_i - birthyear.to_i
     end

@@ -3,9 +3,9 @@ layout: boxed
 ---
 <div class="Person u-richText">
   <h1>{{page.name}}</h1>
-  <p>Born: {{ page.birthyear }}</p>
+  <p>Born: {{ page.birthyear | bce }}</p>
   {% if page.deathyear %}
-    <p>Died: {{ page.deathyear }}</p>
+    <p>Died: {{ page.deathyear | bce }}</p>
   {% endif %}
   {% if page.father %}
     {% assign fatherInCollection = site.persons | where:"slug", page.father | first %}
