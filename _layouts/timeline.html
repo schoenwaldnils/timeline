@@ -6,7 +6,7 @@ layout: base
 <style>
 {% for event in sorted_events %}
   .Event--{{ event.name | downcase }} {
-    left: calc({{ event.year }}px + 4026px);
+    left: {{ event.year | yearcc }}px;
   }
 {% endfor %}
 {% for person in sorted_persons %}
@@ -16,8 +16,8 @@ layout: base
     {% capture deathyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
   {% endif %}
   .Human--{{ person.slug }} {
-    width: calc({{ deathyear }}px - {{ person.birthyear }}px);
-    margin-left: calc({{ person.birthyear }}px + 4026px);
+    width: {{ person.birthyear | age:deathyear }}px;
+    margin-left: {{ person.birthyear | yearcc }}px;
   }
 {% endfor %}
 </style>
