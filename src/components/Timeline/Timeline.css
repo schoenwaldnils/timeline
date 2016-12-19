@@ -5,3 +5,28 @@
   width: 6041px;
   font-size: 8px;
 }
+
+.Timeline-scale {
+  &::before {
+    left: 0;
+    width: 4026px;
+    background: linear-gradient(to left, transparent 99%, #555 99%);
+    background-position-x: right;
+  }
+
+  &::after {
+    left: 4026px;
+    width: calc(100% - 4026px);
+    background: linear-gradient(to right, transparent 99%, #555 99%);
+    background-position-x: 0;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-size: 100px;
+  }
+}

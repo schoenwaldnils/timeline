@@ -5,7 +5,7 @@ layout: base
 {% assign sorted_persons = (site.persons | sort:"birthyear") %}
 <style>
 {% for event in sorted_events %}
-  .Event--{{ event.name | pascalize }} {
+  .Event[data-year='{{ event.year }}'] {
     left: {{ event.year | yearcc }}px;
   }
 {% endfor %}
@@ -22,6 +22,7 @@ layout: base
 {% endfor %}
 </style>
 <div class="Timeline">
+  <div class="Timeline-scale"></div>
   {% for event in sorted_events %}
     {% include Event.html event=event %}
   {% endfor %}

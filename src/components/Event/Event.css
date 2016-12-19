@@ -11,10 +11,23 @@
   color: #fff;
   background-color: var(--cb7);
 
-  &::after {
-    content: attr(data-name);
+  &::before {
+    content: '(' attr(data-year) ')';
     position: absolute;
     top: 0;
     left: calc(100% + 5px);
+    white-space: nowrap;
   }
+
+  &::after {
+    content: attr(data-name);
+    position: absolute;
+    top: 1.4em;
+    left: calc(100% + 5px);
+    white-space: nowrap;
+  }
+}
+
+.Event:not([data-name])::before {
+  content: attr(data-year);
 }

@@ -1,7 +1,7 @@
 ---
 layout: boxed
 ---
-<div class="Person u-richText">
+<div class="Person">
   <h1>{{page.name}}</h1>
   <p>Born: {{ page.birthyear | bce }}</p>
   {% if page.deathyear %}
@@ -10,7 +10,7 @@ layout: boxed
   {% if page.father %}
     {% assign fatherInCollection = site.persons | where:"slug", page.father | first %}
     {% if fatherInCollection %}
-      <p>Father: <a href="/person/{{ fatherInCollection.slug }}">{{ fatherInCollection.name }}</a></p>
+      <p>Father: <a href="{{ fatherInCollection.id }}">{{ fatherInCollection.name }}</a></p>
     {% else %}
       <p>Father: {{ page.father }}</p>
     {% endif %}
@@ -18,7 +18,7 @@ layout: boxed
   {% if page.mother %}
     {% assign motherInCollection = site.persons | where:"slug", page.mother | first %}
     {% if motherInCollection %}
-      <p>Mother: <a href="/person/{{ motherInCollection.slug }}">{{ motherInCollection.name }}</a></p>
+      <p>Mother: <a href="{{ motherInCollection.id }}">{{ motherInCollection.name }}</a></p>
     {% else %}
       <p>Mother: {{ page.mother }}</p>
     {% endif %}
@@ -29,7 +29,7 @@ layout: boxed
       {% for child in page.childs %}
         {% assign childInCollection = site.persons | where:"slug", child | first %}
         {% if childInCollection %}
-          <li><a href="{{childInCollection.id}}">{{ childInCollection.name }}</a></li>
+          <li><a href="{{ childInCollection.id }}">{{ childInCollection.name }}</a></li>
         {% else %}
           <li>{{ child | capitalize }}</li>
         {% endif %}

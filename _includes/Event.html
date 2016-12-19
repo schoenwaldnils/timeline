@@ -1,2 +1,2 @@
 {% assign event = include.event %}
-<div class="Event Event--{{ event.name | pascalize }}" data-name="{{ event.name }}"></div>
+<div class="Event" {% if event.name %} data-name="{{ event.name }}" {% endif %} data-year="{{ event.year }}"></div>
