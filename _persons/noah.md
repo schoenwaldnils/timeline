@@ -5,7 +5,7 @@ deathyear: -2020
 gender: male
 father: lamech
 childs:
-  - sem
+  - shem
   - ham
-  - japhet
+  - japheth
 ---

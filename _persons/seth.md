@@ -5,5 +5,5 @@ deathyear: -3089
 gender: male
 father: adam
 childs:
-  - enosch
+  - enosh
 ---
