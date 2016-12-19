@@ -1,0 +1,34 @@
+@font-face {
+    font-family: WtClearText;
+    src: url(/assets/fonts/ClearTextBold.woff) format("woff"),url(/assets/fonts/ClearTextBold.ttf) format("truetype");
+    font-weight: 700;
+    font-style: normal
+}
+
+@font-face {
+    font-family: WtClearText;
+    src: url(/assets/fonts/ClearTextBoldItalic.woff) format("woff"),url(/assets/fonts/ClearTextBoldItalic.ttf) format("truetype");
+    font-weight: 700;
+    font-style: italic
+}
+
+@font-face {
+    font-family: WtClearText;
+    src: url(/assets/fonts/ClearTextMedium.woff) format("woff"),url(/assets/fonts/ClearTextMedium.ttf) format("truetype");
+    font-weight: 500;
+    font-style: normal
+}
+
+@font-face {
+    font-family: WtClearText;
+    src: url(/assets/fonts/ClearTextMediumItalic.woff) format("woff"),url(/assets/fonts/ClearTextMediumItalic.ttf) format("truetype");
+    font-weight: 500;
+    font-style: italic
+}
+
+@font-face {
+    font-family: WtClearTextSC;
+    src: url(/assets/fonts/ClearTextSCMedium.woff) format("woff"),url(/assets/fonts/ClearTextSCMedium.ttf) format("truetype");
+    font-weight: 500;
+    font-style: normal
+}
