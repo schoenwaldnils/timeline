@@ -24,8 +24,8 @@ module Jekyll
       end
     end
 
-    def age(birthyear, deathyear)
-      deathyear.to_i - birthyear.to_i
+    def period(startyear, endyear)
+      endyear.to_i - startyear.to_i
     end
   end
 end
