@@ -1,7 +1,7 @@
 ---
 name: Noah
-birthyear: -2970
-deathyear: -2020
+birthyear: -2968
+deathyear: -2018
 gender: male
 father: lamech
 childs:

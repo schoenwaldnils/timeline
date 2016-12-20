@@ -1,7 +1,7 @@
 ---
 name: Shem
-birthyear: -2470
-deathyear: -1870
+birthyear: -2468
+deathyear: -1868
 gender: male
 father: noah
 childs:

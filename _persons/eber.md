@@ -1,7 +1,7 @@
 ---
 name: Eʹber
-birthyear: -2305
-deathyear: -1831
+birthyear: -2303
+deathyear: -1839
 gender: male
 father: shelah
 childs:

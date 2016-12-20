@@ -1,7 +1,7 @@
 ---
 name: Teʹrah
-birthyear: -2150
-deathyear: -1945
+birthyear: -2148
+deathyear: -1943
 gender: male
 father: nahor
 childs:

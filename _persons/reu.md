@@ -1,7 +1,7 @@
 ---
 name: Reʹu
-birthyear: -2241
-deathyear: -2002
+birthyear: -2239
+deathyear: -2000
 gender: male
 father: peleg
 childs:

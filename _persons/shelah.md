@@ -1,7 +1,7 @@
 ---
 name: Sheʹlah
-birthyear: -2335
-deathyear: -1902
+birthyear: -2333
+deathyear: -1900
 gender: male
 father: arpachshad
 childs:
