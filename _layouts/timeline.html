@@ -1,14 +1,10 @@
 ---
 layout: base
 ---
-{% assign sorted_events = (site.data.events | sort:"date") %}
 {% assign sorted_persons = (site.persons | sort:"birthyear") %}
+{% assign sorted_times = (site.data.times | sort:"start") %}
+{% assign sorted_events = (site.data.events | sort:"date") %}
 <style>
-{% for event in sorted_events %}
-  .Event[data-year='{{ event.year }}'] {
-    left: {{ event.year | yearcc }}px;
-  }
-{% endfor %}
 {% for person in sorted_persons %}
   {% if person.deathyear %}
     {% assign deathyear = person.deathyear %}
@@ -16,17 +12,36 @@ layout: base
     {% capture deathyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
   {% endif %}
   .Human--{{ person.slug }} {
-    width: {{ person.birthyear | age:deathyear }}px;
+    width: {{ person.birthyear | period:deathyear }}px;
     margin-left: {{ person.birthyear | yearcc }}px;
+  }
+{% endfor %}
+{% for time in sorted_times %}
+  {% if time.endyear %}
+    {% assign endyear = time.endyear %}
+  {% else %}
+    {% capture endyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
+  {% endif %}
+  .Time--{{ time.name | pascalize }} {
+    width: {{ time.startyear | period:endyear }}px;
+    margin-left: {{ time.startyear | yearcc }}px;
+  }
+{% endfor %}
+{% for event in sorted_events %}
+  .Event[data-year='{{ event.year }}'] {
+    left: {{ event.year | yearcc }}px;
   }
 {% endfor %}
 </style>
 <div class="Timeline">
   <div class="Timeline-scale"></div>
-  {% for event in sorted_events %}
-    {% include Event.html event=event %}
-  {% endfor %}
   {% for person in sorted_persons %}
     {% include Human.html human=person %}
+  {% endfor %}
+  {% for time in sorted_times %}
+    {% include Time.html time=time %}
+  {% endfor %}
+  {% for event in sorted_events %}
+    {% include Event.html event=event %}
   {% endfor %}
 </div>

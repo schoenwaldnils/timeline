@@ -1,0 +1,17 @@
+/** @define Time */
+
+.Time {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 2em;
+  padding-left: .5em;
+  margin-bottom: 1px;
+  font-family: monospace;
+  color: #000;
+  background-color: var(--cbA);
+
+  &:hover {
+    color: var(--cb2);
+  };
+}
