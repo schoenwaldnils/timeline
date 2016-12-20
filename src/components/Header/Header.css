@@ -9,14 +9,20 @@
 
 .Header-content {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
-  padding-right: 3rem;
-  padding-left: 3rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .Header-title {
   font-family: monospace;
   font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.Header-nav {
+  font-family: monospace;
   text-transform: uppercase;
 }
