@@ -9,7 +9,7 @@
   margin-bottom: 1px;
   font-family: monospace;
   color: #000;
-  background-color: var(--cb6);
+  background-color: var(--cbB);
 
   &:hover {
     color: var(--cb2);
