@@ -25,7 +25,11 @@ module Jekyll
     end
 
     def period(startyear, endyear)
-      endyear.to_i - startyear.to_i
+      calced_period = endyear.to_i - startyear.to_i
+      if startyear < 0 and endyear > 0
+        calced_period = calced_period - 1
+      end
+      calced_period
     end
   end
 end
