@@ -1,8 +1,17 @@
 ---
 layout: boxed
 ---
+
+{% if page.deathyear %}
+  {% assign deathyear = page.deathyear %}
+{% else %}
+  {% capture deathyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
+{% endif %}
+
+
 <div class="Person">
   <h1>{{page.name}}</h1>
+  <p>Years lived: {{ page.birthyear | period:deathyear }}</p>
   <p>Born: {{ page.birthyear | bce }}</p>
   {% if page.deathyear %}
     <p>Died: {{ page.deathyear | bce }}</p>
