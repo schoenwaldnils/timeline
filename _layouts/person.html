@@ -12,9 +12,9 @@ layout: boxed
 <div class="Person">
   <h1>{{page.name}}</h1>
   <p>Years lived: {{ page.birthyear | period:deathyear }}</p>
-  <p>Born: {{ page.birthyear | bce }}</p>
+  <p>Birth: {{ page.birthyear | bce }}</p>
   {% if page.deathyear %}
-    <p>Died: {{ page.deathyear | bce }}</p>
+    <p>Death: {{ page.deathyear | bce }}</p>
   {% endif %}
   {% if page.father %}
     {% assign fatherInCollection = site.persons | where:"slug", page.father | first %}
@@ -33,7 +33,7 @@ layout: boxed
     {% endif %}
   {% endif %}
   {% if page.childs %}
-    <p>Childs</p>
+    <p>Childs:</p>
     <ul>
       {% for child in page.childs %}
         {% assign childInCollection = site.persons | where:"slug", child | first %}

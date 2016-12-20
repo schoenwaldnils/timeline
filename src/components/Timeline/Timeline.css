@@ -9,9 +9,8 @@
 
 .Timeline-scale {
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
   margin-bottom: 2.8em;
+  padding-right: 17px;
   padding-left: 26px;
 
   &::before {
@@ -38,8 +37,22 @@
   }
 }
 
+.Timeline-negativeNumbers {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.Timeline-positiveNumbers {
+  display: flex;
+  margin-left: 100px;
+}
+
 .Timeline-scaleNumber {
   width: 100px;
   padding-left: .25rem;
   font-family: monospace;
+}
+
+.Timeline-positiveNumbers .Timeline-scaleNumber:first-child {
+  width: 99px;
 }
