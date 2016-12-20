@@ -11,7 +11,30 @@
   color: #000;
   background-color: var(--cbB);
 
-  &:hover {
+  &::before,
+  &::after {
+    content: attr(data-name);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-left: .5em;
+  }
+
+  &::before {
+    color: #fff;
+  }
+
+  &::after {
+    width: 100%;
+    color: #000;
+    text-shadow: 0 0;
+    overflow: hidden;
+  }
+
+  &:hover::after {
     color: var(--cb2);
   };
 }
