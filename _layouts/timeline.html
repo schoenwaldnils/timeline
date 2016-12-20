@@ -34,7 +34,11 @@ layout: base
 {% endfor %}
 </style>
 <div class="Timeline">
-  <div class="Timeline-scale"></div>
+  <div class="Timeline-scale">
+    {% for number in (1..40) %}
+      <div class="Timeline-scaleNumber">{{ number | times:-100 }}</div>
+    {% endfor %}
+  </div>
   {% for person in sorted_persons %}
     {% include Human.html human=person %}
   {% endfor %}
