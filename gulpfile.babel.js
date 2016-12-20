@@ -60,7 +60,6 @@ gulp.task('build:css', () => {
       postcssImport({ glob: true }),
       postcssUrl(),
       postcssNested(),
-      postcssCustomProperties(),
       postcssCalc(),
       postcssColorFunction(),
       postcssCustomMedia(),
