@@ -1,10 +1,19 @@
 <header class="Header">
   <div class="Header-content">
     <a class="Header-title" href="/">Timeline</a>
-    <nav class="Header-nav">
+    <nav class="Header-nav Header-nav--main">
       <ul class="Header-list">
         <li class="Header-listItem">
-          <a href="/persons" class="Header-link">Persons</a>
+          <a href="/persons" class="Header-link Header-link--persons">Persons</a>
+          <nav class="Header-subNav">
+            <ul class="Header-subList u-richText">
+              {% for person in site.persons %}
+                <li>
+                  <a class="Header-subLink" href="{{ person.id }}" data-name="{{ person.slug }}">{{ person.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
         </li>
       </ul>
     </nav>

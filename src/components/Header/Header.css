@@ -1,8 +1,12 @@
 /** @define Header */
 
+:root {
+  --Header-height: 2.5rem;
+}
+
 .Header {
   flex-shrink: 0;
-  height: 2.5rem;
+  height: var(--Header-height);
   color: var(--Header-color, #0ff);
   background-color: var(--Header-background, #000);
 }
@@ -22,7 +26,29 @@
   text-transform: uppercase;
 }
 
-.Header-nav {
+.Header-link--persons {
   font-family: monospace;
   text-transform: uppercase;
+}
+
+.Header-subNav {
+  position: fixed;
+  top: var(--Header-height);
+  right: 0;
+  height: calc(100vh - var(--Header-height));
+  z-index: 2;
+  font-size: .8rem;
+  transition: transform var(--time-animation) ease-out;
+  transform: translateX(100%);
+  overflow: hidden;
+}
+
+.Header-subNav.is-active {
+  transform: translateX(0);
+}
+
+.Header-subList {
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--Header-background, #000);
 }
