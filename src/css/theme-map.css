@@ -27,6 +27,9 @@
    * Z-Index Applications
    */
 
+   --z-human-active: var(--z-index-1);
+   --z-submenu: var(--z-index-2);
+
   /**
    * Components
    */

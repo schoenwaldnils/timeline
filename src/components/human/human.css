@@ -10,6 +10,7 @@
   font-family: monospace;
   color: #000;
   background-color: var(--cbB);
+  cursor: pointer;
 
   &::before,
   &::after {
@@ -37,4 +38,36 @@
   &:hover::after {
     color: var(--cb2);
   };
+}
+
+.Human:focus {
+  background-color: #fff;
+  z-index: var(--z-human-active);
+  outline: none;
+  text-decoration: underline;
+}
+
+.Human-info {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: .4em .5em;
+  color: var(--text-color);
+  background-color: #fff;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-duration: var(--time-animation);
+  pointer-events: none;
+}
+
+.Human:focus .Human-info {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.Human-tableCell {
+  vertical-align: top;
+  white-space: nowrap;
 }

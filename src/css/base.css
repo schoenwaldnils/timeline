@@ -37,3 +37,15 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+table {
+  border-spacing: 0;
+}
+
+td {
+  padding: 0;
+}
+
+td:not(:last-child) {
+  padding-right: .25em;
+}
