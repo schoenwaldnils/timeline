@@ -5,5 +5,5 @@ deathyear: -2736
 gender: male
 father: kenan
 childs:
-  - enoch
+  - jared
 ---
