@@ -18,5 +18,5 @@ branches:
 env:
   global:
     NOKOGIRI_USE_SYSTEM_LIBRARIES: true # speeds up installation of html-proofer
-    ENCRYPTION_LABEL: "1d97a522c7ba"
+    ENCRYPTION_LABEL: "aef673239dae"
     COMMIT_AUTHOR_EMAIL: "bot@schoenwald.media"
