@@ -5,21 +5,21 @@
   display: flex;
   align-items: center;
   height: 2em;
-  padding-left: .5em;
   margin-bottom: 1px;
+  padding-left: .5em;
   font-family: monospace;
   color: #000;
-  background-color: var(--cbB);
   cursor: pointer;
+  background-color: var(--cbB);
 
   &::before,
   &::after {
     content: attr(data-name);
-    display: flex;
-    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
+    display: flex;
+    align-items: center;
     height: 100%;
     padding-left: .5em;
   }
@@ -30,9 +30,9 @@
 
   &::after {
     width: 100%;
+    overflow: hidden;
     color: #000;
     text-shadow: 0 0;
-    overflow: hidden;
   }
 
   &:hover::after {
@@ -41,10 +41,10 @@
 }
 
 .Human:focus {
-  background-color: #fff;
   z-index: var(--z-human-active);
-  outline: none;
   text-decoration: underline;
+  background-color: #fff;
+  outline: none;
 }
 
 .Human-info {
@@ -53,21 +53,21 @@
   left: 0;
   padding: .4em .5em;
   color: var(--text-color);
-  background-color: #fff;
-  transform: translateY(-100%);
-  opacity: 0;
-  transition-property: transform, opacity;
-  transition-duration: var(--time-animation);
   pointer-events: none;
+  background-color: #fff;
+  opacity: 0;
+  transform: translateY(-30%);
+  transition-duration: var(--time-animation);
+  transition-property: transform, opacity;
 }
 
 .Human:focus .Human-info {
-  transform: translateY(0);
-  opacity: 1;
   pointer-events: initial;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .Human-tableCell {
-  vertical-align: top;
   white-space: nowrap;
+  vertical-align: top;
 }

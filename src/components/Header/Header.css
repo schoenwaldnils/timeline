@@ -35,12 +35,12 @@
   position: fixed;
   top: var(--Header-height);
   right: 0;
-  height: calc(100vh - var(--Header-height));
   z-index: var(--z-submenu);
-  font-size: .8rem;
-  transition: transform var(--time-animation) ease-out;
-  transform: translateX(100%);
+  height: calc(100vh - var(--Header-height));
   overflow: hidden;
+  font-size: .8rem;
+  transform: translateX(100%);
+  transition: transform var(--time-animation) ease-out;
 }
 
 .Header-subNav.is-active {

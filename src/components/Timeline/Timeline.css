@@ -3,9 +3,9 @@
 .Timeline {
   position: relative;
   width: 6041px;
+  padding-bottom: 1rem;
   font-size: 10px;
   color: #fff;
-  padding-bottom: 1rem;
 }
 
 .Timeline-scale {

@@ -4,8 +4,8 @@
   position: absolute;
   top: 0;
   display: block;
-  height: 100%;
   width: 1px;
+  height: 100%;
   font-family: monospace;
   line-height: 1.5em;
   color: #fff;

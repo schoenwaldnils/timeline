@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
   height: 2em;
-  padding-left: .5em;
   margin-bottom: 1px;
+  padding-left: .5em;
   font-family: monospace;
   white-space: nowrap;
   background-color: var(--cbA);
@@ -14,11 +14,11 @@
   &::before,
   &::after {
     content: attr(data-name);
-    display: flex;
-    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
+    display: flex;
+    align-items: center;
     height: 100%;
     padding-left: .5em;
   }
@@ -29,8 +29,8 @@
 
   &::after {
     width: 100%;
+    overflow: hidden;
     color: #000;
     text-shadow: 0 0;
-    overflow: hidden;
   }
 }
