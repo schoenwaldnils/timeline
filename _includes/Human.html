@@ -1,4 +1,11 @@
 {% assign human = include.human %}
+
+{% if human.deathyear %}
+  {% assign deathyear = human.deathyear %}
+{% else %}
+  {% capture deathyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
+{% endif %}
+
 <div class="Human Human--{{ human.slug }}" data-name="{{ human.name }}" tabindex="0">
   <div class="Human-info">
     <table>
