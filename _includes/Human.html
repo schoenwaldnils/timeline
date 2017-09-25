@@ -6,7 +6,7 @@
   {% capture deathyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
 {% endif %}
 
-<div class="Human Human--{{ human.slug }}" data-name="{{ human.name }}" tabindex="0">
+<div id="{{ human.slug }}" class="Human Human--{{ human.slug }}" data-name="{{ human.name }}" tabindex="0" data-scroll>
   <div class="Human-info">
     <table>
       <tr>
@@ -55,7 +55,7 @@
               {% for child in human.childs %}
                 {% assign childInCollection = site.persons | where:"slug", child | first %}
                 {% if childInCollection %}
-                  <li><a href="{{ childInCollection.id }}">{{ childInCollection.name }}</a></li>
+                  <li>{{ childInCollection.name }}</li>
                 {% else %}
                   <li>{{ child | capitalize }}</li>
                 {% endif %}

@@ -8,7 +8,6 @@ layout: boxed
   {% capture deathyear %}{{'now' | date: "%Y" | times: 1 }}{% endcapture %}
 {% endif %}
 
-
 <div class="Person">
   <h1>{{page.name}}</h1>
   <p>Years lived: {{ page.birthyear | period:deathyear }}</p>

@@ -62,5 +62,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.4"
+    "sweet-scroll": "^2.2.0"
   }
 }

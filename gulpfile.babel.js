@@ -79,7 +79,6 @@ function compileJS(flag) {
       .pipe(plumber())
       .pipe(source(main.js))
       .pipe(buffer())
-      .pipe(uglify())
       .pipe(gulp.dest(dirs.dest));
   }
 
