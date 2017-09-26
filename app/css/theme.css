@@ -1,0 +1,97 @@
+/*
+ * Theme definition
+ *
+ * This defines the theme in fundamental terms.
+ */
+
+/*
+ * Breakpoints
+ */
+@custom-media --viewport-sm (min-width: 480px);
+@custom-media --viewport-md (min-width: 768px);
+@custom-media --viewport-lg (min-width: 992px);
+
+/*
+ * Content Widths
+ * 1. TODO: propose to replace with --content-width.
+ */
+:root {
+  --base-unit: 8px;
+
+  /*
+  * Colors
+  */
+
+  /*
+   * Colors
+   */
+
+  --cb0: #2d2d2d;
+  --cb1: #444;
+  --cb2: #515151;
+  --cb3: #7c7c7c;
+  --cb4: #bbb;
+  --cb5: #ccc;
+  --cb6: #e6e6e6;
+  --cb7: #f2f2f2;
+  --cb8: #f2777a;
+  --cb9: #f99157;
+  --cbA: #fc6;
+  --cbB: #9c9;
+  --cbC: #6cc;
+  --cbD: #69c;
+  --cbE: #c9c;
+  --cbF: #d27b53;
+
+  --color-error: #da2000;
+  --color-warning: #edba00;
+
+  --color-red: var(--cb8);
+  --color-orange: var(--cb9);
+  --color-wellow: var(--cbA);
+  --color-green: var(--cbB);
+  --color-cyan: var(--cbC);
+  --color-blue: var(--cbD);
+  --color-purple: var(--cbE);
+  --color-brown: var(--cbF);
+
+  --text-color: var(--cb0);
+  --link-color: var(--cbD);
+  --link-color-hover: var(--text-color);
+
+  --body-background-color: var(--cb0);
+
+
+  /*
+  * Typography
+  */
+
+  --font-size: 1rem;
+  --font-family: WtClearText, Georgia, serif;
+  --font-weight: 500;
+  --line-height: 1.4;
+
+  --font-size-alpha: 2rem;
+  --font-size-beta: 1.5rem;
+  --font-size-gamma: 1rem;
+
+  /**
+   * Z-Indexes
+   */
+
+  --z-human-active: 100;
+  --z-submenu: 110;
+
+  /**
+   * Times
+   */
+
+  --time-animation: 300ms;
+  --time-transition: 150ms;
+
+  /**
+   * Components
+   */
+
+  --Header-height: 2.5rem;
+}

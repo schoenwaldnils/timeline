@@ -1,0 +1,59 @@
+/** @define Header */
+
+:root {
+  --Header-color: var(--text-color);
+  --Header-background: #fff;
+}
+
+.Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-shrink: 0;
+  width: 100vw;
+  height: var(--Header-height);
+  color: var(--Header-color, #0ff);
+  background-color: var(--Header-background, #000);
+}
+
+.Header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.Header-title {
+  font-family: monospace;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.Header-link--persons {
+  font-family: monospace;
+  text-transform: uppercase;
+}
+
+.Header-subNav {
+  position: fixed;
+  top: var(--Header-height);
+  right: 0;
+  z-index: var(--z-submenu);
+  height: calc(100vh - var(--Header-height));
+  overflow: hidden;
+  font-size: .8rem;
+  transform: translateX(100%);
+  transition: transform var(--time-animation) ease-out;
+}
+
+.Header-subNav.is-active {
+  transform: translateX(0);
+}
+
+.Header-subList {
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--Header-background, #000);
+}

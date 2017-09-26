@@ -1,11 +1,4 @@
-language: ruby
-rvm:
-  - 2.3.0
-
-before_install:
-  - bundle install
-  - nvm install node
-  - npm install
+language: node
 
 script: npm run lint
 
