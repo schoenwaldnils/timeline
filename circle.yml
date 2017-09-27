@@ -1,0 +1,9 @@
+machine:
+  services:
+    - docker
+
+deployment:
+  hub:
+    branch: nextjs
+    commands:
+      - docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
