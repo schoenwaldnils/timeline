@@ -10,7 +10,8 @@
     "build": "next build",
     "export": "NODE_ENV=production next build && next export",
     "start": "npm run dev",
-    "lint": "stylelint \"app/**/*.css\" --formatter verbose --fix"
+    "lint": "stylelint \"app/**/*.css\" --formatter verbose --fix",
+    "deploy": "gh-pages -d out"
   },
   "keywords": [],
   "author": "",
