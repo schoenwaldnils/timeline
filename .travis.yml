@@ -5,8 +5,7 @@ language: node_js
 services:
   - docker
 
-before_install:
-  - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+install: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 script: docker-compose exec nextjs /bin/sh -c "npm run lint"
 
