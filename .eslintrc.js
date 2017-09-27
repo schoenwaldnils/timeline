@@ -29,6 +29,7 @@ module.exports = {
         ],
       },
     ],
+    'react/no-danger': 0,
     'strict': 0,
     'prefer-template': 0,
     'consistent-return': 0,

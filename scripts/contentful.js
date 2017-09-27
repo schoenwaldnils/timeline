@@ -7,13 +7,27 @@ const client = contentful.createClient({
 
 async function getEntries(type) {
   const entries = [];
+  let orderBy = '';
+
+  switch (type) {
+    case 'person':
+      orderBy = 'fields.birth';
+      break;
+    case 'time':
+      orderBy = 'fields.startYear';
+      break;
+    case 'event':
+      orderBy = 'fields.year';
+      break;
+    default:
+  }
 
   try {
     const res = await client.getEntries({
       content_type: type,
       select: 'sys.id',
+      order: orderBy,
     });
-    console.log(res);
     res.items.map((item) => {
       entries.push(item.sys.id);
       return true;
@@ -27,8 +41,8 @@ async function getEntries(type) {
 
 async function getFields(id) {
   try {
-    const res = await client.getEntry(id);
-    const fields = res.fields;
+    const res = await client.getEntries({ 'sys.id': id });
+    const fields = res.items[0].fields;
     return fields;
   } catch (exception) {
     return console.error(exception);

@@ -48,7 +48,7 @@
 
   --color-red: var(--cb8);
   --color-orange: var(--cb9);
-  --color-wellow: var(--cbA);
+  --color-yellow: var(--cbA);
   --color-green: var(--cbB);
   --color-cyan: var(--cbC);
   --color-blue: var(--cbD);
@@ -79,7 +79,7 @@
    * Z-Indexes
    */
 
-  --z-human-active: 100;
+  --z-element-active: 100;
   --z-submenu: 110;
 
   /**

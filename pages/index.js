@@ -5,12 +5,12 @@ import timeperiod from '../app/js/utils';
 import Header from '../app/components/Header/Header';
 import Timeline from '../app/components/Timeline/Timeline';
 
-const Page = ({ persons }) => {
+const Page = ({ persons, times, events }) => {
   return (
     <div className="Page">
       <Header />
       <section className="Page-wrapTimeline" role="main">
-        <Timeline persons={persons} />
+        <Timeline persons={persons} times={times} events={events} />
       </section>
     </div>
   );
@@ -18,7 +18,6 @@ const Page = ({ persons }) => {
 
 Page.getInitialProps = async () => {
   const personEntries = await getEntries('person');
-
   const persons = await Promise.all(personEntries.map(async (person) => {
     const personFields = await getFields(person);
     if (personFields.image) {
@@ -34,17 +33,41 @@ Page.getInitialProps = async () => {
     return personFields;
   }));
 
+  const timeEntries = await getEntries('time');
+  const times = await Promise.all(timeEntries.map(async (time) => {
+    const timeFields = await getFields(time);
+    if (timeFields.startYear) {
+      timeFields.duration = timeperiod(
+        timeFields.startYear,
+        timeFields.endYear || new Date().getFullYear());
+    }
+    return timeFields;
+  }));
+
+  const eventEntries = await getEntries('event');
+  const events = await Promise.all(eventEntries.map(async (event) => {
+    const eventFields = await getFields(event);
+    return eventFields;
+  }));
+
+
   return {
     persons,
+    times,
+    events,
   };
 };
 
 Page.propTypes = {
   persons: PropTypes.array,
+  times: PropTypes.array,
+  events: PropTypes.array,
 };
 
 Page.defaultProps = {
   persons: null,
+  times: null,
+  events: null,
 };
 
 export default Page;

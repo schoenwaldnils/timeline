@@ -1,6 +1,6 @@
-/** @define Person */
+/** @define Time */
 
-.Person {
+.Time {
   position: relative;
   display: flex;
   align-items: center;
@@ -8,12 +8,12 @@
   margin-bottom: 1px;
   padding-left: .5em;
   font-family: monospace;
-  color: #000;
+  white-space: nowrap;
   cursor: pointer;
-  background-color: var(--color-green);
+  background-color: var(--color-yellow);
 }
 
-.Person-name {
+.Time-title {
   position: absolute;
   top: 0;
   left: 0;
@@ -21,15 +21,10 @@
   align-items: center;
   height: 100%;
   padding-left: .5em;
+  color: #000;
 }
 
-.Person:focus {
-  z-index: var(--z-element-active);
-  text-decoration: underline;
-  outline: none;
-}
-
-.Person-info {
+.Time-info {
   position: absolute;
   top: 100%;
   left: 0;
@@ -43,14 +38,19 @@
   transition-property: transform, opacity;
 }
 
-.Person:focus .Person-info {
+.Time:focus {
+  z-index: var(--z-element-active);
+  text-decoration: underline;
+  outline: none;
+}
+
+.Time:focus .Time-info {
   pointer-events: initial;
   opacity: 1;
   transform: translateY(0);
 }
 
-.Person-tableCell {
-  padding: .25em;
+.Time-tableCell {
   white-space: nowrap;
   vertical-align: top;
 }
