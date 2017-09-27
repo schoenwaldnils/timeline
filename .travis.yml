@@ -6,6 +6,7 @@ services:
   - docker
 
 before_install:
+  - sudo groupadd --gid 1000 dockerbuild && sudo usermod -a -G 1000 $USER && sudo chown -R :dockerbuild .
   - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 script: npm run lint
