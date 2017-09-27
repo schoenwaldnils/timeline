@@ -1,21 +1,23 @@
 sudo: required
 
 language: node_js
+node_js:
+  - "8.4.0"
 
 services:
   - docker
 
 install: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
-script: docker-compose exec nextjs /bin/sh -c "npm run lint"
+script: npm run lint
 
 before_deploy:
-  - docker-compose exec nextjs /bin/sh -c "npm run export"
+  - npm run export
 
 deploy:
   skip_cleanup: true
   provider: script
-  script: docker-compose exec nextjs /bin/sh -c "$TRAVIS_BUILD_DIR/deploy.sh"
+  script: bash $TRAVIS_BUILD_DIR/deploy.sh
   on:
     branch: master
 
