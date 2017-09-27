@@ -8,10 +8,4 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    ports:
-      - ${PORT}:3000
-    extra_hosts:
-      - ${HOST}:172.18.0.1
-    env_file: .env
     command: npm run next
-    restart: always

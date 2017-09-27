@@ -4,4 +4,3 @@ services:
 
   nextjs:
     command: npm run deploy
-    restart: "no"
