@@ -10,7 +10,7 @@
     "build": "next build",
     "export": "NODE_ENV=production next build && next export",
     "start": "npm run dev",
-    "stylelint": "stylelint \"app/**/*.css\" --formatter verbose --fix"
+    "lint": "stylelint \"app/**/*.css\" --formatter verbose --fix"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +28,7 @@
     "express": "^4.15.3",
     "gh-pages": "^1.0.0",
     "marked": "^0.3.6",
-    "next": "3.2.1",
+    "next": "~3.2.2",
     "next-routes": "^1.0.40",
     "next-url-prettifier": "^1.1.5",
     "normalize.css": "^7.0.0",
@@ -40,7 +40,7 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.6",
     "postcss-reporter": "^5.0.0",
-    "prop-types": "^15.5.10",
+    "prop-types": "~15.6.0",
     "raw-loader": "^0.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -62,7 +62,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.1",
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
-    "react-addons-test-utils": "^15.6.0",
+    "react-addons-test-utils": "~15.6.2",
     "react-test-renderer": "^15.6.1"
   }
 }

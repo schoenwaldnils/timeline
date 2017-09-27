@@ -16,25 +16,31 @@ const Time = (props) => {
   return (
     <div className={`Time ${className}`} tabIndex={tabIndex}>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-      <div className="Time-title">
-        {name}
-        <table className="Time-info">
-          <tbody>
-            <tr>
-              <td className="Time-tableCell">Start:</td>
-              <td className="Time-tableCell">{startYear}</td>
-            </tr>
-            <tr>
-              <td className="Time-tableCell">Ende:</td>
-              <td className="Time-tableCell">{endYear}</td>
-            </tr>
-            <tr>
-              <td className="Time-tableCell">Dauer:</td>
-              <td className="Time-tableCell">{duration}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {name}
+      <table className="Time-info">
+        <tbody>
+          <tr>
+            <td className="Time-tableCell">Start:</td>
+            <td className="Time-tableCell">
+              {startYear <= 0 && `${startYear * -1} v.u.Z.`}
+              {startYear >= 0 && `${startYear} u.Z.`}
+            </td>
+          </tr>
+          <tr>
+            <td className="Time-tableCell">Ende:</td>
+            <td className="Time-tableCell">
+              {endYear <= 0 && `${endYear * -1} v.u.Z.`}
+              {endYear >= 0 && `${endYear} u.Z.`}
+            </td>
+          </tr>
+          <tr>
+            <td className="Time-tableCell">Dauer:</td>
+            <td className="Time-tableCell">
+              {duration} Jahre
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

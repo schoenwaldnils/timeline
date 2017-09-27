@@ -20,15 +20,15 @@ const Person = (props) => {
   return (
     <div className={`Person ${className}`} tabIndex={tabIndex}>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-      <div className="Person-name">{name}</div>
+      {name}
       <div className="Person-info">
-        {image && <img className="Person-image" src={`${image}?w=150`} alt={`Bild von ${name}`} />}
+        {image && <picture>
+          <source srcSet={`${image}?w=300&fl=progressive`} media="(min-resolution: 120dpi)" />
+          <img className="Person-image" src={`${image}?w=150&fl=progressive`} alt={`Bild von ${name}`} />
+        </picture>}
+
         <table>
           <tbody>
-            <tr>
-              <td className="Person-tableCell">Jahre gelebt:</td>
-              <td className="Person-tableCell">{age}</td>
-            </tr>
 
             <tr>
               <td className="Person-tableCell">Geboren:</td>
@@ -45,6 +45,11 @@ const Person = (props) => {
                 {death >= 0 && `${death} u.Z.`}
               </td>
             </tr>}
+
+            <tr>
+              <td className="Person-tableCell">Lebensdauer:</td>
+              <td className="Person-tableCell">{age} Jahre</td>
+            </tr>
 
             {father && <tr>
               <td className="Person-tableCell">Vater:</td>

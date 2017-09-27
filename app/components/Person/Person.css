@@ -9,23 +9,13 @@
   padding-left: .5em;
   font-family: monospace;
   color: #000;
+  white-space: nowrap;
   cursor: pointer;
   background-color: var(--color-green);
 }
 
-.Person-name {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding-left: .5em;
-}
-
 .Person:focus {
   z-index: var(--z-element-active);
-  text-decoration: underline;
   outline: none;
 }
 
@@ -47,6 +37,10 @@
   pointer-events: initial;
   opacity: 1;
   transform: translateY(0);
+}
+
+.Person-image {
+  width: 150px;
 }
 
 .Person-tableCell {
