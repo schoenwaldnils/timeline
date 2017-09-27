@@ -8,7 +8,7 @@ services:
   - docker
 
 before_install:
-  - docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
+  - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 script: npm run lint
 
