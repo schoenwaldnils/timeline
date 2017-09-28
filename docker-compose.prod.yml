@@ -3,4 +3,4 @@ version: '3'
 services:
 
   nextjs:
-    command: npm run deploy
+    command: npm run export
