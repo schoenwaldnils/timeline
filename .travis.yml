@@ -10,9 +10,6 @@ after_install:
 
 script: npm run lint
 
-before_deploy:
-  - npm run export
-
 deploy:
   skip_cleanup: true
   provider: script
