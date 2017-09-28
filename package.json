@@ -11,7 +11,7 @@
     "export": "NODE_ENV=production next build && next export",
     "start": "npm run dev",
     "lint": "stylelint \"app/**/*.css\" --formatter verbose --fix",
-    "deploy": "npm run export && touch out/.nojekyll && cp CNAME out/ && /bin/bash scripts/deploy.sh"
+    "deploy": "touch out/.nojekyll && cp CNAME out/ && /bin/bash scripts/deploy.sh"
   },
   "keywords": [],
   "author": "",
