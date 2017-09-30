@@ -8,7 +8,7 @@ const Event = ({ className, name, year }) => {
   return (
     <div className={`Event ${className}`}>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-      <div className="Event-title">{`${name} (${ourTime(year)})`}</div>
+      <div className="Event-title">{name}<br />{`(${ourTime(year)})`}</div>
     </div>
   );
 };
