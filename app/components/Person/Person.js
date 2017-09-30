@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import stylesheet from './Person.css';
+import { ourTime } from '../../js/utils';
 
 const Person = (props) => {
   const {
@@ -14,8 +15,12 @@ const Person = (props) => {
     image,
     father,
     mother,
-    childs,
+    children,
   } = props;
+
+  if (!birth || !death) {
+    return null;
+  }
 
   return (
     <div className={`Person ${className}`} tabIndex={tabIndex}>
@@ -33,16 +38,14 @@ const Person = (props) => {
             <tr>
               <td className="Person-tableCell">Geboren:</td>
               <td className="Person-tableCell">
-                {birth <= 0 && `${birth * -1} v.u.Z.`}
-                {birth >= 0 && `${birth} u.Z.`}
+                {ourTime(birth)}
               </td>
             </tr>
 
             {death && <tr>
               <td className="Person-tableCell">Gestorben:</td>
               <td className="Person-tableCell">
-                {death <= 0 && `${death * -1} v.u.Z.`}
-                {death >= 0 && `${death} u.Z.`}
+                {ourTime(death)}
               </td>
             </tr>}
 
@@ -65,12 +68,12 @@ const Person = (props) => {
               </td>
             </tr>}
 
-            {childs && <tr>
+            {children && <tr>
               <td className="Person-tableCell">Kinder:</td>
               <td className="Person-tableCell">
                 <ul>
-                  { childs.map((child) => {
-                    return <li>{child}</li>;
+                  { children.map((child) => {
+                    return <li key={child}>{child}</li>;
                   })}
                 </ul>
               </td>
@@ -89,11 +92,11 @@ Person.defaultProps = {
   image: null,
   name: 'Max Mustermann',
   birth: -2000,
-  death: 1000,
+  death: null,
   age: 5000,
   father: null,
   mother: null,
-  childs: null,
+  children: null,
 };
 
 Person.propTypes = {
@@ -106,7 +109,7 @@ Person.propTypes = {
   age: PropTypes.number,
   father: PropTypes.string,
   mother: PropTypes.string,
-  childs: PropTypes.array,
+  children: PropTypes.array,
 };
 
 const StyledPerson = styled(Person)`

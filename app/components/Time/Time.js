@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import stylesheet from './Time.css';
+import { ourTime } from '../../js/utils';
 
 const Time = (props) => {
   const {
@@ -22,15 +23,13 @@ const Time = (props) => {
           <tr>
             <td className="Time-tableCell">Start:</td>
             <td className="Time-tableCell">
-              {startYear <= 0 && `${startYear * -1} v.u.Z.`}
-              {startYear >= 0 && `${startYear} u.Z.`}
+              {ourTime(startYear)}
             </td>
           </tr>
           <tr>
             <td className="Time-tableCell">Ende:</td>
             <td className="Time-tableCell">
-              {endYear <= 0 && `${endYear * -1} v.u.Z.`}
-              {endYear >= 0 && `${endYear} u.Z.`}
+              {ourTime(endYear)}
             </td>
           </tr>
           <tr>

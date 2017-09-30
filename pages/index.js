@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getEntries, getFields } from '../scripts/contentful';
-import timeperiod from '../app/js/utils';
+import { timeperiod } from '../app/js/utils';
 import Header from '../app/components/Header/Header';
 import Timeline from '../app/components/Timeline/Timeline';
 
@@ -25,10 +25,29 @@ Page.getInitialProps = async () => {
       delete personFields.image;
       personFields.image = image;
     }
+
     if (personFields.birth) {
       personFields.age = timeperiod(
         personFields.birth,
         personFields.death || new Date().getFullYear());
+    }
+
+    if (personFields.father) {
+      const father = personFields.father.fields.name;
+      delete personFields.father;
+      personFields.father = father;
+    }
+
+    if (personFields.mother) {
+      const mother = personFields.mother.fields.name;
+      delete personFields.mother;
+      personFields.mother = mother;
+    }
+
+    if (personFields.children) {
+      const children = personFields.children.map(mapChildren => mapChildren.fields.name);
+      delete personFields.children;
+      personFields.children = children;
     }
     return personFields;
   }));

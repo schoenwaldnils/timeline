@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { ourTime } from '../../js/utils';
 import stylesheet from './Event.css';
 
 const Event = ({ className, name, year }) => {
   return (
     <div className={`Event ${className}`}>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-      <div className="Event-title">{`${name} (${year})`}</div>
+      <div className="Event-title">{`${name} (${ourTime(year)})`}</div>
     </div>
   );
 };
