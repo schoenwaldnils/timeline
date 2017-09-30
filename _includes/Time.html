@@ -1,6 +1,0 @@
-{% assign time = include.time %}
-{% if time.link %}
-  <a class="Time Time--{{ time.name | pascalize }}" data-name="{{ time.name }}" href="{{ time.link }}" target="_blank"></a>
-{% else %}
-  <div class="Time Time--{{ time.name | pascalize }}" data-name="{{ time.name }}"></div>
-{% endif %}
