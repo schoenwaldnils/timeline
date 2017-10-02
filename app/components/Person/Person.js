@@ -18,7 +18,7 @@ const Person = (props) => {
     children,
   } = props;
 
-  if (!birth || !death) {
+  if ((!birth || !death) && name !== 'Nils') {
     return null;
   }
 
@@ -72,9 +72,7 @@ const Person = (props) => {
               <td className="Person-tableCell">Kinder:</td>
               <td className="Person-tableCell">
                 <ul>
-                  { children.map((child) => {
-                    return <li key={child}>{child}</li>;
-                  })}
+                  { children.map(child => <li key={child}>{child}</li>)}
                 </ul>
               </td>
             </tr>}

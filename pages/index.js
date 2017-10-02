@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getEntries, getFields } from '../scripts/contentful';
 import { timeperiod } from '../app/js/utils';
-import Header from '../app/components/Header/Header';
+// import Header from '../app/components/Header/Header';
 import Timeline from '../app/components/Timeline/Timeline';
 
 const Page = ({ persons, times, events }) => {
+  // console.log(persons);
   return (
     <div className="Page">
-      <Header />
+      {/* <Header /> */}
       <section className="Page-wrapTimeline" role="main">
         <Timeline persons={persons} times={times} events={events} />
       </section>
@@ -47,7 +48,7 @@ Page.getInitialProps = async () => {
     if (personFields.children) {
       const children = personFields.children.map(mapChildren => mapChildren.fields.name);
       delete personFields.children;
-      personFields.children = children;
+      personFields.children = children.sort();
     }
     return personFields;
   }));

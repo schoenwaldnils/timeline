@@ -12,9 +12,20 @@
   background-color: var(--color-red);
 }
 
+.Event:focus {
+  outline: none;
+}
+
 .Event-title {
   position: absolute;
-  top: 1.4em;
-  left: calc(100% + 5px);
+  top: 2em;
+  left: 100%;
+  padding: .25em .5em;
   white-space: nowrap;
+  background-color: #555;
+}
+
+.Event:focus .Event-title {
+  z-index: var(--z-event-active);
+  box-shadow: .125em 0 .25em var(--body-background-color);
 }

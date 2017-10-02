@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { ourTime } from '../../js/utils';
 import stylesheet from './Event.css';
 
-const Event = ({ className, name, year }) => {
+const Event = ({ className, tabIndex, name, year }) => {
   return (
-    <div className={`Event ${className}`}>
+    <div className={`Event ${className}`} tabIndex={tabIndex}>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       <div className="Event-title">{name}<br />{`(${ourTime(year)})`}</div>
     </div>
@@ -15,12 +15,14 @@ const Event = ({ className, name, year }) => {
 
 Event.propTypes = {
   className: PropTypes.string,
+  tabIndex: PropTypes.number,
   name: PropTypes.string,
   year: PropTypes.number,
 };
 
 Event.defaultProps = {
   className: null,
+  tabIndex: 0,
   name: null,
   year: null,
 };

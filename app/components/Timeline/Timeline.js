@@ -27,7 +27,7 @@ const Timeline = ({ persons, times, events }) => {
           {scaleNumberPositive}
         </div>
       </div>
-      {events && events.map(event => <Event {...event} key={event.name} />)}
+      {events && events.map((event, key) => <Event {...event} key={event.name} tabIndex={key} />)}
       {persons && persons.map(
         (person, key) => <Person {...person} key={person.name} tabIndex={key} />,
       )}
