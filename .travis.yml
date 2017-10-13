@@ -28,4 +28,4 @@ env:
     COMMIT_AUTHOR_EMAIL: bot@schoenwald.media
 
 after_success:
-  - if [[ $TRAVIS_PULL_REQUEST -ne "false" ]] && [[ $TRAVIS_BRANCH == 'develop' ]]; then node node_modules/lighthouse-ci/runlighthouse.js --score=80 http://timeline.schoenwald.media ; fi
+  - if [[ $TRAVIS_PULL_REQUEST -ne "false" ]]; then node node_modules/lighthouse-ci/runlighthouse.js --score=80 http://timeline.schoenwald.media ; fi
