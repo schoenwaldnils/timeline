@@ -63,6 +63,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.1",
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
+    "lighthouse-ci": "git+https://github.com/ebidel/lighthouse-ci.git",
     "react-addons-test-utils": "~15.6.2",
     "react-test-renderer": "^15.6.1"
   }
