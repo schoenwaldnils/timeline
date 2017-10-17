@@ -44,5 +44,8 @@ module.exports = {
     'no-param-reassign': ['error', { props: false }],
     'no-underscore-dangle': 0,
     'no-prototype-builtins': 0,
+  },
+  env: {
+    browser: true
   }
 };
