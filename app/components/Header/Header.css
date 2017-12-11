@@ -2,7 +2,7 @@
 
 :root {
   --Header-color: var(--text-color);
-  --Header-background: #fff;
+  --Header-background: var(--color-brown);
 }
 
 .Header {

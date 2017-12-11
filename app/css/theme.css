@@ -30,18 +30,18 @@
   --cb1: #444;
   --cb2: #515151;
   --cb3: #7c7c7c;
-  --cb4: #bbb;
+  --cb4: #bebab5;
   --cb5: #ccc;
-  --cb6: #e6e6e6;
+  --cb6: #e5e3e2;
   --cb7: #f2f2f2;
   --cb8: #f2777a;
   --cb9: #f99157;
   --cbA: #fc6;
-  --cbB: #9c9;
+  --cbB: #57b895;
   --cbC: #6cc;
   --cbD: #69c;
   --cbE: #c9c;
-  --cbF: #d27b53;
+  --cbF: #635f5e;
 
   --color-error: #da2000;
   --color-warning: #edba00;
@@ -50,6 +50,7 @@
   --color-orange: var(--cb9);
   --color-yellow: var(--cbA);
   --color-green: var(--cbB);
+  --color-green-darker: #41ad95;
   --color-cyan: var(--cbC);
   --color-blue: var(--cbD);
   --color-purple: var(--cbE);
@@ -59,7 +60,8 @@
   --link-color: var(--cbD);
   --link-color-hover: var(--text-color);
 
-  --body-background-color: var(--cb0);
+  --body-background-color: var(--cb6);
+  --body-background-shadow: var(--cb4);
 
 
   /*

@@ -27,5 +27,4 @@
 
 .Event:focus .Event-title {
   z-index: var(--z-event-active);
-  box-shadow: .125em 0 .25em var(--body-background-color);
 }

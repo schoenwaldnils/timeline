@@ -10,7 +10,6 @@ html {
   font-size: 16px;
   font-weight: var(--font-weight);
   line-height: var(--line-height);
-  background-color: var(--Header-background);
 }
 
 body {
@@ -21,6 +20,7 @@ body {
   overflow-x: hidden;
   color: var(--text-color);
   background-color: var(--body-background-color);
+  background-image: radial-gradient(var(--body-background-color) 0%, var(--body-background-shadow) 100%);
 }
 
 /*
@@ -31,7 +31,7 @@ body {
 
 textarea:focus,
 input:focus {
-  outline: 1px solid var(--color-blue);
+  outline: 1px solid var(--color-green);
 }
 
 img {

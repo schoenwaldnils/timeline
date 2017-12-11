@@ -6,7 +6,7 @@
   padding-top: 4rem;
   padding-bottom: 1rem;
   font-size: 10px;
-  color: #fff;
+  color: var(--color-brown);
 }
 
 .Timeline-scale {
@@ -23,14 +23,14 @@
 .Timeline-scale::before {
   left: 0;
   width: 4026px;
-  background: linear-gradient(to left, transparent 99%, #555 99%);
+  background: linear-gradient(to left, transparent 99%, var(--color-brown) 99%);
   background-position-x: right;
 }
 
 .Timeline-scale::after {
   left: 4026px;
   width: calc(100% - 4026px);
-  background: linear-gradient(to right, #555 1%, transparent 1%);
+  background: linear-gradient(to right, var(--color-brown) 1%, transparent 1%);
   background-position-x: 0;
 }
 
