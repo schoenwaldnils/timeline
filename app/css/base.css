@@ -20,7 +20,11 @@ body {
   overflow-x: hidden;
   color: var(--text-color);
   background-color: var(--body-background-color);
-  background-image: radial-gradient(var(--body-background-color) 0%, var(--body-background-shadow) 100%);
+  background-image:
+    radial-gradient(
+      var(--body-background-color) 0%,
+      var(--body-background-shadow) 100%
+    );
 }
 
 /*
