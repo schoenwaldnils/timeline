@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { ourTime } from '../../js/utils';
 import stylesheet from './Event.css';
 
-const Event = ({ className, tabIndex, name, year }) => {
+const Event = ({
+  className, tabIndex, name, year,
+}) => {
   return (
     <div className={`Event ${className}`} tabIndex={tabIndex}>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />

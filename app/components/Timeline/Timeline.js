@@ -27,13 +27,12 @@ const Timeline = ({ persons, times, events }) => {
           {scaleNumberPositive}
         </div>
       </div>
-      {events && events.map((event, key) => <Event {...event} key={event.name} tabIndex={key} />)}
-      {persons && persons.map(
-        (person, key) => <Person {...person} key={person.name} tabIndex={key} />,
-      )}
-      {times && times.map(
-        (time, key) => <Time {...time} key={time.name} tabIndex={key} />,
-      )}
+      { events && events
+        .map((event, key) => <Event {...event} key={event.name} tabIndex={key} />)}
+      { persons && persons
+        .map((person, key) => <Person {...person} key={person.name} tabIndex={key} />)}
+      { times && times
+        .map((time, key) => <Time {...time} key={time.name} tabIndex={key} />)}
     </div>
   );
 };

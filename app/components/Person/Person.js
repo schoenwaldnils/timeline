@@ -27,10 +27,12 @@ const Person = (props) => {
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       {name}
       <div className="Person-info">
-        {image && <picture>
-          <source srcSet={`${image}?w=300&fl=progressive`} media="(min-resolution: 120dpi)" />
-          <img className="Person-image" src={`${image}?w=150&fl=progressive`} alt={`Bild von ${name}`} />
-        </picture>}
+        { image &&
+          <picture>
+            <source srcSet={`${image}?w=300&fl=progressive`} media="(min-resolution: 120dpi)" />
+            <img className="Person-image" src={`${image}?w=150&fl=progressive`} alt={`Bild von ${name}`} />
+          </picture>
+        }
 
         <table>
           <tbody>
@@ -42,40 +44,48 @@ const Person = (props) => {
               </td>
             </tr>
 
-            {death && <tr>
-              <td className="Person-tableCell">Gestorben:</td>
-              <td className="Person-tableCell">
-                {ourTime(death)}
-              </td>
-            </tr>}
+            { death &&
+              <tr>
+                <td className="Person-tableCell">Gestorben:</td>
+                <td className="Person-tableCell">
+                  {ourTime(death)}
+                </td>
+              </tr>
+            }
 
             <tr>
               <td className="Person-tableCell">Lebensdauer:</td>
               <td className="Person-tableCell">{age} Jahre</td>
             </tr>
 
-            {father && <tr>
-              <td className="Person-tableCell">Vater:</td>
-              <td className="Person-tableCell">
-                {father}
-              </td>
-            </tr>}
+            { father &&
+              <tr>
+                <td className="Person-tableCell">Vater:</td>
+                <td className="Person-tableCell">
+                  {father}
+                </td>
+              </tr>
+            }
 
-            {mother && <tr>
-              <td className="Person-tableCell">Mutter:</td>
-              <td className="Person-tableCell">
-                {mother}
-              </td>
-            </tr>}
+            { mother &&
+              <tr>
+                <td className="Person-tableCell">Mutter:</td>
+                <td className="Person-tableCell">
+                  {mother}
+                </td>
+              </tr>
+            }
 
-            {children && <tr>
-              <td className="Person-tableCell">Kinder:</td>
-              <td className="Person-tableCell">
-                <ul>
-                  { children.map(child => <li key={child}>{child}</li>)}
-                </ul>
-              </td>
-            </tr>}
+            { children &&
+              <tr>
+                <td className="Person-tableCell">Kinder:</td>
+                <td className="Person-tableCell">
+                  <ul>
+                    { children.map(child => <li key={child}>{child}</li>)}
+                  </ul>
+                </td>
+              </tr>
+            }
 
           </tbody>
         </table>
@@ -88,7 +98,6 @@ Person.defaultProps = {
   className: null,
   tabIndex: 0,
   image: null,
-  name: 'Max Mustermann',
   birth: -2000,
   death: null,
   age: 5000,
