@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cs from 'classnames';
 import styled from 'styled-components';
 import stylesheet from './Person.css';
 import { ourTime } from '../../js/utils';
@@ -10,7 +11,9 @@ const Person = (props) => {
     tabIndex,
     name,
     birth,
+    birthUnsure,
     death,
+    deathUnsure,
     age,
     image,
     father,
@@ -22,8 +25,17 @@ const Person = (props) => {
     return null;
   }
 
+  const personClassnames = cs(
+    'Person',
+    {
+      'Person--birthUnsure': birthUnsure,
+      'Person--deathUnsure': deathUnsure,
+    },
+    [className],
+  );
+
   return (
-    <div className={`Person ${className}`} tabIndex={tabIndex}>
+    <div className={personClassnames} tabIndex={tabIndex}>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       {name}
       <div className="Person-info">
@@ -95,15 +107,17 @@ const Person = (props) => {
 };
 
 Person.defaultProps = {
-  className: null,
+  className: undefined,
   tabIndex: 0,
-  image: null,
-  birth: -2000,
-  death: null,
-  age: 5000,
-  father: null,
-  mother: null,
-  children: null,
+  image: undefined,
+  birth: undefined,
+  birthUnsure: false,
+  death: undefined,
+  deathUnsure: false,
+  age: undefined,
+  father: undefined,
+  mother: undefined,
+  children: undefined,
 };
 
 Person.propTypes = {
@@ -112,7 +126,9 @@ Person.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string.isRequired,
   birth: PropTypes.number,
+  birthUnsure: PropTypes.bool,
   death: PropTypes.number,
+  deathUnsure: PropTypes.bool,
   age: PropTypes.number,
   father: PropTypes.string,
   mother: PropTypes.string,

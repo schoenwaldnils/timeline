@@ -30,7 +30,8 @@ Page.getInitialProps = async () => {
     if (personFields.birth) {
       personFields.age = timeperiod(
         personFields.birth,
-        personFields.death || new Date().getFullYear());
+        personFields.death || new Date().getFullYear(),
+      );
     }
 
     if (personFields.father) {
@@ -59,7 +60,8 @@ Page.getInitialProps = async () => {
     if (timeFields.startYear) {
       timeFields.duration = timeperiod(
         timeFields.startYear,
-        timeFields.endYear || new Date().getFullYear());
+        timeFields.endYear || new Date().getFullYear(),
+      );
     }
     return timeFields;
   }));
