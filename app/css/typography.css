@@ -1,3 +1,25 @@
+:root {
+  --list-dot-size: .35em;
+}
+
+/**
+ * Typography
+ */
+html {
+  min-height: 100vh;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  line-height: var(--line-height);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+  text-rendering: optimizeLegibility;
+}
+
 h1,
 h2,
 h3,
@@ -19,9 +41,19 @@ h1,
 h2,
 h3,
 h4 {
-  line-height: 1.1;
-  color: var(--text-color);
+  font-weight: inherit;
+  line-height: inherit;
 }
+
+@media print {
+  h1,
+  h2,
+  h3,
+  h4 {
+    page-break-after: avoid;
+  }
+}
+
 
 a,
 a:hover,
@@ -31,7 +63,115 @@ a:focus {
   cursor: pointer;
 }
 
-ul {
+@media print {
+  a[href^='http']:not([href*='schoenwald.media']) {
+    white-space: nowrap;
+  }
+
+  a[href^='http']:not([href*='schoenwald.media'])::after {
+    content: ' (' attr(href) ')';
+  }
+}
+
+.u-richText ul,
+.u-richText ol,
+.u-richText dd,
+.u-richText p,
+.u-richText figure,
+.u-richText pre,
+.u-richText table,
+.u-richText fieldset,
+.u-richText hr {
+  margin-bottom: 1rem;
+}
+
+.u-richText h1,
+.u-richText h2,
+.u-richText h3,
+.u-richText h4 {
+  margin-bottom: .75rem;
+  /* font-family: var(--font-second); */
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.u-richText h1 {
+  font-size: 2rem;
+}
+
+.u-richText h2 {
+  font-size: 1.75rem;
+}
+
+.u-richText h3 {
+  font-size: 1.5rem;
+}
+
+.u-richText h4 {
+  font-size: 1rem;
+}
+
+/*
+ * [1] use text-shadow to generate optical margin to underline
+ */
+
+.u-link,
+.u-richText a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color var(--time-transition);
+}
+
+.u-richText a:hover,
+.u-richText a:focus {
+  color: var(--link-color-hover);
+}
+
+.u-richText ol {
   padding-left: 0;
   list-style: none;
+  counter-reset: ol;
+}
+
+.u-richText ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.u-richText li {
+  position: relative;
+  padding-left: 1em;
+}
+
+.u-richText ol > li {
+  counter-increment: ol;
+}
+
+.u-richText ol > li::before {
+  content: counter(ol);
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* font-family: var(--font-second); */
+  font-size: .8em;
+  font-weight: 200;
+  line-height: calc(1.4em / .8);
+  color: var(--color-green);
+}
+
+.u-richText ul > li::before {
+  content: '';
+  position: absolute;
+  top: calc(1em * 1.4 / 2);
+  left: 0;
+  width: var(--list-dot-size);
+  height: calc(var(--list-dot-size) * .25);
+  margin-top: calc(var(--list-dot-size) * -.5 * .25);
+  background-color: var(--color-green);
+}
+
+::selection {
+  color: #fff !important;
+  text-shadow: none;
+  background: var(--color-green) !important;
 }

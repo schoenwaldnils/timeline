@@ -57,7 +57,7 @@
   --color-brown: var(--cbF);
 
   --text-color: var(--cb0);
-  --link-color: var(--cbD);
+  --link-color: var(--color-green);
   --link-color-hover: var(--text-color);
 
   --body-background-color: var(--cb6);
@@ -68,8 +68,9 @@
   * Typography
   */
 
-  --font-size: 1rem;
-  --font-family: WtClearText, Georgia, serif;
+  --font-size: 16px;
+  /* --font-family: WtClearText, Georgia, serif; */
+  --font-family: monospace;
   --font-weight: 500;
   --line-height: 1.4;
 
