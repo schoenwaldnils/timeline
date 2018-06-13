@@ -34,8 +34,6 @@ const Time = (props) => {
     [className],
   );
 
-  if (name === 'Nils') console.log(props);
-
   if (!startYear || !duration ) return null;
 
   return (

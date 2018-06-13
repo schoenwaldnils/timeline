@@ -17,10 +17,7 @@ class Timeline extends Component {
   };
 
   handleElementClick = async (type, id) => {
-    console.log('handleElementClick', id);
-
     const { activePersons, activeTimes, activeEvents } = this.state;
-    console.log({ activePersons, activeTimes, activeEvents });
 
     switch (type) {
       case 'person':
@@ -105,7 +102,6 @@ class Timeline extends Component {
   render() {
     const { persons, times, events } = this.props;
     const { activePersons, activeTimes, activeEvents } = this.state;
-    console.log(this.state);
 
     const scaleNumberNegativ = [];
     for (let i = 0; i <= 40; i += 1) {

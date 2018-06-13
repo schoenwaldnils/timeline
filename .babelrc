@@ -1,22 +1,21 @@
 {
-  "presets": [
-    "next/babel"
-  ],
-  "plugins": [
-    [ "transform-define", "./env-config.js" ]
-  ],
   "env": {
     "development": {
+      "presets": [
+        "next/babel"
+      ],
       "plugins": [
         "transform-es2015-modules-commonjs"
       ]
     },
     "production": {
       "presets": [
-        ["env", { "modules": "commonjs" }]
+        ["next/babel", {
+          "preset-env": { "modules": "commonjs" }
+        }]
       ],
       "plugins": [
-        "transform-class-properties"
+        [ "transform-define", "./env-config.js" ]
       ]
     }
   }

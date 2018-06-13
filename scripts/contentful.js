@@ -67,28 +67,28 @@ export async function getFields(id) {
 }
 
 export async function fetchPathMapForNextJS(type = 'static') {
-  const pathMap = {'/lps': { page: '/lps' }};
+  const pathMap = {};
   const serverPaths = [];
 
-  try {
-    const contentfulPersons = await getEntries('person');
+  // try {
+  //   const contentfulPersons = await getEntries('person');
 
-    contentfulPersons.forEach((query) => {
-      const { url, id, type } = query;
+  //   contentfulPersons.forEach((query) => {
+  //     const { url, id, type } = query;
 
-      pathMap[url] = {
-        page: '/page',
-        query: {
-          type,
-          id,
-        },
-      };
+  //     pathMap[url] = {
+  //       page: '/person',
+  //       query: {
+  //         type,
+  //         id,
+  //       },
+  //     };
 
-      serverPaths.push(query);
-    });
-  } catch (ex) {
-    console.error(ex);
-  }
+  //     serverPaths.push(query);
+  //   });
+  // } catch (ex) {
+  //   console.error(ex);
+  // }
 
   if (type === 'server') {
     return serverPaths;

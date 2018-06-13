@@ -9,7 +9,6 @@ import '../app/css/index.css'
 import Timeline from '../app/components/Timeline/Timeline';
 
 const Page = ({ persons, times, events }) => {
-  // console.log(persons);
   return (
     <div className="Page">
       {/* <Header /> */}

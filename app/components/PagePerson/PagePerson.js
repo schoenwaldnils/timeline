@@ -16,7 +16,6 @@ const PagePerson = ({
   name,
   content
 }) => {
-  console.log(name);
   return (
     <div className="PagePerson">
       <img className="PagePerson-image" src={image} />

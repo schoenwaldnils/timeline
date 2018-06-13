@@ -3,7 +3,10 @@ import { fetchPathMapForNextJS } from './scripts/contentful';
 
 const exportPathMap = async () => {
   const contentfulPages = await fetchPathMapForNextJS();
-  console.log(contentfulPages);
+  console.log({
+    '/': { page: '/' },
+    ...contentfulPages,
+  });
   return {
     '/': { page: '/' },
     ...contentfulPages,
