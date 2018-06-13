@@ -51,7 +51,7 @@
 
 .Timeline-numbers {
   position: sticky;
-  top: 0;
+  top: .25em;
   display: flex;
   padding-right: 17px;
   padding-left: 26px;

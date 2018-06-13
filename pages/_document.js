@@ -16,7 +16,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
-          <meta content="width=device-width,initial-scale=1" name="viewport" />
+          <meta name="viewport" content="height=device-height, initial-scale=1, minimum-scale=1" />
           <link rel="stylesheet" href="/_next/static/style.css" />{/* TODO: hash css file */}
           {this.props.styleTags}
         </Head>
