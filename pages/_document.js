@@ -1,7 +1,6 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import stylesheet from '../app/css/index.css';
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -18,7 +17,7 @@ export default class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta content="width=device-width,initial-scale=1" name="viewport" />
-          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+          <link rel="stylesheet" href="/_next/static/style.css" />{/* TODO: hash css file */}
           {this.props.styleTags}
         </Head>
         <body>

@@ -1,20 +1,23 @@
 {
   "presets": [
-    "next/babel",
-    "stage-0",
-    "env"
+    "next/babel"
   ],
   "plugins": [
-    [ "wrap-in-js", {
-      "extensions": [
-        ".css$"
-      ]
-    }],
-    [ "styled-components", {
-      "ssr": true,
-      "displayName": true,
-      "preprocess": false,
-    }],
     [ "transform-define", "./env-config.js" ]
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    },
+    "production": {
+      "presets": [
+        ["env", { "modules": "commonjs" }]
+      ],
+      "plugins": [
+        "transform-class-properties"
+      ]
+    }
+  }
 }

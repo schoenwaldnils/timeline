@@ -17,9 +17,10 @@
 }
 
 .Event-title {
-  position: absolute;
+  position: sticky;
   top: 2em;
   left: 100%;
+  display: inline-block;
   padding: .25em .5em;
   white-space: nowrap;
   background-color: #555;

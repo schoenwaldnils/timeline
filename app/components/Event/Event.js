@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ourTime } from '../../js/utils';
-import stylesheet from './Event.css';
+import './Event.css';
 
 const Event = ({
   className, tabIndex, name, year,
 }) => {
   return (
     <div className={`Event ${className}`} tabIndex={tabIndex}>
-      <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       <div className="Event-title">{name}<br />{`(${ourTime(year)})`}</div>
     </div>
   );

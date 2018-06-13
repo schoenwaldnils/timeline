@@ -1,23 +1,28 @@
-const contentful = require('contentful');
+import { createClient } from 'contentful';
+import paramCase from 'param-case';
 
-const client = contentful.createClient({
+const client = createClient({
   space: process.env.CONTENTFUL_SPACE,
   accessToken: process.env.CONTENTFUL_TOKEN,
 });
 
-async function getEntries(type) {
+export async function getEntries(type) {
   const entries = [];
-  let orderBy = '';
+  let order;
+  let select = 'sys.id';
+  let isPerson = false;
 
   switch (type) {
     case 'person':
-      orderBy = 'fields.birth';
+      order = 'fields.startYear';
+      select = 'sys.id,fields.name';
+      isPerson = true;
       break;
     case 'time':
-      orderBy = 'fields.startYear';
+      order = 'fields.startYear';
       break;
     case 'event':
-      orderBy = 'fields.year';
+      order = 'fields.year';
       break;
     default:
   }
@@ -25,30 +30,72 @@ async function getEntries(type) {
   try {
     const res = await client.getEntries({
       content_type: type,
-      select: 'sys.id',
-      order: orderBy,
+      select,
+      order,
     });
-    res.items.map((item) => {
-      entries.push(item.sys.id);
-      return true;
+
+    res.items.forEach((item) => {
+      let entry = {
+        id: item.sys.id,
+      };
+
+      if (isPerson) {
+        entry = {
+          id: item.sys.id,
+          url: `/personen/${paramCase(item.fields.name)}`,
+          type,
+        };
+      }
+      entries.push(entry);
     });
   } catch (exception) {
-    return console.error(exception);
+    console.error(exception);
   }
-
   return entries;
 }
 
-async function getFields(id) {
+export async function getFields(id) {
   try {
-    const res = await client.getEntries({ 'sys.id': id });
-    const fields = res.items[0].fields;
-    return fields;
+    const res = await client.getEntries({
+      'sys.id': id,
+    });
+    const entryFields = res.items[0].fields;
+    return entryFields;
   } catch (exception) {
     return console.error(exception);
   }
 }
 
-exports.client = client;
-exports.getEntries = getEntries;
-exports.getFields = getFields;
+export async function fetchPathMapForNextJS(type = 'static') {
+  const pathMap = {'/lps': { page: '/lps' }};
+  const serverPaths = [];
+
+  try {
+    const contentfulPersons = await getEntries('person');
+
+    contentfulPersons.forEach((query) => {
+      const { url, id, type } = query;
+
+      pathMap[url] = {
+        page: '/page',
+        query: {
+          type,
+          id,
+        },
+      };
+
+      serverPaths.push(query);
+    });
+  } catch (ex) {
+    console.error(ex);
+  }
+
+  if (type === 'server') {
+    return serverPaths;
+  }
+  return pathMap;
+}
+
+export const serverPathMap = fetchPathMapForNextJS('server');
+
+export default client;

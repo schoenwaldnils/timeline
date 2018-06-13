@@ -1,6 +1,6 @@
-const express = require('express');
-const next = require('next');
-const { client } = require('./scripts/contentful');
+import express from 'express';
+import next from 'next';
+import { serverPathMap } from './scripts/contentful';
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -8,19 +8,13 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(async () => {
   const server = express();
-  const contentfulRes = await client.getEntries();
 
   // CUSTOM ROUTES GO HERE
-  contentfulRes.items.map((item) => {
-    if (item.sys.contentType.sys.id === 'page') {
-      const { url } = item.fields;
-      const { id } = item.sys;
-      server.get(url, (req, res) => {
-        const mergedQuery = Object.assign({}, req.query, req.params, { id });
-        return app.render(req, res, '/page', mergedQuery);
-      });
-    }
-    return true;
+  (await serverPathMap).forEach(({ url, id, type }) => {
+    console.log({ url, id, type });
+    server.get(url, (req, res) => {
+      return app.render(req, res, `/${type}`, { id });
+    });
   });
 
   server.get('/page', (req, res) => {
@@ -32,7 +26,7 @@ app.prepare().then(async () => {
     return handle(req, res);
   });
 
-  const port = process.env.PORT || 3000;
+  const port = 3000;
 
   server.listen(port, (err) => {
     if (err) throw err;

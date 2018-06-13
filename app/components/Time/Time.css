@@ -1,5 +1,13 @@
 /** @define Time */
 
+.Time--time {
+  --Time-color: var(--color-yellow);
+}
+
+.Time--person {
+  --Time-color: var(--color-green-darker);
+}
+
 .Time {
   position: relative;
   display: flex;
@@ -11,11 +19,33 @@
   color: #000;
   white-space: nowrap;
   cursor: pointer;
-  background-color: var(--color-yellow);
+  background-color: var(--Time-color);
+}
+
+.Time--startUnsure::before,
+.Time--endUnsure::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 3rem;
+  height: 100%;
+  opacity: .75;
+}
+
+.Time--startUnsure::before {
+  right: 100%;
+  background: linear-gradient(to left, var(--Time-color) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 50px 0 0 50px;
+}
+
+.Time--endUnsure::after {
+  left: 100%;
+  background: linear-gradient(to right, var(--Time-color) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 0 50px 50px 0;
 }
 
 .Time:focus {
-  z-index: var(--z-element-active);
+  background-color: var(--Time-color);
   outline: none;
 }
 
@@ -25,18 +55,15 @@
   left: 0;
   padding: .4em .5em;
   color: var(--text-color);
-  pointer-events: none;
   background-color: #fff;
-  opacity: 0;
-  transform: translateY(-30%);
-  transition-duration: var(--time-animation);
-  transition-property: transform, opacity;
 }
 
-.Time:focus .Time-info {
-  pointer-events: initial;
-  opacity: 1;
-  transform: translateY(0);
+.Time.is-active .Time-info {
+  z-index: 1;
+}
+
+.Time-image {
+  width: 150px;
 }
 
 .Time-tableCell {

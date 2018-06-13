@@ -1,16 +1,10 @@
-const path = require('path');
-const webpackPostcssTools = require('webpack-postcss-tools');
-
-const map = webpackPostcssTools.makeVarMap(path.resolve(__dirname, 'app/css/theme.css'));
+const { viewportsCss } = require('./app/js/viewports');
 
 module.exports = () => ({
   plugins: {
     'postcss-import': {},
-    'postcss-css-variables': {
-      variables: map.vars,
-    },
     'postcss-custom-media': {
-      extensions: map.media,
+      extensions: viewportsCss,
     },
     'postcss-color-function': {},
     'postcss-calc': {},

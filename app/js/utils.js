@@ -20,9 +20,3 @@ export function ourTime(year) {
   }
   return `${year} u.Z.`;
 }
-
-export default {
-  timeperiod,
-  htmlEntities,
-  ourTime,
-};

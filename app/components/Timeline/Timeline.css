@@ -1,35 +1,41 @@
 /** @define Timeline */
 
+:root {
+  --Time-yearsBeforeZero: 4026px;
+  --Time-yearsAfterZero: 2200px;
+}
+
 .Timeline {
   position: relative;
-  width: 6041px;
-  padding-top: 4rem;
-  padding-bottom: 1rem;
+  width: calc(var(--Time-yearsBeforeZero) + var(--Time-yearsAfterZero));
+  height: 100%;
   font-size: 10px;
   color: var(--color-brown);
+  background-image:
+    radial-gradient(
+      var(--body-background-color) 0%,
+      var(--body-background-shadow) 100%
+    );
 }
 
 .Timeline-scale {
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
   width: 100%;
   height: 100%;
-  padding-right: 17px;
-  padding-left: 26px;
 }
 
 .Timeline-scale::before {
   left: 0;
-  width: 4026px;
+  width: var(--Time-yearsBeforeZero);
   background: linear-gradient(to left, transparent 99%, var(--color-brown) 99%);
   background-position-x: right;
 }
 
 .Timeline-scale::after {
-  left: 4026px;
-  width: calc(100% - 4026px);
+  left: var(--Time-yearsBeforeZero);
+  width: calc(100% - var(--Time-yearsBeforeZero));
   background: linear-gradient(to right, var(--color-brown) 1%, transparent 1%);
   background-position-x: 0;
 }
@@ -41,6 +47,14 @@
   top: 0;
   height: 100%;
   background-size: 100px;
+}
+
+.Timeline-numbers {
+  position: sticky;
+  top: 0;
+  display: flex;
+  padding-right: 17px;
+  padding-left: 26px;
 }
 
 .Timeline-negativeNumbers {
@@ -60,4 +74,9 @@
 
 .Timeline-positiveNumbers .Timeline-scaleNumber:first-child {
   width: 99px;
+}
+
+.Timeline-content {
+  padding-top: 4rem;
+  padding-bottom: 10rem;
 }
