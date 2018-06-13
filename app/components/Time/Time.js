@@ -38,7 +38,9 @@ const Time = (props) => {
 
   return (
     <div className={timeClassnames} tabIndex={tabIndex} onClick={handleElementClick}>
-      { name }
+      <div className="Time-name">
+        { name }
+      </div>
       <Fade collapse when={isActive} duration={300}>
         <div className="Time-info">
           { children }

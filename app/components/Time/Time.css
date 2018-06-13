@@ -14,6 +14,7 @@
   align-items: center;
   height: 2em;
   margin-bottom: 1px;
+  padding-right: .5em;
   padding-left: .5em;
   font-family: monospace;
   color: #000;
@@ -47,6 +48,11 @@
 .Time:focus {
   background-color: var(--Time-color);
   outline: none;
+}
+
+.Time-name {
+  position: sticky;
+  left: .5em;
 }
 
 .Time-info {
