@@ -56,6 +56,7 @@
   padding: .4em .5em;
   color: var(--text-color);
   background-color: #fff;
+  box-shadow: 2px 2px rgba(0, 0, 0, .125);
 }
 
 .Time.is-active .Time-info {
