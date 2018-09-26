@@ -66,36 +66,4 @@ export async function getFields(id) {
   }
 }
 
-export async function fetchPathMapForNextJS(type = 'static') {
-  const pathMap = {};
-  const serverPaths = [];
-
-  // try {
-  //   const contentfulPersons = await getEntries('person');
-
-  //   contentfulPersons.forEach((query) => {
-  //     const { url, id, type } = query;
-
-  //     pathMap[url] = {
-  //       page: '/person',
-  //       query: {
-  //         type,
-  //         id,
-  //       },
-  //     };
-
-  //     serverPaths.push(query);
-  //   });
-  // } catch (ex) {
-  //   console.error(ex);
-  // }
-
-  if (type === 'server') {
-    return serverPaths;
-  }
-  return pathMap;
-}
-
-export const serverPathMap = fetchPathMapForNextJS('server');
-
 export default client;

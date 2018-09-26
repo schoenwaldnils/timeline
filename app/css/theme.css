@@ -34,29 +34,32 @@
   --cb5: #ccc;
   --cb6: #e5e3e2;
   --cb7: #f2f2f2;
+
+  /*
   --cb8: #f2777a;
   --cb9: #f99157;
-  --cbA: #fc6;
-  --cbB: #57b895;
+  --cbA: #f9d75c;
+  --cbB: #3dd2b1;
   --cbC: #6cc;
   --cbD: #69c;
   --cbE: #c9c;
   --cbF: #635f5e;
+  */
 
   --color-error: #da2000;
   --color-warning: #edba00;
 
-  --color-red: var(--cb8);
-  --color-orange: var(--cb9);
-  --color-yellow: var(--cbA);
-  --color-green: var(--cbB);
+  --color-red: #f2777a;
+  --color-orange: #f99157;
+  --color-yellow: #f5d14f;
+  --color-green: #3dd2b1;
   --color-green-darker: #41ad95;
-  --color-cyan: var(--cbC);
-  --color-blue: var(--cbD);
-  --color-purple: var(--cbE);
-  --color-brown: var(--cbF);
+  --color-cyan: #6cc;
+  --color-blue: #69c;
+  --color-purple: #c9c;
+  --color-brown: #635f5e;
 
-  --text-color: var(--cb0);
+  --text-color: #2d2d2d;
   --link-color: var(--color-green);
   --link-color-hover: var(--text-color);
 
@@ -69,7 +72,9 @@
   */
 
   --font-size: 16px;
+
   /* --font-family: WtClearText, Georgia, serif; */
+
   --font-family: monospace;
   --font-weight: 500;
   --line-height: 1.4;

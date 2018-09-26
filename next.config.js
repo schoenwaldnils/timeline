@@ -1,2 +1,3 @@
-require('babel-register');
-module.exports = require('./next.config.es6.js');
+const withCSS = require('@zeit/next-css');
+
+module.exports = withCSS();

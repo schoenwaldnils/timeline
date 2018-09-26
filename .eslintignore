@@ -1,0 +1,15 @@
+node_modules/
+.publish
+.sass-cache
+.asset-cache
+npm-debug.log
+deploy_key
+deploy_key.pub
+lib
+
+build/
+out/
+.next/
+.env
+
+content/*.json
