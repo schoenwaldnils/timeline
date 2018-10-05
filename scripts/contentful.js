@@ -10,13 +10,11 @@ export async function getEntries(type) {
   const entries = [];
   let order;
   let select = 'sys.id';
-  let isPerson = false;
 
   switch (type) {
     case 'person':
       order = 'fields.startYear';
       select = 'sys.id,fields.name';
-      isPerson = true;
       break;
     case 'time':
       order = 'fields.startYear';
@@ -39,7 +37,7 @@ export async function getEntries(type) {
         id: item.sys.id,
       };
 
-      if (isPerson) {
+      if (type === 'person') {
         entry = {
           id: item.sys.id,
           url: `/personen/${paramCase(item.fields.name)}`,

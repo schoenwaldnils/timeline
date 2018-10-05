@@ -59,6 +59,8 @@
   --color-purple: #c9c;
   --color-brown: #635f5e;
 
+  --color-theme: var(--color-green-darker);
+
   --text-color: #2d2d2d;
   --link-color: var(--color-green);
   --link-color-hover: var(--text-color);
