@@ -5,7 +5,6 @@ import cs from 'classnames';
 import styled from 'styled-components';
 
 import './Time.css';
-import { ourTime } from '../../js/utils';
 
 const Time = (props) => {
   const {
@@ -16,9 +15,9 @@ const Time = (props) => {
     tabIndex,
     name,
     startYear,
-    startUnsure,
-    endYear,
-    endUnsure,
+    birthVagueness,
+    deathVagueness,
+    alive,
     duration,
     handleElementClick,
   } = props;
@@ -27,17 +26,17 @@ const Time = (props) => {
     'Time',
     `Time--${type}`,
     {
-      'Time--startUnsure': startUnsure,
-      'Time--endUnsure': endUnsure,
+      'Time--startUnsure': birthVagueness,
+      'Time--endUnsure': deathVagueness || alive,
       'is-active': isActive,
     },
     [className],
   );
 
-  if (!startYear || !duration ) return null;
+  if (!startYear || !duration) return null;
 
   return (
-    <div className={timeClassnames} tabIndex={tabIndex} onClick={handleElementClick}>
+    <div className={timeClassnames} role="button" tabIndex={tabIndex} onKeyUp={() => {}} onClick={handleElementClick}>
       <div className="Time-name">
         { name }
       </div>
@@ -56,9 +55,9 @@ Time.defaultProps = {
   children: undefined,
   tabIndex: 0,
   startYear: undefined,
-  startUnsure: false,
-  endYear: undefined,
-  endUnsure: false,
+  birthVagueness: undefined,
+  deathVagueness: undefined,
+  alive: false,
   duration: undefined,
 };
 
@@ -66,16 +65,16 @@ Time.propTypes = {
   type: PropTypes.oneOf([
     'time',
     'person',
-  ]),
+  ]).isRequired,
   isActive: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node,
   tabIndex: PropTypes.number,
   name: PropTypes.string.isRequired,
   startYear: PropTypes.number,
-  startUnsure: PropTypes.bool,
-  endYear: PropTypes.number,
-  endUnsure: PropTypes.bool,
+  birthVagueness: PropTypes.string,
+  alive: PropTypes.bool,
+  deathVagueness: PropTypes.string,
   duration: PropTypes.number,
   handleElementClick: PropTypes.func.isRequired,
 };

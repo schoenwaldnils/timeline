@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
-import paramCase from 'param-case';
+import PropTypes from 'prop-types';
 
 import { ourTime } from '../../js/utils';
 
 const TimeContentPerson = (props) => {
   const {
     name,
-    image,
+    avatar: image,
     startYear: birth,
     endYear: death,
     duration: age,
@@ -66,7 +66,7 @@ const TimeContentPerson = (props) => {
             </tr>
           }
 
-          { childs &&
+          { childs.length > 0 &&
             <tr>
               <td className="Time-tableCell">Kinder:</td>
               <td className="Time-tableCell">
@@ -78,9 +78,29 @@ const TimeContentPerson = (props) => {
           }
         </tbody>
       </table>
-      {/* <a className="Time-link" href={`/person/${paramCase(name)}`}>mehr ></a> */}
     </Fragment>
   );
+};
+
+TimeContentPerson.defaultProps = {
+  avatar: undefined,
+  startYear: undefined,
+  endYear: undefined,
+  duration: undefined,
+  father: undefined,
+  mother: undefined,
+  childs: [],
+};
+
+TimeContentPerson.propTypes = {
+  name: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
+  startYear: PropTypes.number,
+  endYear: PropTypes.number,
+  duration: PropTypes.number,
+  father: PropTypes.string,
+  mother: PropTypes.string,
+  childs: PropTypes.array,
 };
 
 export default TimeContentPerson;

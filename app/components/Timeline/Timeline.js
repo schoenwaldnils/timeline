@@ -115,8 +115,7 @@ class Timeline extends Component {
 
     return (
       <div className="Timeline" id="timeline">
-        <div className="Timeline-scale">
-        </div>
+        <div className="Timeline-scale" />
         <div className="Timeline-numbers">
           <div className="Timeline-negativeNumbers">
             {scaleNumberNegativ}
@@ -170,8 +169,8 @@ class Timeline extends Component {
         </div>
       </div>
     );
-  };
-};
+  }
+}
 
 Timeline.defaultProps = {
   persons: undefined,
