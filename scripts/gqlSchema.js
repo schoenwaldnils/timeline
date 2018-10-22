@@ -6,7 +6,7 @@ module.exports = gql`{
       startYear_exists: true,
       OR: [
         { endYear_exists: true },
-        { alive: true }
+        { stillActive: true }
       ]
     }
     order: [
@@ -26,10 +26,10 @@ module.exports = gql`{
       },
       gender,
       startYear,
-      birthVagueness,
+      startVagueness,
       endYear,
-      deathVagueness,
-      alive,
+      endVagueness,
+      stillActive,
       father {
         name
       },

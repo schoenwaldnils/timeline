@@ -1,5 +1,3 @@
-import { timeperiod } from '../app/js/utils';
-
 export function formatPerson(data) {
   if (data.sys && data.sys.id) {
     data.id = data.sys.id;
@@ -26,18 +24,6 @@ export function formatPerson(data) {
     delete data.childsCollection;
   }
 
-  if (data.startYear && data.endYear) {
-    data.duration = timeperiod(
-      data.startYear,
-      data.endYear,
-    );
-  } else if (data.startYear && data.alive) {
-    data.duration = timeperiod(
-      data.startYear,
-      new Date().getFullYear(),
-    );
-  }
-
   return data;
 }
 
@@ -47,12 +33,6 @@ export function formatTime(data) {
     delete data.sys;
   }
 
-  if (data.startYear) {
-    data.duration = timeperiod(
-      data.startYear,
-      data.endYear || new Date().getFullYear(),
-    );
-  }
   return data;
 }
 
