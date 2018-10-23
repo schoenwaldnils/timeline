@@ -5,22 +5,43 @@ import cs from 'classnames';
 import styled from 'styled-components';
 
 import { timeperiod } from '../../js/utils';
+import { calcTimes } from './calcTimes';
 
 import './Time.css';
 
-function calcDuration(type, startYear, endYear, stillActive) {
-  if (startYear && endYear) {
-    return timeperiod(
-      startYear,
-      endYear,
-    );
-  } else if (startYear && (stillActive || type === 'time')) {
-    return timeperiod(
-      startYear,
-      new Date().getFullYear(),
-    );
+
+function generateGradient({
+  calcedStart, calcedStartCertain, calcedEndCertain, calcedEnd, duration,
+}) {
+  if (!calcedStartCertain && !calcedEndCertain) {
+    return '';
   }
-  return undefined;
+
+  let startPx = 0;
+  let endPx = startPx + duration;
+
+  let gradientStart = '';
+  let gradientEnd = '';
+
+  if (calcedStartCertain) {
+    startPx = calcedStartCertain - calcedStart;
+    gradientStart = 'transparent 0px, ';
+  }
+
+  if (calcedEndCertain) {
+    endPx = calcedEndCertain - calcedStart;
+    gradientEnd = `transparent ${calcedEnd - calcedStart}px`;
+  }
+
+  return `
+  linear-gradient(
+    to right,
+    ${gradientStart}
+    var(--Time-color)
+    ${startPx}px,
+    var(--Time-color)
+    ${endPx}px,
+    ${gradientEnd})`;
 }
 
 class Time extends PureComponent {
@@ -45,28 +66,31 @@ class Time extends PureComponent {
       handleElementClick,
     } = this.props;
 
-    const duration = calcDuration(type, startYear, endYear, stillActive);
+    const {
+      calcedStart,
+      calcedEnd,
+    } = calcTimes({
+      type, startYear, startVagueness, endYear, endVagueness, stillActive,
+    });
 
     const timeClassnames = cs(
       'Time',
       `Time--${type}`,
       {
-        'Time--startUnsure': startVagueness,
-        'Time--endUnsure': endVagueness || stillActive,
+        // 'Time--startUnsure': startVagueness,
+        // 'Time--endUnsure': endVagueness || stillActive,
         'is-active': isActive,
       },
       [className],
     );
+
+    const duration = timeperiod(calcedStart, calcedEnd);
 
     if (!startYear || !duration) return null;
 
     return (
       <div
         className={timeClassnames}
-        // style={{
-        //   '--startVagueness': startVagueness,
-        //   '--endVagueness': endVagueness,
-        // }}
         role="button"
         tabIndex={0}
         onKeyUp={() => {}}
@@ -113,12 +137,26 @@ Time.propTypes = {
 };
 
 const StyledTime = styled(Time)(({
-  type, startYear, endYear, stillActive,
+  type, startYear, startVagueness, endYear, endVagueness, stillActive,
 }) => {
-  const duration = calcDuration(type, startYear, endYear, stillActive);
+  const {
+    calcedStart,
+    calcedStartCertain,
+    calcedEndCertain,
+    calcedEnd,
+  } = calcTimes({
+    type, startYear, startVagueness, endYear, endVagueness, stillActive,
+  });
+  const duration = timeperiod(calcedStart, calcedEnd);
+  const background = generateGradient({
+    calcedStart, calcedStartCertain, calcedEndCertain, calcedEnd, duration,
+  });
+
+
   return ({
     width: `${duration}px`,
-    marginLeft: `${startYear + 4026}px`,
+    marginLeft: `${calcedStart + 4026}px`,
+    background,
   });
 });
 

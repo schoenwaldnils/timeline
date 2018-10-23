@@ -5,7 +5,7 @@
 }
 
 .Time--person {
-  --Time-color: var(--color-green-darker);
+  --Time-color: #68d4bc;
 }
 
 .Time {
@@ -21,55 +21,24 @@
   white-space: nowrap;
   cursor: pointer;
   background-color: var(--Time-color);
-}
-
-.Time--startUnsure::before,
-.Time--endUnsure::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  height: 100%;
-  opacity: .75;
-}
-
-.Time--startUnsure::before {
-  right: 100%;
-  width: var(--startVagueness, 3rem);
-  background:
-    linear-gradient(
-      to left,
-      var(--Time-color) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-  border-radius: 50px 0 0 50px;
-}
-
-.Time--endUnsure::after {
-  left: 100%;
-  width: var(--endVagueness, 3rem);
-  background:
-    linear-gradient(
-      to right,
-      var(--Time-color) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-  border-radius: 0 50px 50px 0;
+  border-radius: .5em;
 }
 
 .Time:focus {
-  background-color: var(--Time-color);
+  --Time-color: #24bb9a;
   outline: none;
 }
 
 .Time-name {
   position: sticky;
   left: .5em;
+  padding-bottom: .25em;
 }
 
 .Time-info {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: .25em;
   padding: .4em .5em;
   color: var(--text-color);
   background-color: #fff;

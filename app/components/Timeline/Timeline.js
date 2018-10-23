@@ -53,8 +53,6 @@ class Timeline extends Component {
   }
 
   handleElementClose = (type = 'all', id = undefined) => {
-    console.log('handleElementClose', { type, id });
-
     const { activePersons, activeTimes, activeEvents } = this.state;
 
     switch (type) {
