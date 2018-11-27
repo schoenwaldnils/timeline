@@ -5,7 +5,7 @@ import cs from 'classnames';
 import styled from 'styled-components';
 
 import { timeperiod } from '../../js/utils';
-import { calcTimes } from './calcTimes';
+import { calcTimes } from '../../js/calcTimes';
 
 import './Time.css';
 
@@ -155,7 +155,7 @@ const StyledTime = styled(Time)(({
 
   return ({
     width: `${duration}px`,
-    marginLeft: `${calcedStart + 4026}px`,
+    marginLeft: `${calcedStart + 4100}px`,
     background,
   });
 });

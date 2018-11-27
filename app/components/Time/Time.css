@@ -16,45 +16,26 @@
   margin-bottom: 1px;
   padding-right: .5em;
   padding-left: .5em;
-  font-family: monospace;
   color: #000;
   white-space: nowrap;
   cursor: pointer;
   background-color: var(--Time-color);
-  border-radius: .5em;
 }
 
 .Time:focus {
-  --Time-color: #24bb9a;
   outline: none;
+}
+
+.Time--person:focus {
+  --Time-color: #24bb9a;
+}
+
+.Time--time:focus {
+  --Time-color: #ddb938;
 }
 
 .Time-name {
   position: sticky;
   left: .5em;
   padding-bottom: .25em;
-}
-
-.Time-info {
-  position: absolute;
-  top: 100%;
-  left: .25em;
-  padding: .4em .5em;
-  color: var(--text-color);
-  background-color: #fff;
-  box-shadow: 2px 2px rgba(0, 0, 0, .125);
-}
-
-.Time.is-active .Time-info {
-  z-index: 1;
-}
-
-.Time-image {
-  width: 150px;
-}
-
-.Time-tableCell {
-  padding: .25em;
-  white-space: nowrap;
-  vertical-align: top;
 }

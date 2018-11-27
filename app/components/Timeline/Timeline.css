@@ -1,24 +1,16 @@
 /** @define Timeline */
 
 :root {
-  --Time-yearsBeforeZero: 4026px;
+  --Time-yearsBeforeZero: 4100px;
   --Time-yearsAfterZero: 2200px;
 }
 
 .Timeline {
   position: relative;
   width: calc(var(--Time-yearsBeforeZero) + var(--Time-yearsAfterZero));
-  height: 100%;
   font-size: 10px;
   color: var(--color-brown);
-  background-image:
-    linear-gradient(
-      to bottom,
-      var(--body-background-shadow) 0%,
-      var(--body-background-color) 50%,
-      var(--body-background-shadow) 100%
-    );
-  background-size: auto 100%;
+  background-color: #f0f0f0;
 }
 
 .Timeline-scale {
@@ -57,7 +49,7 @@
   top: .25em;
   display: flex;
   padding-right: 17px;
-  padding-left: 26px;
+  padding-left: 5px;
 }
 
 .Timeline-negativeNumbers {
@@ -71,7 +63,7 @@
 
 .Timeline-scaleNumber {
   width: 100px;
-  padding-left: .25rem;
+  padding-left: 0;
   font-family: monospace;
 }
 

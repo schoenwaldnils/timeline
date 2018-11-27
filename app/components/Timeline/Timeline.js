@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Time from '../Time/Time';
-import TimeContentPerson from '../Time/TimeContentPerson';
-import TimeContentTime from '../Time/TimeContentTime';
 import Event from '../Event/Event';
 
 import './Timeline.css';
@@ -98,11 +96,20 @@ class Timeline extends Component {
   }
 
   render() {
-    const { persons, times, events } = this.props;
-    const { activePersons, activeTimes, activeEvents } = this.state;
+    const {
+      persons,
+      times,
+      events,
+      changeSidebarContent,
+    } = this.props;
+    const {
+      activePersons,
+      activeTimes,
+      activeEvents,
+    } = this.state;
 
     const scaleNumberNegativ = [];
-    for (let i = 0; i <= 40; i += 1) {
+    for (let i = 0; i <= 41; i += 1) {
       scaleNumberNegativ.push(<div className="Timeline-scaleNumber" key={i}>{i * -100 }</div>);
     }
 
@@ -123,47 +130,32 @@ class Timeline extends Component {
           </div>
         </div>
         <div className="Timeline-content" id="timeline">
-          { events && events.map((eventData, key) => {
-            const { id, ...event } = eventData;
-            return (
-              <Event
-                {...event}
-                isActive={activeEvents.includes(id)}
-                key={id}
-                tabIndex={key}
-                handleElementClick={() => this.handleElementClick('event', id)} />
-            );
-          })}
+          { events && events.map(({ id, ...event }, key) => (
+            <Event
+              {...event}
+              isActive={activeEvents.includes(id)}
+              key={id}
+              tabIndex={key}
+              handleElementClick={() => changeSidebarContent(id, 'event')} />
+          ))}
 
-          { persons && persons.map((personData, key) => {
-            const { id, ...person } = personData;
-            return (
-              <Time
-                {...person}
-                type="person"
-                isActive={activePersons.includes(id)}
-                key={id}
-                tabIndex={key}
-                handleElementClick={() => this.handleElementClick('person', id)}>
-                <TimeContentPerson {...person} />
-              </Time>
-            );
-          })}
+          { persons && persons.map(({ id, ...person }) => (
+            <Time
+              key={id}
+              {...person}
+              type="person"
+              isActive={activePersons.includes(id)}
+              handleElementClick={() => changeSidebarContent(id, 'person')} />
+          ))}
 
-          { times && times.map((timeData, key) => {
-            const { id, ...time } = timeData;
-            return (
-              <Time
-                {...time}
-                type="time"
-                isActive={activeTimes.includes(id)}
-                key={id}
-                tabIndex={key}
-                handleElementClick={() => this.handleElementClick('time', id)}>
-                <TimeContentTime {...time} />
-              </Time>
-            );
-          })}
+          { times && times.map(({ id, ...time }) => (
+            <Time
+              key={id}
+              {...time}
+              type="time"
+              isActive={activeTimes.includes(id)}
+              handleElementClick={() => changeSidebarContent(id, 'time')} />
+          ))}
         </div>
       </div>
     );

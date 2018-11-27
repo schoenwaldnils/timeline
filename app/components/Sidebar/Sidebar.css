@@ -1,0 +1,30 @@
+/** @define Sidebar */
+
+.Sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+  font-size: 12px;
+  box-shadow: inset 1rem 0 .75rem -1rem rgba(0, 0, 0, .5);
+}
+
+.Sidebar-title {
+  margin-bottom: .5em;
+}
+
+.Sidebar-icon {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.Sidebar-image {
+  margin-bottom: 1rem;
+}
+
+.Sidebar-tableCell {
+  padding: .25em;
+  white-space: nowrap;
+  vertical-align: top;
+}

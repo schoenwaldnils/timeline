@@ -26,13 +26,11 @@
 }
 
 .Header-title {
-  font-family: monospace;
   font-size: 1.5rem;
   text-transform: uppercase;
 }
 
 .Header-link--persons {
-  font-family: monospace;
   text-transform: uppercase;
 }
 

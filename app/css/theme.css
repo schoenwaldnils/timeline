@@ -4,12 +4,6 @@
  * This defines the theme in fundamental terms.
  */
 
-/*
- * Breakpoints
- */
-@custom-media --viewport-sm (min-width: 480px);
-@custom-media --viewport-md (min-width: 768px);
-@custom-media --viewport-lg (min-width: 992px);
 
 /*
  * Content Widths
@@ -76,9 +70,17 @@
 
   --font-size: 16px;
 
-  /* --font-family: WtClearText, Georgia, serif; */
+  --font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
 
-  --font-family: monospace;
   --font-weight: 500;
   --line-height: 1.4;
 

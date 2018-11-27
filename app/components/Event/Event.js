@@ -29,7 +29,7 @@ Event.defaultProps = {
 };
 
 const StyledEvent = styled(Event)`
-  margin-left: ${props => props.year + 4026}px;
+  margin-left: ${props => props.year + 4100}px;
 `;
 
 export default StyledEvent;
