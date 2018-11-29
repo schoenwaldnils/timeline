@@ -20,27 +20,11 @@ module.exports = gql`{
         id
       }
       name,
-      image {
-        fileName,
-        url
-      },
-      gender,
       startYear,
       startVagueness,
       endYear,
       endVagueness,
       stillActive,
-      father {
-        name
-      },
-      mother {
-        name
-      },
-      childsCollection {
-        items {
-          name
-        }
-      }
     }
   },
   timeCollection(

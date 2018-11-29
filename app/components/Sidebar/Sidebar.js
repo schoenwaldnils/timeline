@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import cs from 'classnames';
 import gql from 'graphql-tag';
-import { MdArrowBack } from 'react-icons/md';
+import { MdArrowForward } from 'react-icons/md';
 import getAllData from '../../../scripts/cfGraphql-es6';
 
 import SidebarContentEvent from './SidebarContentEvent';
@@ -115,24 +116,26 @@ class Sidebar extends PureComponent {
   }
 
   render() {
-    const { changeSidebarContent, contentElement: { type: contentType } } = this.props;
+    const { isActive, changeSidebarContent, contentElement: { type: contentType } } = this.props;
     const { content } = this.state;
 
-    if (!content) return null;
-
     return (
-      <div className="Sidebar">
-        <MdArrowBack className="Sidebar-icon Sidebar-icon--back" onClick={() => changeSidebarContent(undefined)} />
-        {contentType === 'event' && <SidebarContentEvent {...content} />}
-        {contentType === 'person' && <SidebarContentPerson {...content} />}
-        {contentType === 'time' && <SidebarContentTime {...content} />}
-      </div>
+      <aside className={cs('Sidebar', { 'is-active': isActive })}>
+        <MdArrowForward className="Sidebar-icon Sidebar-icon--back" onClick={() => changeSidebarContent(undefined)} />
+        { content &&
+          <Fragment>
+            {contentType === 'event' && <SidebarContentEvent {...content} />}
+            {contentType === 'person' && <SidebarContentPerson {...content} />}
+            {contentType === 'time' && <SidebarContentTime {...content} />}
+          </Fragment>
+        }
+      </aside>
     );
   }
 }
 
 Sidebar.defaultProps = {
-  contentElement: undefined,
+  contentElement: {},
 };
 
 Sidebar.propTypes = {

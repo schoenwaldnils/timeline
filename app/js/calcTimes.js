@@ -51,8 +51,8 @@ export function calcPoints(type, year, vagueness) {
 }
 
 function maxEnd(value) {
-  if (value > 2200) {
-    return 2200;
+  if (value > 2500) {
+    return 2500;
   }
   return value;
 }

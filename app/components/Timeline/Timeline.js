@@ -102,6 +102,7 @@ class Timeline extends Component {
       events,
       changeSidebarContent,
     } = this.props;
+
     const {
       activePersons,
       activeTimes,

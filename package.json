@@ -78,6 +78,8 @@
     "react": "16.5.2",
     "react-addons-test-utils": "15.6.2",
     "react-dom": "16.5.2",
+    "react-easy-swipe": "0.0.17",
+    "react-icons": "3.2.1",
     "react-reveal": "1.2.2",
     "react-test-renderer": "16.5.2",
     "style-loader": "0.23.0",
