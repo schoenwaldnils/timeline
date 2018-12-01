@@ -63,10 +63,10 @@ const SidebarContentPerson = (props) => {
             <td className="Sidebar-tableCell">{age ? `${age} Jahre` : 'unbekannt'}</td>
           </tr>
 
-          <tr>
-            <td className="Sidebar-tableCell">Vater:</td>
-            <td className="Sidebar-tableCell">
-              { father ? (
+          { father &&
+            <tr>
+              <td className="Sidebar-tableCell">Vater:</td>
+              <td className="Sidebar-tableCell">
                 <a
                   onKeyUp={e => e.keyCode === 13 && changeSidebarContent(father.id)}
                   onClick={() => changeSidebarContent(father.id)}
@@ -74,16 +74,14 @@ const SidebarContentPerson = (props) => {
                   tabIndex={0}>
                   {father.name}
                 </a>
-              ) : (
-                'unbekannt'
-              )}
-            </td>
-          </tr>
+              </td>
+            </tr>
+          }
 
-          <tr>
-            <td className="Sidebar-tableCell">Mutter:</td>
-            <td className="Sidebar-tableCell">
-              { mother ? (
+          { mother &&
+            <tr>
+              <td className="Sidebar-tableCell">Mutter:</td>
+              <td className="Sidebar-tableCell">
                 <a
                   onKeyUp={e => e.keyCode === 13 && changeSidebarContent(mother.id)}
                   onClick={() => changeSidebarContent(mother.id)}
@@ -91,11 +89,9 @@ const SidebarContentPerson = (props) => {
                   tabIndex={0}>
                   {mother.name}
                 </a>
-              ) : (
-                'unbekannt'
-              )}
-            </td>
-          </tr>
+              </td>
+            </tr>
+          }
 
           { childs.length > 0 &&
             <tr>
