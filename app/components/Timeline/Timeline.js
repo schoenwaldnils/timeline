@@ -136,26 +136,29 @@ class Timeline extends Component {
               {...event}
               isActive={activeEvents.includes(id)}
               key={id}
+              id={id}
               tabIndex={key}
-              handleElementClick={() => changeSidebarContent(id, 'event')} />
+              handleElementClick={() => changeSidebarContent(id)} />
           ))}
 
           { persons && persons.map(({ id, ...person }) => (
             <Time
               key={id}
+              id={id}
               {...person}
               type="person"
               isActive={activePersons.includes(id)}
-              handleElementClick={() => changeSidebarContent(id, 'person')} />
+              handleElementClick={() => changeSidebarContent(id)} />
           ))}
 
           { times && times.map(({ id, ...time }) => (
             <Time
               key={id}
+              id={id}
               {...time}
               type="time"
               isActive={activeTimes.includes(id)}
-              handleElementClick={() => changeSidebarContent(id, 'time')} />
+              handleElementClick={() => changeSidebarContent(id)} />
           ))}
         </div>
       </div>

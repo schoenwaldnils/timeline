@@ -53,6 +53,7 @@ class Time extends PureComponent {
 
   render() {
     const {
+      id,
       type,
       isActive,
       className,
@@ -90,6 +91,7 @@ class Time extends PureComponent {
 
     return (
       <div
+        id={id}
         className={timeClassnames}
         role="button"
         tabIndex={0}
@@ -120,6 +122,7 @@ Time.defaultProps = {
 };
 
 Time.propTypes = {
+  id: PropTypes.string.isRequired,
   type: PropTypes.oneOf([
     'time',
     'person',

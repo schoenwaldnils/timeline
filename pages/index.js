@@ -4,6 +4,7 @@ import Swipe from 'react-easy-swipe';
 import cfGraphql from '../scripts/cfGraphql';
 import query from '../scripts/gqlSchema';
 import { formatPerson, formatTime, formatEvent } from '../scripts/formatData';
+import { setUrlHash, getUrlHash } from '../app/js/urlHash';
 
 // import Header from '../app/components/Header/Header';
 import Timeline from '../app/components/Timeline/Timeline';
@@ -16,11 +17,17 @@ class Page extends PureComponent {
     persons: [],
     times: [],
     events: [],
-    activeElement: undefined,
+    activeElement: null,
   }
 
   componentWillMount() {
     this.fetchContentfulData();
+  }
+
+  componentDidMount() {
+    this.setState({ // eslint-disable-line react/no-did-mount-set-state
+      activeElement: getUrlHash() || this.state.activeElement,
+    });
   }
 
   async fetchContentfulData() {
@@ -49,12 +56,10 @@ class Page extends PureComponent {
     });
   }
 
-  changeSidebarContent = (id, type) => {
+  changeSidebarContent = (id) => {
+    setUrlHash(id || null);
     this.setState({
-      activeElement: {
-        id,
-        type,
-      },
+      activeElement: id,
     });
   }
 
@@ -79,11 +84,12 @@ class Page extends PureComponent {
         </section>
         <Swipe onSwipeRight={() => this.changeSidebarContent(undefined)}>
           <Sidebar
-            persons={persons}
-            times={times}
-            events={events}
-            isActive={activeElement && activeElement.id}
-            contentElement={activeElement}
+            entries={[
+              ...persons,
+              ...times,
+              ...events,
+            ]}
+            entryId={activeElement}
             changeSidebarContent={this.changeSidebarContent} />
         </Swipe>
       </div>

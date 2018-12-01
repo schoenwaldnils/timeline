@@ -5,20 +5,13 @@ import { ourTime } from '../../js/utils';
 import './Event.css';
 
 const Event = ({
-  className, tabIndex, name, year,
+  id, className, tabIndex, name, year,
 }) => {
   return (
-    <div className={`Event ${className}`} tabIndex={tabIndex}>
+    <div id={id} className={`Event ${className}`} tabIndex={tabIndex}>
       <div className="Event-title">{name}<br />{`(${ourTime(year)})`}</div>
     </div>
   );
-};
-
-Event.propTypes = {
-  className: PropTypes.string,
-  tabIndex: PropTypes.number,
-  name: PropTypes.string,
-  year: PropTypes.number,
 };
 
 Event.defaultProps = {
@@ -26,6 +19,14 @@ Event.defaultProps = {
   tabIndex: 0,
   name: null,
   year: null,
+};
+
+Event.propTypes = {
+  id: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  tabIndex: PropTypes.number,
+  name: PropTypes.string,
+  year: PropTypes.number,
 };
 
 const StyledEvent = styled(Event)`

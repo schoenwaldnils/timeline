@@ -68,8 +68,8 @@ const SidebarContentPerson = (props) => {
             <td className="Sidebar-tableCell">
               { father ? (
                 <a
-                  onKeyUp={e => e.keyCode === 13 && changeSidebarContent(father.id, 'person')}
-                  onClick={() => changeSidebarContent(father.id, 'person')}
+                  onKeyUp={e => e.keyCode === 13 && changeSidebarContent(father.id)}
+                  onClick={() => changeSidebarContent(father.id)}
                   role="button"
                   tabIndex={0}>
                   {father.name}
@@ -85,8 +85,8 @@ const SidebarContentPerson = (props) => {
             <td className="Sidebar-tableCell">
               { mother ? (
                 <a
-                  onKeyUp={e => e.keyCode === 13 && changeSidebarContent(mother.id, 'person')}
-                  onClick={() => changeSidebarContent(mother.id, 'person')}
+                  onKeyUp={e => e.keyCode === 13 && changeSidebarContent(mother.id)}
+                  onClick={() => changeSidebarContent(mother.id)}
                   role="button"
                   tabIndex={0}>
                   {mother.name}
@@ -105,8 +105,8 @@ const SidebarContentPerson = (props) => {
                   { childs.map(({ id, name: childName }) => (
                     <a
                       key={id}
-                      onKeyUp={e => e.keyCode === 13 && changeSidebarContent(id, 'person')}
-                      onClick={() => changeSidebarContent(id, 'person')}
+                      onKeyUp={e => e.keyCode === 13 && changeSidebarContent(id)}
+                      onClick={() => changeSidebarContent(id)}
                       role="button"
                       tabIndex={0}>
                       <li>{childName}</li>

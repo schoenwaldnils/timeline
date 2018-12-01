@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
+import shallowequal from 'shallowequal';
 import { MdArrowForward } from 'react-icons/md';
 
 import SidebarContentEvent from './SidebarContentEvent';
@@ -13,6 +14,7 @@ import './Sidebar.css';
 class Sidebar extends PureComponent {
   state = {
     content: undefined,
+    contentType: undefined,
   }
 
   componentDidMount() {
@@ -20,42 +22,45 @@ class Sidebar extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.contentElement !== prevProps.contentElement) {
+    if (!shallowequal(this.props, prevProps)) {
       this.fetchData();
     }
   }
 
   fetchData() {
-    const { contentElement: { id, type: contentType } } = this.props;
+    const { entries, entryId } = this.props;
+    let { contentType } = this.props;
     let content;
 
-    if (id && contentType) {
-      this.props[`${contentType}s`].forEach((element) => {
-        if (element.id === id) {
-          content = element;
+    if (entryId) {
+      entries.forEach((entry) => {
+        if (entry.id === entryId) {
+          content = entry;
+          contentType = entry.__typename || contentType;
         }
       });
     }
 
     this.setState({
       content,
+      contentType,
     });
   }
 
   render() {
-    const { isActive, changeSidebarContent, contentElement: { type: contentType } } = this.props;
-    const { content } = this.state;
+    const { entryId, changeSidebarContent } = this.props;
+    const { content, contentType } = this.state;
 
     return (
-      <aside className={cs('Sidebar', { 'is-active': isActive })}>
+      <aside className={cs('Sidebar', { 'is-active': !!entryId })}>
         <MdArrowForward className="Sidebar-icon Sidebar-icon--back" onClick={() => changeSidebarContent(undefined)} />
         { content &&
           <Fragment>
-            {contentType === 'person' &&
+            {contentType === 'Person' &&
               <SidebarContentPerson {...content} changeSidebarContent={changeSidebarContent} />
             }
-            {contentType === 'event' && <SidebarContentEvent {...content} />}
-            {contentType === 'time' && <SidebarContentTime {...content} />}
+            {contentType === 'Event' && <SidebarContentEvent {...content} />}
+            {contentType === 'Time' && <SidebarContentTime {...content} />}
           </Fragment>
         }
       </aside>
@@ -64,18 +69,11 @@ class Sidebar extends PureComponent {
 }
 
 Sidebar.defaultProps = {
-  contentElement: {},
+  entryId: undefined,
 };
 
 Sidebar.propTypes = {
-  contentElement: PropTypes.shape({
-    id: PropTypes.string,
-    type: PropTypes.oneOf([
-      'event',
-      'person',
-      'time',
-    ]),
-  }),
+  entryId: PropTypes.string,
 };
 
 export default Sidebar;
