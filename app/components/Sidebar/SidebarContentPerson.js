@@ -14,9 +14,14 @@ const SidebarContentPerson = (props) => {
     father,
     mother,
     childs,
+    changeSidebarContent,
   } = props;
 
-  const age = timeperiod(startYear, (endYear || new Date().getFullYear()));
+  let age;
+
+  if (startYear) {
+    age = timeperiod(startYear, (endYear || new Date().getFullYear()));
+  }
 
 
   return (
@@ -36,48 +41,77 @@ const SidebarContentPerson = (props) => {
           <tr>
             <td className="Sidebar-tableCell">Geboren:</td>
             <td className="Sidebar-tableCell">
-              {ourTime(startYear)}{startVagueness && `(${startVagueness})`}
+              {startYear && ourTime(startYear)}
+              {' '}
+              {startYear && startVagueness && `(${startVagueness})`}
+              {!startYear && 'unbekannt'}
             </td>
           </tr>
 
-          { endYear &&
-            <tr>
-              <td className="Sidebar-tableCell">Gestorben:</td>
-              <td className="Sidebar-tableCell">
-                {ourTime(endYear)} {endVagueness && `(${endVagueness})`}
-              </td>
-            </tr>
-          }
+          <tr>
+            <td className="Sidebar-tableCell">Gestorben:</td>
+            <td className="Sidebar-tableCell">
+              {endYear && ourTime(endYear)}
+              {' '}
+              {endYear && endVagueness && `(${endVagueness})`}
+              {!endYear && 'unbekannt'}
+            </td>
+          </tr>
 
           <tr>
             <td className="Sidebar-tableCell">Lebensdauer:</td>
-            <td className="Sidebar-tableCell">{age} Jahre</td>
+            <td className="Sidebar-tableCell">{age ? `${age} Jahre` : 'unbekannt'}</td>
           </tr>
 
-          { father &&
-            <tr>
-              <td className="Sidebar-tableCell">Vater:</td>
-              <td className="Sidebar-tableCell">
-                {father}
-              </td>
-            </tr>
-          }
+          <tr>
+            <td className="Sidebar-tableCell">Vater:</td>
+            <td className="Sidebar-tableCell">
+              { father ? (
+                <a
+                  onKeyUp={e => e.keyCode === 13 && changeSidebarContent(father.id, 'person')}
+                  onClick={() => changeSidebarContent(father.id, 'person')}
+                  role="button"
+                  tabIndex={0}>
+                  {father.name}
+                </a>
+              ) : (
+                'unbekannt'
+              )}
+            </td>
+          </tr>
 
-          { mother &&
-            <tr>
-              <td className="Sidebar-tableCell">Mutter:</td>
-              <td className="Sidebar-tableCell">
-                {mother}
-              </td>
-            </tr>
-          }
+          <tr>
+            <td className="Sidebar-tableCell">Mutter:</td>
+            <td className="Sidebar-tableCell">
+              { mother ? (
+                <a
+                  onKeyUp={e => e.keyCode === 13 && changeSidebarContent(mother.id, 'person')}
+                  onClick={() => changeSidebarContent(mother.id, 'person')}
+                  role="button"
+                  tabIndex={0}>
+                  {mother.name}
+                </a>
+              ) : (
+                'unbekannt'
+              )}
+            </td>
+          </tr>
 
           { childs.length > 0 &&
             <tr>
               <td className="Sidebar-tableCell">Kinder:</td>
               <td className="Sidebar-tableCell">
                 <ul>
-                  { childs.map(child => <li key={child}>{child}</li>)}
+                  { childs.map(({ id, name: childName }) => (
+                    <a
+                      key={id}
+                      onKeyUp={e => e.keyCode === 13 && changeSidebarContent(id, 'person')}
+                      onClick={() => changeSidebarContent(id, 'person')}
+                      role="button"
+                      tabIndex={0}>
+                      <li>{childName}</li>
+                    </a>
+                  ))}
                 </ul>
               </td>
             </tr>
@@ -106,9 +140,10 @@ SidebarContentPerson.propTypes = {
   startVagueness: PropTypes.string,
   endYear: PropTypes.number,
   endVagueness: PropTypes.string,
-  father: PropTypes.string,
-  mother: PropTypes.string,
+  father: PropTypes.object,
+  mother: PropTypes.object,
   childs: PropTypes.array,
+  changeSidebarContent: PropTypes.func.isRequired,
 };
 
 export default SidebarContentPerson;

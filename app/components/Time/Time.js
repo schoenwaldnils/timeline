@@ -93,7 +93,7 @@ class Time extends PureComponent {
         className={timeClassnames}
         role="button"
         tabIndex={0}
-        onKeyUp={() => {}}
+        onKeyUp={e => e.keyCode === 13 && this.handleElementClick}
         onClick={handleElementClick}>
         <div className="Time-name">
           { name }

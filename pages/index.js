@@ -1,17 +1,52 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import Swipe from 'react-easy-swipe';
 
-import '../app/css/index.css';
+import cfGraphql from '../scripts/cfGraphql';
+import query from '../scripts/gqlSchema';
+import { formatPerson, formatTime, formatEvent } from '../scripts/formatData';
 
 // import Header from '../app/components/Header/Header';
 import Timeline from '../app/components/Timeline/Timeline';
 import Sidebar from '../app/components/Sidebar/Sidebar';
-import { formatPerson, formatTime, formatEvent } from '../scripts/formatData';
+
+import '../app/css/index.css';
 
 class Page extends PureComponent {
   state = {
+    persons: [],
+    times: [],
+    events: [],
     activeElement: undefined,
+  }
+
+  componentWillMount() {
+    this.fetchContentfulData();
+  }
+
+  async fetchContentfulData() {
+    const data = await cfGraphql(query);
+
+    const {
+      personCollection: { items: persons },
+      timeCollection: { items: times },
+      eventCollection: { items: events },
+    } = data;
+
+    persons.map(person => formatPerson(person));
+    times.map(time => formatTime(time));
+    events.map(event => formatEvent(event));
+
+    const filteredPersons = persons.filter(({ startYear, endYear, stillActive }) => {
+      if (startYear && (endYear || stillActive)) return true;
+      return false;
+    });
+
+    this.setState({
+      persons,
+      filteredPersons,
+      times,
+      events,
+    });
   }
 
   changeSidebarContent = (id, type) => {
@@ -24,16 +59,29 @@ class Page extends PureComponent {
   }
 
   render() {
-    const { persons, times, events } = this.props;
-    const { activeElement } = this.state;
+    const {
+      persons,
+      filteredPersons,
+      times,
+      events,
+      activeElement,
+    } = this.state;
+
     return (
       <div className="Page">
         {/* <Header /> */}
         <section className="Page-wrapTimeline" role="main">
-          <Timeline persons={persons} times={times} events={events} changeSidebarContent={this.changeSidebarContent} />
+          <Timeline
+            persons={filteredPersons}
+            times={times}
+            events={events}
+            changeSidebarContent={this.changeSidebarContent} />
         </section>
         <Swipe onSwipeRight={() => this.changeSidebarContent(undefined)}>
           <Sidebar
+            persons={persons}
+            times={times}
+            events={events}
             isActive={activeElement && activeElement.id}
             contentElement={activeElement}
             changeSidebarContent={this.changeSidebarContent} />
@@ -42,31 +90,5 @@ class Page extends PureComponent {
     );
   }
 }
-
-Page.getInitialProps = async ({ query: { data } }) => {
-  const {
-    personCollection: { items: persons },
-    timeCollection: { items: times },
-    eventCollection: { items: events },
-  } = data;
-
-  return {
-    persons: persons.map(person => formatPerson(person)),
-    times: times.map(time => formatTime(time)),
-    events: events.map(event => formatEvent(event)),
-  };
-};
-
-Page.propTypes = {
-  persons: PropTypes.array,
-  times: PropTypes.array,
-  events: PropTypes.array,
-};
-
-Page.defaultProps = {
-  persons: null,
-  times: null,
-  events: null,
-};
 
 export default Page;

@@ -2,13 +2,6 @@ const gql = require('graphql-tag');
 
 module.exports = gql`{
   personCollection(
-    where: {
-      startYear_exists: true,
-      OR: [
-        { endYear_exists: true },
-        { stillActive: true }
-      ]
-    }
     order: [
       startYear_ASC,
       name_ASC
@@ -20,11 +13,36 @@ module.exports = gql`{
         id
       }
       name,
+      image {
+        fileName,
+        url
+      },
+      gender,
       startYear,
       startVagueness,
       endYear,
       endVagueness,
       stillActive,
+      father {
+        sys {
+          id
+        }
+        name
+      },
+      mother {
+        sys {
+          id
+        }
+        name
+      },
+      childsCollection {
+        items {
+          sys {
+            id
+          }
+          name
+        }
+      }
     }
   },
   timeCollection(

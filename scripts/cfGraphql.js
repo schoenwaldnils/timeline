@@ -1,7 +1,7 @@
-const { ApolloClient } = require('apollo-client');
-const { InMemoryCache } = require('apollo-cache-inmemory');
-const { HttpLink } = require('apollo-link-http');
-const fetch = require('node-fetch');
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import fetch from 'node-fetch';
 
 
 function newContenfulGQLClient({
@@ -47,4 +47,4 @@ async function getAllData(query) {
   }
 }
 
-module.exports = getAllData;
+export default getAllData;

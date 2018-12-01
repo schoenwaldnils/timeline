@@ -10,16 +10,24 @@ export function formatPerson(data) {
   }
 
   if (data.father) {
-    data.father = data.father.name;
+    data.father = {
+      id: data.father.sys ? data.father.sys.id : data.father.id,
+      name: data.father.name,
+    };
   }
 
   if (data.mother) {
-    data.mother = data.mother.name;
+    data.mother = {
+      id: data.mother.sys ? data.mother.sys.id : data.mother.id,
+      name: data.mother.name,
+    };
   }
 
   if (data.childsCollection) {
     if (data.childsCollection.items.length) {
-      data.childs = data.childsCollection.items.map(child => child.name);
+      data.childs = data.childsCollection.items.map(({ name, sys: { id } }) => {
+        return { id, name };
+      });
     }
     delete data.childsCollection;
   }
