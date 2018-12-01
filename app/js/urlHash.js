@@ -1,6 +1,6 @@
 import shallowequal from 'shallowequal';
 
-export function setUrlHash(hash, pushState = false) {
+export function setUrlHash(hash, pushState = true) {
   if (typeof window !== 'undefined' && window.location) {
     const currentState = window.location.hash.replace(/^#/, '');
 
