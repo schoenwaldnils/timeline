@@ -8,6 +8,7 @@
 .Timeline {
   position: relative;
   width: calc(var(--Time-yearsBeforeZero) + var(--Time-yearsAfterZero));
+  min-height: 100vh;
   font-size: 10px;
   color: var(--color-brown);
   background-color: #f0f0f0;

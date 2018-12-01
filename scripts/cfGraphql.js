@@ -42,7 +42,7 @@ async function getAllData(query) {
     return data;
   } catch (error) {
     if (error.networkError) {
-      console.error(error.networkError.result.errors);
+      console.error(error.networkError.result ? error.networkError.result.errors : error.networkError);
     }
   }
 }

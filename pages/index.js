@@ -31,29 +31,33 @@ class Page extends PureComponent {
   }
 
   async fetchContentfulData() {
-    const data = await cfGraphql(query);
+    try {
+      const data = await cfGraphql(query);
 
-    const {
-      personCollection: { items: persons },
-      timeCollection: { items: times },
-      eventCollection: { items: events },
-    } = data;
+      const {
+        personCollection: { items: persons },
+        timeCollection: { items: times },
+        eventCollection: { items: events },
+      } = data;
 
-    persons.map(person => formatPerson(person));
-    times.map(time => formatTime(time));
-    events.map(event => formatEvent(event));
+      persons.map(person => formatPerson(person));
+      times.map(time => formatTime(time));
+      events.map(event => formatEvent(event));
 
-    const filteredPersons = persons.filter(({ startYear, endYear, stillActive }) => {
-      if (startYear && (endYear || stillActive)) return true;
-      return false;
-    });
+      const filteredPersons = persons.filter(({ startYear, endYear, stillActive }) => {
+        if (startYear && (endYear || stillActive)) return true;
+        return false;
+      });
 
-    this.setState({
-      persons,
-      filteredPersons,
-      times,
-      events,
-    });
+      this.setState({
+        persons,
+        filteredPersons,
+        times,
+        events,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   changeSidebarContent = (id) => {
