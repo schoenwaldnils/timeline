@@ -1,3 +1,5 @@
+import { SCALE_YEARS_AFTER_ZERO } from '../data/defaults';
+
 export function formatVagueness(vagueness) {
   const [value] = vagueness.match(/[0-9]+/g);
 
@@ -51,8 +53,8 @@ export function calcPoints(type, year, vagueness) {
 }
 
 function maxEnd(value) {
-  if (value > 2500) {
-    return 2500;
+  if (value > SCALE_YEARS_AFTER_ZERO) {
+    return SCALE_YEARS_AFTER_ZERO;
   }
   return value;
 }

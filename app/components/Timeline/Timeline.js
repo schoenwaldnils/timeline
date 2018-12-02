@@ -1,18 +1,53 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { pixelToYear } from '../../js/calcTimes';
+
 import Time from '../Time/Time';
 import Event from '../Event/Event';
 
 import './Timeline.css';
+import { ourTime } from '../../js/utils';
 
 
 class Timeline extends Component {
-  state = {
-    activePersons: [],
-    activeTimes: [],
-    activeEvents: [],
-  };
+  constructor() {
+    super();
+    this.state = {
+      activePersons: [],
+      activeTimes: [],
+      activeEvents: [],
+      cursorPositionLeft: -1,
+      cursorYear: undefined,
+    };
+    this.cursor = React.createRef();
+  }
+
+  componentDidMount() {
+    this.handleCursorMovement();
+  }
+
+  handleCursorMovement = () => {
+    let { cursorPositionLeft, cursorYear } = this.state;
+    let ticking = false;
+
+    document.addEventListener('mousemove', ({ pageX }) => {
+      cursorPositionLeft = pageX;
+      const { left } = JSON.parse(window.sessionStorage.getItem('scrollPosition'));
+      cursorYear = pixelToYear(left + pageX);
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          this.setState({
+            cursorPositionLeft,
+            cursorYear,
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
 
   handleElementClick = async (type, id) => {
     const { activePersons, activeTimes, activeEvents } = this.state;
@@ -107,6 +142,8 @@ class Timeline extends Component {
       activePersons,
       activeTimes,
       activeEvents,
+      cursorPositionLeft,
+      cursorYear,
     } = this.state;
 
     const scaleNumberNegativ = [];
@@ -122,6 +159,7 @@ class Timeline extends Component {
     return (
       <div className="Timeline" id="timeline">
         <div className="Timeline-scale" />
+
         <div className="Timeline-numbers">
           <div className="Timeline-negativeNumbers">
             {scaleNumberNegativ}
@@ -130,6 +168,7 @@ class Timeline extends Component {
             {scaleNumberPositive}
           </div>
         </div>
+
         <div className="Timeline-content" id="timeline">
           { events && events.map(({ id, ...event }, key) => (
             <Event
@@ -161,6 +200,14 @@ class Timeline extends Component {
               handleElementClick={() => changeSidebarContent(id)} />
           ))}
         </div>
+
+        <div
+          className="Timeline-cursor"
+          style={{
+            '--Timeline-scale-position-left': `${cursorPositionLeft}px`,
+            '--Timeline-scale-year': `'${ourTime(cursorYear)}'`,
+          }}
+          ref={this.cursor} />
       </div>
     );
   }

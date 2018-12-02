@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
 import { ourTime } from '../../js/utils';
+import { SCALE_YEARS_BEFORE_ZERO } from '../../data/defaults';
+
 import './Event.css';
 
 const Event = ({
@@ -30,7 +33,7 @@ Event.propTypes = {
 };
 
 const StyledEvent = styled(Event)`
-  margin-left: ${props => props.year + 4100}px;
+  margin-left: ${props => props.year + SCALE_YEARS_BEFORE_ZERO}px;
 `;
 
 export default StyledEvent;

@@ -1,0 +1,2 @@
+export const SCALE_YEARS_BEFORE_ZERO = 4100;
+export const SCALE_YEARS_AFTER_ZERO = 2500;

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { timeperiod } from '../../js/utils';
 import { calcTimes } from '../../js/calcTimes';
+import { SCALE_YEARS_BEFORE_ZERO } from '../../data/defaults';
 
 import './Time.css';
 
@@ -158,7 +159,7 @@ const StyledTime = styled(Time)(({
 
   return ({
     width: `${duration}px`,
-    marginLeft: `${calcedStart + 4100}px`,
+    marginLeft: `${calcedStart + SCALE_YEARS_BEFORE_ZERO}px`,
     background,
   });
 });
