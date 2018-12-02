@@ -13,11 +13,15 @@ import Sidebar from '../app/components/Sidebar/Sidebar';
 import '../app/css/index.css';
 
 class Page extends PureComponent {
-  state = {
-    persons: [],
-    times: [],
-    events: [],
-    activeElement: null,
+  constructor() {
+    super();
+    this.state = {
+      persons: [],
+      times: [],
+      events: [],
+      activeElement: null,
+    };
+    this.timeline = React.createRef();
   }
 
   componentWillMount() {
@@ -28,7 +32,40 @@ class Page extends PureComponent {
     this.setState({ // eslint-disable-line react/no-did-mount-set-state
       activeElement: getUrlHash() || this.state.activeElement,
     });
+    this.getScrollPosition();
   }
+
+  getScrollPosition = () => {
+    let lastKnownScrollPosition = JSON.parse(window.sessionStorage.getItem('scrollPosition')) || { top: 0, left: 0 };
+    let ticking = false;
+    const RefTimeline = this.timeline.current;
+
+    setTimeout(() => {
+      RefTimeline.scrollTop = lastKnownScrollPosition.top;
+      RefTimeline.scrollLeft = lastKnownScrollPosition.left;
+    }, 200);
+
+    function saveScrollpositionToSessionStorrage(scrollPos) {
+      if (scrollPos) window.sessionStorage.setItem('scrollPosition', JSON.stringify(scrollPos));
+    }
+
+    RefTimeline.addEventListener('scroll', () => {
+      lastKnownScrollPosition = {
+        top: RefTimeline.scrollTop,
+        left: RefTimeline.scrollLeft,
+      };
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          saveScrollpositionToSessionStorrage(lastKnownScrollPosition);
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    });
+  }
+
 
   async fetchContentfulData() {
     try {
@@ -79,7 +116,7 @@ class Page extends PureComponent {
     return (
       <div className="Page">
         {/* <Header /> */}
-        <section className="Page-wrapTimeline" role="main">
+        <section className="Page-wrapTimeline" role="main" ref={this.timeline}>
           <Timeline
             persons={filteredPersons}
             times={times}
