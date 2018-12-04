@@ -1,4 +1,4 @@
-import { SCALE_YEARS_AFTER_ZERO } from '../data/defaults';
+import { SCALE_YEARS_BEFORE_ZERO, SCALE_YEARS_AFTER_ZERO } from '../data/defaults';
 
 export function formatVagueness(vagueness) {
   const [value] = vagueness.match(/[0-9]+/g);
@@ -90,4 +90,9 @@ export function calcTimes({
   }
 
   return points;
+}
+
+export function pixelToYear(pixel) {
+  const year = pixel - SCALE_YEARS_BEFORE_ZERO;
+  return year;
 }
