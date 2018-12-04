@@ -33,7 +33,8 @@ class Timeline extends Component {
 
     document.addEventListener('mousemove', ({ pageX }) => {
       cursorPositionLeft = pageX;
-      const { left = 0 } = JSON.parse(window.sessionStorage.getItem('scrollPosition'));
+      const scrollPosition = JSON.parse(window.sessionStorage.getItem('scrollPosition'));
+      const left = scrollPosition ? scrollPosition.left : 0;
       cursorYear = pixelToYear(left + pageX);
 
       if (!ticking) {
