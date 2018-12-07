@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { ourTime } from '../../js/utils';
 import { SCALE_YEARS_BEFORE_ZERO } from '../../data/defaults';
+import { LanguageConsumer } from './../../js/context/lang-context';
 
 import './Event.css';
 
@@ -11,9 +12,13 @@ const Event = ({
   id, className, tabIndex, name, year,
 }) => {
   return (
-    <div id={id} className={`Event ${className}`} tabIndex={tabIndex}>
-      <div className="Event-title">{name}<br />{`(${ourTime(year)})`}</div>
-    </div>
+    <LanguageConsumer>
+      {({ language } = {}) => (
+        <div id={id} className={`Event ${className}`} tabIndex={tabIndex}>
+          <div className="Event-title">{name}<br />{`(${ourTime(year, language)})`}</div>
+        </div>
+      )}
+    </LanguageConsumer>
   );
 };
 

@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+
 import { ourTime, timeperiod } from '../../js/utils';
+import t from '../../js/translate';
 
 const SidebarContentPerson = (props) => {
   const {
@@ -39,33 +41,33 @@ const SidebarContentPerson = (props) => {
         <tbody>
 
           <tr>
-            <td className="Sidebar-tableCell">Geboren:</td>
+            <td className="Sidebar-tableCell">{t('life.born')}:</td>
             <td className="Sidebar-tableCell">
               {startYear && ourTime(startYear)}
               {' '}
               {startYear && startVagueness && `(${startVagueness})`}
-              {!startYear && 'unbekannt'}
+              {!startYear && t('misc.unnown')}
             </td>
           </tr>
 
           <tr>
-            <td className="Sidebar-tableCell">Gestorben:</td>
+            <td className="Sidebar-tableCell">{t('life.died')}:</td>
             <td className="Sidebar-tableCell">
               {endYear && ourTime(endYear)}
               {' '}
               {endYear && endVagueness && `(${endVagueness})`}
-              {!endYear && 'unbekannt'}
+              {!endYear && t('misc.unnown')}
             </td>
           </tr>
 
           <tr>
-            <td className="Sidebar-tableCell">Lebensdauer:</td>
-            <td className="Sidebar-tableCell">{age ? `${age} Jahre` : 'unbekannt'}</td>
+            <td className="Sidebar-tableCell">{t('life.span')}:</td>
+            <td className="Sidebar-tableCell">{age ? `${age} ${t('time.years')}` : t('misc.unnown')}</td>
           </tr>
 
           { father &&
             <tr>
-              <td className="Sidebar-tableCell">Vater:</td>
+              <td className="Sidebar-tableCell">{t('relations.father')}:</td>
               <td className="Sidebar-tableCell">
                 <a
                   onKeyUp={e => e.keyCode === 13 && changeSidebarContent(father.id)}
@@ -80,7 +82,7 @@ const SidebarContentPerson = (props) => {
 
           { mother &&
             <tr>
-              <td className="Sidebar-tableCell">Mutter:</td>
+              <td className="Sidebar-tableCell">{t('relations.mother')}:</td>
               <td className="Sidebar-tableCell">
                 <a
                   onKeyUp={e => e.keyCode === 13 && changeSidebarContent(mother.id)}
@@ -95,7 +97,7 @@ const SidebarContentPerson = (props) => {
 
           { childs.length > 0 &&
             <tr>
-              <td className="Sidebar-tableCell">Kinder:</td>
+              <td className="Sidebar-tableCell">{t('relations.kids')}:</td>
               <td className="Sidebar-tableCell">
                 <ul>
                   { childs.map(({ id, name: childName }) => (

@@ -38,3 +38,7 @@
   white-space: nowrap;
   vertical-align: top;
 }
+
+.Sidebar-tableCell:first-child {
+  text-transform: capitalize;
+}

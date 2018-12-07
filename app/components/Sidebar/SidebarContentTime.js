@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { ourTime, timeperiod } from '../../js/utils';
+import t from '../../js/translate';
 
 const SidebarContentTime = ({
   name, startYear, endYear,
@@ -15,21 +16,21 @@ const SidebarContentTime = ({
       <table>
         <tbody>
           <tr>
-            <td className="Sidebar-tableCell">Start:</td>
+            <td className="Sidebar-tableCell">{t('time.start')}:</td>
             <td className="Sidebar-tableCell">
               {ourTime(startYear)}
             </td>
           </tr>
           <tr>
-            <td className="Sidebar-tableCell">Ende:</td>
+            <td className="Sidebar-tableCell">{t('time.end')}:</td>
             <td className="Sidebar-tableCell">
-              {endYear ? ourTime(endYear) : 'andauernd'}
+              {endYear ? ourTime(endYear) : t('time.ongoing')}
             </td>
           </tr>
           <tr>
-            <td className="Sidebar-tableCell">Dauer:</td>
+            <td className="Sidebar-tableCell">{t('time.duration')}:</td>
             <td className="Sidebar-tableCell">
-              {duration} Jahre
+              {duration} {t('time.years')}
             </td>
           </tr>
         </tbody>

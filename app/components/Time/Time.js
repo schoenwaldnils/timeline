@@ -46,12 +46,6 @@ function generateGradient({
 }
 
 class Time extends PureComponent {
-  handleEnterKey = ({ keyCode }) => {
-    if (keyCode === 13) {
-      this.props.handleElementClick();
-    }
-  }
-
   render() {
     const {
       id,

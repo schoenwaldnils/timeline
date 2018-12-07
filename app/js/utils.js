@@ -1,3 +1,5 @@
+import t from './translate';
+
 export function timeperiod(startyear, endyear) {
   let calcedPeriod = endyear - startyear;
   if (startyear < 0 && endyear > 0) {
@@ -16,7 +18,8 @@ export function htmlEntities(str) {
 
 export function ourTime(year) {
   if (year <= 0) {
-    return `${year * -1} v.u.Z.`;
+    return `${year * -1} ${t('time.extension.negative')}`;
   }
-  return `${year} u.Z.`;
+  return `${year} ${t('time.extension.positive')}`;
 }
+

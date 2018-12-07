@@ -1,7 +1,8 @@
 const gql = require('graphql-tag');
 
-module.exports = gql`{
+module.exports = locale => gql`{
   personCollection(
+    locale: "${locale}"
     order: [
       startYear_ASC,
       name_ASC
@@ -46,6 +47,7 @@ module.exports = gql`{
     }
   },
   timeCollection(
+    locale: "${locale}"
     where: {
       startYear_exists: true,
     }
@@ -65,6 +67,7 @@ module.exports = gql`{
     }
   },
   eventCollection(
+    locale: "${locale}"
     where: {
       year_exists: true,
     }

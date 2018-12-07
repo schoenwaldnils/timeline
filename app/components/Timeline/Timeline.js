@@ -14,9 +14,6 @@ class Timeline extends Component {
   constructor() {
     super();
     this.state = {
-      activePersons: [],
-      activeTimes: [],
-      activeEvents: [],
       cursorPositionLeft: -1,
       cursorYear: undefined,
     };
@@ -50,99 +47,16 @@ class Timeline extends Component {
     });
   }
 
-  handleElementClick = async (type, id) => {
-    const { activePersons, activeTimes, activeEvents } = this.state;
-
-    switch (type) {
-      case 'person':
-        if (!activePersons.includes(id)) {
-          activePersons.push(id);
-          await this.setState({ activePersons });
-        } else {
-          this.handleElementClose('person', id);
-        }
-        break;
-
-      case 'time':
-        if (!activeTimes.includes(id)) {
-          activeTimes.push(id);
-          this.setState({ activeTimes });
-        } else {
-          this.handleElementClose('time', id);
-        }
-        break;
-
-      case 'event':
-        if (!activeEvents.includes(id)) {
-          activeEvents.push(id);
-          this.setState({ activeEvents });
-        } else {
-          this.handleElementClose('event', id);
-        }
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  handleElementClose = (type = 'all', id = undefined) => {
-    const { activePersons, activeTimes, activeEvents } = this.state;
-
-    switch (type) {
-      case 'person':
-        if (!id) this.setState({ activePersons: [] });
-
-        const indexPerson = activePersons.indexOf(id);
-        if (indexPerson > -1) {
-          activePersons.splice(indexPerson, 1);
-          this.setState({ activePersons });
-        }
-        break;
-
-      case 'time':
-        if (!id) this.setState({ activeTimes: [] });
-
-        const indexTime = activeTimes.indexOf(id);
-        if (indexTime > -1) {
-          activeTimes.splice(indexTime, 1);
-          this.setState({ activeTimes });
-        }
-        break;
-
-      case 'event':
-        if (!id) this.setState({ activeEvents: [] });
-
-        const indexEvent = activeEvents.indexOf(id);
-        if (indexEvent > -1) {
-          activeEvents.splice(indexEvent, 1);
-          this.setState({ activeEvents });
-        }
-        break;
-
-      case 'all':
-      default:
-        this.setState({
-          activePersons: [],
-          activeTimes: [],
-          activeEvents: [],
-        });
-        break;
-    }
-  }
-
   render() {
     const {
       persons,
       times,
       events,
+      activeElement,
       changeSidebarContent,
     } = this.props;
 
     const {
-      activePersons,
-      activeTimes,
-      activeEvents,
       cursorPositionLeft,
       cursorYear,
     } = this.state;
@@ -174,9 +88,9 @@ class Timeline extends Component {
           { events && events.map(({ id, ...event }, key) => (
             <Event
               {...event}
-              isActive={activeEvents.includes(id)}
               key={id}
               id={id}
+              isActive={id === activeElement}
               tabIndex={key}
               handleElementClick={() => changeSidebarContent(id)} />
           ))}
@@ -187,7 +101,7 @@ class Timeline extends Component {
               id={id}
               {...person}
               type="person"
-              isActive={activePersons.includes(id)}
+              isActive={id === activeElement}
               handleElementClick={() => changeSidebarContent(id)} />
           ))}
 
@@ -197,18 +111,20 @@ class Timeline extends Component {
               id={id}
               {...time}
               type="time"
-              isActive={activeTimes.includes(id)}
+              isActive={id === activeElement}
               handleElementClick={() => changeSidebarContent(id)} />
           ))}
         </div>
 
-        <div
-          className="Timeline-cursor"
-          style={{
-            '--Timeline-scale-position-left': `${cursorPositionLeft}px`,
-            '--Timeline-scale-year': `'${ourTime(cursorYear)}'`,
-          }}
-          ref={this.cursor} />
+        { cursorYear &&
+          <div
+            className="Timeline-cursor"
+            style={{
+              '--Timeline-scale-position-left': `${cursorPositionLeft}px`,
+              '--Timeline-scale-year': `'${ourTime(cursorYear)}'`,
+            }}
+            ref={this.cursor} />
+          }
       </div>
     );
   }
@@ -218,12 +134,15 @@ Timeline.defaultProps = {
   persons: undefined,
   times: undefined,
   events: undefined,
+  activeElement: undefined,
 };
 
 Timeline.propTypes = {
   persons: PropTypes.array,
   times: PropTypes.array,
   events: PropTypes.array,
+  activeElement: PropTypes.string,
+  changeSidebarContent: PropTypes.func.isRequired,
 };
 
 export default Timeline;
