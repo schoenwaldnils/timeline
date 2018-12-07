@@ -58,8 +58,8 @@ export default {
       en: 'mother',
       de: 'Mutter',
     },
-    kids: {
-      en: 'kids',
+    children: {
+      en: 'children',
       de: 'Kinder',
     },
   },

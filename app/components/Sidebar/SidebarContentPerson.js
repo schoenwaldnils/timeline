@@ -97,7 +97,7 @@ const SidebarContentPerson = (props) => {
 
           { childs.length > 0 &&
             <tr>
-              <td className="Sidebar-tableCell">{t('relations.kids')}:</td>
+              <td className="Sidebar-tableCell">{t('relations.children')}:</td>
               <td className="Sidebar-tableCell">
                 <ul>
                   { childs.map(({ id, name: childName }) => (
