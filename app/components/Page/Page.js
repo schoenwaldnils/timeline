@@ -76,33 +76,48 @@ class Page extends PureComponent {
 
 
   async fetchContentfulData(language = this.props.language) {
+    let data;
     try {
-      const data = await cfGraphql(query(language));
+      data = {
+        en: await cfGraphql(query('en')),
+        de: await cfGraphql(query('de')),
+      };
 
-      const {
-        personCollection: { items: persons },
-        timeCollection: { items: times },
-        eventCollection: { items: events },
-      } = data;
-
-      persons.map(person => formatPerson(person));
-      times.map(time => formatTime(time));
-      events.map(event => formatEvent(event));
-
-      const filteredPersons = persons.filter(({ startYear, endYear, stillActive }) => {
-        if (startYear && (endYear || stillActive)) return true;
-        return false;
-      });
-
-      this.setState({
-        persons,
-        filteredPersons,
-        times,
-        events,
-      });
+      if (data.en || data.de) {
+        window.localStorage.setItem('contentfulData', JSON.stringify(data));
+      }
     } catch (error) {
       console.error(error);
     }
+
+    if (!data.en && !data.de) {
+      const localData = JSON.parse(window.localStorage.getItem('contentfulData'));
+      if (localData) {
+        data = await localData;
+      }
+    }
+
+    const {
+      personCollection: { items: persons },
+      timeCollection: { items: times },
+      eventCollection: { items: events },
+    } = data[language];
+
+    persons.map(person => formatPerson(person));
+    times.map(time => formatTime(time));
+    events.map(event => formatEvent(event));
+
+    const filteredPersons = persons.filter(({ startYear, endYear, stillActive }) => {
+      if (startYear && (endYear || stillActive)) return true;
+      return false;
+    });
+
+    this.setState({
+      persons,
+      filteredPersons,
+      times,
+      events,
+    });
   }
 
   changeSidebarContent = (id) => {
