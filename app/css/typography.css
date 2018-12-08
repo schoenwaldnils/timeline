@@ -85,12 +85,15 @@ a:focus {
   margin-bottom: 1rem;
 }
 
+.u-richText table ul {
+  margin-bottom: 0;
+}
+
 .u-richText h1,
 .u-richText h2,
 .u-richText h3,
 .u-richText h4 {
   margin-bottom: .75rem;
-  /* font-family: var(--font-second); */
   font-weight: 400;
   line-height: 1.1;
 }
@@ -152,7 +155,6 @@ a:focus {
   position: absolute;
   top: 0;
   left: 0;
-  /* font-family: var(--font-second); */
   font-size: .8em;
   font-weight: 200;
   line-height: calc(1.4em / .8);
@@ -168,6 +170,11 @@ a:focus {
   height: calc(var(--list-dot-size) * .25);
   margin-top: calc(var(--list-dot-size) * -.5 * .25);
   background-color: var(--color-green);
+}
+
+.u-richText table {
+  width: 100%;
+  table-layout: fixed;
 }
 
 ::selection {

@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 import shallowequal from 'shallowequal';
@@ -55,13 +55,13 @@ class Sidebar extends PureComponent {
       <aside className={cs('Sidebar', { 'is-active': !!entryId })}>
         <MdArrowForward className="Sidebar-icon Sidebar-icon--back" onClick={() => changeSidebarContent(undefined)} />
         { content &&
-          <Fragment>
+          <div className="Sidebar-content u-richText">
             {contentType === 'Person' &&
               <SidebarContentPerson {...content} changeSidebarContent={changeSidebarContent} />
             }
             {contentType === 'Event' && <SidebarContentEvent {...content} />}
             {contentType === 'Time' && <SidebarContentTime {...content} />}
-          </Fragment>
+          </div>
         }
       </aside>
     );

@@ -51,7 +51,8 @@ module.exports = locale => gql`{
           }
           name
         }
-      }
+      },
+      wolLink,
     }
   },
   timeCollection(
@@ -72,6 +73,7 @@ module.exports = locale => gql`{
       name,
       startYear,
       endYear,
+      wolLink,
     }
   },
   eventCollection(
@@ -91,6 +93,7 @@ module.exports = locale => gql`{
       }
       name,
       year,
+      wolLink,
     }
   }
 }`;

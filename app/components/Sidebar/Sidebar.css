@@ -34,11 +34,20 @@
 }
 
 .Sidebar-tableCell {
-  padding: .25em;
+  padding-top: .25em;
+  padding-bottom: .25em;
   white-space: nowrap;
   vertical-align: top;
 }
 
+.Sidebar-tableCell:not(:first-child) {
+  padding-left: .25em;
+}
+
 .Sidebar-tableCell:first-child {
   text-transform: capitalize;
+}
+
+.Sidebar-content.Sidebar-content li { /* stylelint-disable-line */
+  padding-left: 0;
 }

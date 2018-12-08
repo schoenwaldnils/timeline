@@ -17,6 +17,7 @@ const SidebarContentPerson = (props) => {
     father,
     mother,
     childs,
+    wolLink,
     changeSidebarContent,
   } = props;
 
@@ -44,9 +45,15 @@ const SidebarContentPerson = (props) => {
           <tr>
             <td className="Sidebar-tableCell">{t('life.born')}:</td>
             <td className="Sidebar-tableCell">
-              {startYear && ourTime(startYear)}
-              {' '}
-              {startYear && startVagueness && `(${startVagueness})`}
+              {startYear &&
+                <Fragment>
+                  {startVagueness && t('misc.approx')}
+                  {' '}
+                  {ourTime(startYear)}
+                  {' '}
+                  {startVagueness && `(${startVagueness})`}
+                </Fragment>
+              }
               {!startYear && t('misc.unnown')}
             </td>
           </tr>
@@ -54,16 +61,24 @@ const SidebarContentPerson = (props) => {
           <tr>
             <td className="Sidebar-tableCell">{t('life.died')}:</td>
             <td className="Sidebar-tableCell">
-              {endYear && ourTime(endYear)}
-              {' '}
-              {endYear && endVagueness && `(${endVagueness})`}
+              {endYear &&
+                <Fragment>
+                  {endVagueness && t('misc.approx')}
+                  {' '}
+                  {ourTime(endYear)}
+                  {' '}
+                  {endVagueness && `(${endVagueness})`}
+                </Fragment>
+              }
               {!endYear && t('misc.unnown')}
             </td>
           </tr>
 
           <tr>
             <td className="Sidebar-tableCell">{t('life.span')}:</td>
-            <td className="Sidebar-tableCell">{age ? `${age} ${t('time.years')}` : t('misc.unnown')}</td>
+            <td className="Sidebar-tableCell">
+              {age && !startVagueness && !endVagueness ? `${age} ${t('time.years')}` : t('misc.unnown')}
+            </td>
           </tr>
 
           { spouse.length > 0 &&
@@ -137,6 +152,10 @@ const SidebarContentPerson = (props) => {
           }
         </tbody>
       </table>
+
+      { wolLink &&
+        <a href={wolLink} target="_blank" rel="noopener noreferrer">WOL-link</a>
+      }
     </Fragment>
   );
 };
@@ -151,6 +170,7 @@ SidebarContentPerson.defaultProps = {
   father: undefined,
   mother: undefined,
   childs: [],
+  wolLink: undefined,
 };
 
 SidebarContentPerson.propTypes = {
@@ -164,6 +184,7 @@ SidebarContentPerson.propTypes = {
   father: PropTypes.object,
   mother: PropTypes.object,
   childs: PropTypes.array,
+  wolLink: PropTypes.string,
   changeSidebarContent: PropTypes.func.isRequired,
 };
 

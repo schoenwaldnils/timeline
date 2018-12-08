@@ -56,7 +56,7 @@
   --color-theme: var(--color-green-darker);
 
   --text-color: #2d2d2d;
-  --link-color: var(--color-green);
+  --link-color: var(--color-theme);
   --link-color-hover: var(--text-color);
 
   --body-background-color: var(--cb6);

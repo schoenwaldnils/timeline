@@ -72,5 +72,9 @@ export default {
       en: 'unnown',
       de: 'unbekannt',
     },
+    approx: {
+      en: 'approx.',
+      de: 'ca.',
+    },
   },
 };
