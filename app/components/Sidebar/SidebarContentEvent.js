@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { ourTime } from '../../js/utils';
+import t from '../../js/translate';
 
 const SidebarContentEvent = ({ name, year, wolLink }) => (
   <Fragment>
@@ -10,7 +11,7 @@ const SidebarContentEvent = ({ name, year, wolLink }) => (
     <table>
       <tbody>
         <tr>
-          <td className="Sidebar-tableCell">Jahr:</td>
+          <td className="Sidebar-tableCell">{t('time.year')}:</td>
           <td className="Sidebar-tableCell">
             {ourTime(year)}
           </td>
