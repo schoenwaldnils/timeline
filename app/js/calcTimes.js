@@ -71,7 +71,7 @@ export function calcTimes({
   let correctedEndYear = endYear;
 
   if (stillActive || !endYear) {
-    correctedEndYear = new Date().getFullYear();
+    correctedEndYear = SCALE_YEARS_AFTER_ZERO;
   }
 
   const points = {
