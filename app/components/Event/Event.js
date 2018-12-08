@@ -9,13 +9,25 @@ import { LanguageConsumer } from './../../js/context/lang-context';
 import './Event.css';
 
 const Event = ({
-  id, className, tabIndex, name, year,
+  id,
+  className,
+  tabIndex,
+  name,
+  year,
+  handleElementClick,
 }) => {
   return (
     <LanguageConsumer>
       {({ language } = {}) => (
         <div id={id} className={`Event ${className}`} tabIndex={tabIndex}>
-          <div className="Event-title">{name}<br />{`(${ourTime(year, language)})`}</div>
+          <div
+            className="Event-title"
+            role="button"
+            tabIndex={0}
+            onKeyUp={e => e.keyCode === 13 && handleElementClick}
+            onClick={handleElementClick}>
+            {name}<br />{`(${ourTime(year, language)})`}
+          </div>
         </div>
       )}
     </LanguageConsumer>
@@ -35,6 +47,7 @@ Event.propTypes = {
   tabIndex: PropTypes.number,
   name: PropTypes.string,
   year: PropTypes.number,
+  handleElementClick: PropTypes.func.isRequired,
 };
 
 const StyledEvent = styled(Event)`
