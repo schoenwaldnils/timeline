@@ -13,6 +13,7 @@ const SidebarContentPerson = (props) => {
     startVagueness,
     endYear,
     endVagueness,
+    spouse,
     father,
     mother,
     childs,
@@ -64,6 +65,26 @@ const SidebarContentPerson = (props) => {
             <td className="Sidebar-tableCell">{t('life.span')}:</td>
             <td className="Sidebar-tableCell">{age ? `${age} ${t('time.years')}` : t('misc.unnown')}</td>
           </tr>
+
+          { spouse.length > 0 &&
+            <tr>
+              <td className="Sidebar-tableCell">{t('relations.spouse')}:</td>
+              <td className="Sidebar-tableCell">
+                <ul>
+                  { spouse.map(({ id, name: spouseName }) => (
+                    <a
+                      key={id}
+                      onKeyUp={e => e.keyCode === 13 && changeSidebarContent(id)}
+                      onClick={() => changeSidebarContent(id)}
+                      role="button"
+                      tabIndex={0}>
+                      <li>{spouseName}</li>
+                    </a>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          }
 
           { father &&
             <tr>
@@ -126,6 +147,7 @@ SidebarContentPerson.defaultProps = {
   startVagueness: undefined,
   endYear: undefined,
   endVagueness: undefined,
+  spouse: [],
   father: undefined,
   mother: undefined,
   childs: [],
@@ -138,6 +160,7 @@ SidebarContentPerson.propTypes = {
   startVagueness: PropTypes.string,
   endYear: PropTypes.number,
   endVagueness: PropTypes.string,
+  spouse: PropTypes.array,
   father: PropTypes.object,
   mother: PropTypes.object,
   childs: PropTypes.array,

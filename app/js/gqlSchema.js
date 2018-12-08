@@ -24,6 +24,14 @@ module.exports = locale => gql`{
       endYear,
       endVagueness,
       stillActive,
+      spouseCollection {
+        items {
+          sys {
+            id
+          }
+          name
+        }
+      }
       father {
         sys {
           id

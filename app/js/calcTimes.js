@@ -36,11 +36,13 @@ export function calcPoints(type, year, vagueness) {
     }
 
     if (positiveValue) {
+      point = year;
       certainPoint = year + positiveValue;
     }
   } else {
     if (negativeValue) {
       certainPoint = year - negativeValue;
+      point = year;
     }
 
     if (positiveValue) {

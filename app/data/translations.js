@@ -50,6 +50,10 @@ export default {
     },
   },
   relations: {
+    spouse: {
+      en: 'spouse',
+      de: 'Ehepartner',
+    },
     father: {
       en: 'father',
       de: 'Vater',

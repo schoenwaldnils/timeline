@@ -9,6 +9,15 @@ export function formatPerson(data) {
     delete data.image;
   }
 
+  if (data.spouseCollection) {
+    if (data.spouseCollection.items.length) {
+      data.spouse = data.spouseCollection.items.map(({ name, sys: { id } }) => {
+        return { id, name };
+      });
+    }
+    delete data.spouseCollection;
+  }
+
   if (data.father) {
     data.father = {
       id: data.father.sys ? data.father.sys.id : data.father.id,
