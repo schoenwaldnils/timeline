@@ -21,6 +21,10 @@ class TimelineCursor extends PureComponent {
     this.handleCursorMovement();
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('mousemove');
+  }
+
   handleCursorMovement = () => {
     let { cursorPositionLeft, cursorYear } = this.state;
     let ticking = false;

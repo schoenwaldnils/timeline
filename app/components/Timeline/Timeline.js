@@ -13,6 +13,10 @@ import './Timeline.css';
 
 
 class Timeline extends Component {
+  state = {
+    times: [],
+  }
+
   static getDerivedStateFromProps(nextProps) {
     const { timespans } = nextProps;
     const times = timespans.map(time => updateTimeProps(time));
