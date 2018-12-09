@@ -174,7 +174,6 @@ a:focus {
 
 .u-richText table {
   width: 100%;
-  table-layout: fixed;
 }
 
 ::selection {
