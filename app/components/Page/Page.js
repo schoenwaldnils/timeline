@@ -19,6 +19,7 @@ class Page extends PureComponent {
     super();
     this.state = {
       persons: [],
+      filteredPersons: [],
       times: [],
       events: [],
       activeElement: null,
@@ -140,8 +141,7 @@ class Page extends PureComponent {
       <div className="Page">
         <section className="Page-wrapTimeline" role="main" ref={this.timeline}>
           <Timeline
-            persons={filteredPersons}
-            times={times}
+            timespans={[...filteredPersons, ...times]}
             events={events}
             activeElement={activeElement}
             changeSidebarContent={this.changeSidebarContent} />

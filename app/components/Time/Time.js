@@ -1,49 +1,11 @@
 import React, { PureComponent } from 'react';
-import Fade from 'react-reveal/Fade';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 import styled from 'styled-components';
 
-import { timeperiod } from '../../js/utils';
-import { calcTimes } from '../../js/calcTimes';
 import { SCALE_YEARS_BEFORE_ZERO } from '../../data/defaults';
 
 import './Time.css';
-
-
-function generateGradient({
-  calcedStart, calcedStartCertain, calcedEndCertain, calcedEnd, duration,
-}) {
-  if (!calcedStartCertain && !calcedEndCertain) {
-    return '';
-  }
-
-  let startPx = 0;
-  let endPx = startPx + duration;
-
-  let gradientStart = '';
-  let gradientEnd = '';
-
-  if (calcedStartCertain) {
-    startPx = calcedStartCertain - calcedStart;
-    gradientStart = 'transparent 0px, ';
-  }
-
-  if (calcedEndCertain) {
-    endPx = calcedEndCertain - calcedStart;
-    gradientEnd = `transparent ${calcedEnd - calcedStart}px`;
-  }
-
-  return `
-  linear-gradient(
-    to right,
-    ${gradientStart}
-    var(--Time-color)
-    ${startPx}px,
-    var(--Time-color)
-    ${endPx}px,
-    ${gradientEnd})`;
-}
 
 class Time extends PureComponent {
   render() {
@@ -52,22 +14,11 @@ class Time extends PureComponent {
       type,
       isActive,
       className,
-      children,
       name,
       startYear,
-      startVagueness,
-      endYear,
-      endVagueness,
-      stillActive,
+      duration,
       handleElementClick,
     } = this.props;
-
-    const {
-      calcedStart,
-      calcedEnd,
-    } = calcTimes({
-      type, startYear, startVagueness, endYear, endVagueness, stillActive,
-    });
 
     const timeClassnames = cs(
       'Time',
@@ -79,8 +30,6 @@ class Time extends PureComponent {
       },
       [className],
     );
-
-    const duration = timeperiod(calcedStart, calcedEnd);
 
     if (!startYear || !duration) return null;
 
@@ -95,11 +44,6 @@ class Time extends PureComponent {
         <div className="Time-name">
           { name }
         </div>
-        <Fade collapse when={isActive} duration={300}>
-          <div className="Time-info">
-            { children }
-          </div>
-        </Fade>
       </div>
     );
   }
@@ -108,12 +52,8 @@ class Time extends PureComponent {
 Time.defaultProps = {
   isActive: false,
   className: undefined,
-  children: undefined,
   startYear: undefined,
-  startVagueness: undefined,
-  endYear: undefined,
-  endVagueness: undefined,
-  stillActive: false,
+  duration: undefined,
 };
 
 Time.propTypes = {
@@ -123,39 +63,23 @@ Time.propTypes = {
     'person',
   ]).isRequired,
   isActive: PropTypes.bool,
+  duration: PropTypes.number,
   className: PropTypes.string,
-  children: PropTypes.node,
   name: PropTypes.string.isRequired,
   startYear: PropTypes.number,
-  startVagueness: PropTypes.string,
-  endYear: PropTypes.number,
-  endVagueness: PropTypes.string,
-  stillActive: PropTypes.bool,
   handleElementClick: PropTypes.func.isRequired,
 };
 
 const StyledTime = styled(Time)(({
-  type, startYear, startVagueness, endYear, endVagueness, stillActive,
-}) => {
-  const {
-    calcedStart,
-    calcedStartCertain,
-    calcedEndCertain,
-    calcedEnd,
-  } = calcTimes({
-    type, startYear, startVagueness, endYear, endVagueness, stillActive,
-  });
-  const duration = timeperiod(calcedStart, calcedEnd);
-  const background = generateGradient({
-    calcedStart, calcedStartCertain, calcedEndCertain, calcedEnd, duration,
-  });
-
-
-  return ({
-    width: `${duration}px`,
-    marginLeft: `${calcedStart + SCALE_YEARS_BEFORE_ZERO}px`,
-    background,
-  });
-});
+  calcedStart,
+  top = 0,
+  duration,
+  background,
+}) => ({
+  width: `${duration}px`,
+  top: `calc(${top} * (2em + 1px) + 100px)`,
+  left: `${calcedStart + SCALE_YEARS_BEFORE_ZERO}px`,
+  background,
+}));
 
 export default StyledTime;

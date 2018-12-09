@@ -9,7 +9,7 @@
 }
 
 .Time {
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
   height: 2em;

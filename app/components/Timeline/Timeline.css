@@ -76,22 +76,3 @@
   padding-top: 4.5rem;
   padding-bottom: 10rem;
 }
-
-.Timeline-cursor {
-  position: fixed;
-  top: 0;
-  left: var(--Timeline-scale-position-left);
-  width: 1px;
-  height: 100vh;
-  pointer-events: none;
-  background-color: #000;
-}
-
-.Timeline-cursor::after {
-  content: var(--Timeline-scale-year);
-  position: absolute;
-  top: 20px;
-  left: 5px;
-  color: #000;
-  white-space: nowrap;
-}

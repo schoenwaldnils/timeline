@@ -91,6 +91,14 @@ export function calcTimes({
     points.calcedEndCertain = maxEnd(certainPoint);
   }
 
+  if (points.calcedStart) {
+    points.pixelStart = points.calcedStart + SCALE_YEARS_BEFORE_ZERO;
+  }
+
+  if (points.calcedEnd) {
+    points.pixelEnd = points.calcedEnd + SCALE_YEARS_BEFORE_ZERO;
+  }
+
   return points;
 }
 
