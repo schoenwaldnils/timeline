@@ -7,7 +7,6 @@ export default function positionTimes(events) {
     } = event;
 
     const endWithMargin = start + (name.length * 7) + 10;
-    console.log(endWithMargin);
 
     let top = 0;
 
@@ -29,11 +28,6 @@ export default function positionTimes(events) {
 
 
     return event;
-  });
-
-  console.log({
-    eventsHeight: occupiedSpace.length,
-    events,
   });
 
   return {

@@ -33,8 +33,6 @@ class Timeline extends Component {
     const { timesHeight, times: positionedTimes } = positionTimes(sortedTimes);
     const { eventsHeight, events: positionedEvents } = positionEvents(sortedEvents);
 
-    console.log(positionedEvents);
-
     return {
       times: positionedTimes,
       timesHeight,
