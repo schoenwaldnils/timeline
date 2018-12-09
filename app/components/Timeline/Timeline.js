@@ -60,7 +60,7 @@ class Timeline extends Component {
     }
 
     const scaleNumberPositive = [];
-    for (let i = 1; i <= 21; i += 1) {
+    for (let i = 1; i <= 24; i += 1) {
       scaleNumberPositive.push(<div className="Timeline-scaleNumber" key={i}>{i * 100 }</div>);
     }
 
