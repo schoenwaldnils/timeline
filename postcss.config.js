@@ -7,6 +7,7 @@ module.exports = () => ({
       extensions: viewportsCss,
     },
     'postcss-color-function': {},
+    'postcss-color-hex-alpha': {},
     'postcss-calc': {},
     autoprefixer: {},
     'postcss-reporter': {

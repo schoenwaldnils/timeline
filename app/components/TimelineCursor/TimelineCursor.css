@@ -7,7 +7,7 @@
   width: 1px;
   height: 100vh;
   pointer-events: none;
-  background-color: #000;
+  background-color: #00000080;
 }
 
 .TimelineCursor::after {
