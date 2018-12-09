@@ -1,12 +1,13 @@
-export default function positionTimes(times) {
+export default function positionTimes(events) {
   const occupiedSpace = [0];
-  times.map((time) => {
+  events.map((event) => {
     const {
-      pixelStart: start,
-      pixelEnd: end,
-    } = time;
+      pixelYear: start,
+      name,
+    } = event;
 
-    const endWithMargin = end + 10;
+    const endWithMargin = start + (name.length * 7) + 10;
+    console.log(endWithMargin);
 
     let top = 0;
 
@@ -24,14 +25,19 @@ export default function positionTimes(times) {
       }
     }());
 
-    time.top = top;
+    event.top = top;
 
 
-    return time;
+    return event;
+  });
+
+  console.log({
+    eventsHeight: occupiedSpace.length,
+    events,
   });
 
   return {
-    timesHeight: occupiedSpace.length,
-    times,
+    eventsHeight: occupiedSpace.length,
+    events,
   };
 }

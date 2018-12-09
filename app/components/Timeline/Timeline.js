@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import updateTimeProps from './updateTimeProps';
+import updateEventProps from './updateEventProps';
 import positionTimes from './positionTimes';
+import positionEvents from './positionEvents';
 import sortObjectArray from '../../js/sortObjectArray';
 
 import Time from '../Time/Time';
@@ -15,30 +17,43 @@ import './Timeline.css';
 class Timeline extends Component {
   state = {
     times: [],
+    timesHeight: 1,
+    eventsHeight: 1,
   }
 
   static getDerivedStateFromProps(nextProps) {
-    const { timespans } = nextProps;
+    const { timespans, events: rawEvents } = nextProps;
+
     const times = timespans.map(time => updateTimeProps(time));
+    const events = rawEvents.map((event, index) => updateEventProps({ ...event, zIndex: rawEvents.length - index }));
 
     const sortedTimes = sortObjectArray(times, 'pixelStart');
+    const sortedEvents = sortObjectArray(events, 'pixelYear');
 
-    const positionedTimes = positionTimes(sortedTimes);
+    const { timesHeight, times: positionedTimes } = positionTimes(sortedTimes);
+    const { eventsHeight, events: positionedEvents } = positionEvents(sortedEvents);
+
+    console.log(positionedEvents);
 
     return {
       times: positionedTimes,
+      timesHeight,
+      events: positionedEvents,
+      eventsHeight,
     };
   }
 
   render() {
     const {
-      events,
       activeElement,
       changeSidebarContent,
     } = this.props;
 
     const {
       times,
+      timesHeight,
+      events,
+      eventsHeight,
     } = this.state;
 
     const scaleNumberNegativ = [];
@@ -52,7 +67,7 @@ class Timeline extends Component {
     }
 
     return (
-      <div className="Timeline" id="timeline">
+      <div className="Timeline">
         <div className="Timeline-scale" />
 
         <div className="Timeline-numbers">
@@ -64,25 +79,41 @@ class Timeline extends Component {
           </div>
         </div>
 
-        <div className="Timeline-content" id="timeline">
-          { events && events.map(({ id, ...event }, key) => (
-            <Event
-              {...event}
-              key={id}
-              id={id}
-              isActive={id === activeElement}
-              tabIndex={key}
-              handleElementClick={() => changeSidebarContent(id)} />
-          ))}
+        <div className="Timeline-content">
+          { events &&
+            <div
+              className="Timeline-wrapEvents"
+              style={{
+                '--Timeline-eventsHeight': eventsHeight,
+              }}>
+              { events.map(({ id, ...event }, key) => (
+                <Event
+                  {...event}
+                  key={id}
+                  id={id}
+                  isActive={id === activeElement}
+                  tabIndex={key}
+                  handleElementClick={() => changeSidebarContent(id)} />
+              ))}
+            </div>
+          }
 
-          { times && times.map(({ id, ...time }) => (
-            <Time
-              key={id}
-              id={id}
-              {...time}
-              isActive={id === activeElement}
-              handleElementClick={() => changeSidebarContent(id)} />
-          ))}
+          { times &&
+            <div
+              className="Timeline-wrapTimes"
+              style={{
+                '--Timeline-timesHeight': timesHeight,
+              }}>
+              { times.map(({ id, ...time }) => (
+                <Time
+                  key={id}
+                  id={id}
+                  {...time}
+                  isActive={id === activeElement}
+                  handleElementClick={() => changeSidebarContent(id)} />
+              ))}
+            </div>
+          }
         </div>
 
         <TimelineCursor />

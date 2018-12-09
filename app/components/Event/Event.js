@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { ourTime } from '../../js/utils';
-import { SCALE_YEARS_BEFORE_ZERO } from '../../data/defaults';
 import { LanguageConsumer } from './../../js/context/lang-context';
 
 import './Event.css';
@@ -19,15 +18,14 @@ const Event = ({
   return (
     <LanguageConsumer>
       {({ language } = {}) => (
-        <div id={id} className={`Event ${className}`} tabIndex={tabIndex}>
-          <div
-            className="Event-title"
-            role="button"
-            tabIndex={0}
-            onKeyUp={e => e.keyCode === 13 && handleElementClick}
-            onClick={handleElementClick}>
-            {name}<br />{`(${ourTime(year, language)})`}
-          </div>
+        <div
+          id={id}
+          className={`Event ${className}`}
+          tabIndex={tabIndex}
+          role="button"
+          onKeyUp={e => e.keyCode === 13 && handleElementClick}
+          onClick={handleElementClick}>
+          {name}<br />{`(${ourTime(year, language)})`}
         </div>
       )}
     </LanguageConsumer>
@@ -50,8 +48,14 @@ Event.propTypes = {
   handleElementClick: PropTypes.func.isRequired,
 };
 
-const StyledEvent = styled(Event)`
-  margin-left: ${props => props.year + SCALE_YEARS_BEFORE_ZERO}px;
-`;
+const StyledEvent = styled(Event)(({
+  top = 0,
+  pixelYear,
+  zIndex,
+}) => ({
+  top: `calc(${top} * (4em + 1px))`,
+  left: `${pixelYear}px`,
+  zIndex,
+}));
 
 export default StyledEvent;

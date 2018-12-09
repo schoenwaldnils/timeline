@@ -77,7 +77,7 @@ const StyledTime = styled(Time)(({
   background,
 }) => ({
   width: `${duration}px`,
-  top: `calc(${top} * (2em + 1px) + 100px)`,
+  top: `calc(${top} * (2em + 1px))`,
   left: `${calcedStart + SCALE_YEARS_BEFORE_ZERO}px`,
   background,
 }));

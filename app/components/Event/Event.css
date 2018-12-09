@@ -3,29 +3,28 @@
 .Event {
   position: absolute;
   top: 0;
+  z-index: 0;
   display: block;
-  width: 1px;
-  height: 100%;
-  line-height: 1.5em;
+  padding: .25em .5em .65em;
+  font-family: monospace;
   color: #fff;
-  background-color: var(--color-red);
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: #555;
 }
 
 .Event:focus {
   outline: none;
 }
 
-.Event-title {
-  position: sticky;
-  top: 4em;
-  left: 100%;
-  display: inline-block;
-  padding: .25em .5em;
-  white-space: nowrap;
-  background-color: #555;
-  box-shadow: 0 0 .5em rgba(255, 255, 255, .25);
-}
-
-.Event:focus .Event-title {
-  z-index: var(--z-event-active);
+.Event::before {
+  content: '';
+  position: absolute;
+  top: -100vh;
+  right: 100%;
+  z-index: -1;
+  display: block;
+  width: 1px;
+  height: 200vh;
+  background-color: var(--color-red);
 }
