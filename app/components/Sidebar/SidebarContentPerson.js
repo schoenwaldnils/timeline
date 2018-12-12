@@ -18,6 +18,7 @@ const SidebarContentPerson = (props) => {
     mother,
     childs,
     wolLink,
+    content,
     changeSidebarContent,
   } = props;
 
@@ -39,7 +40,7 @@ const SidebarContentPerson = (props) => {
 
       <h1 className="Sidebar-title">{name}</h1>
 
-      <table>
+      <table className="Sidebar-table">
         <tbody>
 
           <tr>
@@ -156,6 +157,10 @@ const SidebarContentPerson = (props) => {
       { wolLink &&
         <a href={wolLink} target="_blank" rel="noopener noreferrer">WOL-link</a>
       }
+
+      { content &&
+        <div className="Sidebar-richText u-richText" dangerouslySetInnerHTML={{ __html: content }} />
+      }
     </Fragment>
   );
 };
@@ -171,6 +176,7 @@ SidebarContentPerson.defaultProps = {
   mother: undefined,
   childs: [],
   wolLink: undefined,
+  content: undefined,
 };
 
 SidebarContentPerson.propTypes = {
@@ -185,6 +191,7 @@ SidebarContentPerson.propTypes = {
   mother: PropTypes.object,
   childs: PropTypes.array,
   wolLink: PropTypes.string,
+  content: PropTypes.string,
   changeSidebarContent: PropTypes.func.isRequired,
 };
 

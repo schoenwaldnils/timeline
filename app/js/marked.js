@@ -1,4 +1,3 @@
-import React from 'react';
 import marked from 'marked';
 // import { renderToString } from 'react-dom/server';
 // import { HTML as decodeHTML } from 'entities/lib/decode';

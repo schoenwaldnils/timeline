@@ -5,7 +5,7 @@ import { ourTime, timeperiod } from '../../js/utils';
 import t from '../../js/translate';
 
 const SidebarContentTime = ({
-  name, startYear, endYear, wolLink,
+  name, startYear, endYear, wolLink, content,
 }) => {
   const duration = timeperiod(startYear, (endYear || new Date().getFullYear()));
 
@@ -39,6 +39,10 @@ const SidebarContentTime = ({
       { wolLink &&
         <a href={wolLink} target="_blank" rel="noopener noreferrer">WOL-link</a>
       }
+
+      { content &&
+        <div className="Sidebar-richText u-richText" dangerouslySetInnerHTML={{ __html: content }} />
+      }
     </Fragment>
   );
 };
@@ -48,6 +52,7 @@ SidebarContentTime.defaultProps = {
   startYear: undefined,
   endYear: undefined,
   wolLink: undefined,
+  content: undefined,
 };
 
 SidebarContentTime.propTypes = {
@@ -55,6 +60,7 @@ SidebarContentTime.propTypes = {
   startYear: PropTypes.number,
   endYear: PropTypes.number,
   wolLink: PropTypes.string,
+  content: PropTypes.string,
 };
 
 export default SidebarContentTime;

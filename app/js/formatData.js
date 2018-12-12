@@ -1,3 +1,5 @@
+import marked from './marked';
+
 export function formatPerson(data) {
   if (data.sys && data.sys.id) {
     data.id = data.sys.id;
@@ -41,6 +43,10 @@ export function formatPerson(data) {
     delete data.childsCollection;
   }
 
+  if (data.content) {
+    data.content = marked(data.content);
+  }
+
   return data;
 }
 
@@ -50,6 +56,9 @@ export function formatTime(data) {
     delete data.sys;
   }
 
+  if (data.content) {
+    data.content = marked(data.content);
+  }
   return data;
 }
 
@@ -59,5 +68,8 @@ export function formatEvent(data) {
     delete data.sys;
   }
 
+  if (data.content) {
+    data.content = marked(data.content);
+  }
   return data;
 }
