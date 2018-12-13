@@ -78,15 +78,19 @@ class Page extends PureComponent {
 
 
   async fetchContentfulData(language = this.props.language) {
-    const data = JSON.parse(window.localStorage.getItem('contentfulData'));
+    const localData = JSON.parse(window.localStorage.getItem('contentfulData'));
+    let data;
     try {
-      data.en = await cfGraphql(query('en'));
-      data.de = await cfGraphql(query('de'));
+      data = {
+        en: await cfGraphql(query('en')),
+        de: await cfGraphql(query('de')),
+      };
 
       if (data.en || data.de) {
         window.localStorage.setItem('contentfulData', JSON.stringify(data));
       }
     } catch (error) {
+      data = localData;
       console.error(error);
     }
 
@@ -94,7 +98,7 @@ class Page extends PureComponent {
       personCollection: { items: persons },
       timeCollection: { items: times },
       eventCollection: { items: events },
-    } = data[language];
+    } = data && data[language];
 
     persons.map(person => formatPerson(person));
     times.map(time => formatTime(time));

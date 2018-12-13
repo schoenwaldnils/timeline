@@ -28,8 +28,10 @@ class Sidebar extends PureComponent {
   componentDidMount() {
     this.fetchData();
 
+    const sidebarWidth = window.localStorage.getItem('sidebarWidth') || this.state.sidebarWidth;
+
     this.setState({ // eslint-disable-line react/no-did-mount-set-state
-      sidebarWidth: window.localStorage.getItem('sidebarWidth'),
+      sidebarWidth,
     });
   }
 
@@ -70,7 +72,11 @@ class Sidebar extends PureComponent {
 
   render() {
     const { entryId, changeSidebarContent } = this.props;
-    const { content: { wolLink, content, ...customContent } = {}, contentType, sidebarWidth } = this.state;
+    const {
+      content: { wolLink, content, ...customContent } = {},
+      contentType,
+      sidebarWidth,
+    } = this.state;
 
     return (
       <Resizable

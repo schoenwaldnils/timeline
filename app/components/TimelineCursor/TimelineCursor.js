@@ -22,7 +22,7 @@ class TimelineCursor extends PureComponent {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousemove');
+    document.removeEventListener('mousemove', () => {});
   }
 
   handleCursorMovement = () => {
