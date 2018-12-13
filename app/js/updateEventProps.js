@@ -1,4 +1,4 @@
-import { SCALE_YEARS_BEFORE_ZERO } from '../../data/defaults';
+import { SCALE_YEARS_BEFORE_ZERO } from '../data/defaults';
 
 export default (event) => {
   const {

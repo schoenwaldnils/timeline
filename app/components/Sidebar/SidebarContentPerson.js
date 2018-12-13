@@ -17,8 +17,6 @@ const SidebarContentPerson = (props) => {
     father,
     mother,
     childs,
-    wolLink,
-    content,
     changeSidebarContent,
   } = props;
 
@@ -90,6 +88,7 @@ const SidebarContentPerson = (props) => {
                   { spouse.map(({ id, name: spouseName }) => (
                     <a
                       key={id}
+                      className="u-link"
                       onKeyUp={e => e.keyCode === 13 && changeSidebarContent(id)}
                       onClick={() => changeSidebarContent(id)}
                       role="button"
@@ -107,6 +106,7 @@ const SidebarContentPerson = (props) => {
               <td className="Sidebar-tableCell">{t('relations.father')}:</td>
               <td className="Sidebar-tableCell">
                 <a
+                  className="u-link"
                   onKeyUp={e => e.keyCode === 13 && changeSidebarContent(father.id)}
                   onClick={() => changeSidebarContent(father.id)}
                   role="button"
@@ -122,6 +122,7 @@ const SidebarContentPerson = (props) => {
               <td className="Sidebar-tableCell">{t('relations.mother')}:</td>
               <td className="Sidebar-tableCell">
                 <a
+                  className="u-link"
                   onKeyUp={e => e.keyCode === 13 && changeSidebarContent(mother.id)}
                   onClick={() => changeSidebarContent(mother.id)}
                   role="button"
@@ -140,6 +141,7 @@ const SidebarContentPerson = (props) => {
                   { childs.map(({ id, name: childName }) => (
                     <a
                       key={id}
+                      className="u-link"
                       onKeyUp={e => e.keyCode === 13 && changeSidebarContent(id)}
                       onClick={() => changeSidebarContent(id)}
                       role="button"
@@ -153,14 +155,6 @@ const SidebarContentPerson = (props) => {
           }
         </tbody>
       </table>
-
-      { wolLink &&
-        <a href={wolLink} target="_blank" rel="noopener noreferrer">WOL-link</a>
-      }
-
-      { content &&
-        <div className="Sidebar-richText u-richText" dangerouslySetInnerHTML={{ __html: content }} />
-      }
     </Fragment>
   );
 };
@@ -175,8 +169,6 @@ SidebarContentPerson.defaultProps = {
   father: undefined,
   mother: undefined,
   childs: [],
-  wolLink: undefined,
-  content: undefined,
 };
 
 SidebarContentPerson.propTypes = {
@@ -190,8 +182,6 @@ SidebarContentPerson.propTypes = {
   father: PropTypes.object,
   mother: PropTypes.object,
   childs: PropTypes.array,
-  wolLink: PropTypes.string,
-  content: PropTypes.string,
   changeSidebarContent: PropTypes.func.isRequired,
 };
 

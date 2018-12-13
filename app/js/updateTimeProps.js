@@ -1,5 +1,5 @@
-import { timeperiod } from '../../js/utils';
-import { calcTimes } from '../../js/calcTimes';
+import { timeperiod } from './utils';
+import { calcTimes } from './calcTimes';
 
 function generateGradient({
   calcedStart, calcedStartCertain, calcedEndCertain, calcedEnd, duration,
@@ -55,7 +55,7 @@ export default (time) => {
   } = calcTimes({
     startYear, startVagueness, endYear, endVagueness, stillActive,
   });
-  const duration = timeperiod(calcedStart, calcedEnd);
+  const duration = timeperiod(calcedStart, calcedEnd || new Date().getFullYear());
   const background = generateGradient({
     calcedStart, calcedStartCertain, calcedEndCertain, calcedEnd, duration,
   });

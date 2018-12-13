@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import updateTimeProps from './updateTimeProps';
-import updateEventProps from './updateEventProps';
 import positionTimes from './positionTimes';
 import positionEvents from './positionEvents';
 import sortObjectArray from '../../js/sortObjectArray';
@@ -22,16 +20,13 @@ class Timeline extends Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    const { timespans, events: rawEvents } = nextProps;
+    const { timespans, events } = nextProps;
 
-    const times = timespans.map(time => updateTimeProps(time));
-    const events = rawEvents.map((event, index) => updateEventProps({ ...event, zIndex: rawEvents.length - index }));
-
-    const sortedTimes = sortObjectArray(times, 'pixelStart');
+    const sortedTimes = sortObjectArray(timespans, 'pixelStart');
     const sortedEvents = sortObjectArray(events, 'pixelYear');
 
-    const { timesHeight, times: positionedTimes } = positionTimes(sortedTimes);
-    const { eventsHeight, events: positionedEvents } = positionEvents(sortedEvents);
+    const { timesHeight, times: positionedTimes } = sortedTimes && positionTimes(sortedTimes);
+    const { eventsHeight, events: positionedEvents } = sortedEvents && positionEvents(sortedEvents);
 
     return {
       times: positionedTimes,

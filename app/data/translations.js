@@ -76,5 +76,9 @@ export default {
       en: 'approx.',
       de: 'ca.',
     },
+    contentfulEdit: {
+      en: 'Edit in Contentful',
+      de: 'In Contentful editieren',
+    },
   },
 };

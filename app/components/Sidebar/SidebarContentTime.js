@@ -1,14 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { ourTime, timeperiod } from '../../js/utils';
+import { ourTime } from '../../js/utils';
 import t from '../../js/translate';
 
 const SidebarContentTime = ({
-  name, startYear, endYear, wolLink, content,
+  name, startYear, endYear, duration,
 }) => {
-  const duration = timeperiod(startYear, (endYear || new Date().getFullYear()));
-
   return (
     <Fragment>
       <h1 className="Sidebar-title">{name}</h1>
@@ -35,14 +33,6 @@ const SidebarContentTime = ({
           </tr>
         </tbody>
       </table>
-
-      { wolLink &&
-        <a href={wolLink} target="_blank" rel="noopener noreferrer">WOL-link</a>
-      }
-
-      { content &&
-        <div className="Sidebar-richText u-richText" dangerouslySetInnerHTML={{ __html: content }} />
-      }
     </Fragment>
   );
 };
@@ -51,16 +41,14 @@ SidebarContentTime.defaultProps = {
   name: undefined,
   startYear: undefined,
   endYear: undefined,
-  wolLink: undefined,
-  content: undefined,
+  duration: undefined,
 };
 
 SidebarContentTime.propTypes = {
   name: PropTypes.string,
   startYear: PropTypes.number,
   endYear: PropTypes.number,
-  wolLink: PropTypes.string,
-  content: PropTypes.string,
+  duration: PropTypes.number,
 };
 
 export default SidebarContentTime;

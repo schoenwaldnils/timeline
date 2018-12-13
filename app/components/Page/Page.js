@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Swipe from 'react-easy-swipe';
 
 import cfGraphql from '../../js/cfGraphql';
 import query from '../../js/gqlSchema';
 import { formatPerson, formatTime, formatEvent } from '../../js/formatData';
 import { setUrlHash, getUrlHash } from '../../js/urlHash';
+import updateTimeProps from '../../js/updateTimeProps';
+import updateEventProps from '../../js/updateEventProps';
 
 
 import Timeline from '../Timeline/Timeline';
@@ -77,25 +78,16 @@ class Page extends PureComponent {
 
 
   async fetchContentfulData(language = this.props.language) {
-    let data;
+    const data = JSON.parse(window.localStorage.getItem('contentfulData'));
     try {
-      data = {
-        en: await cfGraphql(query('en')),
-        de: await cfGraphql(query('de')),
-      };
+      data.en = await cfGraphql(query('en'));
+      data.de = await cfGraphql(query('de'));
 
       if (data.en || data.de) {
         window.localStorage.setItem('contentfulData', JSON.stringify(data));
       }
     } catch (error) {
       console.error(error);
-    }
-
-    if (!data.en && !data.de) {
-      const localData = JSON.parse(window.localStorage.getItem('contentfulData'));
-      if (localData) {
-        data = await localData;
-      }
     }
 
     const {
@@ -108,16 +100,20 @@ class Page extends PureComponent {
     times.map(time => formatTime(time));
     events.map(event => formatEvent(event));
 
-    const filteredPersons = persons.filter(({ startYear, endYear, stillActive }) => {
+    const updatedPersons = persons.map(time => updateTimeProps(time));
+    const updatedTimes = times.map(time => updateTimeProps(time));
+    const updatedEvents = events.map((event, index) => updateEventProps({ ...event, zIndex: events.length - index }));
+
+    const filteredPersons = updatedPersons.filter(({ startYear, endYear, stillActive }) => {
       if (startYear && (endYear || stillActive)) return true;
       return false;
     });
 
     this.setState({
-      persons,
+      persons: updatedPersons,
       filteredPersons,
-      times,
-      events,
+      times: updatedTimes,
+      events: updatedEvents,
     });
   }
 
@@ -146,16 +142,14 @@ class Page extends PureComponent {
             activeElement={activeElement}
             changeSidebarContent={this.changeSidebarContent} />
         </section>
-        <Swipe onSwipeRight={() => this.changeSidebarContent(undefined)}>
-          <Sidebar
-            entries={[
-              ...persons,
-              ...times,
-              ...events,
-            ]}
-            entryId={activeElement}
-            changeSidebarContent={this.changeSidebarContent} />
-        </Swipe>
+        <Sidebar
+          entries={[
+            ...persons,
+            ...times,
+            ...events,
+          ]}
+          entryId={activeElement}
+          changeSidebarContent={this.changeSidebarContent} />
         <div className="Page-wrapLangSwitch">
           <LangSwitch />
         </div>
