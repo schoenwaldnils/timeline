@@ -61,6 +61,7 @@
     "eslint-config-schoenwaldnils": "1.0.2",
     "graphql": "14.0.2",
     "graphql-tag": "2.10.0",
+    "html-minifier": "3.5.21",
     "html-react-parser": "0.4.7",
     "htmlhint": "0.10.1",
     "husky": "1.0.0",
