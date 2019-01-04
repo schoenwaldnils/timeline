@@ -134,10 +134,18 @@ class Sidebar extends PureComponent {
 
 Sidebar.defaultProps = {
   entryId: undefined,
+  entries: [],
 };
 
 Sidebar.propTypes = {
   entryId: PropTypes.string,
+  entries: PropTypes.array,
+  contentType: PropTypes.onOf([
+    'Person',
+    'Event',
+    'Time',
+  ]).isRequired,
+  changeSidebarContent: PropTypes.func.isRequired,
 };
 
 export default Sidebar;
