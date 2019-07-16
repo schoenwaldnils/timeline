@@ -1,0 +1,12 @@
+{
+  "aws": {
+    "region": "eu-central-1",
+    "s3": {
+      "bucket": "cdn.schoen.world"
+    }
+  },
+  "contentful": {
+    "accessToken": "VX0Df2ptjUdatNH3XsYRRd85494LOfT-OQwbOYyS550",
+    "space": "81noh8m93vcd"
+  }
+}

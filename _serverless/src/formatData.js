@@ -1,6 +1,6 @@
-import marked from './marked';
+const marked = require('./marked');
 
-export function formatPerson(data) {
+function formatPerson(data) {
   if (data.sys && data.sys.id) {
     data.id = data.sys.id;
     delete data.sys;
@@ -50,7 +50,7 @@ export function formatPerson(data) {
   return data;
 }
 
-export function formatTime(data) {
+function formatTime(data) {
   if (data.sys && data.sys.id) {
     data.id = data.sys.id;
     delete data.sys;
@@ -62,7 +62,7 @@ export function formatTime(data) {
   return data;
 }
 
-export function formatEvent(data) {
+function formatEvent(data) {
   if (data.sys && data.sys.id) {
     data.id = data.sys.id;
     delete data.sys;
@@ -73,3 +73,17 @@ export function formatEvent(data) {
   }
   return data;
 }
+
+module.exports = (data) => {
+  const {
+    personCollection: { items: persons },
+    timeCollection: { items: times },
+    eventCollection: { items: events },
+  } = data;
+
+  return {
+    persons: persons.map(person => formatPerson(person)),
+    times: times.map(time => formatTime(time)),
+    events: events.map(event => formatEvent(event)),
+  };
+};

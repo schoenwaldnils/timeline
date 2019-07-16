@@ -1,7 +1,14 @@
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import fetch from 'node-fetch';
+const { ApolloClient } = require('apollo-client');
+const { InMemoryCache } = require('apollo-cache-inmemory');
+const { HttpLink } = require('apollo-link-http');
+const fetch = require('node-fetch');
+
+const {
+  contentful: {
+    space,
+    accessToken,
+  },
+} = require('../../config.json');
 
 
 function newContenfulGQLClient({
@@ -30,12 +37,12 @@ function newContenfulGQLClient({
 }
 
 const client = newContenfulGQLClient({
-  spaceId: process.env.CONTENTFUL_SPACE_ID,
-  cdaToken: process.env.CONTENTFUL_CONTENT_DELIVERY_TOKEN,
+  spaceId: space,
+  cdaToken: accessToken,
 });
 
 
-async function getAllData(query) {
+async function getData(query) {
   try {
     const { data } = await client.query({ query });
 
@@ -47,4 +54,4 @@ async function getAllData(query) {
   }
 }
 
-export default getAllData;
+module.exports = getData;

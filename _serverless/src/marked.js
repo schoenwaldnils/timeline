@@ -1,4 +1,4 @@
-import marked from 'marked';
+const marked = require('marked');
 // import { renderToString } from 'react-dom/server';
 // import { HTML as decodeHTML } from 'entities/lib/decode';
 
@@ -16,7 +16,7 @@ import marked from 'marked';
 //     float={options.float} />);
 // };
 
-export default function (string) {
+module.exports = (string) => {
   return marked(string);
   // return marked(string, { renderer });
-}
+};

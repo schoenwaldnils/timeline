@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import fetch from 'isomorphic-fetch';
 
-import cfGraphql from '../../js/cfGraphql';
-import query from '../../js/gqlSchema';
-import { formatPerson, formatTime, formatEvent } from '../../js/formatData';
 import { setUrlHash, getUrlHash } from '../../js/urlHash';
 import updateTimeProps from '../../js/updateTimeProps';
 import updateEventProps from '../../js/updateEventProps';
@@ -14,6 +12,8 @@ import Sidebar from '../Sidebar/Sidebar';
 import LangSwitch from '../LangSwitch/LangSwitch';
 
 import './Page.css';
+
+const getDataUrl = lang => `https://timeline.api.schoen.world/dev/getTimelineData?lang=${lang}`;
 
 class Page extends PureComponent {
   constructor() {
@@ -78,31 +78,16 @@ class Page extends PureComponent {
 
 
   async fetchContentfulData(language = this.props.language) {
-    const localData = JSON.parse(window.localStorage.getItem('contentfulData'));
-    let data;
+    let data = {};
     try {
-      data = {
-        en: await cfGraphql(query('en')),
-        de: await cfGraphql(query('de')),
-      };
+      const res = await fetch(getDataUrl(language));
 
-      if (data.en || data.de) {
-        window.localStorage.setItem('contentfulData', JSON.stringify(data));
-      }
+      data = await res.json();
     } catch (error) {
-      data = localData;
       console.error(error);
     }
 
-    const {
-      personCollection: { items: persons },
-      timeCollection: { items: times },
-      eventCollection: { items: events },
-    } = data && data[language];
-
-    persons.map(person => formatPerson(person));
-    times.map(time => formatTime(time));
-    events.map(event => formatEvent(event));
+    const { persons = [], times = [], events = [] } = data;
 
     const updatedPersons = persons.map(time => updateTimeProps(time));
     const updatedTimes = times.map(time => updateTimeProps(time));
