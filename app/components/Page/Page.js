@@ -11,8 +11,9 @@ import LangSwitch from '../LangSwitch/LangSwitch';
 import './Page.css';
 
 // const getDataUrl = lang => `https://timeline.api.schoen.world/dev/getTimelineData?lang=${lang}`;
-const getDataUrl = lang =>
-  `//cdn.schoen.world.s3-website.eu-central-1.amazonaws.com/timelineData/timelineData-${lang}.json`;
+const getDataUrl = lang => `https://cdn.schoen.world/dev/getTimelineData?lang=${lang}`;
+// const getDataUrl = lang =>
+//   `//cdn.schoen.world.s3-website.eu-central-1.amazonaws.com/timelineData/timelineData-${lang}.json`;
 
 class Page extends PureComponent {
   constructor() {
