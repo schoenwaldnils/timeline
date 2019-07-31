@@ -1,4 +1,5 @@
 export default function sortObjectArray(arrayOfObjects, sortKey, reversed = false) {
+  if (typeof arrayOfObjects !== 'object') return arrayOfObjects;
   if (arrayOfObjects.length < 1) return arrayOfObjects;
 
   arrayOfObjects.sort((a, b) => {

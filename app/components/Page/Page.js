@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import fetch from 'isomorphic-fetch';
 
 import { setUrlHash, getUrlHash } from '../../js/urlHash';
-import updateTimeProps from '../../js/updateTimeProps';
-import updateEventProps from '../../js/updateEventProps';
-
 
 import Timeline from '../Timeline/Timeline';
 import Sidebar from '../Sidebar/Sidebar';
@@ -13,23 +10,25 @@ import LangSwitch from '../LangSwitch/LangSwitch';
 
 import './Page.css';
 
-const getDataUrl = lang => `https://timeline.api.schoen.world/dev/getTimelineData?lang=${lang}`;
+// const getDataUrl = lang => `https://timeline.api.schoen.world/dev/getTimelineData?lang=${lang}`;
+const getDataUrl = lang =>
+  `//cdn.schoen.world.s3-website.eu-central-1.amazonaws.com/timelineData/timelineData-${lang}.json`;
 
 class Page extends PureComponent {
   constructor() {
     super();
+    this.persons = [];
+    this.filteredPersons = [];
+    this.times = [];
+    this.events = [];
     this.state = {
-      persons: [],
-      filteredPersons: [],
-      times: [],
-      events: [],
       activeElement: null,
     };
     this.timeline = React.createRef();
   }
 
-  async componentWillMount() {
-    this.fetchContentfulData();
+  componentWillMount() {
+    this.updateTimelineData();
   }
 
   componentDidMount() {
@@ -41,7 +40,7 @@ class Page extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.language !== this.props.language) {
-      this.fetchContentfulData(nextProps.language);
+      this.updateTimelineData(nextProps.language);
     }
   }
 
@@ -76,34 +75,43 @@ class Page extends PureComponent {
     });
   }
 
+  fetchContentfulData = async (language = 'en') => {
+    console.log('fetchContentfulData');
 
-  async fetchContentfulData(language = this.props.language) {
-    let data = {};
+    this.setState({ loading: true });
+
+    const url = getDataUrl(language);
+
     try {
-      const res = await fetch(getDataUrl(language));
-
-      data = await res.json();
+      const response = await fetch(url, {
+      // const response = await fetch('//d2bgg7x6s5zwg8.cloudfront.net/timelineData/timelineData-en.json', {
+      // const response = await fetch('http://cdn.schoen.world/timelineData/timelineData-en.json', {
+      // const response = await fetch('https://timeline.api.schoen.world/dev/getTimelineData', {
+        origin: window.location.origin,
+      });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const data = await response.json();
+      return data;
     } catch (error) {
-      console.error(error);
+      console.warn(error);
+      throw error;
     }
+  }
 
-    const { persons = [], times = [], events = [] } = data;
+  updateTimelineData = async (language = this.props.language) => {
+    console.log('updateTimelineData', language);
+    const data = await this.fetchContentfulData(language);
 
-    const updatedPersons = persons.map(time => updateTimeProps(time));
-    const updatedTimes = times.map(time => updateTimeProps(time));
-    const updatedEvents = events.map((event, index) => updateEventProps({ ...event, zIndex: events.length - index }));
+    console.log(data);
 
-    const filteredPersons = updatedPersons.filter(({ startYear, endYear, stillActive }) => {
-      if (startYear && (endYear || stillActive)) return true;
-      return false;
-    });
+    this.persons = data.persons || [];
+    this.filteredPersons = data.filteredPersons || [];
+    this.times = data.times || [];
+    this.events = data.events || [];
 
-    this.setState({
-      persons: updatedPersons,
-      filteredPersons,
-      times: updatedTimes,
-      events: updatedEvents,
-    });
+    this.setState({ loading: false });
   }
 
   changeSidebarContent = (id) => {
@@ -114,31 +122,27 @@ class Page extends PureComponent {
   }
 
   render() {
-    const {
-      persons,
-      filteredPersons,
-      times,
-      events,
-      activeElement,
-    } = this.state;
-
     return (
       <div className="Page">
         <section className="Page-wrapTimeline" role="main" ref={this.timeline}>
-          <Timeline
-            timespans={[...filteredPersons, ...times]}
-            events={events}
-            activeElement={activeElement}
-            changeSidebarContent={this.changeSidebarContent} />
+          {!this.state.loading && this.filteredPersons && this.times && (
+            <Timeline
+              timespans={[...this.filteredPersons, ...this.times]}
+              events={this.events}
+              activeElement={this.state.activeElement}
+              changeSidebarContent={this.changeSidebarContent} />
+          )}
         </section>
-        <Sidebar
-          entries={[
-            ...persons,
-            ...times,
-            ...events,
-          ]}
-          entryId={activeElement}
-          changeSidebarContent={this.changeSidebarContent} />
+        {!this.state.loading && (
+          <Sidebar
+            entries={[
+              ...this.persons,
+              ...this.times,
+              ...this.events,
+            ]}
+            entryId={this.state.activeElement}
+            changeSidebarContent={this.changeSidebarContent} />
+        )}
         <div className="Page-wrapLangSwitch">
           <LangSwitch />
         </div>
