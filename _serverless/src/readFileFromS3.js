@@ -22,16 +22,20 @@ module.exports = async (intl) => {
   const filename = `timelineData-${intl}.json`;
   const keyName = getKeyName(folder, filename);
 
-  const data = await s3.getObject({
-    Bucket: bucket,
-    Key: keyName,
-  }, (err) => {
-    if (err) {
-      console.log(err);
-    }
-  }).promise();
+  try {
+    const data = await s3.getObject({
+      Bucket: bucket,
+      Key: keyName,
+    }, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    }).promise();
 
-  const result = data.Body.toString();
+    const result = await data.Body.toString();
 
-  return result;
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 };

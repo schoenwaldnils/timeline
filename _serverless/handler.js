@@ -23,19 +23,20 @@ module.exports.updateTimelineData = async () => {
 };
 
 module.exports.getTimelineData = async (event) => {
-  console.log(event);
   let language = 'en';
   if (event.queryStringParameters && event.queryStringParameters.lang) {
     language = event.queryStringParameters.lang;
   }
   const result = await readFileFromS3(language);
 
+  // const origin = event.headers && event.headers.origin ? event.headers.origin : '*';
+
   return {
     statusCode: result ? 200 : 500,
     body: result,
     headers: {
-      'access-control-allow-origin': event.headers.origin,
-      'access-control-allow-credentials': true,
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': true, // Required for cookies, authorization headers with HTTPS
     },
   };
 };

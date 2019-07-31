@@ -21,6 +21,7 @@
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
     "marked": "^0.7.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "node-gzip": "^1.1.2"
   }
 }

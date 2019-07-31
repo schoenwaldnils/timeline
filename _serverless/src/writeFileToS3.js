@@ -1,4 +1,5 @@
 const S3 = require('aws-sdk/clients/s3');
+const CloudFront = require('aws-sdk/clients/cloudfront');
 
 
 const {
@@ -13,8 +14,28 @@ const s3 = new S3({
   region,
 });
 
+const cloudfront = new CloudFront({ apiVersion: '2019-03-26' });
+
 function getKeyName(folder, filename) {
   return folder + '/' + filename;
+}
+
+async function invalidateCloudFront() {
+  return cloudfront.createInvalidation({
+    DistributionId: 'E22UXDDPQ7XQ5A', // cdn.schoen.world
+    InvalidationBatch: {
+      CallerReference: Date.now().toString(),
+      Paths: {
+        Quantity: 1, /* required */
+        Items: [
+          '/',
+        ],
+      },
+    },
+  }, (err, data) => {
+    if (err) console.log(err, err.stack); // an error occurred
+    else console.log(data); // successful response  });
+  });
 }
 
 module.exports = async (content, intl) => {
@@ -29,7 +50,7 @@ module.exports = async (content, intl) => {
     Bucket: bucket,
     Key: keyName,
     Body: body,
-  }, (err) => {
+  }, async (err) => {
     if (err) {
       result = err;
     } else {
@@ -37,5 +58,10 @@ module.exports = async (content, intl) => {
     }
   }).promise();
 
+  if (result.startsWith('Success')) {
+    await invalidateCloudFront();
+  }
+
   return result;
 };
+

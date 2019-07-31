@@ -1,4 +1,6 @@
 const marked = require('./marked');
+const updateTimeProps = require('./updateTimeProps');
+const updateEventProps = require('./updateEventProps');
 
 function formatPerson(data) {
   if (data.sys && data.sys.id) {
@@ -81,9 +83,27 @@ module.exports = (data) => {
     eventCollection: { items: events },
   } = data;
 
+  const formatedPersons = persons.map(person => formatPerson(person));
+  const formatedTimes = times.map(time => formatTime(time));
+  const formatedEvents = events.map(event => formatEvent(event));
+
+  const updatedPersons = formatedPersons.map(time => updateTimeProps(time));
+  const updatedTimes = formatedTimes.map(time => updateTimeProps(time));
+  const updatedEvents = formatedEvents.map((event, index) => updateEventProps({
+    ...event,
+    zIndex: events.length - index,
+  }));
+
+  const filteredPersons = updatedPersons.filter(({ startYear, endYear, stillActive }) => {
+    if (startYear && (endYear || stillActive)) return true;
+    return false;
+  });
+
+
   return {
-    persons: persons.map(person => formatPerson(person)),
-    times: times.map(time => formatTime(time)),
-    events: events.map(event => formatEvent(event)),
+    persons: updatedPersons,
+    filteredPersons,
+    times: updatedTimes,
+    events: updatedEvents,
   };
 };
