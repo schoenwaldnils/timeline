@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "dotenv-load next dev -p 3002",
+    "dev": "dotenv-load next dev -p 3002",
     "build": "dotenv-load next build",
     "export": "NODE_ENV=production next build && next export",
     "export-local": "NODE_ENV=production dotenv-load next build && dotenv-load next export",
