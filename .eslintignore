@@ -13,3 +13,4 @@ out/
 .env
 
 content/*.json
+_serverless

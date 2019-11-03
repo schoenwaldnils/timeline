@@ -14,11 +14,11 @@ const PagePerson = ({
   children,
   image,
   name,
-  content
+  content,
 }) => {
   return (
     <div className="PagePerson">
-      <img className="PagePerson-image" src={image} />
+      <img className="PagePerson-image" src={image} alt={name} />
       <div className="PagePerson-content">
         <h1 className="PagePerson-name">{name}</h1>
 
@@ -85,8 +85,27 @@ const PagePerson = ({
   );
 };
 
+PagePerson.defaultProps = {
+  birth: undefined,
+  death: undefined,
+  age: undefined,
+  father: null,
+  mother: null,
+  children: [],
+  image: undefined,
+  content: null,
+};
+
 PagePerson.propTypes = {
   name: PropTypes.string.isRequired,
+  birth: PropTypes.number,
+  death: PropTypes.number,
+  age: PropTypes.number,
+  father: PropTypes.node,
+  mother: PropTypes.node,
+  children: PropTypes.arrayOf(PropTypes.node),
+  image: PropTypes.string,
+  content: PropTypes.node,
 };
 
 export default PagePerson;
