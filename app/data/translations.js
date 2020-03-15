@@ -81,4 +81,4 @@ export default {
       de: 'In Contentful editieren',
     },
   },
-};
+}

@@ -1,4 +1,4 @@
-const marked = require('marked');
+const marked = require('marked')
 // import { renderToString } from 'react-dom/server';
 // import { HTML as decodeHTML } from 'entities/lib/decode';
 
@@ -16,7 +16,7 @@ const marked = require('marked');
 //     float={options.float} />);
 // };
 
-module.exports = (string) => {
-  return marked(string);
+module.exports = string => {
+  return marked(string)
   // return marked(string, { renderer });
-};
+}

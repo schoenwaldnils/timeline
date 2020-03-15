@@ -1,4 +1,4 @@
-const gql = require('graphql-tag');
+const gql = require('graphql-tag')
 
 module.exports = locale => gql`{
   personCollection(
@@ -7,7 +7,7 @@ module.exports = locale => gql`{
       startYear_ASC,
       name_ASC
     ],
-    limit: 1000,
+    limit: 500,
   ) {
     items {
       sys {
@@ -62,7 +62,7 @@ module.exports = locale => gql`{
       startYear_exists: true,
     }
     order: [
-      startYear_ASC, 
+      startYear_ASC,
       name_ASC
     ],
     limit: 1000,
@@ -84,7 +84,7 @@ module.exports = locale => gql`{
       year_exists: true,
     }
     order: [
-      year_ASC, 
+      year_ASC,
       name_ASC
     ],
     limit: 1000,
@@ -99,4 +99,4 @@ module.exports = locale => gql`{
       content,
     }
   }
-}`;
+}`

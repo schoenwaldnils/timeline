@@ -1,11 +1,11 @@
-import t from './translate';
+import t from './translate'
 
-export function timeperiod(startyear, endyear) {
-  let calcedPeriod = endyear - startyear;
+export function getTimePeriod(startyear, endyear) {
+  let calcedPeriod = endyear - startyear
   if (startyear < 0 && endyear > 0) {
-    calcedPeriod -= 1;
+    calcedPeriod -= 1
   }
-  return calcedPeriod;
+  return calcedPeriod
 }
 
 export function htmlEntities(str) {
@@ -13,13 +13,12 @@ export function htmlEntities(str) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
 }
 
 export function ourTime(year) {
   if (year <= 0) {
-    return `${year * -1} ${t('time.extension.negative')}`;
+    return `${year * -1} ${t('time.extension.negative')}`
   }
-  return `${year} ${t('time.extension.positive')}`;
+  return `${year} ${t('time.extension.positive')}`
 }
-

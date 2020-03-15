@@ -29,35 +29,11 @@
   padding: 1rem 1rem 3rem;
 }
 
-.Sidebar-title {
-  margin-bottom: .5em;
-}
-
 .Sidebar-icon {
   flex-shrink: 0;
   margin-bottom: 1rem;
   font-size: 2rem;
   cursor: pointer;
-}
-
-.Sidebar-image {
-  width: 300px;
-  margin-bottom: 1rem;
-}
-
-.Sidebar-tableCell {
-  padding-top: .25em;
-  padding-bottom: .25em;
-  white-space: nowrap;
-  vertical-align: top;
-}
-
-.Sidebar-tableCell:not(:first-child) {
-  padding-left: .25em;
-}
-
-.Sidebar-tableCell:first-child {
-  text-transform: capitalize;
 }
 
 .Sidebar-richText {

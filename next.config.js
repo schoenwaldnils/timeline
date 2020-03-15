@@ -1,15 +1,12 @@
-const withCSS = require('@zeit/next-css');
-const config = require('config');
+const withCSS = require('@zeit/next-css')
 
 module.exports = withCSS({
+  exportTrailingSlash: true,
   exportPathMap: async () => {
     return {
       '/': {
         page: '/',
       },
-    };
+    }
   },
-  publicRuntimeConfig: { // Will be available on both server and client
-    CONTENTFUL_SPACE_ID: config.get('CONTENTFUL_SPACE_ID'),
-  },
-});
+})

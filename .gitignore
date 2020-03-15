@@ -1,4 +1,3 @@
-node_modules/
 .publish
 .sass-cache
 .asset-cache
@@ -7,7 +6,8 @@ deploy_key
 deploy_key.pub
 lib
 
-build/
-out/
-.next/
+node_modules
+build
+out
+.next
 .env

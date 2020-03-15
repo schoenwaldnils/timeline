@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { ourTime } from '../../js/utils';
+import { ourTime } from '../../js/utils'
 
-import './PagePerson.css';
+import './PagePerson.css'
 
 const PagePerson = ({
   birth,
@@ -24,66 +24,63 @@ const PagePerson = ({
 
         <table className="PagePerson-table">
           <tbody>
-
             <tr>
               <td className="PagePerson-tableCell">Geboren:</td>
-              <td className="PagePerson-tableCell">
-                {ourTime(birth)}
-              </td>
+              <td className="PagePerson-tableCell">{ourTime(birth)}</td>
             </tr>
 
-            { death &&
+            {death && (
               <tr>
                 <td className="PagePerson-tableCell">Gestorben:</td>
-                <td className="PagePerson-tableCell">
-                  {ourTime(death)}
-                </td>
+                <td className="PagePerson-tableCell">{ourTime(death)}</td>
               </tr>
-            }
+            )}
 
             <tr>
               <td className="PagePerson-tableCell">Lebensdauer:</td>
               <td className="PagePerson-tableCell">{age} Jahre</td>
             </tr>
 
-            { father &&
+            {father && (
               <tr>
                 <td className="PagePerson-tableCell">Vater:</td>
-                <td className="PagePerson-tableCell">
-                  {father}
-                </td>
+                <td className="PagePerson-tableCell">{father}</td>
               </tr>
-            }
+            )}
 
-            { mother &&
+            {mother && (
               <tr>
                 <td className="PagePerson-tableCell">Mutter:</td>
-                <td className="PagePerson-tableCell">
-                  {mother}
-                </td>
+                <td className="PagePerson-tableCell">{mother}</td>
               </tr>
-            }
+            )}
 
-            { children &&
+            {children && (
               <tr>
                 <td className="PagePerson-tableCell">Kinder:</td>
                 <td className="PagePerson-tableCell">
                   <ul>
-                    { children.map(child => <li key={child}>{child}</li>)}
+                    {children.map(child => (
+                      <li key={child}>{child}</li>
+                    ))}
                   </ul>
                 </td>
               </tr>
-            }
+            )}
           </tbody>
         </table>
 
-
-        <div className="u-richText" dangerouslySetInnerHTML={{ __html: content }} />
-        <a className="PagePerson-backLink u-link" href="/">{'<'} Zurück zur Timeline</a>
+        <div
+          className="u-richText"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+        <a className="PagePerson-backLink u-link" href="/">
+          {'<'} Zurück zur Timeline
+        </a>
       </div>
     </div>
-  );
-};
+  )
+}
 
 PagePerson.defaultProps = {
   birth: undefined,
@@ -94,7 +91,7 @@ PagePerson.defaultProps = {
   children: [],
   image: undefined,
   content: null,
-};
+}
 
 PagePerson.propTypes = {
   name: PropTypes.string.isRequired,
@@ -106,6 +103,6 @@ PagePerson.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
   image: PropTypes.string,
   content: PropTypes.node,
-};
+}
 
-export default PagePerson;
+export default PagePerson

@@ -1,4 +1,4 @@
-const { viewportsCss } = require('./app/js/viewports');
+const { viewportsCss } = require('./app/js/viewports')
 
 module.exports = () => ({
   plugins: {
@@ -14,4 +14,4 @@ module.exports = () => ({
       clearMessages: true,
     },
   },
-});
+})

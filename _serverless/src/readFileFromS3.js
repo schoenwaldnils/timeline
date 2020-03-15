@@ -1,41 +1,45 @@
-const S3 = require('aws-sdk/clients/s3');
-
+const S3 = require('aws-sdk/clients/s3')
 
 const {
   aws: {
     region,
     s3: { bucket },
   },
-} = require('../config.json');
+} = require('../config.json')
 
 const s3 = new S3({
   apiVersion: '2006-03-01',
   region,
-});
+})
 
 function getKeyName(folder, filename) {
-  return folder + '/' + filename;
+  return `${folder}/${filename}`
 }
 
-module.exports = async (intl) => {
-  const folder = 'timelineData';
-  const filename = `timelineData-${intl}.json`;
-  const keyName = getKeyName(folder, filename);
+module.exports = async intl => {
+  const folder = 'timelineData'
+  const filename = `timelineData-${intl}.json`
+  const keyName = getKeyName(folder, filename)
 
   try {
-    const data = await s3.getObject({
-      Bucket: bucket,
-      Key: keyName,
-    }, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    }).promise();
+    const data = await s3
+      .getObject(
+        {
+          Bucket: bucket,
+          Key: keyName,
+        },
+        err => {
+          if (err) {
+            console.log(err)
+          }
+        },
+      )
+      .promise()
 
-    const result = await data.Body.toString();
+    const result = await data.Body.toString()
 
-    return result;
+    return result
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}

@@ -1,27 +1,31 @@
-const { timeperiod } = require('./utils');
-const { calcTimes } = require('./calcTimes');
+const { getTimePeriod } = require('./utils')
+const { calcTimes } = require('./calcTimes')
 
 function generateGradient({
-  calcedStart, calcedStartCertain, calcedEndCertain, calcedEnd, duration,
+  calcedStart,
+  calcedStartCertain,
+  calcedEndCertain,
+  calcedEnd,
+  duration,
 }) {
   if (!calcedStartCertain && !calcedEndCertain) {
-    return '';
+    return ''
   }
 
-  let startPx = 0;
-  let endPx = startPx + duration;
+  let startPx = 0
+  let endPx = startPx + duration
 
-  let gradientStart = '';
-  let gradientEnd = '';
+  let gradientStart = ''
+  let gradientEnd = ''
 
   if (calcedStartCertain) {
-    startPx = calcedStartCertain - calcedStart;
-    gradientStart = 'transparent 0px, ';
+    startPx = calcedStartCertain - calcedStart
+    gradientStart = 'transparent 0px, '
   }
 
   if (calcedEndCertain) {
-    endPx = calcedEndCertain - calcedStart;
-    gradientEnd = `transparent ${calcedEnd - calcedStart}px`;
+    endPx = calcedEndCertain - calcedStart
+    gradientEnd = `transparent ${calcedEnd - calcedStart}px`
   }
 
   return `
@@ -32,18 +36,18 @@ function generateGradient({
     ${startPx}px,
     var(--Time-color)
     ${endPx}px,
-    ${gradientEnd})`;
+    ${gradientEnd})`
 }
 
-module.exports = (time) => {
+module.exports = time => {
   const {
-    __typename,
+    typeName,
     startYear,
     startVagueness,
     endYear,
     endVagueness,
     stillActive,
-  } = time;
+  } = time
 
   const {
     calcedStart,
@@ -53,22 +57,32 @@ module.exports = (time) => {
     pixelStart,
     pixelEnd,
   } = calcTimes({
-    startYear, startVagueness, endYear, endVagueness, stillActive,
-  });
-  const duration = timeperiod(calcedStart, calcedEnd || new Date().getFullYear());
+    startYear,
+    startVagueness,
+    endYear,
+    endVagueness,
+    stillActive,
+  })
+  const duration = getTimePeriod(
+    calcedStart,
+    calcedEnd || new Date().getFullYear(),
+  )
   const background = generateGradient({
-    calcedStart, calcedStartCertain, calcedEndCertain, calcedEnd, duration,
-  });
+    calcedStart,
+    calcedStartCertain,
+    calcedEndCertain,
+    calcedEnd,
+    duration,
+  })
 
   return {
     ...time,
-    type: __typename.toLowerCase(),
+    type: typeName.toLowerCase(),
     calcedStart,
     calcedEnd,
     pixelStart,
     pixelEnd,
     duration,
     background,
-  };
-};
-
+  }
+}

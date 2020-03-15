@@ -1,3 +1,6 @@
 {
-  "extends": "stylelint-config-schoenwaldnils"
+  "extends": "stylelint-config-schoenwaldnils",
+  "rules": {
+    "number-leading-zero": "always"
+  }
 }
