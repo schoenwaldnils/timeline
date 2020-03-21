@@ -1,23 +1,17 @@
-import {
-  getLocalStorage,
-  setLocalStorage,
-  removeLocalStorage,
-} from '../../js/localStorage'
-
-const STORAGE_NAME = 'timeline-contentID'
+import { setUrlHash, getUrlHash, removeUrlHash } from '../../js/urlHash'
 
 export const getUserContentID = (): string => {
-  const storageContentID = getLocalStorage(STORAGE_NAME)
+  const urlID = getUrlHash()
 
-  if (storageContentID) return storageContentID
+  if (urlID) return urlID
 
   return null
 }
 
 export const setUserContentID = (id: string) => {
-  setLocalStorage(STORAGE_NAME, id)
+  setUrlHash(id)
 }
 
 export const removeUserContentID = () => {
-  removeLocalStorage(STORAGE_NAME)
+  removeUrlHash()
 }

@@ -26,11 +26,19 @@ export const SidebarProvider: React.FC = ({ children }) => {
     setIsActive(false)
   }
 
-  useEffect(() => {
+  const triggerCheck = () => {
     const localId = getUserContentID()
     if (localId) {
       changeContent(localId)
     }
+  }
+
+  useEffect(() => {
+    window.onpopstate = () => {
+      triggerCheck()
+    }
+
+    triggerCheck()
   }, [])
 
   return (

@@ -1,35 +1,36 @@
 import shallowequal from 'shallowequal'
 
-export function setUrlHash(hash: string, pushState = true) {
-  if (typeof window !== 'undefined' && window.location) {
-    const currentState = window.location.hash.replace(/^#/, '')
+const hasWindowLocation = !!(typeof window !== 'undefined' && window.location)
 
-    let path = window.location.pathname
+export const setUrlHash = (hash: string, pushState = true) => {
+  if (!hasWindowLocation) return null
 
-    if (hash && !shallowequal(currentState, hash)) {
-      path = `${window.location.pathname}#${hash}`
-    }
+  const currentState = window.location.hash.replace(/^#/, '')
 
-    if (pushState) {
-      window.history.pushState(null, null, path)
-      // const evt = document.createEvent('HTMLEvents');
-      // evt.initEvent('popstate', false, true);
-      // window.dispatchEvent(evt);
-    } else {
-      window.history.replaceState(null, null, path)
-    }
+  if (!hash || shallowequal(currentState, hash)) return null
 
-    return hash
+  const path = `${window.location.pathname}#${hash}`
+
+  if (pushState) {
+    window.history.pushState(null, null, path)
+  } else {
+    window.history.replaceState(null, null, path)
   }
 
-  return false
+  return hash
 }
 
-export function getUrlHash(): string {
-  if (typeof window !== 'undefined' && window.location) {
-    const currentState = window.location.hash.replace(/^#/, '')
-    return currentState
-  }
+export const getUrlHash = (): string => {
+  if (!hasWindowLocation) return null
 
+  const currentState = window.location.hash.replace(/^#/, '')
+  return currentState
+}
+
+export const removeUrlHash = () => {
+  if (!hasWindowLocation) return null
+
+  window.history.replaceState(null, null, window.location.pathname)
+  window.history.replaceState(null, null, window.location.pathname)
   return null
 }
