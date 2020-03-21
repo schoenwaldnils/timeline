@@ -38,13 +38,7 @@ const Wrapper = styled.div<WrapperProps>`
   ${({ isActive }) => isActive && isActiveStyles}
 `
 
-const StyledSwipe = styled(Swipe)`
-  height: 100%;
-`
-
 const SidebarContent = styled.div`
-  display: flex;
-  flex-direction: column;
   max-height: 100%;
   padding: 1rem 1rem 3rem;
   overflow-y: auto;
@@ -93,16 +87,14 @@ export const Sidebar: React.FC = () => {
   }, [])
 
   return (
-    <Wrapper isActive={isActive} role="dialog">
-      {content && (
-        <StyledSwipe onSwipeRight={closeSidebar}>
-          <SidebarContent>{content}</SidebarContent>
-          <Close onClick={() => closeSidebar()}>
-            <MdVerticalAlignBottom />
-          </Close>
-        </StyledSwipe>
-      )}
-    </Wrapper>
+    <Swipe onSwipeRight={closeSidebar}>
+      <Wrapper isActive={isActive} role="dialog">
+        {content && <SidebarContent>{content}</SidebarContent>}
+        <Close onClick={() => closeSidebar()}>
+          <MdVerticalAlignBottom />
+        </Close>
+      </Wrapper>
+    </Swipe>
   )
 }
 

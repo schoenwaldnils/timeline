@@ -3,6 +3,8 @@ import React, { useContext } from 'react'
 import { SidebarContext } from './SidebarContext'
 
 export const SidebarChange: React.FC<{ type: string }> = ({ type }) => {
+  if (!type) return null
+
   const { changeContent } = useContext(SidebarContext)
 
   const options = {
