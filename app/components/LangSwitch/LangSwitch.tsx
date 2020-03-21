@@ -11,8 +11,8 @@ const Wrapper = styled.div`
 
 const Button = styled.button`
   padding: 0.5em 0.7em;
-  border: 0;
   background-color: #fff;
+  border: 0;
 `
 
 export const LangSwitch: React.FC = props => {

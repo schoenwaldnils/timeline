@@ -2,7 +2,8 @@
   "extends": "stylelint-config-schoenwaldnils",
   "rules": {
     "number-leading-zero": "always",
-    "declaration-colon-newline-after": null
+    "declaration-colon-newline-after": null,
+    "value-list-comma-newline-after": null
   },
   "processors": [
     "stylelint-processor-styled-components"

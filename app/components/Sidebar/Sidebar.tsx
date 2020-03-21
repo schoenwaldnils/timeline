@@ -14,9 +14,9 @@ interface WrapperProps {
 }
 
 const isActiveStyles = css`
+  opacity: 1;
   transform: translateX(-100%);
   transition: transform 300ms, opacity 50ms 0ms;
-  opacity: 1;
 `
 
 const Wrapper = styled.div<WrapperProps>`
@@ -27,13 +27,13 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
   width: 20rem;
-  height: 100vh;
   max-width: 100vw;
+  height: 100vh;
   font-size: 1rem;
   background-color: #fff;
+  opacity: 0;
   box-shadow: 1rem -0.5rem 0.75rem 1rem rgba(0, 0, 0, 0.25);
   transition: transform 300ms, opacity 100ms 200ms;
-  opacity: 0;
 
   ${({ isActive }) => isActive && isActiveStyles}
 `
@@ -52,8 +52,8 @@ const SidebarContent = styled.div`
 
 const Close = styled.button`
   position: absolute;
-  left: 0;
   bottom: 1rem;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,11 +63,11 @@ const Close = styled.button`
   font-size: 1.5rem;
   line-height: 1;
   color: #fff;
-  background-color: ${themeColors.themeColor};
-  border-radius: 50%;
-  border: none;
-  transform: rotate(-90deg);
   cursor: pointer;
+  background-color: ${themeColors.themeColor};
+  border: none;
+  border-radius: 50%;
+  transform: rotate(-90deg);
   -moz-outline-radius: 50%;
 
   :focus {

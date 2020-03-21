@@ -21,8 +21,8 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   height: 5rem;
-  background-color: ${({ color }) => color};
   color: ${({ color }) => (isDark(color) ? '#fff' : '#000')};
+  background-color: ${({ color }) => color};
 `
 
 export const Shades = () => (
