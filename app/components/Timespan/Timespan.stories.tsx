@@ -8,9 +8,23 @@ export default {
 }
 
 export const Time = () => (
-  <Timespan id="" name="Event Lorem Ipsum" type="time" duration={537} />
+  <Timespan
+    id=""
+    name="Event Lorem Ipsum"
+    type="time"
+    pixelStart={50}
+    rowIndex={0}
+    pixelDuration={537}
+  />
 )
 
 export const Person = () => (
-  <Timespan id="" name="John Doe" type="person" duration={1542} />
+  <Timespan
+    pixelStart={50}
+    rowIndex={0}
+    id=""
+    name="John Doe"
+    type="person"
+    pixelDuration={1542}
+  />
 )

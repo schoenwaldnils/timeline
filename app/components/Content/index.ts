@@ -1,6 +1,4 @@
-import { ContentTemplate } from './ContentTemplate'
-import { ContentEvent } from './ContentEvent'
-import { ContentPerson } from './ContentPerson'
-import { ContentTime } from './ContentTime'
-
-export { ContentTemplate, ContentEvent, ContentPerson, ContentTime }
+export * from './ContentTemplate'
+export * from './ContentEvent'
+export * from './ContentPerson'
+export * from './ContentTime'

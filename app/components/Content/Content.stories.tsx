@@ -1,5 +1,4 @@
 import React from 'react'
-import { action } from '@storybook/addon-actions'
 
 import {
   ContentTemplate,
@@ -44,7 +43,6 @@ export const Person = () => (
     startYear={1900}
     image="https://picsum.photos/500/300"
     father={{ name: 'Peter Doe', id: '42' }}
-    changeSidebarContent={action('link clicked')}
   />
 )
-export const Time = () => <ContentTime />
+export const Time = () => <ContentTime name="Test time" startYear={100} />

@@ -15,12 +15,7 @@ const Button = styled.button`
   background-color: #fff;
 `
 
-interface Props {
-  language: string
-  changeLanguage: Function
-}
-
-export const LangSwitch: React.FC<Props> = () => {
+export const LangSwitch: React.FC = props => {
   const { language, changeLanguage } = useContext(ContextLang)
 
   if (!language) return null
@@ -28,7 +23,7 @@ export const LangSwitch: React.FC<Props> = () => {
   const otherLanguages = languages.filter(lang => lang !== language)
 
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       {otherLanguages.map(otherLanguage => (
         <Button
           key={otherLanguage}

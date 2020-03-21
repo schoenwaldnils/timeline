@@ -1,11 +1,16 @@
 import { css } from '@emotion/core'
-import { themeColors } from '../../js/colors'
+import { themeColors, colors } from '../../js/colors'
 
 export default css`
   *,
   *::before,
   *::after {
     box-sizing: border-box;
+    word-break: break-word;
+
+    :focus {
+      outline: solid 1px ${colors.red};
+    }
   }
 
   html {
@@ -21,11 +26,11 @@ export default css`
     display: flex;
     flex-direction: column;
     margin: 0;
-    color: ${themeColors.textColor};
-    background-color: ${themeColors.bodyBackgroundColor};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: ${themeColors.textColor};
     text-rendering: optimizeLegibility;
+    background-color: ${themeColors.bodyBackgroundColor};
   }
 
   /* textarea:focus,

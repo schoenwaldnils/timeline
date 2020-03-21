@@ -5,18 +5,25 @@ export function generateGradient(startBlurriness, endBlurriness, color) {
     return color
   }
 
+  let left = `${color} 0%,`
+  let right = `${color} 100%`
+
   // setting transparent to rgba value due to a safari bug
   // https://css-tricks.com/thing-know-gradients-transparent-black/
   const transparent = Color(color).alpha(0)
 
-  const gradientStart = `${transparent} 0px, `
-  const gradientEnd = `${transparent} 100%`
+  if (startBlurriness) {
+    left = `${transparent}, ${color} ${startBlurriness}px,`
+  }
+
+  if (endBlurriness) {
+    right = `${color} calc(100% - ${endBlurriness}px), ${transparent} 100%`
+  }
 
   return `
   linear-gradient(
     to right,
-    ${gradientStart}
-    ${color} ${startBlurriness}px,
-    ${color} calc(100% - ${endBlurriness}px),
-    ${gradientEnd})`
+    ${left}
+    ${right}
+  );`
 }

@@ -1,6 +1,1 @@
-export {
-  languages,
-  ContextLang,
-  LanguageProvider,
-  currentlocale,
-} from './ContextLang'
+export * from './ContextLang'

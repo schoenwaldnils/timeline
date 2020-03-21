@@ -1,67 +1,87 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from '@emotion/styled'
 
-import { ourTime } from '../../js/utils'
-import { colors } from '../../js/colors'
-import { SCALE_YEARS_BEFORE_ZERO } from '../../data/defaults'
+import { SidebarContext } from '../Sidebar/SidebarContext'
 
-const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: ${({ year }) => year + SCALE_YEARS_BEFORE_ZERO + 1}px;
-  z-index: 0;
-  display: block;
-  padding: 0.25em 0.5em 0.65em;
+import { colors } from '../../js/colors'
+import { zIndexes } from '../../data/constants'
+
+interface WrapperProps {
+  pixelYear: number
+  rowIndex?: number
+  zIndex?: number
+}
+
+const Wrapper = styled.div<WrapperProps>`
+  position: relative;
+  z-index: ${({ zIndex }) => zIndex + zIndexes.event};
+  display: inline-flex;
+  align-items: center;
+  grid-area: events;
+  width: fit-content;
+  height: 2em;
+  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 2px));
+  margin-left: ${({ pixelYear }) => pixelYear}px;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
   font-family: monospace;
   color: #fff;
   white-space: nowrap;
   cursor: pointer;
   background-color: #555;
 
-  :hover,
-  :focus {
-    z-index: 1;
-    outline: 1px solid #fff;
-  }
-
   ::before {
     content: '';
     position: absolute;
     right: 100%;
-    top: -20vh;
-    z-index: 0;
+    bottom: 0;
     display: block;
     width: 1px;
-    height: 120vh;
+    height: 100vh;
+    min-height: calc(100% + 20vh);
     background-color: ${colors.red};
+  }
+
+  :hover,
+  :focus {
+    z-index: ${zIndexes.eventFocus};
+
+    ::before {
+      outline: 0;
+    }
   }
 `
 
-interface Props {
+export interface EventProps extends WrapperProps {
   id: string
-  // tabIndex: number
   name: string
-  year: number
-  handleElementClick: MouseEvent<HTMLDivElement, MouseEvent>
 }
 
-export const Event: React.FC<Props> = ({
+export const Event: React.FC<EventProps> = ({
   id,
-  // tabIndex,
   name,
-  year,
-  handleElementClick,
+  pixelYear,
+  rowIndex = 0,
+  zIndex = zIndexes.event,
 }) => {
+  const { changeContent } = useContext(SidebarContext)
   return (
     <Wrapper
       id={id}
       // tabIndex={tabIndex}
       role="button"
-      year={year}
-      onKeyUp={e => e.keyCode === 13 && handleElementClick}
-      onClick={handleElementClick}
+      tabIndex={0}
+      pixelYear={pixelYear}
+      rowIndex={rowIndex}
+      zIndex={zIndex}
+      onKeyUp={e => e.keyCode === 13 && changeContent(id)}
+      onClick={() => changeContent(id)}
     >
       {name}
     </Wrapper>
   )
+}
+
+Event.defaultProps = {
+  rowIndex: 0,
 }

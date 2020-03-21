@@ -5,7 +5,7 @@ export default gql`
     sys {
       id
     }
-    name
+    title: name
     year
     richText {
       json

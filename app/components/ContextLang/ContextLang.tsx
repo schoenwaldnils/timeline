@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
-import { getUserLanguage } from '../../js/getUserLanguage'
-import { createCookie } from '../../js/cookie'
+import { getUserLanguage, setUserLanguage } from './userLanguage'
 
 export const languages = ['en', 'de']
 
 let locale = 'en'
 
-interface ContextLangInterface {
+interface ContextLangProps {
   language: string
   changeLanguage: (language: any) => void
 }
 
-export const ContextLang = React.createContext<ContextLangInterface | null>({
+export const ContextLang = React.createContext<ContextLangProps | null>({
   language: locale,
   changeLanguage: () => null,
 })
@@ -20,9 +19,9 @@ export const ContextLang = React.createContext<ContextLangInterface | null>({
 export const LanguageProvider: React.FC = ({ children }) => {
   const [language, setLanguage] = useState(locale)
 
-  const changeLanguage = language => {
-    createCookie('timeline-lang', language)
-    setLanguage(language)
+  const changeLanguage = (newLanguage: string) => {
+    setUserLanguage(newLanguage)
+    setLanguage(newLanguage)
   }
 
   useEffect(() => {
@@ -44,4 +43,4 @@ export const LanguageProvider: React.FC = ({ children }) => {
   )
 }
 
-export const currentlocale = () => locale
+export const currentLocale = locale

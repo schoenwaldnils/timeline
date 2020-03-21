@@ -9,7 +9,7 @@ import { formatTime } from './formatData'
 import timeById from './gql/timeById'
 
 interface Props {
-  id: String
+  id: string
 }
 
 export const ContentfulTime: React.FC<Props> = ({ id }) => {
@@ -22,10 +22,7 @@ export const ContentfulTime: React.FC<Props> = ({ id }) => {
   if (loading) return <Loading />
   if (error || data.timeCollection.items[0].length < 1) return <div>Error!</div>
 
-  console.log(data.timeCollection.items[0])
-
   const cleanedTime = formatTime(data.timeCollection.items[0])
-  console.log(cleanedTime)
 
   return <ContentTime {...cleanedTime} />
 }

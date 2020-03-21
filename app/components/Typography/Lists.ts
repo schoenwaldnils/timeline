@@ -5,9 +5,14 @@ import { themeColors } from '../../js/colors'
 const listDotSize = '.35em'
 
 export const UL = styled.ul`
+  margin-top: 0;
   margin-bottom: 1em;
-  padding-left: 0.75em;
+  padding-left: 0;
   list-style: none;
+
+  & & {
+    padding-left: 0.75em;
+  }
 `
 
 export const OL = styled.ol`

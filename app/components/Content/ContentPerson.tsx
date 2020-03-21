@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Document } from '@contentful/rich-text-types'
 
+import { SidebarContext } from '../Sidebar/SidebarContext'
 import { ContentTemplate } from './ContentTemplate'
 import { TableList } from '../TableList'
 import { RichText } from '../RichText'
+import { LinkToWOL } from './ContentLinkWol'
+import { UL, LI, ButtonPlain } from '../Typography'
 
-import { ourTime, getTimePeriod } from '../../js/utils'
-import t from '../../js/translate'
-import { UL, LI } from '../Typography'
+import { ourTime } from '../../js/utils'
+import { t } from '../../js/translate'
 
 interface Person {
   name: string
@@ -15,54 +18,62 @@ interface Person {
 
 export interface ContentPersonProps {
   name: string
-  image?: Object
+  image?: string
   startYear: number
-  startBlurriness?: string
+  startBlurriness?: number
   endYear?: number
-  endBlurriness?: string
+  endBlurriness?: number
+  duration?: number
   spouse?: Array<Person>
   father?: Person
   mother?: Person
   childs?: Array<Person>
-  richText?: Object
-  changeSidebarContent: Function
+  richText?: Document
+  wolLink?: string
 }
 
-export const ContentPerson: React.FC<ContentPersonProps> = props => {
-  const {
-    name,
-    image,
-    startYear,
-    startBlurriness,
-    endYear,
-    endBlurriness,
-    spouse,
-    father,
-    mother,
-    childs,
-    changeSidebarContent,
-    richText,
-  } = props
+export const ContentPerson: React.FC<ContentPersonProps> = ({
+  name,
+  image,
+  startYear,
+  startBlurriness,
+  endYear,
+  endBlurriness,
+  duration: age,
+  spouse,
+  father,
+  mother,
+  childs,
+  richText,
+  wolLink,
+}) => {
+  const { changeContent } = useContext(SidebarContext)
 
-  let age
+  const yearBlur = (
+    year: number,
+    blur: number,
+    type: 'start' | 'end',
+  ): string => {
+    if (!blur) return ourTime(year)
 
-  if (startYear) {
-    age = getTimePeriod(startYear, endYear || new Date().getFullYear())
+    let blurYear = year + blur / 2
+
+    if (type === 'end') {
+      blurYear = year - blur / 2
+    }
+
+    return `${t('misc.approx')} ${ourTime(blurYear)} (+-${blur / 2})`
   }
 
   const bornString = !startYear
     ? t('misc.unnown')
-    : `${startBlurriness ? t('misc.approx') : ''} ${ourTime(startYear)}${
-        startBlurriness ? `(${startBlurriness})` : ''
-      }`
+    : yearBlur(startYear, startBlurriness, 'start')
 
   const deathString = !endYear
     ? t('misc.unnown')
-    : `${endBlurriness ? t('misc.approx') : ''} ${ourTime(endYear)}${
-        endBlurriness ? `(${endBlurriness})` : ''
-      }`
+    : yearBlur(endYear, endBlurriness, 'end')
 
-  let list = {
+  let list: any = {
     [t('life.born')]: bornString,
     [t('life.died')]: deathString,
     [t('life.span')]:
@@ -74,18 +85,20 @@ export const ContentPerson: React.FC<ContentPersonProps> = props => {
   if (spouse.length > 0) {
     list = {
       ...list,
-      [t('relations.spouse')]: spouse.map(({ id, name: spouseName }) => (
-        <a
-          key={id}
-          className="u-link"
-          onKeyUp={e => e.keyCode === 13 && changeSidebarContent(id)}
-          onClick={() => changeSidebarContent(id)}
-          role="button"
-          tabIndex={0}
-        >
-          <li>{spouseName}</li>
-        </a>
-      )),
+      [t('relations.spouse')]: (
+        <UL>
+          {spouse.map(({ id, name: spouseName }) => (
+            <LI key={id}>
+              <ButtonPlain
+                onKeyUp={e => e.keyCode === 13 && changeContent(id)}
+                onClick={() => changeContent(id)}
+              >
+                {spouseName}
+              </ButtonPlain>
+            </LI>
+          ))}
+        </UL>
+      ),
     }
   }
 
@@ -93,15 +106,12 @@ export const ContentPerson: React.FC<ContentPersonProps> = props => {
     list = {
       ...list,
       [t('relations.father')]: (
-        <a
-          className="u-link"
-          onKeyUp={e => e.keyCode === 13 && changeSidebarContent(father.id)}
-          onClick={() => changeSidebarContent(father.id)}
-          role="button"
-          tabIndex={0}
+        <ButtonPlain
+          onKeyUp={e => e.keyCode === 13 && changeContent(father.id)}
+          onClick={() => changeContent(father.id)}
         >
           {father.name}
-        </a>
+        </ButtonPlain>
       ),
     }
   }
@@ -110,15 +120,12 @@ export const ContentPerson: React.FC<ContentPersonProps> = props => {
     list = {
       ...list,
       [t('relations.mother')]: (
-        <a
-          className="u-link"
-          onKeyUp={e => e.keyCode === 13 && changeSidebarContent(mother.id)}
-          onClick={() => changeSidebarContent(mother.id)}
-          role="button"
-          tabIndex={0}
+        <ButtonPlain
+          onKeyUp={e => e.keyCode === 13 && changeContent(mother.id)}
+          onClick={() => changeContent(mother.id)}
         >
           {mother.name}
-        </a>
+        </ButtonPlain>
       ),
     }
   }
@@ -129,17 +136,13 @@ export const ContentPerson: React.FC<ContentPersonProps> = props => {
       [t('relations.children')]: (
         <UL>
           {childs.map(({ id, name: childName }) => (
-            <LI key={childName}>
-              <a
-                key={id}
-                className="u-link"
-                onKeyUp={e => e.keyCode === 13 && changeSidebarContent(id)}
-                onClick={() => changeSidebarContent(id)}
-                role="button"
-                tabIndex={0}
+            <LI key={id}>
+              <ButtonPlain
+                onKeyUp={e => e.keyCode === 13 && changeContent(id)}
+                onClick={() => changeContent(id)}
               >
                 {childName}
-              </a>
+              </ButtonPlain>
             </LI>
           ))}
         </UL>
@@ -152,18 +155,13 @@ export const ContentPerson: React.FC<ContentPersonProps> = props => {
       <TableList list={list} />
       <br />
       <br />
-      <RichText content={richText} />
+      {richText && <RichText content={richText} />}
+      {wolLink && <LinkToWOL wolLink={wolLink} />}
     </ContentTemplate>
   )
 }
 
 ContentPerson.defaultProps = {
-  startYear: undefined,
-  startBlurriness: undefined,
-  endYear: undefined,
-  endBlurriness: undefined,
   spouse: [],
-  father: undefined,
-  mother: undefined,
   childs: [],
 }

@@ -1,21 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { Document } from '@contentful/rich-text-types'
 
 import { ContentTemplate } from './ContentTemplate'
 import { TableList } from '../TableList'
 import { RichText } from '../RichText'
+import { LinkToWOL } from './ContentLinkWol'
 
 import { ourTime } from '../../js/utils'
-import t from '../../js/translate'
+import { t } from '../../js/translate'
 
 export interface ContentTimeProps {
   name: string
-  startYear: Number
-  endYear?: Number
-  duration?: Number
-  richText?: Object
+  startYear: number
+  endYear?: number
+  duration?: number
+  richText?: Document
   image?: string
-  changeSidebarContent: Function
+  wolLink?: string
 }
 
 export const ContentTime: React.FC<ContentTimeProps> = ({
@@ -25,6 +26,7 @@ export const ContentTime: React.FC<ContentTimeProps> = ({
   duration,
   richText,
   image,
+  wolLink,
 }) => {
   const list = {
     [t('time.start')]: ourTime(startYear),
@@ -38,6 +40,7 @@ export const ContentTime: React.FC<ContentTimeProps> = ({
       <br />
       <br />
       <RichText content={richText} />
+      {wolLink && <LinkToWOL wolLink={wolLink} />}
     </ContentTemplate>
   )
 }

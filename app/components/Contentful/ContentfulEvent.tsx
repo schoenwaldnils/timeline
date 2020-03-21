@@ -9,13 +9,11 @@ import { formatEvent } from './formatData'
 import eventById from './gql/eventById'
 
 interface Props {
-  id: String
+  id: string
 }
 
 export const ContentfulEvent: React.FC<Props> = ({ id }) => {
   const { language } = useContext(ContextLang)
-
-  console.log({ language })
 
   const { loading, error, data } = useQuery(eventById, {
     variables: { id, locale: language },

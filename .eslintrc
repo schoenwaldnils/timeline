@@ -1,12 +1,3 @@
 {
-  "extends": "eslint-config-schoenwaldnils",
-  "rules": {
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true,
-        "optionalDependencies": false
-      }
-    ]
-  }
+  "extends": "@schoenwald/eslint-config-typescript"
 }

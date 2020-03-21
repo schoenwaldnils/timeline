@@ -1,8 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
-const Image = styled.img`
+const Wrapper = styled.div`
   max-width: 300px;
 `
 
@@ -16,11 +15,13 @@ export const ContentImage: React.FC<ContentImageProps> = ({
   title,
   ...props
 }) => (
-  <picture>
-    <source
-      srcSet={`${image}?w=480&fl=progressive`}
-      media="(min-resolution: 120dpi)"
-    />
-    <Image src={`${image}?w=320&fl=progressive`} alt={title} {...props} />
-  </picture>
+  <Wrapper>
+    <picture>
+      <source
+        srcSet={`${image}?w=480&fl=progressive`}
+        media="(min-resolution: 120dpi)"
+      />
+      <img src={`${image}?w=320&fl=progressive`} alt={title} {...props} />
+    </picture>
+  </Wrapper>
 )

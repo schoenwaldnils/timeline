@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 const List = styled.div`

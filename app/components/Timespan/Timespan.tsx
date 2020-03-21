@@ -1,57 +1,74 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from '@emotion/styled'
+
+import { SidebarContext } from '../Sidebar/SidebarContext'
 
 import { colors } from '../../js/colors'
 import { generateGradient } from './generateGradient'
+import { zIndexes } from '../../data/constants'
 
 const timeColors = {
   person: colors.green,
   time: colors.yellow,
 }
 
-const Wrapper = styled.div`
+interface WrapperProps {
+  type: string
+  isActive?: Boolean
+  pixelStart: number
+  pixelDuration: number
+  background?: string
+  rowIndex: number
+}
+
+const Wrapper = styled.div<WrapperProps>`
+  position: relative;
+  z-index: ${zIndexes.timespan};
   display: flex;
   align-items: center;
-  width: ${({ duration }) => duration}px;
+  grid-area: times;
+  width: ${({ pixelDuration }) => pixelDuration}px;
   height: 2em;
+  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 2px));
   margin-bottom: 1px;
+  margin-left: ${({ pixelStart }) => pixelStart}px;
   padding-right: 0.5em;
   padding-left: 0.5em;
   font-size: 10px;
   color: #000;
-  background: ${({ background }) => background};
   white-space: nowrap;
   cursor: pointer;
+  background: ${({ background }) => background};
 `
 
-const TimespanName: React.FC<{ name: string }> = styled.div`
+interface TimespanNameProps {
+  children: string
+}
+
+const TimespanName = styled.div<TimespanNameProps>`
   position: sticky;
   left: 0.5em;
 `
 
-type Props = {
+export interface TimespanProps extends WrapperProps {
   id: string
   name: string
-  type: 'time' | 'person'
-  duration: Number
-  isActive?: Boolean
-  startYear: Number
-  startBlurriness: Number
-  endYear: Number
-  endBlurriness: Number
+  startBlurriness?: Number
+  endBlurriness?: Number
 }
 
-export const Timespan: React.FC<Props> = ({
+export const Timespan: React.FC<TimespanProps> = ({
+  id,
   type,
   isActive,
   name,
-  duration,
-  startYear,
+  pixelStart,
+  pixelDuration,
   startBlurriness,
-  endYear,
   endBlurriness,
+  rowIndex,
 }) => {
-  if (!duration) return null
+  const { changeContent } = useContext(SidebarContext)
 
   const background = generateGradient(
     startBlurriness,
@@ -63,10 +80,14 @@ export const Timespan: React.FC<Props> = ({
     <Wrapper
       type={type}
       background={background}
-      duration={duration}
+      pixelStart={pixelStart}
+      pixelDuration={pixelDuration}
       isActive={isActive}
       role="button"
+      rowIndex={rowIndex}
       tabIndex={0}
+      onKeyUp={e => e.keyCode === 13 && changeContent(id)}
+      onClick={() => changeContent(id)}
     >
       <TimespanName>{name}</TimespanName>
     </Wrapper>
@@ -76,12 +97,3 @@ export const Timespan: React.FC<Props> = ({
 Timespan.defaultProps = {
   isActive: false,
 }
-
-// const StyledTimespan = styled(Timespan)(
-//   ({ calcedStart, top = 0, duration, background }) => ({
-//     width: `${duration}px`,
-//     top: `calc(${top} * (2em + 1px))`,
-//     left: `${calcedStart + SCALE_YEARS_BEFORE_ZERO}px`,
-//     background,
-//   }),
-// )

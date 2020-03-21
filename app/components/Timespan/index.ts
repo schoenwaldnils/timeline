@@ -1,1 +1,1 @@
-export { Timespan } from './Timespan'
+export * from './Timespan'

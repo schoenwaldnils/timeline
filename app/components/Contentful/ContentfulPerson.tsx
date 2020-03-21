@@ -9,7 +9,7 @@ import { formatPerson } from './formatData'
 import personById from './gql/personById'
 
 interface Props {
-  id: String
+  id: string
 }
 
 export const ContentfulPerson: React.FC<Props> = ({ id }) => {
