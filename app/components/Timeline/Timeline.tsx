@@ -12,6 +12,7 @@ import { Sidebar } from '../Sidebar'
 import { LangSwitch } from '../LangSwitch'
 import { TimelineCursor } from '../TimelineCursor'
 import { scroller } from '../../js/scroller'
+import { checkForTouchDevice } from '../../js/checkForTouchDevice'
 
 interface WrapperProps {
   width: number
@@ -120,6 +121,8 @@ export const Timeline: React.FC<TimelineProps> = ({
   const [mousePosition, ref] = useMousePosition()
 
   const width = getTimelineWidth(scale)
+  const isTouchDevice = checkForTouchDevice()
+  const showCursor = !isTouchDevice && mousePosition.x
 
   const scaleNumberNegativ = []
   for (let i = 0; i <= time.YEARS_BEFORE_ZERO / 100; i += 1) {
@@ -155,10 +158,12 @@ export const Timeline: React.FC<TimelineProps> = ({
       </Content>
       <Sidebar />
       <StyledLangSwitch />
-      <TimelineCursor
-        pixelYear={mousePosition.x}
-        year={mousePosition.clientX}
-      />
+      {showCursor && (
+        <TimelineCursor
+          pixelYear={mousePosition.x}
+          year={mousePosition.clientX}
+        />
+      )}
     </Wrapper>
   )
 }
