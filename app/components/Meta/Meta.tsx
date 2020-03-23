@@ -30,5 +30,5 @@ Meta.defaultProps = {
   type: 'website',
   title: 'Timeline',
   description: 'Overview of biblical Persons and events',
-  image: 'https://schoenwald.media/static/assets/images/favicon.png',
+  image: 'https://timeline.schoen.world/static/assets/images/favicon.png',
 }
