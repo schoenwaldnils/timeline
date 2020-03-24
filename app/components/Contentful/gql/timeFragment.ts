@@ -6,6 +6,10 @@ export default gql`
       id
     }
     name
+    image {
+      fileName
+      url
+    }
     startYear
     endYear
     richText {

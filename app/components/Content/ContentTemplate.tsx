@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { ReactChildren, ReactChild } from 'react'
 import styled from '@emotion/styled'
 import { ContentImage } from './ContentImage'
 import { ContentfulLink } from '../ContentfulLink'
+import { H1 } from '../Typography'
 
-const Title = styled.h1`
-  margin: 0 0 0.5em;
-`
-
-const Image = styled(ContentImage)`
+const Box = styled.div`
   margin-bottom: 1em;
+
+  :last-of-type {
+    margin-bottom: 0;
+  }
 `
+
+export interface ContentBoxProps {
+  children: ReactChildren | ReactChild
+}
+
+export const ContentBox: React.FC<ContentBoxProps> = ({ children }) => (
+  <Box>{children}</Box>
+)
 
 export interface ContentTemplateProps {
   idContentful?: string
@@ -24,13 +33,21 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
   children,
 }) => (
   <>
-    {image && <Image image={image} title={title} />}
+    {image && (
+      <Box>
+        <ContentImage image={image} title={title} />
+      </Box>
+    )}
 
-    {title && <Title>{title}</Title>}
+    {title && <H1>{title}</H1>}
 
-    {children}
+    {children && <Box>{children}</Box>}
 
-    {idContentful && <ContentfulLink id={idContentful} />}
+    {idContentful && (
+      <Box>
+        <ContentfulLink id={idContentful} />
+      </Box>
+    )}
   </>
 )
 

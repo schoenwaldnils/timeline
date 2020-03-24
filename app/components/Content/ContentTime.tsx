@@ -1,7 +1,7 @@
 import React from 'react'
 import { Document } from '@contentful/rich-text-types'
 
-import { ContentTemplate } from './ContentTemplate'
+import { ContentTemplate, ContentBox } from './ContentTemplate'
 import { TableList } from '../TableList'
 import { RichText } from '../RichText'
 import { LinkToWOL } from './ContentLinkWol'
@@ -10,6 +10,7 @@ import { ourTime } from '../../js/utils'
 import { t } from '../../js/translate'
 
 export interface ContentTimeProps {
+  id: string
   name: string
   startYear: number
   endYear?: number
@@ -20,6 +21,7 @@ export interface ContentTimeProps {
 }
 
 export const ContentTime: React.FC<ContentTimeProps> = ({
+  id,
   name,
   startYear,
   endYear,
@@ -35,20 +37,20 @@ export const ContentTime: React.FC<ContentTimeProps> = ({
   }
 
   return (
-    <ContentTemplate title={name} image={image}>
-      <TableList list={list} />
-      <br />
-      <br />
-      <RichText content={richText} />
-      {wolLink && <LinkToWOL wolLink={wolLink} />}
+    <ContentTemplate title={name} image={image} idContentful={id}>
+      <ContentBox>
+        <TableList list={list} />
+      </ContentBox>
+      {richText && (
+        <ContentBox>
+          <RichText content={richText} />
+        </ContentBox>
+      )}
+      {wolLink && (
+        <ContentBox>
+          <LinkToWOL wolLink={wolLink} />
+        </ContentBox>
+      )}
     </ContentTemplate>
   )
-}
-
-ContentTime.defaultProps = {
-  name: undefined,
-  startYear: undefined,
-  endYear: undefined,
-  duration: undefined,
-  image: undefined,
 }

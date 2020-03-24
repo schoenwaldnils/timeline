@@ -1,9 +1,10 @@
 import { calcTimes } from './calcTimes'
 
 interface Props {
+  id: string
+  name: string
   year: number
   [key: string]: any
-  title: string
 }
 
 export const updateEventProps = (event: Props) => {

@@ -5,8 +5,12 @@ export default gql`
     sys {
       id
     }
-    title: name
+    name
     year
+    image {
+      fileName
+      url
+    }
     richText {
       json
     }

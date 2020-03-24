@@ -45,6 +45,7 @@ export const ContentfulTimeline: React.FC = () => {
     ...e,
     zIndex: formatedEvents.length - key,
   }))
+
   const positionedEvents = positionEvents(indexedEvents)
 
   const eventKeyMap = ['pixelYear']

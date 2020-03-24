@@ -10,6 +10,10 @@ export const UL = styled.ul`
   padding-left: 0;
   list-style: none;
 
+  :last-of-type {
+    margin-bottom: 0;
+  }
+
   & & {
     padding-left: 0.75em;
   }
@@ -20,6 +24,10 @@ export const OL = styled.ol`
   padding-left: 0;
   list-style: none;
   counter-reset: ol;
+
+  :last-of-type {
+    margin-bottom: 0;
+  }
 `
 
 export const LI = styled.li`
@@ -50,9 +58,5 @@ export const LI = styled.li`
     height: calc(${listDotSize} * 0.5);
     margin-top: calc(${listDotSize} * -0.5 * 0.25);
     background-color: ${themeColors.themeColor};
-  }
-
-  > p:last-child {
-    margin: 0;
   }
 `

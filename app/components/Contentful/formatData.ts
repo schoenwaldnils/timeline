@@ -60,6 +60,10 @@ export function formatTime(oldData, type = 'time') {
     type,
   }
 
+  if (data.image) {
+    data.image = data.image.url
+  }
+
   if (data.sys && data.sys.id) {
     data.id = data.sys.id
     delete data.sys
@@ -74,17 +78,12 @@ export function formatTime(oldData, type = 'time') {
 
 export function formatEvent(oldData: any) {
   const data = {
-    ...oldData,
-    title: oldData.title,
-  }
-
-  if (data.sys && data.sys.id) {
-    data.id = data.sys.id
-    delete data.sys
-  }
-
-  if (data.richText) {
-    data.richText = data.richText.json
+    id: oldData.sys.id,
+    name: oldData.name,
+    image: oldData.image ? oldData.image.url : null,
+    year: oldData.year,
+    richText: oldData.richText ? oldData.richText.json : null,
+    wolLink: oldData.wolLink,
   }
 
   return updateEventProps(data)

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ContentTemplate } from './ContentTemplate'
+import { ContentTemplate, ContentBox } from './ContentTemplate'
 import { TableList } from '../TableList'
 import { LinkToWOL } from './ContentLinkWol'
 
@@ -8,19 +8,33 @@ import { ourTime } from '../../js/utils'
 import { t } from '../../js/translate'
 
 interface Props {
-  title: string
+  id: string
+  name: string
   year: number
+  image?: string
   wolLink?: string
 }
 
-export const ContentEvent: React.FC<Props> = ({ title, year, wolLink }) => (
-  <ContentTemplate title={title}>
-    <TableList
-      list={{
-        [t('time.year')]: ourTime(year),
-      }}
-    />
+export const ContentEvent: React.FC<Props> = ({
+  id,
+  name,
+  year,
+  image,
+  wolLink,
+}) => (
+  <ContentTemplate title={name} image={image} idContentful={id}>
+    <ContentBox>
+      <TableList
+        list={{
+          [t('time.year')]: ourTime(year),
+        }}
+      />
+    </ContentBox>
 
-    {wolLink && <LinkToWOL wolLink={wolLink} />}
+    {wolLink && (
+      <ContentBox>
+        <LinkToWOL wolLink={wolLink} />
+      </ContentBox>
+    )}
   </ContentTemplate>
 )

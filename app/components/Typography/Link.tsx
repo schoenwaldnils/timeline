@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
-import { colors, themeColors } from '../../js/colors'
+import { shades, themeColors } from '../../js/colors'
 
 const StyledA = styled.a`
   color: ${themeColors.themeColor};
@@ -11,7 +11,7 @@ const StyledA = styled.a`
   transition: 150ms;
 
   :hover {
-    color: ${colors.green};
+    color: ${shades.cb2};
   }
 `
 

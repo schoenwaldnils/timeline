@@ -1,4 +1,4 @@
-export function positionEvents(events) {
+export function positionEvents(events = []) {
   const occupiedSpace = [0]
 
   return events.map(event => {

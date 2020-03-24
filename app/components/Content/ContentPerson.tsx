@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Document } from '@contentful/rich-text-types'
 
 import { SidebarContext } from '../Sidebar/SidebarContext'
-import { ContentTemplate } from './ContentTemplate'
+import { ContentTemplate, ContentBox } from './ContentTemplate'
 import { TableList } from '../TableList'
 import { RichText } from '../RichText'
 import { LinkToWOL } from './ContentLinkWol'
@@ -12,11 +12,12 @@ import { ourTime } from '../../js/utils'
 import { t } from '../../js/translate'
 
 interface Person {
-  name: string
   id: string
+  name: string
 }
 
 export interface ContentPersonProps {
+  id: string
   name: string
   image?: string
   startYear: number
@@ -33,6 +34,7 @@ export interface ContentPersonProps {
 }
 
 export const ContentPerson: React.FC<ContentPersonProps> = ({
+  id,
   name,
   image,
   startYear,
@@ -87,11 +89,11 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
       ...list,
       [t('relations.spouse')]: (
         <UL>
-          {spouse.map(({ id, name: spouseName }) => (
+          {spouse.map(({ id: spouseID, name: spouseName }) => (
             <LI key={id}>
               <ButtonPlain
-                onKeyUp={e => e.keyCode === 13 && changeContent(id)}
-                onClick={() => changeContent(id)}
+                onKeyUp={e => e.keyCode === 13 && changeContent(spouseID)}
+                onClick={() => changeContent(spouseID)}
               >
                 {spouseName}
               </ButtonPlain>
@@ -135,11 +137,11 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
       ...list,
       [t('relations.children')]: (
         <UL>
-          {childs.map(({ id, name: childName }) => (
+          {childs.map(({ id: childID, name: childName }) => (
             <LI key={id}>
               <ButtonPlain
-                onKeyUp={e => e.keyCode === 13 && changeContent(id)}
-                onClick={() => changeContent(id)}
+                onKeyUp={e => e.keyCode === 13 && changeContent(childID)}
+                onClick={() => changeContent(childID)}
               >
                 {childName}
               </ButtonPlain>
@@ -151,12 +153,20 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   }
 
   return (
-    <ContentTemplate title={name} image={image}>
-      <TableList list={list} />
-      <br />
-      <br />
-      {richText && <RichText content={richText} />}
-      {wolLink && <LinkToWOL wolLink={wolLink} />}
+    <ContentTemplate title={name} image={image} idContentful={id}>
+      <ContentBox>
+        <TableList list={list} />
+      </ContentBox>
+      {richText && (
+        <ContentBox>
+          <RichText content={richText} />
+        </ContentBox>
+      )}
+      {wolLink && (
+        <ContentBox>
+          <LinkToWOL wolLink={wolLink} />
+        </ContentBox>
+      )}
     </ContentTemplate>
   )
 }
