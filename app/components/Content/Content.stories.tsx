@@ -35,14 +35,17 @@ export const TemplateWithIamge = () => (
 )
 
 export const Event = () => (
-  <ContentEvent title="ContentEvent Test" year={2000} />
+  <ContentEvent id="abc" name="ContentEvent Test" year={2000} />
 )
 export const Person = () => (
   <ContentPerson
+    id="abc"
     name="Jon Doe"
     startYear={1900}
     image="https://picsum.photos/500/300"
     father={{ name: 'Peter Doe', id: '42' }}
   />
 )
-export const Time = () => <ContentTime name="Test time" startYear={100} />
+export const Time = () => (
+  <ContentTime id="abc" name="Test time" startYear={100} />
+)
