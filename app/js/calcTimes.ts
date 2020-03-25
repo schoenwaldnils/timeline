@@ -42,10 +42,9 @@ export const calcTimes = ({ startYear, endYear, stillActive, type }: Props) => {
   }
 
   return {
-    endYear: correctedEndYear,
     pixelStart,
     pixelEnd,
-    duration: pixelEnd - pixelStart,
+    duration: endYear ? pixelEnd - pixelStart : null,
     pixelDuration: pixelEnd - pixelStart,
   }
 }

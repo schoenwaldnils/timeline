@@ -14,16 +14,13 @@ import { positionTimes } from './positionTimes'
 import { scaleNumbers } from '../../js/scaleNumbers'
 
 const showInTimeline = ({
-  startYear,
-  endYear,
-  type,
+  pixelStart,
+  pixelEnd,
 }: {
-  startYear: number
-  endYear: number
-  type: 'person' | 'time'
+  pixelStart: number
+  pixelEnd: number
 }) => {
-  if (type === 'person' && startYear && endYear) return true
-  if (type === 'time' && startYear) return true
+  if (pixelStart && pixelEnd) return true
   return false
 }
 

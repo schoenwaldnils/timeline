@@ -30,10 +30,16 @@ export const ContentTime: React.FC<ContentTimeProps> = ({
   image,
   wolLink,
 }) => {
-  const list = {
+  let list = {
     [t('time.start')]: ourTime(startYear),
     [t('time.end')]: endYear ? ourTime(endYear) : t('time.ongoing'),
-    [t('time.duration')]: `${duration} ${t('time.years')}`,
+  }
+
+  if (duration) {
+    list = {
+      ...list,
+      [t('time.duration')]: `${duration} ${t('time.years')}`,
+    }
   }
 
   return (

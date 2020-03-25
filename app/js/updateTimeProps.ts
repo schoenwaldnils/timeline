@@ -10,13 +10,7 @@ export const updateTimeProps = time => {
     type,
   } = time
 
-  const {
-    endYear: newEndYear,
-    pixelStart,
-    pixelEnd,
-    duration,
-    pixelDuration,
-  } = calcTimes({
+  const { pixelStart, pixelEnd, duration, pixelDuration } = calcTimes({
     startYear,
     startBlurriness,
     endYear,
@@ -27,7 +21,6 @@ export const updateTimeProps = time => {
 
   return {
     ...time,
-    endYear: newEndYear,
     pixelStart,
     pixelEnd,
     duration,
