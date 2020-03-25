@@ -14,7 +14,6 @@ export default css`
   }
 
   html {
-    min-height: 100vh;
     /* stylelint-disable-next-line max-line-length */
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
       sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
