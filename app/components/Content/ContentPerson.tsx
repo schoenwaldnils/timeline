@@ -84,26 +84,6 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
         : t('misc.unnown'),
   }
 
-  if (spouse.length > 0) {
-    list = {
-      ...list,
-      [t('relations.spouse')]: (
-        <UL>
-          {spouse.map(({ id: spouseID, name: spouseName }) => (
-            <LI key={id}>
-              <ButtonPlain
-                onKeyUp={e => e.keyCode === 13 && changeContent(spouseID)}
-                onClick={() => changeContent(spouseID)}
-              >
-                {spouseName}
-              </ButtonPlain>
-            </LI>
-          ))}
-        </UL>
-      ),
-    }
-  }
-
   if (father) {
     list = {
       ...list,
@@ -132,13 +112,45 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
     }
   }
 
+  if (spouse.length > 1) {
+    list = {
+      ...list,
+      [t('relations.spouse')]: (
+        <UL>
+          {spouse.map(({ id: spouseID, name: spouseName }) => (
+            <LI key={`spouse-${spouseID}`}>
+              <ButtonPlain
+                onKeyUp={e => e.keyCode === 13 && changeContent(spouseID)}
+                onClick={() => changeContent(spouseID)}
+              >
+                {spouseName}
+              </ButtonPlain>
+            </LI>
+          ))}
+        </UL>
+      ),
+    }
+  } else if (spouse.length === 1) {
+    list = {
+      ...list,
+      [t('relations.spouse')]: (
+        <ButtonPlain
+          onKeyUp={e => e.keyCode === 13 && changeContent(spouse[0].id)}
+          onClick={() => changeContent(spouse[0].id)}
+        >
+          {spouse[0].name}
+        </ButtonPlain>
+      ),
+    }
+  }
+
   if (childs.length > 0) {
     list = {
       ...list,
       [t('relations.children')]: (
         <UL>
           {childs.map(({ id: childID, name: childName }) => (
-            <LI key={id}>
+            <LI key={`child-${childID}`}>
               <ButtonPlain
                 onKeyUp={e => e.keyCode === 13 && changeContent(childID)}
                 onClick={() => changeContent(childID)}

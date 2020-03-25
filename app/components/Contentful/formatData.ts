@@ -16,13 +16,12 @@ export function formatPerson(oldData) {
     data.image = data.image.url
   }
 
-  if (data.spouseCollection) {
-    if (data.spouseCollection.items.length) {
-      data.spouse = data.spouseCollection.items.map(({ name, sys: { id } }) => {
+  if (data.spouse) {
+    if (data.spouse.items.length) {
+      data.spouse = data.spouse.items.map(({ name, sys: { id } }) => {
         return { id, name }
       })
     }
-    delete data.spouseCollection
   }
 
   if (data.father) {
