@@ -27,8 +27,8 @@ jobs:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'eu-central-1'   # optional: defaults to us-east-1
-          SOURCE_DIR: 'out'      # optional: defaults to entire repository
+          AWS_REGION: 'eu-central-1' # optional: defaults to us-east-1
+          SOURCE_DIR: 'out' # optional: defaults to entire repository
           DEST_DIR: 'production'
       - name: Invalidate Cloudfront
         uses: chetan/invalidate-cloudfront-action@v1.0
@@ -37,4 +37,13 @@ jobs:
           PATHS: '/*'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'eu-central-1'   # optional: defaults to us-east-1
+          AWS_REGION: 'eu-central-1' # optional: defaults to us-east-1
+      - name: action-slack
+        uses: 8398a7/action-slack@v2.7.0
+        with:
+          status: ${{ job.status }}
+          author_name: Github deployment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
