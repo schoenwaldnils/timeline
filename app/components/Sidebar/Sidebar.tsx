@@ -20,7 +20,7 @@ const isActiveStyles = css`
 `
 
 const Wrapper = styled.div<WrapperProps>`
-  position: fixed !important;
+  position: fixed;
   top: 0;
   left: 100%;
   z-index: ${zIndexes.sidebar};
@@ -28,7 +28,7 @@ const Wrapper = styled.div<WrapperProps>`
   flex-direction: column;
   width: 20rem;
   max-width: 100vw;
-  height: 100vh;
+  height: 100%;
   font-size: 1rem;
   background-color: #fff;
   opacity: 0;
@@ -39,15 +39,21 @@ const Wrapper = styled.div<WrapperProps>`
 `
 
 const SidebarContent = styled.div`
-  max-height: 100%;
+  max-height: 100vh;
   padding: 1rem 1rem 3rem;
   overflow-y: auto;
 `
 
 const Close = styled.button`
   position: absolute;
+  right: 1rem;
   bottom: 2.5rem;
-  left: 0;
+
+  @media (min-width: 21.5rem) {
+    right: auto;
+    left: 0;
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
