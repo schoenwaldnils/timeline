@@ -1,87 +1,79 @@
 import { updateTimeProps } from '../../js/updateTimeProps'
 import { updateEventProps } from '../../js/updateEventProps'
 
+const findParent = (linkedFrom, id: string, type: 'male' | 'female') => {
+  const [parent] = linkedFrom.personCollection.items.filter(
+    ({ gender, childs }) => {
+      if (gender !== type) return false
+      const childIDs =
+        childs.items &&
+        Object.keys(childs.items).map(key => childs.items[key].sys.id)
+      if (!childIDs) return false
+      if (childIDs.includes(id)) return true
+      return false
+    },
+  )
+  if (!parent) return undefined
+  return parent.sys.id
+}
+
 export function formatPerson(oldData) {
   const data = {
-    ...oldData,
     type: 'person',
-  }
-
-  if (data.sys && data.sys.id) {
-    data.id = data.sys.id
-    delete data.sys
-  }
-
-  if (data.image) {
-    data.image = data.image.url
-  }
-
-  if (data.spouse) {
-    if (data.spouse.items.length) {
-      data.spouse = data.spouse.items.map(({ name, sys: { id } }) => {
-        return { id, name }
-      })
-    }
-  }
-
-  if (data.father) {
-    data.father = {
-      id: data.father.sys ? data.father.sys.id : data.father.id,
-      name: data.father.name,
-    }
-  }
-
-  if (data.mother) {
-    data.mother = {
-      id: data.mother.sys ? data.mother.sys.id : data.mother.id,
-      name: data.mother.name,
-    }
-  }
-
-  if (data.childs) {
-    if (data.childs.items.length) {
-      data.childs = data.childs.items.map(({ name, sys: { id } }) => {
-        return { id, name }
-      })
-    }
-  }
-
-  if (data.richText) {
-    data.richText = data.richText.json
-  }
-
-  return updateTimeProps(data)
-}
-
-export function formatTime(oldData, type = 'time') {
-  const data = {
-    ...oldData,
-    type,
-  }
-
-  if (data.image) {
-    data.image = data.image.url
-  }
-
-  if (data.sys && data.sys.id) {
-    data.id = data.sys.id
-    delete data.sys
-  }
-
-  if (data.richText) {
-    data.richText = data.richText.json
-  }
-
-  return updateTimeProps(data)
-}
-
-export function formatEvent(oldData: any) {
-  const data = {
     id: oldData.sys.id,
     name: oldData.name,
-    image: oldData.image ? oldData.image.url : null,
+    image: oldData.image?.url,
+    gender: oldData.gender,
+    startYear: oldData.startYear,
+    startBlurriness: oldData.startBlurriness,
+    endYear: oldData.endYear,
+    endBlurriness: oldData.endBlurriness,
+    stillActive: oldData.stillActive,
+    father: findParent(oldData.linkedFrom, oldData.sys.id, 'male'),
+    mother: findParent(oldData.linkedFrom, oldData.sys.id, 'female'),
+    spouse: [],
+    childs: [],
+    wolLink: oldData.wolLink,
+    richText: null,
+  }
+
+  if (oldData.spouse && oldData.spouse.items.length) {
+    data.spouse = oldData.spouse.items.map(({ sys: { id }, name }) => {
+      return { id, name }
+    })
+  }
+
+  if (oldData.childs && oldData.childs.items.length) {
+    data.childs = oldData.childs.items.map(({ sys: { id }, name }) => {
+      return { id, name }
+    })
+  }
+
+  return updateTimeProps(data)
+}
+
+export function formatTime(oldData) {
+  const data = {
+    type: 'time',
+    id: oldData.sys.id,
+    name: oldData.name,
+    image: oldData.image?.url,
+    startYear: oldData.startYear,
+    endYear: oldData.endYear,
+    richText: oldData.richText?.json,
+    wolLink: oldData.wolLink,
+  }
+
+  return updateTimeProps(data)
+}
+
+export function formatEvent(oldData) {
+  const data = {
+    id: oldData.sys?.id,
+    name: oldData.name,
+    image: oldData.image?.url,
     year: oldData.year,
-    richText: oldData.richText ? oldData.richText.json : null,
+    richText: oldData.richText?.json,
     wolLink: oldData.wolLink,
   }
 

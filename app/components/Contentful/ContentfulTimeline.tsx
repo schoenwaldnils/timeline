@@ -8,10 +8,11 @@ import { Loading } from '../Loading'
 import { Timeline } from '../Timeline'
 
 import timelineCollection from './gql/timelineCollection'
-import { formatEvent, formatTime } from './formatData'
+import { formatEvent } from './formatData'
 import { positionEvents } from './positionEvents'
 import { positionTimes } from './positionTimes'
 import { scaleNumbers } from '../../js/scaleNumbers'
+import { updateTimeProps } from '../../js/updateTimeProps'
 
 const showInTimeline = ({
   pixelStart,
@@ -35,42 +36,43 @@ export const ContentfulTimeline: React.FC = () => {
   if (loading) return <Loading />
   if (error) return <div>Error!</div>
 
+  // EVENTS
   const formatedEvents =
     data.events.items && data.events.items.map(e => formatEvent(e))
-
   const indexedEvents = formatedEvents.map((e, key) => ({
     ...e,
     zIndex: formatedEvents.length - key,
   }))
-
   const positionedEvents = positionEvents(indexedEvents)
+  const scaledEvents = scaleNumbers(positionedEvents, scale, ['pixelYear'])
 
-  const eventKeyMap = ['pixelYear']
-
-  const scaledEvents = scaleNumbers(positionedEvents, scale, eventKeyMap)
-
+  // TIMESPANS
   const formatedTimespans = [
     ...(data.persons.items &&
-      data.persons.items.map(e => formatTime(e, 'person'))),
-    ...(data.times.items && data.times.items.map(e => formatTime(e, 'time'))),
+      data.persons.items.map(e => ({
+        type: 'person',
+        id: e.sys.id,
+        ...updateTimeProps(e),
+      }))),
+    ...(data.times.items &&
+      data.times.items.map(e => ({
+        type: 'time',
+        id: e.sys.id,
+        ...updateTimeProps(e),
+      }))),
   ]
-
   const filteredTimespans = formatedTimespans.filter(t => showInTimeline(t))
-
   const sortetTimespans = sortArray(filteredTimespans, {
     by: 'startYear',
   })
   const positionedTimes = positionTimes(sortetTimespans)
-
-  const timeKeyMap = [
+  const scaledTimes = scaleNumbers(positionedTimes, scale, [
     'pixelStart',
     'pixelEnd',
     'pixelDuration',
     'startBlurriness',
     'endBlurriness',
-  ]
-
-  const scaledTimes = scaleNumbers(positionedTimes, scale, timeKeyMap)
+  ])
 
   return (
     <Timeline events={scaledEvents} timespans={scaledTimes} scale={scale} />
