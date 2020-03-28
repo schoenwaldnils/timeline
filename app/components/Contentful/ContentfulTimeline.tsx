@@ -49,17 +49,13 @@ export const ContentfulTimeline: React.FC = () => {
   // TIMESPANS
   const formatedTimespans = [
     ...(data.persons.items &&
-      data.persons.items.map(e => ({
-        type: 'person',
-        id: e.sys.id,
-        ...updateTimeProps(e),
-      }))),
+      data.persons.items.map(e =>
+        updateTimeProps({ ...e, type: 'person', id: e.sys.id }),
+      )),
     ...(data.times.items &&
-      data.times.items.map(e => ({
-        type: 'time',
-        id: e.sys.id,
-        ...updateTimeProps(e),
-      }))),
+      data.times.items.map(e =>
+        updateTimeProps({ ...e, type: 'time', id: e.sys.id }),
+      )),
   ]
   const filteredTimespans = formatedTimespans.filter(t => showInTimeline(t))
   const sortetTimespans = sortArray(filteredTimespans, {

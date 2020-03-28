@@ -21,6 +21,7 @@ export const updateTimeProps = time => {
 
   return {
     ...time,
+    type,
     pixelStart,
     pixelEnd,
     duration,
