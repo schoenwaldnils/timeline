@@ -2,8 +2,6 @@ import styled from '@emotion/styled'
 
 import { themeColors } from '../../js/colors'
 
-const listDotSize = '.35em'
-
 export const UL = styled.ul`
   margin-top: 0;
   margin-bottom: 1em;
@@ -52,11 +50,11 @@ export const LI = styled.li`
   ${UL} > &::before {
     content: '';
     position: absolute;
-    top: calc(1em * 1.4 / 2);
+    top: calc(1em * 1.5 / 2);
     left: 0;
-    width: ${listDotSize};
-    height: calc(${listDotSize} * 0.5);
-    margin-top: calc(${listDotSize} * -0.5 * 0.25);
+    width: 0.35em;
+    height: 2px;
+    margin-top: -1px;
     background-color: ${themeColors.themeColor};
   }
 `

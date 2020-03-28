@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 const List = styled.div`
   display: inline-grid;
   grid-template-columns: auto auto;
-  grid-gap: 0.5em;
+  grid-gap: 1em;
 `
 
 const ListItem = styled.div``
