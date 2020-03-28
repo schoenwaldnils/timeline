@@ -19,6 +19,8 @@ const isActiveStyles = css`
   transition: transform 300ms, opacity 50ms 0ms;
 `
 
+// 1. https://developers.google.com/web/updates/2016/12/url-bar-resizing
+
 const Wrapper = styled.div<WrapperProps>`
   position: fixed;
   top: 0;
@@ -28,7 +30,7 @@ const Wrapper = styled.div<WrapperProps>`
   flex-direction: column;
   width: 20rem;
   max-width: 100vw;
-  height: 100%;
+  height: 100%; /* 1 */
   font-size: 1rem;
   background-color: #fff;
   opacity: 0;
@@ -75,6 +77,10 @@ const Close = styled.button`
   }
 `
 
+const Icon = styled(MdVerticalAlignBottom)`
+  flex-shrink: 0;
+`
+
 export const Sidebar: React.FC = () => {
   const { isActive, content, closeSidebar } = useContext(SidebarContext)
   const DEFAULT_SIDEBAR_WIDTH = 320
@@ -97,7 +103,7 @@ export const Sidebar: React.FC = () => {
       <Wrapper isActive={isActive} role="dialog">
         {content && <SidebarContent>{content}</SidebarContent>}
         <Close onClick={() => closeSidebar()}>
-          <MdVerticalAlignBottom />
+          <Icon />
         </Close>
       </Wrapper>
     </Swipe>

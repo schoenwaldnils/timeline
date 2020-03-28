@@ -43,6 +43,7 @@ const StyledButton = styled.button`
   padding: 0 0.5em;
   font-size: inherit;
   font-weight: inherit;
+  line-height: inherit;
   color: ${themeColors.linkColor};
   cursor: pointer;
   background: none;

@@ -21,12 +21,7 @@
   "lint-staged": {
     "**/*.(ts|tsx)": [
       "eslint --fix",
-      "stylelint --formatter verbose",
-      "git add"
-    ],
-    "**/*.css": [
-      "stylelint --formatter verbose",
-      "git add"
+      "stylelint --formatter verbose"
     ]
   },
   "keywords": [],
