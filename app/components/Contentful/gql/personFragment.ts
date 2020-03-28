@@ -5,6 +5,23 @@ export default gql`
     sys {
       id
     }
+    linkedFrom {
+      personCollection(locale: "en") {
+        items {
+          sys {
+            id
+          }
+          gender
+          childs: childsCollection {
+            items {
+              sys {
+                id
+              }
+            }
+          }
+        }
+      }
+    }
     name
     image {
       fileName
@@ -23,18 +40,6 @@ export default gql`
         }
         name
       }
-    }
-    father {
-      sys {
-        id
-      }
-      name
-    }
-    mother {
-      sys {
-        id
-      }
-      name
     }
     childs: childsCollection {
       items {

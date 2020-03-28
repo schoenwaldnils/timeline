@@ -43,7 +43,7 @@ export const Person = () => (
     name="Jon Doe"
     startYear={1900}
     image="https://picsum.photos/500/300"
-    father={{ name: 'Peter Doe', id: '42' }}
+    father="42"
   />
 )
 export const Time = () => (

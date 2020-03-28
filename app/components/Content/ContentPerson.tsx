@@ -10,6 +10,7 @@ import { UL, LI, ButtonPlain } from '../Typography'
 
 import { ourTime } from '../../js/utils'
 import { t } from '../../js/translate'
+import { ContentfulParent } from '../Contentful/ContentfulParent'
 
 interface Person {
   id: string
@@ -26,8 +27,8 @@ export interface ContentPersonProps {
   endBlurriness?: number
   duration?: number
   spouse?: Array<Person>
-  father?: Person
-  mother?: Person
+  father?: string
+  mother?: string
   childs?: Array<Person>
   richText?: Document
   wolLink?: string
@@ -89,10 +90,10 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
       ...list,
       [t('relations.father')]: (
         <ButtonPlain
-          onKeyUp={e => e.keyCode === 13 && changeContent(father.id)}
-          onClick={() => changeContent(father.id)}
+          onKeyUp={e => e.keyCode === 13 && changeContent(father)}
+          onClick={() => changeContent(father)}
         >
-          {father.name}
+          <ContentfulParent id={father} />
         </ButtonPlain>
       ),
     }
@@ -103,10 +104,10 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
       ...list,
       [t('relations.mother')]: (
         <ButtonPlain
-          onKeyUp={e => e.keyCode === 13 && changeContent(mother.id)}
-          onClick={() => changeContent(mother.id)}
+          onKeyUp={e => e.keyCode === 13 && changeContent(mother)}
+          onClick={() => changeContent(mother)}
         >
-          {mother.name}
+          <ContentfulParent id={mother} />
         </ButtonPlain>
       ),
     }
