@@ -45,10 +45,6 @@ jobs:
         with:
           name: nextBuild-${{github.sha}}
           path: out
-  echo:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{github.ref}}
 
   deploy:
     if: github.ref == 'refs/heads/workflow-changes'
@@ -64,6 +60,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: nextBuild-${{github.sha}}
+          path: out
 
       - name: S3 Sync
         uses: jakejarvis/s3-sync-action@v0.5.0
