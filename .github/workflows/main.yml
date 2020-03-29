@@ -92,5 +92,4 @@ jobs:
       PR_NUMBER: ${${${github.ref#*/}#*/}%/*}
     steps:
       - run: echo $PR_NUMBER
-      - run: echo ${${${github.ref#*/}#*/}%/*}
       - run: echo ${${${${{github.ref}}#*/}#*/}%/*}
