@@ -86,7 +86,41 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: failure()
 
-  echo:
+  deploy-pr:
+    if: contains(github.ref, 'pull')
     runs-on: ubuntu-latest
+    needs: [test, build]
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'eu-central-1' # optional: defaults to us-east-1
+
     steps:
-      - run: echo ${{github.event.number}}
+      - name: Download nextBuild
+        uses: actions/download-artifact@v1
+        with:
+          name: nextBuild-${{github.sha}}
+          path: out
+
+      - name: S3 Sync
+        uses: jakejarvis/s3-sync-action@v0.5.0
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          SOURCE_DIR: 'out' # optional: defaults to entire repository
+          DEST_DIR: 'pr/${{github.event.number}}'
+
+      - name: Invalidate Cloudfront
+        uses: chetan/invalidate-cloudfront-action@v1.0
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          PATHS: '/*'
+
+      - name: action-slack
+        uses: 8398a7/action-slack@v2.7.0
+        with:
+          status: ${{ job.status }}
+          author_name: Github deployment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
