@@ -92,4 +92,4 @@ jobs:
       PR_NUMBER: ${{github.ref}}
     steps:
       - run: echo $PR_NUMBER
-      - run: echo ${${${PR_NUMBER#*/}#*/}%/*}
+      - run: echo ${${${"PR_NUMBER"#*/}#*/}%/*}
