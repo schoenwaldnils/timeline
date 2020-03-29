@@ -43,6 +43,7 @@ jobs:
           name: nextBuild-${{github.sha}}
           path: out
   echo:
+    runs-on: ubuntu-latest
     steps:
       - run: echo ${{github.ref}}
 
