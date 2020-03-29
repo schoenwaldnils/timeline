@@ -2,6 +2,8 @@ name: timeline
 
 on:
   push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
@@ -83,3 +85,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: failure()
+
+  echo:
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{github.ref}}
+    steps:
+      - run: echo ${{github.ref}}
+      - run: echo ${{github.head_ref}}
+      - run: echo ${{github.base_ref}}
