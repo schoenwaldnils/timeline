@@ -89,6 +89,6 @@ jobs:
   echo:
     runs-on: ubuntu-latest
     env:
-      PR_NUMBER: ${${${${{github.ref}}#*/}#*/}%/*}
+      PR_NUMBER: ${{${{${{github.ref#*/}}#*/}}%/*}}
     steps:
       - run: echo $PR_NUMBER
