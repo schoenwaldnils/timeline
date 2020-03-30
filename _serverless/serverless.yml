@@ -1,0 +1,48 @@
+service:
+  name: timeline003
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  apiGateway:
+    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+  environment:
+    # AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+
+resources:
+  Resources:
+    CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          PriceClass: PriceClass_100
+          Aliases:
+            - '*.pr.timeline.schoen.world'
+          ViewerCertificate:
+            AcmCertificateArn: arn:aws:acm:us-east-1:479583347623:certificate/ff73eb8e-d916-4a89-8cb0-f3881eda4801
+            SslSupportMethod: sni-only
+
+functions:
+  redirectPrSubdomain:
+    handler: handler.redirectPrSubdomain
+    events:
+      - cloudFront:
+          eventType: origin-request
+          origin:
+            CustomOriginConfig:
+              OriginProtocolPolicy: match-viewer
+            DomainName: timeline.schoen.world.s3-website-eu-central-1.amazonaws.com
+            Id: s3/timeline.schoen.world.s3.amazonaws
+          behavior:
+            ViewerProtocolPolicy: redirect-to-https
+            ForwardedValues:
+              Headers:
+                - Host
+              QueryString: false
