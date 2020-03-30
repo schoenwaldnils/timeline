@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import { CloudFrontRequestEvent, CloudFrontRequestCallback } from 'aws-lambda'
 
 const domain = '.timeline.schoen.world'
@@ -6,7 +7,7 @@ const originHostname = 'timeline.schoen.world.s3.amazonaws.com'
 
 export const redirectPrSubdomain = (
   event: CloudFrontRequestEvent,
-  context,
+  _context,
   callback: CloudFrontRequestCallback,
 ) => {
   const { request } = event.Records[0].cf
