@@ -147,17 +147,7 @@ jobs:
           apiToken: ${{ secrets.LIGHTHOUSE_TOKEN }}
           urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
           outputDirectory: /tmp/artifacts
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: Lighthouse reports
-          path: /tmp/artifacts
-
-      - name: Echo Error
-        run: |
-          echo ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults.data }}
-          echo ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults.data.report }}
+          verbose: true
 
       - name: Handle Lighthouse Check results
         uses: foo-software/lighthouse-check-status-action@master
