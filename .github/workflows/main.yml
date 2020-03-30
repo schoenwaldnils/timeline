@@ -130,6 +130,6 @@ jobs:
         id: create
         with:
           type: create
-          body: 'Preview: [PR-${{github.event.number}}](${{github.event.number}}.pr.timeline.schoen.world)'
+          body: 'Preview: [PR-${{github.event.number}}](https://${{github.event.number}}.pr.timeline.schoen.world)'
           issue_number: ${{github.event.number}}
           token: ${{ secrets.GITHUB_TOKEN }}
