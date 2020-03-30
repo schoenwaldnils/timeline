@@ -137,7 +137,6 @@ jobs:
     # needs: [deploy-pr]
     steps:
       - uses: actions/checkout@master
-      - run: mkdir /tmp/artifacts
 
       - name: Run Lighthouse
         uses: foo-software/lighthouse-check-action@master
@@ -145,8 +144,7 @@ jobs:
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
           apiToken: ${{ secrets.LIGHTHOUSE_TOKEN }}
-          urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
-          outputDirectory: /tmp/artifacts
+          urls: 'https://18.pr.timeline.schoen.world'
           verbose: true
 
       - name: Handle Lighthouse Check results
