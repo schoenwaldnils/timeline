@@ -16,7 +16,8 @@
     "lint:html": "htmlhint out",
     "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json static/assets/images/favicons",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "snapshot": "build-storybook && percy-storybook --widths=320,1280"
   },
   "lint-staged": {
     "**/*.(ts|tsx)": [
@@ -69,6 +70,7 @@
     "webpack": "4.42.0"
   },
   "devDependencies": {
+    "@percy/storybook": "3.3.0",
     "@schoenwald/eslint-config-typescript": "4.0.0",
     "@storybook/react": "5.3.17",
     "babel-eslint": "10.1.0",

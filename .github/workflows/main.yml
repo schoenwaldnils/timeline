@@ -47,6 +47,31 @@ jobs:
           name: nextBuild-${{github.sha}}
           path: out
 
+  visual-regression-test:
+    if: contains(github.ref, 'pull')
+    runs-on: ubuntu-latest
+    env:
+      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+
+      - name: npm install
+        run: npm ci
+
+      - name: Percy Test
+        uses: percy/storybook-action@v0.1.2
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+        with:
+          custom-command: 'npm run snapshot'
+
+  #
+  #
+  # DEPLOYMENT
+  #
+
   deploy-master:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
