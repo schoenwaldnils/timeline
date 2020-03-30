@@ -155,8 +155,9 @@ jobs:
           path: /tmp/artifacts
 
       - name: Echo Error
-        run: echo ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults.data }}
-        run: echo ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults.data.report }}
+        run: |
+          echo ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults.data }}
+          echo ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults.data.report }}
 
       - name: Handle Lighthouse Check results
         uses: foo-software/lighthouse-check-status-action@master
