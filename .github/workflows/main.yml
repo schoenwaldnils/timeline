@@ -134,6 +134,7 @@ jobs:
 
   lighthouse-check:
     runs-on: ubuntu-latest
+    needs: [deploy-pr]
     steps:
       - uses: actions/checkout@master
       - run: mkdir /tmp/artifacts
