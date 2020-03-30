@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 
 import { ContextLang } from '../ContextLang'
-import { Loading } from '../Loading'
 
 import { parentById } from './gql/parentById'
 
@@ -17,9 +16,14 @@ export const ContentfulParent: React.FC<Props> = ({ id }) => {
     variables: { id, locale: language },
   })
 
-  if (loading) return <Loading />
-  if (error || data.personCollection.items[0].length < 1)
-    return <div>Error!</div>
+  if (loading) return null
+  if (
+    error ||
+    !data.personCollection.items[0] ||
+    data.personCollection.items[0].length < 1
+  ) {
+    return null
+  }
 
   return <>{data.personCollection.items[0].name}</>
 }

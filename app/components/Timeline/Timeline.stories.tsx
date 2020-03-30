@@ -7,52 +7,7 @@ export default {
   component: Timeline,
 }
 
-export const Basic = () => <Timeline />
-
-export const WithEvents = () => (
-  <Timeline
-    events={[
-      {
-        id: '#1',
-        name: 'Test Event',
-        pixelYear: 50,
-        rowIndex: 0,
-      },
-      {
-        id: '#2',
-        name: 'Test Event',
-        pixelYear: 90,
-        rowIndex: 1,
-      },
-    ]}
-  />
-)
-
-export const WithTimes = () => (
-  <Timeline
-    timespans={[
-      {
-        id: '8d9htmcSCAAyIKoQqqSAm',
-        type: 'person',
-        name: 'Isaac',
-        pixelStart: 50,
-        pixelDuration: 120,
-        startBlurriness: 10,
-        rowIndex: 0,
-      },
-      {
-        id: '#2',
-        type: 'time',
-        name: 'Test Time 2',
-        pixelStart: 70,
-        pixelDuration: 190,
-        rowIndex: 1,
-      },
-    ]}
-  />
-)
-
-export const WithEventsAndTimes = () => (
+export const Basic = () => (
   <Timeline
     events={[
       {
