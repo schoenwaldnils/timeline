@@ -126,10 +126,8 @@ jobs:
         if: failure()
 
       - name: Create comment
-        uses: jungwinter/comment@v1
-        id: create
+        uses: mshick/add-pr-comment@v1
         with:
-          type: create
-          body: 'Preview: [PR-${{github.event.number}}](https://${{github.event.number}}.pr.timeline.schoen.world)'
-          issue_number: ${{github.event.number}}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          message: 'Preview: [PR-${{github.event.number}}](https://${{github.event.number}}.pr.timeline.schoen.world)'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          allow-repeats: false
