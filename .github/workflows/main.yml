@@ -124,3 +124,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: failure()
+
+      - name: Create comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: 'Preview: <a href="https://${{github.event.number}}.pr.timeline.schoen.world" target="_blank">PR-${{github.event.number}}</a>'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          allow-repeats: false
