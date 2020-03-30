@@ -138,12 +138,18 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: mkdir /tmp/artifacts
+
       - name: Run Lighthouse
         uses: foo-software/lighthouse-check-action@master
+        id: lighthouseCheck
         with:
-          apiToken: ${{ secrets.LIGHTHOUSE_TOKEN }}
           accessToken: ${{ secrets.GITHUB_TOKEN }}
+          apiToken: ${{ secrets.LIGHTHOUSE_TOKEN }}
           urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
+
+      - name: Handle Lighthouse Check results
+        uses: foo-software/lighthouse-check-status-action@master
+        with:
           lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
           minAccessibilityScore: '95'
           minBestPracticesScore: '50'
