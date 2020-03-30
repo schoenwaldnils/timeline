@@ -128,6 +128,6 @@ jobs:
       - name: Create comment
         uses: mshick/add-pr-comment@v1
         with:
-          message: 'Preview: [PR-${{github.event.number}}](https://${{github.event.number}}.pr.timeline.schoen.world)'
+          message: 'Preview: [🔗🔗🔗 PR-${{github.event.number}} 🔗🔗🔗](https://${{github.event.number}}.pr.timeline.schoen.world)'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           allow-repeats: false
