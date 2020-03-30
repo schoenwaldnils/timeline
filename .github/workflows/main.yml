@@ -115,6 +115,13 @@ jobs:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
           PATHS: '/*'
 
+      - name: Create comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: 'Preview: <a href="https://${{github.event.number}}.pr.timeline.schoen.world" target="_blank">PR-${{github.event.number}}</a>'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          allow-repeats: false
+
       - name: action-slack
         uses: 8398a7/action-slack@v2.7.0
         with:
@@ -125,9 +132,20 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: failure()
 
-      - name: Create comment
-        uses: mshick/add-pr-comment@v1
+  lighthouse-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: mkdir /tmp/artifacts
+      - name: Run Lighthouse
+        uses: foo-software/lighthouse-check-action@master
         with:
-          message: 'Preview: <a href="https://${{github.event.number}}.pr.timeline.schoen.world" target="_blank">PR-${{github.event.number}}</a>'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          allow-repeats: false
+          apiToken: ${{ secrets.LIGHTHOUSE_TOKEN }}
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
+          lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
+          minAccessibilityScore: '95'
+          minBestPracticesScore: '50'
+          minPerformanceScore: '70'
+          minProgressiveWebAppScore: '50'
+          minSeoScore: '50'
