@@ -31,7 +31,7 @@ export const themeColors = {
   linkColor: colors.greenDarker,
   linkColorHover: shades.cb0,
 
-  bodyBackgroundColor: shades.cb7,
+  bodyBackgroundColor: colors.red,
   bodyBackgroundShadow: shades.cb4,
 }
 
