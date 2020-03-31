@@ -67,7 +67,7 @@
     "shallowequal": "1.1.0",
     "sort-array": "4.1.0",
     "typescript": "3.8.3",
-    "webpack": "4.42.0"
+    "webpack": "4.42.1"
   },
   "devDependencies": {
     "@percy/storybook": "3.3.0",
