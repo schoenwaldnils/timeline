@@ -48,7 +48,6 @@ jobs:
           path: out
 
   visual-regression-test:
-    if: contains(github.ref, 'pull')
     runs-on: ubuntu-latest
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
