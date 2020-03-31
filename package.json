@@ -16,7 +16,8 @@
     "lint:html": "htmlhint out",
     "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json static/assets/images/favicons",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "snapshot": "build-storybook && percy-storybook --widths=320"
   },
   "lint-staged": {
     "**/*.(ts|tsx)": [
@@ -40,7 +41,7 @@
     "@emotion/styled": "10.0.27",
     "@react-hook/mouse-position": "3.1.0",
     "@types/node": "13.9.2",
-    "@types/react": "16.9.23",
+    "@types/react": "16.9.27",
     "@zeit/next-css": "1.0.1",
     "accept-language": "3.0.18",
     "apollo-boost": "0.4.7",
@@ -52,7 +53,7 @@
     "eslint-plugin-prettier": "3.1.2",
     "graphql": "14.6.0",
     "graphql-tag": "2.10.3",
-    "html-react-parser": "0.10.0",
+    "html-react-parser": "0.10.3",
     "htmlhint": "0.11.0",
     "husky": "4.2.3",
     "next": "9.3.2",
@@ -66,15 +67,16 @@
     "shallowequal": "1.1.0",
     "sort-array": "4.1.0",
     "typescript": "3.8.3",
-    "webpack": "4.42.0"
+    "webpack": "4.42.1"
   },
   "devDependencies": {
+    "@percy/storybook": "3.3.0",
     "@schoenwald/eslint-config-typescript": "4.0.0",
     "@storybook/react": "5.3.17",
     "babel-eslint": "10.1.0",
-    "babel-loader": "8.0.6",
+    "babel-loader": "8.1.0",
     "cli-real-favicon": "0.0.8",
-    "lint-staged": "10.0.10",
+    "lint-staged": "10.1.0",
     "stylelint": "13.2.1",
     "stylelint-config-schoenwaldnils": "3.0.0",
     "stylelint-processor-styled-components": "1.10.0"

@@ -27,8 +27,8 @@ export interface ContentPersonProps {
   endBlurriness?: number
   duration?: number
   spouse?: Array<Person>
-  father?: string
-  mother?: string
+  fatherID?: string
+  motherID?: string
   childs?: Array<Person>
   richText?: Document
   wolLink?: string
@@ -44,8 +44,8 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   endBlurriness,
   duration: age,
   spouse,
-  father,
-  mother,
+  fatherID,
+  motherID,
   childs,
   richText,
   wolLink,
@@ -85,31 +85,37 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
         : t('misc.unnown'),
   }
 
-  if (father) {
-    list = {
-      ...list,
-      [t('relations.father')]: (
-        <ButtonPlain
-          onKeyUp={e => e.keyCode === 13 && changeContent(father)}
-          onClick={() => changeContent(father)}
-        >
-          <ContentfulParent id={father} />
-        </ButtonPlain>
-      ),
+  if (fatherID) {
+    const father = <ContentfulParent id={fatherID} />
+    if (father) {
+      list = {
+        ...list,
+        [t('relations.father')]: (
+          <ButtonPlain
+            onKeyUp={e => e.keyCode === 13 && changeContent(fatherID)}
+            onClick={() => changeContent(fatherID)}
+          >
+            <ContentfulParent id={fatherID} />
+          </ButtonPlain>
+        ),
+      }
     }
   }
 
-  if (mother) {
-    list = {
-      ...list,
-      [t('relations.mother')]: (
-        <ButtonPlain
-          onKeyUp={e => e.keyCode === 13 && changeContent(mother)}
-          onClick={() => changeContent(mother)}
-        >
-          <ContentfulParent id={mother} />
-        </ButtonPlain>
-      ),
+  if (motherID) {
+    const mother = <ContentfulParent id={motherID} />
+    if (mother) {
+      list = {
+        ...list,
+        [t('relations.mother')]: (
+          <ButtonPlain
+            onKeyUp={e => e.keyCode === 13 && changeContent(motherID)}
+            onClick={() => changeContent(motherID)}
+          >
+            <ContentfulParent id={motherID} />
+          </ButtonPlain>
+        ),
+      }
     }
   }
 
