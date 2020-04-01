@@ -26,8 +26,10 @@ resources:
           Aliases:
             - '*.pr.timeline.schoen.world'
           ViewerCertificate:
-            AcmCertificateArn: arn:aws:acm:us-east-1:479583347623:certificate/ff73eb8e-d916-4a89-8cb0-f3881eda4801
+            AcmCertificateArn: arn:aws:acm:us-east-1:479583347623:certificate/1fe6c1fc-1852-4b5f-b2fe-1c52bb5b2bd9
             SslSupportMethod: sni-only
+          HttpVersion: http2
+          IPV6Enabled: true
 
 functions:
   redirectPrSubdomain:
@@ -37,14 +39,16 @@ functions:
           eventType: origin-request
           origin:
             CustomOriginConfig:
-              OriginProtocolPolicy: match-viewer
-            DomainName: timeline.schoen.world.s3-website-eu-central-1.amazonaws.com
-            Id: s3/timeline.schoen.world.s3.amazonaws
+              OriginProtocolPolicy: http-only
+              OriginSSLProtocols:
+                - TLSv1.1
+            DomainName: timeline.schoen.world.s3-website.eu-central-1.amazonaws.com
+            Id: s3/timeline.schoen.world
           behavior:
             ViewerProtocolPolicy: redirect-to-https
             ForwardedValues:
               Headers:
                 - Host
               QueryString: false
-          DefaultCacheBehavior:
+            DefaultTTL: 31536000
             Compress: true
