@@ -167,7 +167,7 @@ jobs:
         id: lighthouseCheck
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
-          urls: 'https://18.pr.timeline.schoen.world'
+          urls: 'https://timeline.schoen.world'
 
       - name: Handle Lighthouse Check results
         uses: foo-software/lighthouse-check-status-action@master
