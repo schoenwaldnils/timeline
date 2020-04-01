@@ -25,7 +25,7 @@ export const Template = () => (
 export const TemplateWithIamge = () => (
   <ContentTemplate
     title="ContentTemplate Test"
-    image="https://picsum.photos/500/300"
+    image="https://picsum.photos/id/1010/500/300"
   >
     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur
     doloremque incidunt quasi fugit, nemo culpa sed reiciendis, fugiat sint
@@ -42,8 +42,8 @@ export const Person = () => (
     id="abc"
     name="Jon Doe"
     startYear={1900}
-    image="https://picsum.photos/500/300"
-    father="42"
+    image="https://picsum.photos/id/1010/500/300"
+    fatherID="8d9htmcSCAAyIKoQqqSAm" // Isaak
   />
 )
 export const Time = () => (
