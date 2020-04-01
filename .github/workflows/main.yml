@@ -136,8 +136,15 @@ jobs:
       - name: Invalidate Cloudfront
         uses: chetan/invalidate-cloudfront-action@v1.0
         env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION_PR }}
           PATHS: '/*'
+
+      - name: Create comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: 'Preview: <a href="https://${{github.event.number}}.pr.timeline.schoen.world" target="_blank">PR-${{github.event.number}}</a>'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          allow-repeats: false
 
       - name: action-slack
         uses: 8398a7/action-slack@v2.7.0
@@ -149,9 +156,25 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: failure()
 
-      - name: Create comment
-        uses: mshick/add-pr-comment@v1
+  lighthouse-check:
+    runs-on: ubuntu-latest
+    needs: [deploy-pr]
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Run Lighthouse
+        uses: foo-software/lighthouse-check-action@master
+        id: lighthouseCheck
         with:
-          message: 'Preview: <a href="https://${{github.event.number}}.pr.timeline.schoen.world" target="_blank">PR-${{github.event.number}}</a>'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          allow-repeats: false
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          urls: 'https://18.pr.timeline.schoen.world'
+
+      - name: Handle Lighthouse Check results
+        uses: foo-software/lighthouse-check-status-action@master
+        with:
+          lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
+          minAccessibilityScore: '95'
+          minBestPracticesScore: '50'
+          minPerformanceScore: '70'
+          minProgressiveWebAppScore: '50'
+          minSeoScore: '50'

@@ -3,7 +3,8 @@ import { CloudFrontRequestEvent, CloudFrontRequestCallback } from 'aws-lambda'
 
 const domain = '.timeline.schoen.world'
 
-const originHostname = 'timeline.schoen.world.s3.amazonaws.com'
+const originHostname =
+  'timeline.schoen.world.s3-website.eu-central-1.amazonaws.com'
 
 export const redirectPrSubdomain = (
   event: CloudFrontRequestEvent,
