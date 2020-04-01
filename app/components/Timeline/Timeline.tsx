@@ -23,7 +23,7 @@ const Wrapper = styled.div<WrapperProps>`
   position: relative;
   width: ${({ width }) => `${width}px`};
   min-height: 100vh;
-  font-size: 10px;
+  font-size: 12px;
   background: url('data:image/svg+xml;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAACCAYAAAAdK5NMAAAABGdBTUEAALGPC/xhBQAAACpJREFUOBFj3Ldr638GIFDX1AVRo2A0BEZDACkEmJDYo8zREBgNAbQQAADubQOtULVrKQAAAABJRU5ErkJggg==');
   background-repeat: repeat;
   background-size: 100px 1px;
@@ -80,8 +80,8 @@ const ScaleNumber = styled.div<ScaleNumberProps>`
   width: ${({ scale }) => `${scale * 100}px`};
   padding-left: 0;
   font-family: monospace;
-  font-size: 10px;
-  color: ${shades.cb3};
+  font-size: 12px;
+  color: ${shades.cb2};
 
   [data-type='positive'] > &:first-of-type {
     width: ${({ scale }) => `${scale * 100 - 1}px`};

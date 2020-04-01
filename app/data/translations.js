@@ -81,4 +81,10 @@ export default {
       de: 'In Contentful editieren',
     },
   },
+  ui: {
+    closeSidebar: {
+      en: 'Close sidebar',
+      de: 'Seitenleiste schließen',
+    },
+  },
 }

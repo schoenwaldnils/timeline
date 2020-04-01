@@ -34,7 +34,6 @@ const Wrapper = styled.div<WrapperProps>`
   margin-left: ${({ pixelStart }) => pixelStart}px;
   padding-right: 0.5em;
   padding-left: 0.5em;
-  font-size: 10px;
   color: #000;
   white-space: nowrap;
   cursor: pointer;
