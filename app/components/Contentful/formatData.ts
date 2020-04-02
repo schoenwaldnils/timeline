@@ -1,3 +1,5 @@
+import sortArray from 'sort-array'
+
 import { updateTimeProps } from '../../js/updateTimeProps'
 import { updateEventProps } from '../../js/updateEventProps'
 
@@ -38,14 +40,22 @@ export function formatPerson(oldData) {
   }
 
   if (oldData.spouse && oldData.spouse.items.length) {
-    data.spouse = oldData.spouse.items.map(({ sys: { id }, name }) => {
+    const spouse = oldData.spouse.items.map(({ sys: { id }, name }) => {
       return { id, name }
+    })
+
+    data.spouse = sortArray(spouse, {
+      by: 'name',
     })
   }
 
   if (oldData.childs && oldData.childs.items.length) {
-    data.childs = oldData.childs.items.map(({ sys: { id }, name }) => {
+    const childs = oldData.childs.items.map(({ sys: { id }, name }) => {
       return { id, name }
+    })
+
+    data.childs = sortArray(childs, {
+      by: 'name',
     })
   }
 
