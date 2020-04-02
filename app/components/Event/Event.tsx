@@ -24,7 +24,6 @@ const Wrapper = styled.div<WrapperProps>`
   margin-left: ${({ pixelYear }) => pixelYear}px;
   padding-right: 0.5em;
   padding-left: 0.5em;
-  font-family: monospace;
   color: #fff;
   white-space: nowrap;
   cursor: pointer;

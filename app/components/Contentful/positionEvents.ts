@@ -4,7 +4,7 @@ export function positionEvents(events = []) {
   return events.map(event => {
     const { pixelYear: start, name } = event
 
-    const endWithMargin = start + name.length * 7 + 10
+    const endWithMargin = start + name.length * 8 + 10
 
     let rowIndex = 0
     ;(function testRow(row = 0) {
