@@ -97,7 +97,7 @@ export const Sidebar: React.FC = () => {
     } else if (userSidebarWidth !== sidebarWidth) {
       setSidebarWidth(userSidebarWidth)
     }
-  }, [])
+  }, [sidebarWidth])
 
   return (
     <Swipe onSwipeRight={closeSidebar}>

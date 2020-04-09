@@ -5,7 +5,7 @@ import {
 } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types'
 
-import { H1, H2, H3, UL, OL, LI, P, HR, A } from '../Typography'
+import { H1, H2, H3, UL, OL, LI, P, HR, A, QUOTE } from '../Typography'
 
 const options: Options = {
   renderNode: {
@@ -32,6 +32,9 @@ const options: Options = {
         return null
       return <P>{children}</P>
     },
+    [BLOCKS.QUOTE]: (node: any, children: React.ReactNode) => (
+      <QUOTE>{children}</QUOTE>
+    ),
     [BLOCKS.HR]: () => <HR />,
     // [BLOCKS.EMBEDDED_ENTRY]: node => {
     //   const { target } = node.data

@@ -11,6 +11,7 @@ export const setLocalStorage = (key: string, value: string | number) => {
 }
 
 export const getLocalStorage = (key: string): string => {
+  if (typeof window === 'undefined') return null
   return window.localStorage.getItem(key)
 }
 

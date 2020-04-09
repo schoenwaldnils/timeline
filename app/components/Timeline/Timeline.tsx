@@ -11,7 +11,7 @@ import { shades } from '../../js/colors'
 import { Sidebar } from '../Sidebar'
 import { LangSwitch } from '../LangSwitch'
 import { TimelineCursor } from '../TimelineCursor'
-import { scroller } from '../../js/scroller'
+import { Scroller } from '../../js/scroller'
 import { checkForTouchDevice } from '../../js/checkForTouchDevice'
 
 interface WrapperProps {
@@ -117,7 +117,7 @@ export const Timeline: React.FC<TimelineProps> = ({
   events,
   timespans,
 }) => {
-  scroller() // read and set scroll position
+  Scroller() // read and set scroll position
   const [mousePosition, ref] = useMousePosition()
 
   const width = getTimelineWidth(scale)

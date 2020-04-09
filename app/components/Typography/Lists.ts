@@ -8,7 +8,7 @@ export const UL = styled.ul`
   padding-left: 0;
   list-style: none;
 
-  :last-of-type {
+  :last-child {
     margin-bottom: 0;
   }
 
@@ -23,7 +23,7 @@ export const OL = styled.ol`
   list-style: none;
   counter-reset: ol;
 
-  :last-of-type {
+  :last-child {
     margin-bottom: 0;
   }
 `

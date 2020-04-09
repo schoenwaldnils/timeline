@@ -36,7 +36,7 @@ export function formatPerson(oldData) {
     spouse: [],
     childs: [],
     wolLink: oldData.wolLink,
-    richText: null,
+    richText: oldData.richText?.json,
   }
 
   if (oldData.spouse && oldData.spouse.items.length) {

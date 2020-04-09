@@ -27,7 +27,7 @@ export const ScaleProvider: React.FC = ({ children }) => {
     if (localScale !== scale) {
       changeScale(localScale)
     }
-  }, [])
+  }, [scale])
 
   return (
     <ContextScale.Provider

@@ -1,22 +1,22 @@
-import { useEffect } from 'react'
-
 import { setLocalStorage, getLocalStorage } from './localStorage'
 import { useScrollPosition } from './useScrollPosition'
 
-export const scroller = () => {
-  const handleScroll = (scrollP: { left: number; top: number }) => {
-    setLocalStorage('scrollPosition', JSON.stringify(scrollP))
+const saveScrollLocally = (scrollP: { left: number; top: number }) => {
+  setLocalStorage('scrollPosition', JSON.stringify(scrollP))
+}
+
+const loadLocalScroll = () => {
+  const localScroll = getLocalStorage('scrollPosition')
+  return JSON.parse(localScroll)
+}
+
+export const Scroller = () => {
+  const localScroll = loadLocalScroll()
+  if (localScroll) {
+    window.scrollTo(localScroll)
   }
 
-  useEffect(() => {
-    const localScroll = getLocalStorage('scrollPosition')
-    const parsedLocalScroll = JSON.parse(localScroll)
-    if (parsedLocalScroll) {
-      window.scrollTo(parsedLocalScroll)
-    }
-  })
-
   useScrollPosition(({ prevPos, currPos }) => {
-    if (currPos.left !== prevPos.left) handleScroll(currPos)
+    if (currPos.left !== prevPos.left) saveScrollLocally(currPos)
   }, [])
 }
