@@ -8,7 +8,7 @@ import { getLocalStorageNumber, setLocalStorage } from '../../js/localStorage'
 import { SidebarContext } from './SidebarContext'
 import { themeColors } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
-import { t } from '../../js/translate'
+import { T } from '../../js/translate'
 
 interface WrapperProps {
   isActive: boolean
@@ -103,7 +103,7 @@ export const Sidebar: React.FC = () => {
     <Swipe onSwipeRight={closeSidebar}>
       <Wrapper isActive={isActive} role="dialog">
         {content && <SidebarContent>{content}</SidebarContent>}
-        <Close aria-label={t('ui.closeSidebar')} onClick={() => closeSidebar()}>
+        <Close aria-label={T('ui.closeSidebar')} onClick={() => closeSidebar()}>
           <Icon />
         </Close>
       </Wrapper>

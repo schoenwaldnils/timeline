@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { A } from '../Typography'
-import { t } from '../../js/translate'
+import { T } from '../../js/translate'
 import { CONTENTFUL_SPACE_ID } from '../../data/constants'
 import { shades } from '../../js/colors'
 
@@ -20,6 +20,6 @@ export const ContentfulLink: React.FC<ContentfulLinkProps> = ({ id }) => (
     target="_blank"
     rel="noopener noreferrer"
   >
-    {t('misc.contentfulEdit')}
+    {T('misc.contentfulEdit')}
   </StyledA>
 )

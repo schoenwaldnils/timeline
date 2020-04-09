@@ -5,7 +5,7 @@ import { TableList } from '../TableList'
 import { LinkToWOL } from './ContentLinkWol'
 
 import { ourTime } from '../../js/utils'
-import { t } from '../../js/translate'
+import { T } from '../../js/translate'
 
 interface Props {
   id: string
@@ -26,7 +26,7 @@ export const ContentEvent: React.FC<Props> = ({
     <ContentBox>
       <TableList
         list={{
-          [t('time.year')]: ourTime(year),
+          [T('time.year')]: ourTime(year),
         }}
       />
     </ContentBox>

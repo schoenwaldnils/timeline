@@ -9,7 +9,7 @@ import { LinkToWOL } from './ContentLinkWol'
 import { UL, LI, ButtonPlain } from '../Typography'
 
 import { ourTime } from '../../js/utils'
-import { t } from '../../js/translate'
+import { T } from '../../js/translate'
 import { ContentfulParent } from '../Contentful/ContentfulParent'
 
 interface Person {
@@ -65,24 +65,24 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
       blurYear = year - blur / 2
     }
 
-    return `${t('misc.approx')} ${ourTime(blurYear)} (+-${blur / 2})`
+    return `${T('misc.approx')} ${ourTime(blurYear)} (+-${blur / 2})`
   }
 
   const bornString = !startYear
-    ? t('misc.unnown')
+    ? T('misc.unnown')
     : yearBlur(startYear, startBlurriness, 'start')
 
   const deathString = !endYear
-    ? t('misc.unnown')
+    ? T('misc.unnown')
     : yearBlur(endYear, endBlurriness, 'end')
 
   let list: any = {
-    [t('life.born')]: bornString,
-    [t('life.died')]: deathString,
-    [t('life.span')]:
+    [T('life.born')]: bornString,
+    [T('life.died')]: deathString,
+    [T('life.span')]:
       age && !startBlurriness && !endBlurriness
-        ? `${age} ${t('time.years')}`
-        : t('misc.unnown'),
+        ? `${age} ${T('time.years')}`
+        : T('misc.unnown'),
   }
 
   if (fatherID) {
@@ -90,7 +90,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
     if (father) {
       list = {
         ...list,
-        [t('relations.father')]: (
+        [T('relations.father')]: (
           <ButtonPlain
             onKeyUp={e => e.keyCode === 13 && changeContent(fatherID)}
             onClick={() => changeContent(fatherID)}
@@ -107,7 +107,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
     if (mother) {
       list = {
         ...list,
-        [t('relations.mother')]: (
+        [T('relations.mother')]: (
           <ButtonPlain
             onKeyUp={e => e.keyCode === 13 && changeContent(motherID)}
             onClick={() => changeContent(motherID)}
@@ -122,7 +122,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   if (spouse.length > 1) {
     list = {
       ...list,
-      [t('relations.spouse')]: (
+      [T('relations.spouse')]: (
         <UL>
           {spouse.map(({ id: spouseID, name: spouseName }) => (
             <LI key={`spouse-${spouseID}`}>
@@ -140,7 +140,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   } else if (spouse.length === 1) {
     list = {
       ...list,
-      [t('relations.spouse')]: (
+      [T('relations.spouse')]: (
         <ButtonPlain
           onKeyUp={e => e.keyCode === 13 && changeContent(spouse[0].id)}
           onClick={() => changeContent(spouse[0].id)}
@@ -154,7 +154,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   if (childs.length > 0) {
     list = {
       ...list,
-      [t('relations.children')]: (
+      [T('relations.children')]: (
         <UL>
           {childs.map(({ id: childID, name: childName }) => (
             <LI key={`child-${childID}`}>
