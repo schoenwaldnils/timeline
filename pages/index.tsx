@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { ContentfulTimeline } from '../app/components/Contentful/ContentfulTimeline'
+import { Page } from '../app/components/Page'
 
-export default () => <ContentfulTimeline />
-
-// export default () => <div>blaaa</div>
+export default () => <Page />

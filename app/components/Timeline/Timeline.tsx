@@ -8,8 +8,6 @@ import { Timespan, TimespanProps } from '../Timespan'
 import { getTimelineWidth } from './getTimelineWidth'
 import { time, zIndexes } from '../../data/constants'
 import { shades } from '../../js/colors'
-import { Sidebar } from '../Sidebar'
-import { LangSwitch } from '../LangSwitch'
 import { TimelineCursor } from '../TimelineCursor'
 import { Scroller } from '../../js/scroller'
 import { checkForTouchDevice } from '../../js/checkForTouchDevice'
@@ -22,11 +20,9 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   position: relative;
   width: ${({ width }) => `${width}px`};
-  min-height: 100vh;
+  height: 100%;
+  padding-bottom: 2rem;
   font-size: 12px;
-  background: url('data:image/svg+xml;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAACCAYAAAAdK5NMAAAABGdBTUEAALGPC/xhBQAAACpJREFUOBFj3Ldr638GIFDX1AVRo2A0BEZDACkEmJDYo8zREBgNAbQQAADubQOtULVrKQAAAABJRU5ErkJggg==');
-  background-repeat: repeat;
-  background-size: 100px 1px;
 
   &::before,
   &::after {
@@ -99,13 +95,6 @@ const Content = styled.div`
   margin-top: 1.5rem;
 `
 
-const StyledLangSwitch = styled(LangSwitch)`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: ${zIndexes.langSwitch};
-`
-
 interface TimelineProps {
   scale?: number
   events?: Array<Object>
@@ -156,8 +145,6 @@ export const Timeline: React.FC<TimelineProps> = ({
           <Event {...event} key={event.id} />
         ))}
       </Content>
-      <Sidebar />
-      <StyledLangSwitch />
       {showCursor && (
         <TimelineCursor
           pixelYear={mousePosition.x}

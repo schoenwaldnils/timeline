@@ -80,6 +80,10 @@ export default {
       en: 'Edit in Contentful',
       de: 'In Contentful editieren',
     },
+    search: {
+      en: 'Search...',
+      de: 'Suchen...',
+    },
   },
   ui: {
     closeSidebar: {
