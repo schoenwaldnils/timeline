@@ -140,12 +140,12 @@ jobs:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION_PR }}
           PATHS: '/*'
 
-      - name: Create comment
-        uses: mshick/add-pr-comment@v1
-        with:
-          message: 'Preview: <a href="https://${{github.event.number}}.pr.timeline.schoen.world" target="_blank">PR-${{github.event.number}}</a>'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          allow-repeats: false
+      # - name: Create comment
+      #   uses: mshick/add-pr-comment@v1
+      #   with:
+      #     message: 'Preview: <a href="https://${{github.event.number}}.pr.timeline.schoen.world" target="_blank">PR-${{github.event.number}}</a>'
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+      #     allow-repeats: false
 
       - name: action-slack
         uses: 8398a7/action-slack@v2.7.0
@@ -168,7 +168,7 @@ jobs:
         id: lighthouseCheck
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
-          urls: 'https://18.pr.timeline.schoen.world'
+          urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
 
       - name: Handle Lighthouse Check results
         uses: foo-software/lighthouse-check-status-action@master
