@@ -8,8 +8,10 @@ export default {
   title: 'Search',
 }
 
-export const Bar = () => <SearchBar />
+export const Bar = () => (
+  <SearchBar searchValue="" setSearchValue={() => null} />
+)
 
-export const Hits = () => <SearchHits />
+export const Hits = () => <SearchHits selectHit={() => null} />
 
 export const Composed = () => <Search />
