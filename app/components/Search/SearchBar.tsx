@@ -4,7 +4,7 @@ import { T } from '../../js/translate'
 import { shades } from '../../js/colors'
 
 const Wrapper = styled.input`
-  min-width: 12rem;
+  width: 12rem;
   max-width: 100%;
   height: 2rem;
   padding: 0.5em 0.75em;

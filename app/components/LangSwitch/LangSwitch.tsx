@@ -7,6 +7,12 @@ import { colors, shades } from '../../js/colors'
 import translations from '../../data/translations'
 import { zIndexes } from '../../data/constants'
 import { useClickOutside } from '../../customHooks/useClickOutside'
+import { viewportsJs } from '../../js/viewports'
+
+const Wrapper = styled.div`
+  position: relative;
+  flex-shrink: 0;
+`
 
 const IconButton = styled.button`
   display: flex;
@@ -24,21 +30,21 @@ const Svg = styled.svg`
 `
 
 const Text = styled.span`
+  display: none;
   margin-left: 0.5rem;
   font-size: 0.875rem;
   font-weight: 300;
   color: ${colors.greenDarker};
-`
 
-const Wrapper = styled.div`
-  position: relative;
+  @media ${viewportsJs.sm} {
+    display: block;
+  }
 `
 
 const Menu = styled.div`
   position: absolute;
   top: calc(100% + 3px);
   right: 0;
-  left: 0;
   z-index: ${zIndexes.langSwitch};
   padding: 0.25rem;
   overflow: auto;
@@ -50,6 +56,7 @@ const Menu = styled.div`
 const Button = styled.button`
   padding: 0.5em 0.7em;
   color: inherit;
+  white-space: nowrap;
   cursor: pointer;
   background: none;
   border: 0;

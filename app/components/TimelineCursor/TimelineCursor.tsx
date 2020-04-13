@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   top: 0;
   left: var(--TimelineCursor-left);
   width: 1px;
-  height: 100vh;
+  height: 100%;
   pointer-events: none;
   background-color: #00000080;
 
@@ -32,6 +32,8 @@ interface TimelineCursorProps {
 export const TimelineCursor: React.FC<TimelineCursorProps> = ({
   pixelYear,
 }) => {
+  if (!pixelYear || pixelYear === 0) return null
+
   const properties = {
     '--TimelineCursor-left': `${pixelYear}px`,
     '--TimelineCursor-year': `'${ourTime(pixelToYear(pixelYear))}'`,
