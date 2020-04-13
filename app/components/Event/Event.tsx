@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 import { SidebarContext } from '../Sidebar/SidebarContext'
 
-import { colors } from '../../js/colors'
+import { colors, shades } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
 
 interface WrapperProps {
@@ -27,7 +27,7 @@ const Wrapper = styled.div<WrapperProps>`
   color: #fff;
   white-space: nowrap;
   cursor: pointer;
-  background-color: #555;
+  background-color: ${shades.cb2};
 
   ::before {
     content: '';

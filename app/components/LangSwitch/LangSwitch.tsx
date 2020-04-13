@@ -5,13 +5,11 @@ import { languages, ContextLang } from '../ContextLang'
 
 const Wrapper = styled.div`
   display: inline-block;
-  background-color: #fff;
-  box-shadow: 0.25em 0.25em 0.5em 0 rgba(0, 0, 0, 0.25);
 `
 
 const Button = styled.button`
   padding: 0.5em 0.7em;
-  background-color: #fff;
+  background: none;
   border: 0;
 `
 

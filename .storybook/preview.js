@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { LanguageProvider } from '../app/components/ContextLang'
 import { ScaleProvider } from '../app/components/ContextScale'
 import { SidebarProvider } from '../app/components/Sidebar'
+import { SearchProvider } from '../app/components/Search'
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { client } from '../app/js/cfGraphQL'
 
@@ -16,8 +17,10 @@ addDecorator(storyFn => (
       <ScaleProvider>
         <ApolloProvider client={client}>
           <SidebarProvider>
-            <GlobalStyles />
-            <div>{storyFn()}</div>
+            <SearchProvider>
+              <GlobalStyles />
+              <div>{storyFn()}</div>
+            </SearchProvider>
           </SidebarProvider>
         </ApolloProvider>
       </ScaleProvider>

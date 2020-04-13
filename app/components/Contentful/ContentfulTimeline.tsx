@@ -25,7 +25,7 @@ const showInTimeline = ({
   return false
 }
 
-export const ContentfulTimeline: React.FC = () => {
+export const ContentfulTimeline = React.forwardRef((_props, ref) => {
   const { language } = useContext(ContextLang)
   const { scale } = useContext(ContextScale)
 
@@ -71,6 +71,11 @@ export const ContentfulTimeline: React.FC = () => {
   ])
 
   return (
-    <Timeline events={scaledEvents} timespans={scaledTimes} scale={scale} />
+    <Timeline
+      ref={ref}
+      events={scaledEvents}
+      timespans={scaledTimes}
+      scale={scale}
+    />
   )
-}
+})

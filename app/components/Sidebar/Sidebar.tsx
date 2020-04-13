@@ -23,7 +23,7 @@ const isActiveStyles = css`
 // 1. https://developers.google.com/web/updates/2016/12/url-bar-resizing
 
 const Wrapper = styled.div<WrapperProps>`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 100%;
   z-index: ${zIndexes.sidebar};

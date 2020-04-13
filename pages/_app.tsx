@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { LanguageProvider } from '../app/components/ContextLang'
 import { ScaleProvider } from '../app/components/ContextScale'
+import { SearchProvider } from '../app/components/Search'
 import { SidebarProvider } from '../app/components/Sidebar'
 import { client } from '../app/js/cfGraphQL'
 
@@ -16,8 +17,10 @@ class TimelineApp extends App {
         <ScaleProvider>
           <ApolloProvider client={client}>
             <SidebarProvider>
-              <GlobalStyles />
-              <Component {...pageProps} />
+              <SearchProvider>
+                <GlobalStyles />
+                <Component {...pageProps} />
+              </SearchProvider>
             </SidebarProvider>
           </ApolloProvider>
         </ScaleProvider>

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from '@emotion/styled'
-import useMousePosition from '@react-hook/mouse-position'
+import mergeRefs from 'react-merge-refs'
 
 import { Event, EventProps } from '../Event'
 import { Timespan, TimespanProps } from '../Timespan'
@@ -8,11 +8,9 @@ import { Timespan, TimespanProps } from '../Timespan'
 import { getTimelineWidth } from './getTimelineWidth'
 import { time, zIndexes } from '../../data/constants'
 import { shades } from '../../js/colors'
-import { Sidebar } from '../Sidebar'
-import { LangSwitch } from '../LangSwitch'
 import { TimelineCursor } from '../TimelineCursor'
-import { Scroller } from '../../js/scroller'
 import { checkForTouchDevice } from '../../js/checkForTouchDevice'
+import { useMousePosition } from '../../customHooks/useMousePosition'
 
 interface WrapperProps {
   width: number
@@ -22,11 +20,9 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   position: relative;
   width: ${({ width }) => `${width}px`};
-  min-height: 100vh;
+  height: 100%;
+  padding-bottom: 2rem;
   font-size: 12px;
-  background: url('data:image/svg+xml;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAACCAYAAAAdK5NMAAAABGdBTUEAALGPC/xhBQAAACpJREFUOBFj3Ldr638GIFDX1AVRo2A0BEZDACkEmJDYo8zREBgNAbQQAADubQOtULVrKQAAAABJRU5ErkJggg==');
-  background-repeat: repeat;
-  background-size: 100px 1px;
 
   &::before,
   &::after {
@@ -99,74 +95,61 @@ const Content = styled.div`
   margin-top: 1.5rem;
 `
 
-const StyledLangSwitch = styled(LangSwitch)`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: ${zIndexes.langSwitch};
-`
-
 interface TimelineProps {
   scale?: number
   events?: Array<Object>
   timespans?: Array<Object>
+  ref?: any
 }
 
-export const Timeline: React.FC<TimelineProps> = ({
-  scale,
-  events,
-  timespans,
-}) => {
-  Scroller() // read and set scroll position
-  const [mousePosition, ref] = useMousePosition()
+export const Timeline: React.FC<TimelineProps> = React.forwardRef(
+  ({ scale, events, timespans }, ref) => {
+    const localRef = useRef(null)
+    const mousePosition = useMousePosition(localRef)
 
-  const width = getTimelineWidth(scale)
-  const isTouchDevice = checkForTouchDevice()
-  const showCursor = !isTouchDevice && mousePosition.x
+    const width = getTimelineWidth(scale)
+    const isTouchDevice = checkForTouchDevice()
+    const showCursor = !isTouchDevice && mousePosition.x
 
-  const scaleNumberNegativ = []
-  for (let i = 0; i <= time.YEARS_BEFORE_ZERO / 100; i += 1) {
-    scaleNumberNegativ.push(
-      <ScaleNumber scale={scale} key={`pos${i}`}>
-        {i * -100}
-      </ScaleNumber>,
+    const scaleNumberNegativ = []
+    for (let i = 0; i <= time.YEARS_BEFORE_ZERO / 100; i += 1) {
+      scaleNumberNegativ.push(
+        <ScaleNumber scale={scale} key={`pos${i}`}>
+          {i * -100}
+        </ScaleNumber>,
+      )
+    }
+
+    const scaleNumberPositive = []
+    for (let i = 1; i <= time.YEARS_AFTER_ZERO / 100; i += 1) {
+      scaleNumberPositive.push(
+        <ScaleNumber scale={scale} key={`neg${i}`}>
+          {i * 100}
+        </ScaleNumber>,
+      )
+    }
+
+    return (
+      <Wrapper ref={mergeRefs([ref, localRef])} width={width} scale={scale}>
+        <Numbers>
+          <NumbersBlock>{scaleNumberNegativ.reverse()}</NumbersBlock>
+          <NumbersBlock data-type="positive">
+            {scaleNumberPositive}
+          </NumbersBlock>
+        </Numbers>
+        <Content>
+          {timespans.map((timespan: TimespanProps) => (
+            <Timespan {...timespan} key={timespan.id} />
+          ))}
+          {events.map((event: EventProps) => (
+            <Event {...event} key={event.id} />
+          ))}
+        </Content>
+        {showCursor && <TimelineCursor pixelYear={mousePosition.xElement} />}
+      </Wrapper>
     )
-  }
-
-  const scaleNumberPositive = []
-  for (let i = 1; i <= time.YEARS_AFTER_ZERO / 100; i += 1) {
-    scaleNumberPositive.push(
-      <ScaleNumber scale={scale} key={`neg${i}`}>
-        {i * 100}
-      </ScaleNumber>,
-    )
-  }
-
-  return (
-    <Wrapper ref={ref} width={width} scale={scale}>
-      <Numbers>
-        <NumbersBlock>{scaleNumberNegativ.reverse()}</NumbersBlock>
-        <NumbersBlock data-type="positive">{scaleNumberPositive}</NumbersBlock>
-      </Numbers>
-      <Content>
-        {timespans.map((timespan: TimespanProps) => (
-          <Timespan {...timespan} key={timespan.id} />
-        ))}
-        {events.map((event: EventProps) => (
-          <Event {...event} key={event.id} />
-        ))}
-      </Content>
-      <Sidebar />
-      <StyledLangSwitch />
-      {showCursor && (
-        <TimelineCursor
-          pixelYear={mousePosition.x}
-          year={mousePosition.clientX}
-        />
-      )}
-    </Wrapper>
-  )
-}
+  },
+)
 
 Timeline.defaultProps = {
   scale: 1,

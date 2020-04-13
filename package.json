@@ -17,7 +17,7 @@
     "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json static/assets/images/favicons",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "snapshot": "build-storybook && percy-storybook --widths=320 -t=250"
+    "snapshot": "build-storybook && percy-storybook --widths=320 -t=500"
   },
   "lint-staged": {
     "**/*.(ts|tsx)": [
@@ -39,11 +39,10 @@
     "@contentful/rich-text-types": "14.1.0",
     "@emotion/core": "10.0.28",
     "@emotion/styled": "10.0.27",
-    "@react-hook/mouse-position": "3.1.0",
     "@types/node": "13.9.2",
     "@types/react": "16.9.31",
-    "@zeit/next-css": "1.0.1",
     "accept-language": "3.0.18",
+    "algoliasearch": "4.1.0",
     "apollo-boost": "0.4.7",
     "color": "3.1.2",
     "cookie": "0.4.0",
@@ -64,6 +63,8 @@
     "react-dom": "16.13.1",
     "react-easy-swipe": "0.0.18",
     "react-icons": "3.9.0",
+    "react-instantsearch-dom": "6.4.0",
+    "react-merge-refs": "1.0.0",
     "shallowequal": "1.1.0",
     "sort-array": "4.1.0",
     "typescript": "3.8.3",
