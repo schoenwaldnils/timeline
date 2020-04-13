@@ -168,12 +168,15 @@ jobs:
         id: lighthouseCheck
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
+          author: ${{ github.actor }}
           awsBucket: ${{ secrets.AWS_S3_BUCKET }}
           awsRegion: 'eu-central-1'
           awsAccessKeyId: ${{ secrets.AWS_ACCESS_KEY_ID }}
           awsSecretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          branch: ${{ github.ref }}
           outputDirectory: 'lighthouse'
           urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
+          sha: ${{ github.sha }}
 
       - name: Handle Lighthouse Check results
         uses: foo-software/lighthouse-check-status-action@master
