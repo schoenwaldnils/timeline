@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { Header } from '../Header'
 import { ContentfulTimeline } from '../Contentful/ContentfulTimeline'
 import { Sidebar } from '../Sidebar'
+import { useScrollPosition } from '../../customHooks/useScrollPosition'
 
 const StyledPage = styled.div`
   display: flex;
@@ -23,14 +24,18 @@ const TimelineWrapper = styled.div`
   overflow: auto;
 `
 
-export const Page = () => (
-  <StyledPage>
-    <Header />
-    <Content>
-      <TimelineWrapper>
-        <ContentfulTimeline />
-      </TimelineWrapper>
-      <Sidebar />
-    </Content>
-  </StyledPage>
-)
+export const Page = () => {
+  const [containerRef, elementRef] = useScrollPosition()
+
+  return (
+    <StyledPage>
+      <Header />
+      <Content>
+        <TimelineWrapper ref={containerRef}>
+          <ContentfulTimeline ref={elementRef} />
+        </TimelineWrapper>
+        <Sidebar />
+      </Content>
+    </StyledPage>
+  )
+}

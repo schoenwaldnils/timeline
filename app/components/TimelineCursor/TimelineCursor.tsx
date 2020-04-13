@@ -7,7 +7,7 @@ import { pixelToYear } from '../../js/calcTimes'
 import { ourTime } from '../../js/utils'
 
 const Wrapper = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: var(--TimelineCursor-left);
   width: 1px;
@@ -27,15 +27,13 @@ const Wrapper = styled.div`
 
 interface TimelineCursorProps {
   pixelYear: number
-  year: number
 }
 
 export const TimelineCursor: React.FC<TimelineCursorProps> = ({
   pixelYear,
-  year,
 }) => {
   const properties = {
-    '--TimelineCursor-left': `${year}px`,
+    '--TimelineCursor-left': `${pixelYear}px`,
     '--TimelineCursor-year': `'${ourTime(pixelToYear(pixelYear))}'`,
   } as React.CSSProperties
 
