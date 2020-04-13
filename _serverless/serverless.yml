@@ -8,6 +8,10 @@ service:
 plugins:
   - serverless-webpack
 
+custom:
+  webpack:
+    includeModules: true
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -52,3 +56,8 @@ functions:
               QueryString: false
             DefaultTTL: 31536000
             Compress: true
+
+  indexAlgolia:
+    handler: api.indexAlgolia
+    events:
+      - http: POST indexAlgolia
