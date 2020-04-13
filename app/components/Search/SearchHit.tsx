@@ -8,7 +8,7 @@ const IMAGE_SIZE = 28
 
 const typeColors = {
   person: colors.green,
-  timespan: colors.yellow,
+  time: colors.yellow,
   event: shades.cb2,
 }
 

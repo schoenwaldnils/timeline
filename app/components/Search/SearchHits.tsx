@@ -10,11 +10,11 @@ const Wrapper = styled.div`
   font-size: 12px;
 `
 
-const indicies = ['person', 'timespan', 'event']
+const indicies = ['person', 'time', 'event']
 
 interface HitProps {
   hits: any
-  type: 'person' | 'timespan' | 'event'
+  type: 'person' | 'time' | 'event'
   selectHit: Function
 }
 
