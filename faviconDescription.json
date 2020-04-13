@@ -1,58 +1,58 @@
 {
-	"masterPicture": "static/assets/images/favicon.png",
-	"iconsPath": "/static/assets/images/favicons",
-	"design": {
-		"ios": {
-			"pictureAspect": "backgroundAndMargin",
-			"backgroundColor": "#ffffff",
-			"margin": "14%",
-			"assets": {
-				"ios6AndPriorIcons": false,
-				"ios7AndLaterIcons": false,
-				"precomposedIcons": false,
-				"declareOnlyDefaultIcon": true
-			}
-		},
-		"desktopBrowser": {},
-		"windows": {
-			"pictureAspect": "noChange",
-			"backgroundColor": "#41ad95",
-			"onConflict": "override",
-			"assets": {
-				"windows80Ie10Tile": false,
-				"windows10Ie11EdgeTiles": {
-					"small": false,
-					"medium": true,
-					"big": false,
-					"rectangle": false
-				}
-			}
-		},
-		"androidChrome": {
-			"pictureAspect": "noChange",
-			"themeColor": "#41ad95",
-			"manifest": {
-				"name": "Timeline",
-				"display": "standalone",
-				"orientation": "notSet",
-				"onConflict": "override",
-				"declared": true
-			},
-			"assets": {
-				"legacyIcon": false,
-				"lowResolutionIcons": false
-			}
-		},
-		"safariPinnedTab": {
-			"pictureAspect": "silhouette",
-			"themeColor": "#5bbad5"
-		}
-	},
-	"settings": {
-		"scalingAlgorithm": "Mitchell",
-		"errorOnImageTooSmall": false,
-		"readmeFile": false,
-		"htmlCodeFile": false,
-		"usePathAsIs": false
-	}
+  "masterPicture": "_media/favicon.png",
+  "iconsPath": "/static/assets/images/favicons",
+  "design": {
+    "ios": {
+      "pictureAspect": "backgroundAndMargin",
+      "backgroundColor": "#ffffff",
+      "margin": "14%",
+      "assets": {
+        "ios6AndPriorIcons": false,
+        "ios7AndLaterIcons": false,
+        "precomposedIcons": false,
+        "declareOnlyDefaultIcon": true
+      }
+    },
+    "desktopBrowser": {},
+    "windows": {
+      "pictureAspect": "noChange",
+      "backgroundColor": "#41ad95",
+      "onConflict": "override",
+      "assets": {
+        "windows80Ie10Tile": false,
+        "windows10Ie11EdgeTiles": {
+          "small": false,
+          "medium": true,
+          "big": false,
+          "rectangle": false
+        }
+      }
+    },
+    "androidChrome": {
+      "pictureAspect": "noChange",
+      "themeColor": "#41ad95",
+      "manifest": {
+        "name": "Timeline",
+        "display": "standalone",
+        "orientation": "notSet",
+        "onConflict": "override",
+        "declared": true
+      },
+      "assets": {
+        "legacyIcon": false,
+        "lowResolutionIcons": false
+      }
+    },
+    "safariPinnedTab": {
+      "pictureAspect": "silhouette",
+      "themeColor": "#5bbad5"
+    }
+  },
+  "settings": {
+    "scalingAlgorithm": "Mitchell",
+    "errorOnImageTooSmall": false,
+    "readmeFile": false,
+    "htmlCodeFile": false,
+    "usePathAsIs": false
+  }
 }

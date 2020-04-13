@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useRef, useContext, useState } from 'react'
 import styled from '@emotion/styled'
 import { connectSearchBox } from 'react-instantsearch-dom'
 import { IoIosSearch } from 'react-icons/io'
@@ -6,8 +6,9 @@ import { IoIosSearch } from 'react-icons/io'
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
 import { SidebarContext } from '../Sidebar/SidebarContext'
-import { shades } from '../../js/colors'
+
 import { zIndexes } from '../../data/constants'
+import { useClickOutside } from '../../customHooks/useClickOutside'
 
 const Wrapper = styled.div`
   position: relative;
@@ -29,14 +30,17 @@ const Hits = styled.div`
 `
 
 const Icon = styled(IoIosSearch)`
-  margin-right: 0.25em;
   font-size: 1.5rem;
-  color: ${shades.cb3};
 `
 
 export const CustomSearch = ({ currentRefinement, refine }) => {
   const [isActive, setIsActive] = useState(false)
   const { changeContent } = useContext(SidebarContext)
+  const ref = useRef()
+
+  useClickOutside(ref, () => {
+    setIsActive(false)
+  })
 
   const handleSearchValueChange = (newValue: string) => {
     refine(newValue)
@@ -50,7 +54,7 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
 
   if (isActive) {
     return (
-      <Wrapper>
+      <Wrapper ref={ref}>
         <SearchBar
           searchValue={currentRefinement}
           setSearchValue={handleSearchValueChange}

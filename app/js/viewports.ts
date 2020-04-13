@@ -4,7 +4,9 @@ export const viewports = {
   lg: 769,
 }
 
-export const viewportsJs = {}
+export const viewportsJs = {
+  ...viewports,
+}
 
 Object.keys(viewports).map(key => {
   viewportsJs[key] = `(min-width: ${viewports[key]}px)`

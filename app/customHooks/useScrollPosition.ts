@@ -31,7 +31,9 @@ export function useScrollPosition() {
     if (elementRef.current) {
       const currPos = getScrollPosition(elementRef.current)
 
-      if (currPos.left !== position.current.left) saveLocalScroll(currPos)
+      if (!position.current || currPos.left !== position.current.left) {
+        saveLocalScroll(currPos)
+      }
 
       position.current = currPos
     }
