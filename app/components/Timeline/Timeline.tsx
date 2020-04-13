@@ -99,7 +99,7 @@ interface TimelineProps {
   scale?: number
   events?: Array<Object>
   timespans?: Array<Object>
-  ref: any
+  ref?: any
 }
 
 export const Timeline: React.FC<TimelineProps> = React.forwardRef(

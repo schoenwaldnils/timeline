@@ -39,7 +39,6 @@
     "@contentful/rich-text-types": "14.1.0",
     "@emotion/core": "10.0.28",
     "@emotion/styled": "10.0.27",
-    "@react-hook/mouse-position": "3.1.0",
     "@types/node": "13.9.2",
     "@types/react": "16.9.31",
     "accept-language": "3.0.18",
