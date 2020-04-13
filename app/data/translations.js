@@ -80,15 +80,19 @@ export default {
       en: 'Edit in Contentful',
       de: 'In Contentful editieren',
     },
-    search: {
-      en: 'Search...',
-      de: 'Suchen...',
-    },
   },
   ui: {
     closeSidebar: {
       en: 'Close sidebar',
       de: 'Seitenleiste schließen',
+    },
+    search: {
+      en: 'Search...',
+      de: 'Suchen...',
+    },
+    language: {
+      en: 'English',
+      de: 'Deutsch',
     },
   },
 }
