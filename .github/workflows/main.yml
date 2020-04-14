@@ -163,9 +163,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: create result dir
-        run: mkdir lighthouse
-
       - name: Run Lighthouse
         uses: foo-software/lighthouse-check-action@master
         id: lighthouseCheck
@@ -177,7 +174,6 @@ jobs:
           awsAccessKeyId: ${{ secrets.AWS_ACCESS_KEY_ID }}
           awsSecretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           branch: ${{ github.ref }}
-          outputDirectory: 'lighthouse'
           urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
           sha: ${{ github.sha }}
 
