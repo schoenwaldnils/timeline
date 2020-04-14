@@ -172,7 +172,7 @@ jobs:
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
           author: ${{ github.actor }}
-          awsBucket: ${{ secrets.AWS_S3_BUCKET }}
+          awsBucket: ${{ secrets.AWS_S3_BUCKET_LIGHTHOUSE }}
           awsRegion: 'eu-central-1'
           awsAccessKeyId: ${{ secrets.AWS_ACCESS_KEY_ID }}
           awsSecretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -190,16 +190,3 @@ jobs:
           minPerformanceScore: '70'
           minProgressiveWebAppScore: '50'
           minSeoScore: '50'
-
-      - name: S3 Sync Lightouse Result
-        uses: jakejarvis/s3-sync-action@v0.5.0
-        env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          SOURCE_DIR: 'lighthouse' # optional: defaults to entire repository
-          DEST_DIR: 'pr/${{github.event.number}}/lighthouse'
-
-      - name: Invalidate Cloudfront
-        uses: chetan/invalidate-cloudfront-action@v1.0
-        env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION_PR }}
-          PATHS: '/pr/${{github.event.number}}/lighthouse/*'
