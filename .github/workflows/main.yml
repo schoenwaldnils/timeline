@@ -174,7 +174,7 @@ jobs:
           awsAccessKeyId: ${{ secrets.AWS_ACCESS_KEY_ID }}
           awsSecretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           branch: ${{ github.ref }}
-          outputDirectory: 'lighthouse'
+          outputDirectory: '/lighthouse'
           urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
           sha: ${{ github.sha }}
 
