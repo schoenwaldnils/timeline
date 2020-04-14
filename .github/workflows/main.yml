@@ -163,6 +163,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: create result dir
+        run: mkdir lighthouse
+
       - name: Run Lighthouse
         uses: foo-software/lighthouse-check-action@master
         id: lighthouseCheck
@@ -174,7 +177,7 @@ jobs:
           awsAccessKeyId: ${{ secrets.AWS_ACCESS_KEY_ID }}
           awsSecretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           branch: ${{ github.ref }}
-          outputDirectory: '/tmp/lighthouse'
+          outputDirectory: 'lighthouse'
           urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
           sha: ${{ github.sha }}
 
@@ -192,7 +195,7 @@ jobs:
         uses: jakejarvis/s3-sync-action@v0.5.0
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          SOURCE_DIR: '/tmp/lighthouse' # optional: defaults to entire repository
+          SOURCE_DIR: 'lighthouse' # optional: defaults to entire repository
           DEST_DIR: 'pr/${{github.event.number}}/lighthouse'
 
       - name: Invalidate Cloudfront
