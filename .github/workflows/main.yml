@@ -138,7 +138,7 @@ jobs:
         uses: chetan/invalidate-cloudfront-action@v1.0
         env:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION_PR }}
-          PATHS: '/*'
+          PATHS: '/pr/${{github.event.number}}/*'
 
       # - name: Create comment
       #   uses: mshick/add-pr-comment@v1
@@ -168,7 +168,14 @@ jobs:
         id: lighthouseCheck
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
+          author: ${{ github.actor }}
+          awsBucket: ${{ secrets.AWS_S3_BUCKET_LIGHTHOUSE }}
+          awsRegion: 'eu-central-1'
+          awsAccessKeyId: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          awsSecretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          branch: ${{ github.ref }}
           urls: 'https://${{github.event.number}}.pr.timeline.schoen.world'
+          sha: ${{ github.sha }}
 
       - name: Handle Lighthouse Check results
         uses: foo-software/lighthouse-check-status-action@master
