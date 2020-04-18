@@ -7,19 +7,17 @@
         <circle id="path-1" cx="130" cy="130" r="130"></circle>
         <circle id="path-3" cx="130" cy="130" r="130"></circle>
     </defs>
-    <g id="favicon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Line">
-            <mask id="mask-2" fill="white">
-                <use xlink:href="#path-1"></use>
-            </mask>
-            <use id="Mask" fill="#FFFFFF" xlink:href="#path-1"></use>
-            <polygon id="Line-2" fill="#777777" fill-rule="nonzero" mask="url(#mask-2)" points="100 160 100 100 290 100 290 160"></polygon>
-        </g>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use fill="#FFFFFF" xlink:href="#path-1"></use>
+        <polygon fill="#777777" fill-rule="nonzero" mask="url(#mask-2)" points="100 160 100 100 260 100 260 160"></polygon>
         <mask id="mask-4" fill="white">
             <use xlink:href="#path-3"></use>
         </mask>
         <circle stroke="#B5B5B5" stroke-width="60" cx="130" cy="130" r="100"></circle>
-        <polygon id="Line" fill="#41AD95" fill-rule="nonzero" mask="url(#mask-4)" points="160 160 100 160 100 -30 160 -30"></polygon>
-        <rect id="Rectangle" fill="#000000" mask="url(#mask-4)" x="100" y="100" width="60" height="60"></rect>
+        <polygon fill="#41AD95" fill-rule="nonzero" mask="url(#mask-4)" points="160 160 100 160 100 0 160 0"></polygon>
+        <rect fill="#000000" mask="url(#mask-4)" x="100" y="100" width="60" height="60"></rect>
     </g>
 </svg>
