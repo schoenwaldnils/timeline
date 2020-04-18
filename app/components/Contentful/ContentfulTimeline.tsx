@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import sortArray from 'sort-array'
+import arraySort from 'array-sort'
 
 import { ContextLang } from '../ContextLang'
 import { ContextScale } from '../ContextScale'
@@ -58,9 +58,7 @@ export const ContentfulTimeline = React.forwardRef((_props, ref) => {
       )),
   ]
   const filteredTimespans = formatedTimespans.filter(t => showInTimeline(t))
-  const sortetTimespans = sortArray(filteredTimespans, {
-    by: 'startYear',
-  })
+  const sortetTimespans = arraySort(filteredTimespans, 'startYear')
   const positionedTimes = positionTimes(sortetTimespans)
   const scaledTimes = scaleNumbers(positionedTimes, scale, [
     'pixelStart',

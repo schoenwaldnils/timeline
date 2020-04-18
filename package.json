@@ -44,6 +44,7 @@
     "accept-language": "3.0.18",
     "algoliasearch": "4.1.0",
     "apollo-boost": "0.4.7",
+    "array-sort": "1.0.0",
     "color": "3.1.2",
     "cookie": "0.4.0",
     "css-loader": "3.5.2",
@@ -66,7 +67,6 @@
     "react-instantsearch-dom": "6.4.0",
     "react-merge-refs": "1.0.0",
     "shallowequal": "1.1.0",
-    "sort-array": "4.1.0",
     "typescript": "3.8.3",
     "webpack": "4.42.1"
   },

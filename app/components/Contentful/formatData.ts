@@ -1,4 +1,4 @@
-import sortArray from 'sort-array'
+import arraySort from 'array-sort'
 
 import { updateTimeProps } from '../../js/updateTimeProps'
 import { updateEventProps } from '../../js/updateEventProps'
@@ -44,9 +44,11 @@ export function formatPerson(oldData) {
       return { id, name }
     })
 
-    data.spouse = sortArray(spouse, {
-      by: 'name',
-    })
+    data.spouse = arraySort(
+      spouse,
+      (a: { name: string }, b: { name: string }) =>
+        a.name.localeCompare(b.name),
+    )
   }
 
   if (oldData.childs && oldData.childs.items.length) {
@@ -54,9 +56,11 @@ export function formatPerson(oldData) {
       return { id, name }
     })
 
-    data.childs = sortArray(childs, {
-      by: 'name',
-    })
+    data.childs = arraySort(
+      childs,
+      (a: { name: string }, b: { name: string }) =>
+        a.name.localeCompare(b.name),
+    )
   }
 
   return updateTimeProps(data)
