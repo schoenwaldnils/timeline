@@ -137,7 +137,7 @@ jobs:
 
       - name: S3 Sync (with cached)
         uses: jakejarvis/s3-sync-action@v0.5.0
-        args: --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg"
+        args: --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg" --cache-control max-age=31536000,public
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           SOURCE_DIR: 'out'
