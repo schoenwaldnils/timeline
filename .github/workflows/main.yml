@@ -137,7 +137,7 @@ jobs:
       - name: Invalidate Cloudfront
         uses: chetan/invalidate-cloudfront-action@v1.0
         env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION_PR }}
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
           PATHS: '/pr/${{github.event.number}}/*'
 
       # - name: Create comment
