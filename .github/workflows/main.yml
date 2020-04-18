@@ -127,21 +127,20 @@ jobs:
           name: nextBuild-${{github.sha}}
           path: out
 
-      - name: S3 Sync (without cached)
+      - name: S3 Sync
         uses: jakejarvis/s3-sync-action@v0.5.0
-        args: --include "*" --exclude "*.css" --exclude "*.js" --exclude "*.png" --exclude "*.jpg" --exclude "*.gif" --exclude "*.svg"
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           SOURCE_DIR: 'out'
           DEST_DIR: 'pr/${{github.event.number}}'
 
-      - name: S3 Sync (with cached)
-        uses: jakejarvis/s3-sync-action@v0.5.0
-        args: --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg" --cache-control max-age=31536000,public
+      - name: s3cmd edit cache header
+        uses: jusbrasil/github-action-s3cmd@master
+        with:
+          args: --recursive modify --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg" --add-header="Cache-Control:public ,max-age= 31536000"
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          SOURCE_DIR: 'out'
-          DEST_DIR: 'pr/${{github.event.number}}'
+          ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Invalidate Cloudfront
         uses: chetan/invalidate-cloudfront-action@v1.0
