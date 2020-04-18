@@ -43,14 +43,14 @@ const Text = styled.span`
 
 const Menu = styled.div`
   position: absolute;
-  top: calc(100% + 3px);
+  top: calc(100% + 7px);
   right: 0;
   z-index: ${zIndexes.langSwitch};
   padding: 0.25rem;
   overflow: auto;
   background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0 0.25rem 0.25rem 0 #0003;
+  box-shadow: 0 0.125rem 0.25rem 0 #0007;
 `
 
 const Button = styled.button`

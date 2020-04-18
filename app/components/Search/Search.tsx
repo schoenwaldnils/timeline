@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const Hits = styled.div`
   position: absolute;
-  top: calc(100% + 3px);
+  top: calc(100% + 7px);
   right: 0;
   left: 0;
   z-index: ${zIndexes.searchHits};
@@ -26,7 +26,7 @@ const Hits = styled.div`
   overflow: auto;
   background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0 0.25rem 0.25rem 0 #0003;
+  box-shadow: 0 0.125rem 0.25rem 0 #0007;
 `
 
 const Icon = styled(IoIosSearch)`
@@ -39,6 +39,7 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
   const ref = useRef()
 
   useClickOutside(ref, () => {
+    refine('')
     setIsActive(false)
   })
 
