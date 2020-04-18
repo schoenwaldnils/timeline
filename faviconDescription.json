@@ -1,6 +1,6 @@
 {
   "masterPicture": "_media/favicon.png",
-  "iconsPath": "/static/assets/images/favicons",
+  "iconsPath": "/assets/images/favicons",
   "design": {
     "ios": {
       "pictureAspect": "backgroundAndMargin",

@@ -14,7 +14,7 @@
     "lint:js": "eslint . --ext .ts,.tsx",
     "lint:js-fix": "eslint . --ext .ts,.tsx --fix",
     "lint:html": "htmlhint out",
-    "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json static/assets/images/favicons",
+    "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "snapshot": "build-storybook && percy-storybook --widths=320 -t=500"
@@ -39,6 +39,7 @@
     "@contentful/rich-text-types": "14.1.0",
     "@emotion/core": "10.0.28",
     "@emotion/styled": "10.0.27",
+    "@svgr/webpack": "5.3.1",
     "@types/node": "13.9.2",
     "@types/react": "16.9.34",
     "accept-language": "3.0.18",
@@ -63,11 +64,13 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-easy-swipe": "0.0.18",
+    "react-highlight-words": "0.16.0",
     "react-icons": "3.9.0",
     "react-instantsearch-dom": "6.4.0",
     "react-merge-refs": "1.0.0",
     "shallowequal": "1.1.0",
     "typescript": "3.8.3",
+    "url-loader": "4.1.0",
     "webpack": "4.42.1"
   },
   "devDependencies": {
