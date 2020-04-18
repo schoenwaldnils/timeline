@@ -127,11 +127,20 @@ jobs:
           name: nextBuild-${{github.sha}}
           path: out
 
-      - name: S3 Sync
+      - name: S3 Sync (without cached)
         uses: jakejarvis/s3-sync-action@v0.5.0
+        args: --include "*" --exclude "*.css" --exclude "*.js" --exclude "*.png" --exclude "*.jpg" --exclude "*.gif" --exclude "*.svg"
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          SOURCE_DIR: 'out' # optional: defaults to entire repository
+          SOURCE_DIR: 'out'
+          DEST_DIR: 'pr/${{github.event.number}}'
+
+      - name: S3 Sync (with cached)
+        uses: jakejarvis/s3-sync-action@v0.5.0
+        args: --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg"
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          SOURCE_DIR: 'out'
           DEST_DIR: 'pr/${{github.event.number}}'
 
       - name: Invalidate Cloudfront
