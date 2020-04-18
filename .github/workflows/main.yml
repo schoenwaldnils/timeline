@@ -139,7 +139,7 @@ jobs:
       - name: s3cmd edit cache header
         uses: docker://jusbrasil/s3cmd-action:master
         with:
-          args: modify --recursive --exclude "*" --rinclude "*.[css|js|png|jpg|gif|svg]" --add-header="Cache-Control:public,max-age=31536000" s3://${{ secrets.AWS_S3_BUCKET }}/
+          args: modify --recursive --exclude "*" --rinclude "^.*\.(css|js|png|jpg|gif|svg)$" --add-header="Cache-Control:public,max-age=31536000" s3://${{ secrets.AWS_S3_BUCKET }}/pr/${{github.event.number}}/
         env:
           ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
           SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -149,13 +149,6 @@ jobs:
         env:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION_PR }}
           PATHS: '/*'
-
-      # - name: Create comment
-      #   uses: mshick/add-pr-comment@v1
-      #   with:
-      #     message: 'Preview: <a href="https://${{github.event.number}}.pr.timeline.schoen.world" target="_blank">PR-${{github.event.number}}</a>'
-      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
-      #     allow-repeats: false
 
       - name: action-slack
         uses: 8398a7/action-slack@v2.7.0
@@ -174,7 +167,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Run Lighthouse
-        uses: foo-software/lighthouse-check-action@master
+        uses: foo-software/lighthouse-check-action@v1.0.10
         id: lighthouseCheck
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
