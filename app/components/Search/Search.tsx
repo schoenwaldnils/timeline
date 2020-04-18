@@ -6,6 +6,7 @@ import { IoIosSearch } from 'react-icons/io'
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
 import { SidebarContext } from '../Sidebar/SidebarContext'
+import { T } from '../../js/translate'
 
 import { zIndexes } from '../../data/constants'
 import { useClickOutside } from '../../customHooks/useClickOutside'
@@ -69,7 +70,13 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
     )
   }
 
-  return <Icon role="button" onClick={() => setIsActive(true)} />
+  return (
+    <Icon
+      role="button"
+      aria-label={T('ui.search')}
+      onClick={() => setIsActive(true)}
+    />
+  )
 }
 
 export const Search = connectSearchBox(CustomSearch)

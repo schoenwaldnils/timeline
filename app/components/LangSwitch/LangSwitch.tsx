@@ -87,7 +87,7 @@ export const LangSwitch: React.FC = () => {
 
   return (
     <Wrapper ref={ref}>
-      <IconButton onClick={toggleIsActive}>
+      <IconButton onClick={toggleIsActive} aria-label={T('ui.changeLanguage')}>
         <Svg
           aria-hidden="true"
           focusable="false"

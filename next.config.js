@@ -9,6 +9,13 @@ module.exports = {
           options: {
             icon: true,
             memo: true,
+            svgoConfig: {
+              plugins: [
+                {
+                  cleanupIDs: false,
+                },
+              ],
+            },
           },
         },
         'url-loader',
