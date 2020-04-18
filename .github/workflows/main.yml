@@ -137,7 +137,7 @@ jobs:
       - name: s3cmd edit cache header
         uses: jusbrasil/github-action-s3cmd@master
         with:
-          args: --recursive modify --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg" --add-header="Cache-Control:public ,max-age= 31536000" s3://${{ secrets.AWS_S3_BUCKET }}/pr/${{github.event.number}}/
+          args: --recursive modify --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg" --add-header="Cache-Control:public,max-age= 31536000" s3://${{ secrets.AWS_S3_BUCKET }}/pr/${{github.event.number}}/
         env:
           ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
           SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
