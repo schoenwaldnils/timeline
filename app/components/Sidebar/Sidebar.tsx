@@ -21,6 +21,7 @@ const isActiveStyles = css`
 `
 
 // 1. https://developers.google.com/web/updates/2016/12/url-bar-resizing
+// 2. Set height of swipable div
 
 const Wrapper = styled.div<WrapperProps>`
   position: absolute;
@@ -39,9 +40,14 @@ const Wrapper = styled.div<WrapperProps>`
   transition: transform 300ms, opacity 100ms 200ms;
 
   ${({ isActive }) => isActive && isActiveStyles}
+
+  > div {
+    min-height: 100%; /* 2 */
+  }
 `
 
 const SidebarContent = styled.div`
+  height: 100%;
   max-height: 100vh;
   padding: 1rem 1rem 3rem;
   overflow-y: auto;
@@ -100,14 +106,14 @@ export const Sidebar: React.FC = () => {
   }, [sidebarWidth])
 
   return (
-    <Swipe onSwipeRight={closeSidebar}>
-      <Wrapper isActive={isActive} role="dialog">
+    <Wrapper isActive={isActive} role="dialog">
+      <Swipe onSwipeRight={closeSidebar}>
         {content && <SidebarContent>{content}</SidebarContent>}
         <Close aria-label={T('ui.closeSidebar')} onClick={() => closeSidebar()}>
           <Icon />
         </Close>
-      </Wrapper>
-    </Swipe>
+      </Swipe>
+    </Wrapper>
   )
 }
 
