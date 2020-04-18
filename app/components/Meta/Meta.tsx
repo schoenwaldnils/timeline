@@ -22,6 +22,9 @@ export const Meta = ({ url, type, title, description, image }) => (
     <meta property="og:image:height" content="200" />
 
     <Favicons />
+
+    <link rel="preconnect" href="https://graphql.contentful.com" />
+    <link rel="preconnect" href="https://p7r800rwy1-dsn.algolia.net" />
   </>
 )
 
