@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import Icon from './Icon'
+import { ReactComponent as LogoIcon } from './logo.svg'
 import { H1 } from '../Typography'
 
 import { viewportsJs } from '../../js/viewports'
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   flex-shrink: 0;
 `
 
-const StyledIcon = styled(Icon)`
+const StyledIcon = styled(LogoIcon)`
   font-size: 2rem;
 
   @media ${viewportsJs.sm} {

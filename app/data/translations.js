@@ -86,9 +86,13 @@ export default {
       en: 'Close sidebar',
       de: 'Seitenleiste schließen',
     },
+    changeLanguage: {
+      en: 'change language',
+      de: 'Sprache ändern',
+    },
     search: {
-      en: 'Search...',
-      de: 'Suchen...',
+      en: 'Search',
+      de: 'Suchen',
     },
     language: {
       en: 'English',
