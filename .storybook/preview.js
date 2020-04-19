@@ -7,7 +7,7 @@ import { ScaleProvider } from '../app/components/ContextScale'
 import { SidebarProvider } from '../app/components/Sidebar'
 import { SearchProvider } from '../app/components/Search'
 import { GlobalStyles } from '../app/components/GlobalStyles'
-import { client } from '../app/js/cfGraphQL'
+import { initApolloClient } from '../app/js/apollo'
 
 const Preview = styled.div``
 
@@ -15,7 +15,7 @@ addDecorator(storyFn => (
   <Preview>
     <LanguageProvider>
       <ScaleProvider>
-        <ApolloProvider client={client}>
+        <ApolloProvider client={initApolloClient()}>
           <SidebarProvider>
             <SearchProvider>
               <GlobalStyles />
