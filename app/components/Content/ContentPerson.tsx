@@ -1,4 +1,5 @@
 import React, { useContext, Component } from 'react'
+import { Document } from '@contentful/rich-text-types'
 
 import { SidebarContext } from '../Sidebar/SidebarContext'
 import { ContentTemplate, ContentBox } from './ContentTemplate'
@@ -30,7 +31,7 @@ interface ContentPersonProps {
   motherID?: string
   mother?: Component
   childs?: Array<Person>
-  richText?: any
+  richText?: Document
   wolLink?: string
 }
 
