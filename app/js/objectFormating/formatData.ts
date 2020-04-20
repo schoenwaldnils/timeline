@@ -1,7 +1,7 @@
 import arraySort from 'array-sort'
 
-import { updateTimeProps } from '../../js/updateTimeProps'
-import { updateEventProps } from '../../js/updateEventProps'
+import { updateTimeProps } from './updateTimeProps'
+import { updateEventProps } from './updateEventProps'
 
 const findParent = (linkedFrom, id: string, type: 'male' | 'female') => {
   const [parent] = linkedFrom.personCollection.items.filter(
@@ -64,6 +64,15 @@ export function formatPerson(oldData) {
   }
 
   return updateTimeProps(data)
+}
+
+export function formatParent(oldData) {
+  const data = {
+    type: 'parent',
+    name: oldData.name,
+  }
+
+  return data
 }
 
 export function formatTime(oldData) {

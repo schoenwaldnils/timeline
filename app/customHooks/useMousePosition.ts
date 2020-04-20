@@ -1,4 +1,8 @@
-import { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useEffect, useState } from 'react'
+
+const isBrowser = typeof window !== 'undefined'
+
+const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect
 
 export const useMousePosition = ref => {
   const [position, setPosition] = useState({
@@ -8,7 +12,7 @@ export const useMousePosition = ref => {
     yElement: 0,
   })
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const setFromEvent = e => {
       const refBound = ref.current.getBoundingClientRect()
       setPosition({
@@ -18,6 +22,8 @@ export const useMousePosition = ref => {
         yElement: refBound.y * -1 + e.clientY,
       })
     }
+
+    if (!isBrowser) return null
 
     window.addEventListener('mousemove', setFromEvent, { passive: true })
     return () => {

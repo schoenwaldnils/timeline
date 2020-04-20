@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   ::after {
     content: var(--TimelineCursor-year);
     position: absolute;
-    top: 20px;
+    top: 1.5rem;
     left: 5px;
     color: #000;
     white-space: nowrap;

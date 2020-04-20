@@ -1,4 +1,4 @@
-import { calcTimes } from './calcTimes'
+import { calcTimes } from '../calcTimes'
 
 interface Props {
   id: string

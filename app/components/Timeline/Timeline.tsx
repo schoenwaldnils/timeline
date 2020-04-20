@@ -1,14 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import styled from '@emotion/styled'
 import mergeRefs from 'react-merge-refs'
 
 import { Event, EventProps } from '../Event'
+import { ContextScale } from '../ContextScale'
+import { TimelineNumbers } from './TimelineNumbers'
+import { TimelineCursor } from '../TimelineCursor'
 import { Timespan, TimespanProps } from '../Timespan'
 
 import { getTimelineWidth } from './getTimelineWidth'
 import { time, zIndexes } from '../../data/constants'
-import { shades } from '../../js/colors'
-import { TimelineCursor } from '../TimelineCursor'
 import { checkForTouchDevice } from '../../js/checkForTouchDevice'
 import { useMousePosition } from '../../customHooks/useMousePosition'
 
@@ -23,65 +24,6 @@ const Wrapper = styled.div<WrapperProps>`
   height: 100%;
   padding-bottom: 2rem;
   font-size: 12px;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    background-size: ${({ scale }) => `${scale * 100}px`};
-  }
-
-  &::before {
-    left: 0;
-    width: ${({ scale }) => `${scale * time.YEARS_BEFORE_ZERO}px`};
-    background-image: linear-gradient(
-      to left,
-      transparent calc(100% - 1px),
-      ${shades.cb3} calc(100% - 1px)
-    );
-    background-position-x: right;
-  }
-
-  &::after {
-    left: ${({ scale }) => `${scale * time.YEARS_BEFORE_ZERO}px`};
-    width: ${({ scale }) => `${scale * time.YEARS_AFTER_ZERO + 1}px`};
-    background-image: linear-gradient(
-      to right,
-      ${shades.cb3} 1px,
-      transparent 1px
-    );
-    background-position-x: 0;
-  }
-`
-
-const Numbers = styled.div`
-  position: sticky;
-  top: 0.25em;
-  display: flex;
-  padding-right: 17px;
-  padding-left: 5px;
-`
-
-const NumbersBlock = styled.div`
-  display: flex;
-`
-
-interface ScaleNumberProps {
-  scale?: number
-}
-
-const ScaleNumber = styled.div<ScaleNumberProps>`
-  width: ${({ scale }) => `${scale * 100}px`};
-  padding-left: 0;
-  font-family: monospace;
-  font-size: 12px;
-  color: ${shades.cb2};
-
-  [data-type='positive'] > &:first-of-type {
-    width: ${({ scale }) => `${scale * 100 - 1}px`};
-  }
 `
 
 const Content = styled.div`
@@ -92,51 +34,34 @@ const Content = styled.div`
     'times'
     'events';
   grid-gap: 0.5rem;
-  margin-top: 1.5rem;
+  padding-top: 3rem;
 `
 
 interface TimelineProps {
-  scale?: number
   events?: Array<Object>
   timespans?: Array<Object>
   ref?: any
 }
 
 export const Timeline: React.FC<TimelineProps> = React.forwardRef(
-  ({ scale, events, timespans }, ref) => {
+  ({ events = [], timespans = [] }, ref) => {
     const localRef = useRef(null)
+    const { scale } = useContext(ContextScale)
     const mousePosition = useMousePosition(localRef)
+    const { YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO } = time
 
-    const width = getTimelineWidth(scale)
+    const width = getTimelineWidth(YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO, scale)
     const isTouchDevice = checkForTouchDevice()
-    const showCursor = !isTouchDevice && mousePosition.x
-
-    const scaleNumberNegativ = []
-    for (let i = 0; i <= time.YEARS_BEFORE_ZERO / 100; i += 1) {
-      scaleNumberNegativ.push(
-        <ScaleNumber scale={scale} key={`pos${i}`}>
-          {i * -100}
-        </ScaleNumber>,
-      )
-    }
-
-    const scaleNumberPositive = []
-    for (let i = 1; i <= time.YEARS_AFTER_ZERO / 100; i += 1) {
-      scaleNumberPositive.push(
-        <ScaleNumber scale={scale} key={`neg${i}`}>
-          {i * 100}
-        </ScaleNumber>,
-      )
-    }
+    const showCursor = !!(!isTouchDevice && mousePosition.xElement)
 
     return (
       <Wrapper ref={mergeRefs([ref, localRef])} width={width} scale={scale}>
-        <Numbers>
-          <NumbersBlock>{scaleNumberNegativ.reverse()}</NumbersBlock>
-          <NumbersBlock data-type="positive">
-            {scaleNumberPositive}
-          </NumbersBlock>
-        </Numbers>
+        <TimelineNumbers
+          width={width}
+          startYear={YEARS_BEFORE_ZERO}
+          endYear={YEARS_AFTER_ZERO}
+          scale={scale}
+        />
         <Content>
           {timespans.map((timespan: TimespanProps) => (
             <Timespan {...timespan} key={timespan.id} />
@@ -150,9 +75,3 @@ export const Timeline: React.FC<TimelineProps> = React.forwardRef(
     )
   },
 )
-
-Timeline.defaultProps = {
-  scale: 1,
-  events: [],
-  timespans: [],
-}

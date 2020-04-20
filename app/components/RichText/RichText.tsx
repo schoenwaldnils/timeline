@@ -9,30 +9,18 @@ import { H1, H2, H3, UL, OL, LI, P, HR, A, QUOTE } from '../Typography'
 
 const options: Options = {
   renderNode: {
-    [BLOCKS.HEADING_1]: (node: any, children: React.ReactNode) => (
-      <H1>{children}</H1>
-    ),
-    [BLOCKS.HEADING_2]: (node: any, children: React.ReactNode) => (
-      <H2>{children}</H2>
-    ),
-    [BLOCKS.HEADING_3]: (node: any, children: React.ReactNode) => (
-      <H3>{children}</H3>
-    ),
-    [BLOCKS.UL_LIST]: (node: any, children: React.ReactNode) => (
-      <UL>{children}</UL>
-    ),
-    [BLOCKS.OL_LIST]: (node: any, children: React.ReactNode) => (
-      <OL>{children}</OL>
-    ),
-    [BLOCKS.LIST_ITEM]: (node: any, children: React.ReactNode) => (
-      <LI>{children}</LI>
-    ),
-    [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode[]) => {
+    [BLOCKS.HEADING_1]: (node: any, children: ReactNode) => <H1>{children}</H1>,
+    [BLOCKS.HEADING_2]: (node: any, children: ReactNode) => <H2>{children}</H2>,
+    [BLOCKS.HEADING_3]: (node: any, children: ReactNode) => <H3>{children}</H3>,
+    [BLOCKS.UL_LIST]: (node: any, children: ReactNode) => <UL>{children}</UL>,
+    [BLOCKS.OL_LIST]: (node: any, children: ReactNode) => <OL>{children}</OL>,
+    [BLOCKS.LIST_ITEM]: (node: any, children: ReactNode) => <LI>{children}</LI>,
+    [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode[]) => {
       if (!children || (children.length === 1 && children[0] === ''))
         return null
       return <P>{children}</P>
     },
-    [BLOCKS.QUOTE]: (node: any, children: React.ReactNode) => (
+    [BLOCKS.QUOTE]: (node: any, children: ReactNode) => (
       <QUOTE>{children}</QUOTE>
     ),
     [BLOCKS.HR]: () => <HR />,
@@ -51,7 +39,7 @@ const options: Options = {
     //   }
     // },
 
-    [INLINES.HYPERLINK]: (node, children: React.ReactNode) => {
+    [INLINES.HYPERLINK]: (node, children: ReactNode) => {
       const {
         data: { uri },
       } = node

@@ -1,4 +1,4 @@
-import { calcTimes } from './calcTimes'
+import { calcTimes } from '../calcTimes'
 
 export const updateTimeProps = time => {
   const {
