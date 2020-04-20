@@ -1,27 +1,39 @@
 import gql from 'graphql-tag'
+import personFragment from './personFragment'
+import eventFragment from './eventFragment'
+import timeFragment from './timeFragment'
 
 export const typeById = gql`
-  query($id: String!) {
-    person: personCollection(where: { sys: { id: $id } }) {
+  query($id: String!, $locale: String!) {
+    person: personCollection(
+      where: { sys: { id: $id } }
+      locale: $locale
+      limit: 1
+    ) {
       items {
-        sys {
-          id
-        }
+        ...PersonFragment
       }
     }
-    time: timeCollection(where: { sys: { id: $id } }) {
+    time: timeCollection(
+      where: { sys: { id: $id } }
+      locale: $locale
+      limit: 1
+    ) {
       items {
-        sys {
-          id
-        }
+        ...TimeFragment
       }
     }
-    event: eventCollection(where: { sys: { id: $id } }) {
+    event: eventCollection(
+      where: { sys: { id: $id } }
+      locale: $locale
+      limit: 1
+    ) {
       items {
-        sys {
-          id
-        }
+        ...EventFragment
       }
     }
   }
+  ${personFragment}
+  ${timeFragment}
+  ${eventFragment}
 `

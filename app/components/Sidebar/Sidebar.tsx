@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import Swipe from 'react-easy-swipe'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { MdVerticalAlignBottom } from 'react-icons/md'
 
 import { getLocalStorageNumber, setLocalStorage } from '../../js/localStorage'
-import { SidebarContext } from './SidebarContext'
 import { themeColors } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
 import { T } from '../../js/translate'
@@ -88,8 +87,17 @@ const Icon = styled(MdVerticalAlignBottom)`
   flex-shrink: 0;
 `
 
-export const Sidebar: React.FC = () => {
-  const { isActive, content, closeSidebar } = useContext(SidebarContext)
+interface SidebarProps {
+  isActive: boolean
+  content: any
+  closeSidebar: Function
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({
+  isActive = false,
+  content,
+  closeSidebar,
+}) => {
   const DEFAULT_SIDEBAR_WIDTH = 320
   const LOCALSTORAGE_KEY = 'sidebarWidth'
 
@@ -115,8 +123,4 @@ export const Sidebar: React.FC = () => {
       </Swipe>
     </Wrapper>
   )
-}
-
-Sidebar.defaultProps = {
-  isActive: true,
 }

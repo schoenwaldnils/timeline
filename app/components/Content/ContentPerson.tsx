@@ -10,6 +10,11 @@ import { UL, LI, ButtonPlain } from '../Typography'
 import { ourTime } from '../../js/utils'
 import { T } from '../../js/translate'
 
+interface Person {
+  id: string
+  name: string
+}
+
 interface ContentPersonProps {
   id: string
   name: string
@@ -19,12 +24,12 @@ interface ContentPersonProps {
   endYear?: number
   endBlurriness?: number
   duration?: number
-  spouse?: Array<any>
+  spouse?: Array<Person>
   fatherID?: string
   father?: Component
   motherID?: string
   mother?: Component
-  childs?: Array<any>
+  childs?: Array<Person>
   richText?: any
   wolLink?: string
 }

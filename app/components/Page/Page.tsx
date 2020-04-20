@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
 import { Timeline } from '../Timeline'
-import { Sidebar } from '../Sidebar'
+import { Sidebar, SidebarContext } from '../Sidebar'
 import { useScrollPosition } from '../../customHooks/useScrollPosition'
 // import { Scaling } from '../Scaling'
 
@@ -35,7 +35,7 @@ export const Page = () => {
         <TimelineWrapper ref={containerRef}>
           <Timeline ref={elementRef} />
         </TimelineWrapper>
-        <Sidebar />
+        <Sidebar {...useContext(SidebarContext)} />
         {/* <Scaling /> */}
       </Content>
     </StyledPage>

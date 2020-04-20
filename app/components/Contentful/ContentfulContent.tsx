@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 
 import { Loading, LoadingDots } from '../Loading'
 import { ContentPerson, ContentTime, ContentEvent } from '../Content'
+import { ContextLang } from '../ContextLang'
 
 import { typeById } from '../../gql/typeById'
-import { useContentful } from '../../customHooks/useContentful'
 import {
   formatPerson,
   formatParent,
@@ -36,41 +36,18 @@ const contentfulFunctions = {
   },
 }
 
-const ContentfulItem = ({ id, type }) => {
-  const { formatData, Component, Loading: LoadingComp } = contentfulFunctions[
-    type
-  ]
-
-  const collectionType = type === 'parent' ? 'person' : type
-
-  const { loading, error, data } = useContentful(id, type)
-  if (loading) return <LoadingComp />
-  if (error) return <div>Error! ${error}</div>
-  if (data[`${collectionType}Collection`].items[0]) {
-    let cleanedItem = formatData(data[`${collectionType}Collection`].items[0])
-    if (type === 'person') {
-      cleanedItem = {
-        ...cleanedItem,
-        father: cleanedItem.fatherID && (
-          <ContentfulItem id={cleanedItem.fatherID} type="parent" />
-        ),
-        mother: cleanedItem.motherID && (
-          <ContentfulItem id={cleanedItem.motherID} type="parent" />
-        ),
-      }
-    }
-    return <Component {...cleanedItem} />
-  }
-  return <div>Error! No event found</div>
-}
-
 interface Props {
   id: string
+  isParent?: boolean
 }
 
-export const ContentfulContent: React.FC<Props> = ({ id }) => {
+export const ContentfulContent: React.FC<Props> = ({
+  id,
+  isParent = false,
+}) => {
+  const { language } = useContext(ContextLang)
   const { loading, error, data } = useQuery(typeById, {
-    variables: { id },
+    variables: { id, locale: language },
   })
 
   if (loading) return <Loading />
@@ -80,5 +57,24 @@ export const ContentfulContent: React.FC<Props> = ({ id }) => {
     key => data[key].items.length === 1 && key,
   )
 
-  return <ContentfulItem id={id} type={type} />
+  const fixedType = isParent ? 'parent' : type
+
+  const { formatData, Component } = contentfulFunctions[fixedType]
+
+  if (data[type].items[0]) {
+    let cleanedItem = formatData(data[type].items[0])
+    if (type === 'person' && !isParent) {
+      cleanedItem = {
+        ...cleanedItem,
+        father: cleanedItem.fatherID && (
+          <ContentfulContent id={cleanedItem.fatherID} isParent={true} />
+        ),
+        mother: cleanedItem.motherID && (
+          <ContentfulContent id={cleanedItem.motherID} isParent={true} />
+        ),
+      }
+    }
+    return <Component {...cleanedItem} />
+  }
+  return <div>Error! No event found</div>
 }

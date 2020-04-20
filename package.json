@@ -77,6 +77,7 @@
   "devDependencies": {
     "@percy/storybook": "3.3.0",
     "@schoenwald/eslint-config-typescript": "4.0.0",
+    "@storybook/addon-actions": "5.3.18",
     "@storybook/react": "5.3.18",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",

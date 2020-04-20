@@ -1,4 +1,5 @@
 import React from 'react'
+import { Document } from '@contentful/rich-text-types'
 
 import { ContentTemplate, ContentBox } from './ContentTemplate'
 import { TableList } from '../TableList'
@@ -14,7 +15,7 @@ export interface ContentTimeProps {
   startYear: number
   endYear?: number
   duration?: number
-  richText?: any
+  richText?: Document
   image?: string
   wolLink?: string
 }
