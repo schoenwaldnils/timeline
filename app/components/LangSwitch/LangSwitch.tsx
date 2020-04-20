@@ -2,10 +2,10 @@ import React, { useContext, useState, useRef } from 'react'
 import styled from '@emotion/styled'
 
 import { T } from '../../js/translate'
-import { languages, ContextLang } from '../ContextLang'
+import { ContextLang } from '../ContextLang'
 import { colors, shades } from '../../js/colors'
 import translations from '../../data/translations'
-import { zIndexes } from '../../data/constants'
+import { SUPPORTED_LANGUAGES, zIndexes } from '../../data/constants'
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { viewportsJs } from '../../js/viewports'
 
@@ -106,7 +106,7 @@ export const LangSwitch: React.FC = () => {
 
       {isActive && (
         <Menu>
-          {languages.map(lang => (
+          {SUPPORTED_LANGUAGES.map(lang => (
             <Button
               key={lang}
               disabled={lang === language}

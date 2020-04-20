@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { Document } from '@contentful/rich-text-types'
+import React, { useContext, Component } from 'react'
 
 import { SidebarContext } from '../Sidebar/SidebarContext'
 import { ContentTemplate, ContentBox } from './ContentTemplate'
@@ -10,27 +9,23 @@ import { UL, LI, ButtonPlain } from '../Typography'
 
 import { ourTime } from '../../js/utils'
 import { T } from '../../js/translate'
-import { ContentfulParent } from '../Contentful/ContentfulParent'
 
-interface Person {
-  id: string
-  name: string
-}
-
-export interface ContentPersonProps {
+interface ContentPersonProps {
   id: string
   name: string
   image?: string
-  startYear: number
+  startYear?: number
   startBlurriness?: number
   endYear?: number
   endBlurriness?: number
   duration?: number
-  spouse?: Array<Person>
+  spouse?: Array<any>
   fatherID?: string
+  father?: Component
   motherID?: string
-  childs?: Array<Person>
-  richText?: Document
+  mother?: Component
+  childs?: Array<any>
+  richText?: any
   wolLink?: string
 }
 
@@ -43,10 +38,12 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   endYear,
   endBlurriness,
   duration: age,
-  spouse,
+  spouse = [],
   fatherID,
+  father,
   motherID,
-  childs,
+  mother,
+  childs = [],
   richText,
   wolLink,
 }) => {
@@ -85,37 +82,31 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
         : T('misc.unnown'),
   }
 
-  if (fatherID) {
-    const father = <ContentfulParent id={fatherID} />
-    if (father) {
-      list = {
-        ...list,
-        [T('relations.father')]: (
-          <ButtonPlain
-            onKeyUp={e => e.keyCode === 13 && changeContent(fatherID)}
-            onClick={() => changeContent(fatherID)}
-          >
-            <ContentfulParent id={fatherID} />
-          </ButtonPlain>
-        ),
-      }
+  if (father) {
+    list = {
+      ...list,
+      [T('relations.father')]: (
+        <ButtonPlain
+          onKeyUp={e => e.keyCode === 13 && changeContent(fatherID)}
+          onClick={() => changeContent(fatherID)}
+        >
+          {father}
+        </ButtonPlain>
+      ),
     }
   }
 
-  if (motherID) {
-    const mother = <ContentfulParent id={motherID} />
-    if (mother) {
-      list = {
-        ...list,
-        [T('relations.mother')]: (
-          <ButtonPlain
-            onKeyUp={e => e.keyCode === 13 && changeContent(motherID)}
-            onClick={() => changeContent(motherID)}
-          >
-            <ContentfulParent id={motherID} />
-          </ButtonPlain>
-        ),
-      }
+  if (mother) {
+    list = {
+      ...list,
+      [T('relations.mother')]: (
+        <ButtonPlain
+          onKeyUp={e => e.keyCode === 13 && changeContent(motherID)}
+          onClick={() => changeContent(motherID)}
+        >
+          {mother}
+        </ButtonPlain>
+      ),
     }
   }
 
@@ -188,9 +179,4 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
       )}
     </ContentTemplate>
   )
-}
-
-ContentPerson.defaultProps = {
-  spouse: [],
-  childs: [],
 }

@@ -7,7 +7,7 @@ import { LinkToWOL } from './ContentLinkWol'
 import { ourTime } from '../../js/utils'
 import { T } from '../../js/translate'
 
-interface Props {
+interface ContentEventProps {
   id: string
   name: string
   year: number
@@ -15,26 +15,28 @@ interface Props {
   wolLink?: string
 }
 
-export const ContentEvent: React.FC<Props> = ({
+export const ContentEvent: React.FC<ContentEventProps> = ({
   id,
   name,
   year,
   image,
   wolLink,
-}) => (
-  <ContentTemplate title={name} image={image} idContentful={id}>
-    <ContentBox>
-      <TableList
-        list={{
-          [T('time.year')]: ourTime(year),
-        }}
-      />
-    </ContentBox>
-
-    {wolLink && (
+}) => {
+  return (
+    <ContentTemplate title={name} image={image} idContentful={id}>
       <ContentBox>
-        <LinkToWOL wolLink={wolLink} />
+        <TableList
+          list={{
+            [T('time.year')]: ourTime(year),
+          }}
+        />
       </ContentBox>
-    )}
-  </ContentTemplate>
-)
+
+      {wolLink && (
+        <ContentBox>
+          <LinkToWOL wolLink={wolLink} />
+        </ContentBox>
+      )}
+    </ContentTemplate>
+  )
+}

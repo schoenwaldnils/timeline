@@ -16,7 +16,7 @@ export const getLocalStorage = (key: string): string => {
 }
 
 export const getLocalStorageNumber = (key: string): number => {
-  return parseInt(getLocalStorage(key), 10)
+  return parseFloat(getLocalStorage(key))
 }
 
 export const removeLocalStorage = (key: string) => {

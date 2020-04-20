@@ -2,9 +2,10 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
-import { ContentfulTimeline } from '../Contentful/ContentfulTimeline'
+import { Timeline } from '../Timeline'
 import { Sidebar } from '../Sidebar'
 import { useScrollPosition } from '../../customHooks/useScrollPosition'
+// import { Scaling } from '../Scaling'
 
 const StyledPage = styled.div`
   display: flex;
@@ -32,9 +33,10 @@ export const Page = () => {
       <Header />
       <Content>
         <TimelineWrapper ref={containerRef}>
-          <ContentfulTimeline ref={elementRef} />
+          <Timeline ref={elementRef} />
         </TimelineWrapper>
         <Sidebar />
+        {/* <Scaling /> */}
       </Content>
     </StyledPage>
   )

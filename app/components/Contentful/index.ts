@@ -1,5 +1,1 @@
-export * from './ContentfulPerson'
-export * from './ContentfulTime'
-export * from './ContentfulEvent'
 export * from './ContentfulContent'
-export * from './ContentfulTimeline'
