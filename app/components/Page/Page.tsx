@@ -5,6 +5,7 @@ import { Header } from '../Header'
 import { Timeline } from '../Timeline'
 import { Sidebar, SidebarContext } from '../Sidebar'
 import { useScrollPosition } from '../../customHooks/useScrollPosition'
+import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
 // import { Scaling } from '../Scaling'
 
 const StyledPage = styled.div`
@@ -27,13 +28,16 @@ const TimelineWrapper = styled.div`
 
 export const Page = () => {
   const [containerRef, elementRef] = useScrollPosition()
+  const {
+    data: { events, timespans },
+  } = useContentfulTimeline()
 
   return (
     <StyledPage>
       <Header />
       <Content>
         <TimelineWrapper ref={containerRef}>
-          <Timeline ref={elementRef} />
+          <Timeline {...{ events, timespans }} ref={elementRef} />
         </TimelineWrapper>
         <Sidebar {...useContext(SidebarContext)} />
         {/* <Scaling /> */}

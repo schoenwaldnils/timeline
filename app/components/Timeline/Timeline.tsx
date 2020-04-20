@@ -12,7 +12,6 @@ import { getTimelineWidth } from './getTimelineWidth'
 import { time, zIndexes } from '../../data/constants'
 import { checkForTouchDevice } from '../../js/checkForTouchDevice'
 import { useMousePosition } from '../../customHooks/useMousePosition'
-import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
 
 interface WrapperProps {
   width: number
@@ -35,7 +34,7 @@ const Content = styled.div`
     'times'
     'events';
   grid-gap: 0.5rem;
-  padding-top: 2rem;
+  padding-top: 3rem;
 `
 
 interface TimelineProps {
@@ -45,11 +44,7 @@ interface TimelineProps {
 }
 
 export const Timeline: React.FC<TimelineProps> = React.forwardRef(
-  (_props, ref) => {
-    const {
-      data: { events = [], timespans = [] },
-    } = useContentfulTimeline()
-
+  ({ events = [], timespans = [] }, ref) => {
     const localRef = useRef(null)
     const { scale } = useContext(ContextScale)
     const mousePosition = useMousePosition(localRef)
@@ -57,7 +52,7 @@ export const Timeline: React.FC<TimelineProps> = React.forwardRef(
 
     const width = getTimelineWidth(YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO, scale)
     const isTouchDevice = checkForTouchDevice()
-    const showCursor = !isTouchDevice && mousePosition.x
+    const showCursor = !!(!isTouchDevice && mousePosition.xElement)
 
     return (
       <Wrapper ref={mergeRefs([ref, localRef])} width={width} scale={scale}>
