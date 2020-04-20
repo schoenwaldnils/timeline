@@ -1,6 +1,5 @@
 .next/
 out/
-static/
 node_modules/
 next-env.d.ts
 _serverless

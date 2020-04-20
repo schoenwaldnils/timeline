@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
-import { ContentfulTimeline } from '../Contentful/ContentfulTimeline'
-import { Sidebar } from '../Sidebar'
+import { Timeline } from '../Timeline'
+import { Sidebar, SidebarContext } from '../Sidebar'
 import { useScrollPosition } from '../../customHooks/useScrollPosition'
+import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
+// import { Scaling } from '../Scaling'
 
 const StyledPage = styled.div`
   display: flex;
@@ -26,15 +28,19 @@ const TimelineWrapper = styled.div`
 
 export const Page = () => {
   const [containerRef, elementRef] = useScrollPosition()
+  const {
+    data: { events, timespans },
+  } = useContentfulTimeline()
 
   return (
     <StyledPage>
       <Header />
       <Content>
         <TimelineWrapper ref={containerRef}>
-          <ContentfulTimeline ref={elementRef} />
+          <Timeline {...{ events, timespans }} ref={elementRef} />
         </TimelineWrapper>
-        <Sidebar />
+        <Sidebar {...useContext(SidebarContext)} />
+        {/* <Scaling /> */}
       </Content>
     </StyledPage>
   )

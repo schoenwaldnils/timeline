@@ -1,20 +1,53 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 
-import { Loading } from '../Loading'
-import { ContentfulPerson } from './ContentfulPerson'
-import { ContentfulTime } from './ContentfulTime'
-import { ContentfulEvent } from './ContentfulEvent'
+import { Loading, LoadingDots } from '../Loading'
+import { ContentPerson, ContentTime, ContentEvent } from '../Content'
+import { ContextLang } from '../ContextLang'
 
-import { typeById } from './gql/typeById'
+import { typeById } from '../../gql/typeById'
+import {
+  formatPerson,
+  formatParent,
+  formatTime,
+  formatEvent,
+} from '../../js/objectFormating/formatData'
+
+const contentfulFunctions = {
+  person: {
+    formatData: formatPerson,
+    Component: ContentPerson,
+    Loading,
+  },
+  time: {
+    formatData: formatTime,
+    Component: ContentTime,
+    Loading,
+  },
+  event: {
+    formatData: formatEvent,
+    Component: ContentEvent,
+    Loading,
+  },
+  parent: {
+    formatData: formatParent,
+    Component: ({ name }) => <>{name}</>,
+    Loading: LoadingDots,
+  },
+}
 
 interface Props {
   id: string
+  isParent?: boolean
 }
 
-export const ContentfulContent: React.FC<Props> = ({ id }) => {
+export const ContentfulContent: React.FC<Props> = ({
+  id,
+  isParent = false,
+}) => {
+  const { language } = useContext(ContextLang)
   const { loading, error, data } = useQuery(typeById, {
-    variables: { id },
+    variables: { id, locale: language },
   })
 
   if (loading) return <Loading />
@@ -24,17 +57,24 @@ export const ContentfulContent: React.FC<Props> = ({ id }) => {
     key => data[key].items.length === 1 && key,
   )
 
-  switch (type) {
-    case 'person':
-      return <ContentfulPerson id={id} />
+  const fixedType = isParent ? 'parent' : type
 
-    case 'time':
-      return <ContentfulTime id={id} />
+  const { formatData, Component } = contentfulFunctions[fixedType]
 
-    case 'event':
-      return <ContentfulEvent id={id} />
-
-    default:
-      return null
+  if (data[type].items[0]) {
+    let cleanedItem = formatData(data[type].items[0])
+    if (type === 'person' && !isParent) {
+      cleanedItem = {
+        ...cleanedItem,
+        father: cleanedItem.fatherID && (
+          <ContentfulContent id={cleanedItem.fatherID} isParent={true} />
+        ),
+        mother: cleanedItem.motherID && (
+          <ContentfulContent id={cleanedItem.motherID} isParent={true} />
+        ),
+      }
+    }
+    return <Component {...cleanedItem} />
   }
+  return <div>Error! No event found</div>
 }

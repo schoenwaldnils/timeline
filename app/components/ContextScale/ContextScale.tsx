@@ -6,7 +6,7 @@ const DEFAULT_SCALE = 1
 
 interface ContextScaleInterface {
   scale: number
-  changeScale: (scale: any) => void
+  changeScale: (scale: number) => void
 }
 
 export const ContextScale = React.createContext<ContextScaleInterface | null>({
@@ -18,7 +18,7 @@ export const ScaleProvider: React.FC = ({ children }) => {
   const [scale, setScale] = useState(DEFAULT_SCALE)
 
   const changeScale = newScale => {
-    setUserScale(newScale)
+    setUserScale(newScale.toString())
     setScale(newScale)
   }
 

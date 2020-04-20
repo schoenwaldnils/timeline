@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useCallback } from 'react'
+import { useRef, useEffect, useCallback } from 'react'
 import { setLocalStorage, getLocalStorage } from '../js/localStorage'
 
 const isBrowser = typeof window !== 'undefined'
@@ -55,7 +55,7 @@ export function useScrollPosition() {
     [handleScroll],
   )
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [containerRef, handleScroll])
 

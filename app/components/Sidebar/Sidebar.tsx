@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import Swipe from 'react-easy-swipe'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { MdVerticalAlignBottom } from 'react-icons/md'
 
 import { getLocalStorageNumber, setLocalStorage } from '../../js/localStorage'
-import { SidebarContext } from './SidebarContext'
 import { themeColors } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
 import { T } from '../../js/translate'
@@ -21,6 +20,7 @@ const isActiveStyles = css`
 `
 
 // 1. https://developers.google.com/web/updates/2016/12/url-bar-resizing
+// 2. Set height of swipable div
 
 const Wrapper = styled.div<WrapperProps>`
   position: absolute;
@@ -39,9 +39,14 @@ const Wrapper = styled.div<WrapperProps>`
   transition: transform 300ms, opacity 100ms 200ms;
 
   ${({ isActive }) => isActive && isActiveStyles}
+
+  > div {
+    min-height: 100%; /* 2 */
+  }
 `
 
 const SidebarContent = styled.div`
+  height: 100%;
   max-height: 100vh;
   padding: 1rem 1rem 3rem;
   overflow-y: auto;
@@ -82,8 +87,17 @@ const Icon = styled(MdVerticalAlignBottom)`
   flex-shrink: 0;
 `
 
-export const Sidebar: React.FC = () => {
-  const { isActive, content, closeSidebar } = useContext(SidebarContext)
+interface SidebarProps {
+  isActive: boolean
+  content: any
+  closeSidebar: Function
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({
+  isActive = false,
+  content,
+  closeSidebar,
+}) => {
   const DEFAULT_SIDEBAR_WIDTH = 320
   const LOCALSTORAGE_KEY = 'sidebarWidth'
 
@@ -100,17 +114,13 @@ export const Sidebar: React.FC = () => {
   }, [sidebarWidth])
 
   return (
-    <Swipe onSwipeRight={closeSidebar}>
-      <Wrapper isActive={isActive} role="dialog">
+    <Wrapper isActive={isActive} role="dialog">
+      <Swipe onSwipeRight={closeSidebar}>
         {content && <SidebarContent>{content}</SidebarContent>}
         <Close aria-label={T('ui.closeSidebar')} onClick={() => closeSidebar()}>
           <Icon />
         </Close>
-      </Wrapper>
-    </Swipe>
+      </Swipe>
+    </Wrapper>
   )
-}
-
-Sidebar.defaultProps = {
-  isActive: true,
 }

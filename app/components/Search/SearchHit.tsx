@@ -1,7 +1,10 @@
 import React, { useContext } from 'react'
 import styled from '@emotion/styled'
+import Highlighter from 'react-highlight-words'
 
 import { ContextLang } from '../ContextLang'
+import DefaultImgUrl from './defaultImg.svg'
+
 import { shades, colors } from '../../js/colors'
 
 const IMAGE_SIZE = 28
@@ -40,15 +43,20 @@ const Image = styled.img`
   border-radius: 0.3em;
 `
 
-export const SearchHit = ({ type, objectID, imageUrl, selectHit, ...hit }) => {
+export const SearchHit = ({
+  type,
+  objectID,
+  imageUrl,
+  selectHit,
+  _highlightResult,
+  ...hit
+}) => {
   const { language } = useContext(ContextLang)
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,
-    time:
-      'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MjEuMTI3IiBoZWlnaHQ9IjYyMS4xMjciIHZpZXdCb3g9Ijg5LjQzNyAtMTAuNTYzIDYyMS4xMjcgNjIxLjEyNyI+DQogIDxwYXRoIGZpbGw9IiNEQURCREMiIGQ9Ik0xMDkuNDM3IDEwaDU4MS4xMjd2NTgwLjU2MkgxMDkuNDM3eiIvPg0KICA8cGF0aCBmaWxsPSIjRjNGNEY0IiBkPSJNODkuNDM3LTEwLjU2M2g2MjEuMTI3djYyMS4xMjdIODkuNDM3Vi0xMC41NjN6bTM4MC45MDkgMjU5LjYybC04LjE4NS00Ny44MzEtMTY3LjUzMSAyOS40MTUgMjQuNTUzIDEzOS45MDggMTYuNjI3LTIuODEzdjEyLjAyMWgxNzAuMDg3di0xMzAuN2gtMzUuNTUxek0zMzUuODExIDM1My42NjZsLTUuMzcxIDEuMDIxLTE5Ljk1LTExMi43OTQgMTQwLjQxOS0yNC44MTIgNS42MjggMzEuOTc0SDMzNS44MTF2MTA0LjYxMXptMTU2LjI3NiAxMi4yNzdIMzQ5LjYyMVYyNjIuODY4aDE0Mi40NjZ2MTAzLjA3NXptLTEzMy4yNTktOTMuODY4djc2LjQ3NGwyOC45MDMtMTkuMTgxIDE3LjkwMyAxMS4yNTIgNDMuNDgtNDcuODI5IDUuNjI5IDIuMzAxIDI4LjEzNCAzMi40ODV2LTU1LjUwMkgzNTguODI4em0yNy42MjMgMzIuOTkzYy02LjY0OCAwLTEyLjI3Ni01LjYyNi0xMi4yNzYtMTIuMjc3IDAtNi42NSA1LjYyOC0xMi4yNzkgMTIuMjc2LTEyLjI3OSA2LjY1MSAwIDEyLjI3NiA1LjYyNiAxMi4yNzYgMTIuMjc5LjAwMiA2LjY1MS01LjYyNSAxMi4yNzctMTIuMjc2IDEyLjI3N3oiLz4NCjwvc3ZnPg==',
-    event:
-      'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MjEuMTI3IiBoZWlnaHQ9IjYyMS4xMjciIHZpZXdCb3g9Ijg5LjQzNyAtMTAuNTYzIDYyMS4xMjcgNjIxLjEyNyI+DQogIDxwYXRoIGZpbGw9IiNEQURCREMiIGQ9Ik0xMDkuNDM3IDEwaDU4MS4xMjd2NTgwLjU2MkgxMDkuNDM3eiIvPg0KICA8cGF0aCBmaWxsPSIjRjNGNEY0IiBkPSJNODkuNDM3LTEwLjU2M2g2MjEuMTI3djYyMS4xMjdIODkuNDM3Vi0xMC41NjN6bTM4MC45MDkgMjU5LjYybC04LjE4NS00Ny44MzEtMTY3LjUzMSAyOS40MTUgMjQuNTUzIDEzOS45MDggMTYuNjI3LTIuODEzdjEyLjAyMWgxNzAuMDg3di0xMzAuN2gtMzUuNTUxek0zMzUuODExIDM1My42NjZsLTUuMzcxIDEuMDIxLTE5Ljk1LTExMi43OTQgMTQwLjQxOS0yNC44MTIgNS42MjggMzEuOTc0SDMzNS44MTF2MTA0LjYxMXptMTU2LjI3NiAxMi4yNzdIMzQ5LjYyMVYyNjIuODY4aDE0Mi40NjZ2MTAzLjA3NXptLTEzMy4yNTktOTMuODY4djc2LjQ3NGwyOC45MDMtMTkuMTgxIDE3LjkwMyAxMS4yNTIgNDMuNDgtNDcuODI5IDUuNjI5IDIuMzAxIDI4LjEzNCAzMi40ODV2LTU1LjUwMkgzNTguODI4em0yNy42MjMgMzIuOTkzYy02LjY0OCAwLTEyLjI3Ni01LjYyNi0xMi4yNzYtMTIuMjc3IDAtNi42NSA1LjYyOC0xMi4yNzkgMTIuMjc2LTEyLjI3OSA2LjY1MSAwIDEyLjI3NiA1LjYyNiAxMi4yNzYgMTIuMjc5LjAwMiA2LjY1MS01LjYyNSAxMi4yNzctMTIuMjc2IDEyLjI3N3oiLz4NCjwvc3ZnPg==',
+    time: DefaultImgUrl,
+    event: DefaultImgUrl,
   }
 
   const imgSrc = imageUrl
@@ -57,7 +65,11 @@ export const SearchHit = ({ type, objectID, imageUrl, selectHit, ...hit }) => {
 
   return (
     <Wrapper onClick={() => selectHit(objectID)} indexType={type}>
-      <span>{hit[`name_${language}`]}</span>
+      <Highlighter
+        searchWords={_highlightResult[`name_${language}`].matchedWords}
+        autoEscape={true}
+        textToHighlight={hit[`name_${language}`]}
+      />
       <Image src={imgSrc} />
     </Wrapper>
   )
