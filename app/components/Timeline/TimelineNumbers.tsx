@@ -65,7 +65,7 @@ export const TimelineNumbers: React.FC<TimelineNumbersProps> = ({
   const numbers = []
 
   for (let i = 0; i <= startQuotient; i += 1) {
-    numbers.push((numberWidth / scale) * (startQuotient - i))
+    numbers.push((numberWidth / scale) * (startQuotient - i) * -1)
   }
 
   for (let i = 1; i <= endQuotient; i += 1) {
