@@ -41,8 +41,9 @@ export const Scaling: React.FC = () => {
     <Wrapper>
       <Range
         type="range"
-        min={1}
-        max={9}
+        min={2}
+        max={6}
+        step={1}
         value={valueKey}
         aria-label={T('ui.changeScaling')}
         onChange={handleChange}

@@ -4,113 +4,92 @@ import styled from '@emotion/styled'
 import { shades } from '../../js/colors'
 
 interface WrapperProps {
-  width: number
-  startYear: number
-  endYear: number
-  scale: number
+  paddingLeft: number
 }
 
 const Wrapper = styled.div<WrapperProps>`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${({ width }) => `${width}px`};
+  display: flex;
   height: 100%;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    background-size: ${({ scale }) => `${scale * 100}px`};
-  }
-
-  &::before {
-    left: 0;
-    width: ${({ scale, startYear }) => `${scale * startYear}px`};
-    background-image: linear-gradient(
-      to left,
-      transparent calc(100% - 1px),
-      ${shades.cb3} calc(100% - 1px)
-    );
-    background-position-x: right;
-  }
-
-  &::after {
-    left: ${({ scale, startYear }) => `${scale * startYear}px`};
-    width: ${({ scale, endYear }) => `${scale * endYear + 1}px`};
-    background-image: linear-gradient(
-      to right,
-      ${shades.cb3} 1px,
-      transparent 1px
-    );
-    background-position-x: 0;
-  }
-`
-
-const Numbers = styled.div`
-  position: sticky;
-  top: 0.25em;
-  display: flex;
-  padding-right: 17px;
-  padding-left: 5px;
-`
-
-const NumbersBlock = styled.div`
-  display: flex;
+  padding-left: ${({ paddingLeft }) => `${paddingLeft}px`};
 `
 
 interface NumberProps {
-  scale?: number
+  width: number
+  number: number
 }
 
 const Number = styled.div<NumberProps>`
-  width: ${({ scale }) => `${scale * 100}px`};
-  padding-left: 0;
+  flex-shrink: 0;
+  width: ${({ width, number }) => `${number === 0 ? width - 1 : width}px`};
   font-family: monospace;
   font-size: 12px;
   color: ${shades.cb2};
+  border-left: 1px solid ${shades.cb2};
 
-  [data-type='positive'] > &:first-of-type {
-    width: ${({ scale }) => `${scale * 100 - 1}px`};
+  &::before {
+    content: ${({ number }) => `"${number === 0 ? 1 : number}"`};
+    display: block;
+    margin: 0.25em;
+    white-space: nowrap;
   }
 `
 
-export const TimelineNumbers: React.FC<WrapperProps> = ({
-  width,
+interface TimelineNumbersProps {
+  startYear: number
+  endYear: number
+  scale: number
+}
+
+export const TimelineNumbers: React.FC<TimelineNumbersProps> = ({
   startYear,
   endYear,
   scale,
 }) => {
-  const scaleNumberNegativ = []
-  for (let i = 0; i <= startYear / 100; i += 1) {
-    scaleNumberNegativ.push(
-      <Number scale={scale} key={`pos${i}`}>
-        {i * -100}
-      </Number>,
-    )
+  const numberWidth = 100 // TODO: make adjustable
+
+  const startIsNegative = startYear <= 0
+  const endIsNegative = endYear <= 0
+
+  const start = (startIsNegative ? startYear * -1 : startYear) * scale
+  const startRemainder = start % numberWidth
+  const startQuotient = Math.floor(start / numberWidth)
+
+  const end = (endIsNegative ? endYear * -1 : endYear) * scale
+  const endRemainder = end % numberWidth
+  const endQuotient =
+    Math.floor(end / numberWidth) - (endRemainder === 0 ? 1 : 0)
+
+  const numbers = []
+
+  for (let i = 0; i <= startQuotient; i += 1) {
+    numbers.push((numberWidth / scale) * (startQuotient - i) * -1)
   }
 
-  const scaleNumberPositive = []
-  for (let i = 1; i <= endYear / 100; i += 1) {
-    scaleNumberPositive.push(
-      <Number scale={scale} key={`neg${i}`}>
-        {i * 100}
-      </Number>,
-    )
+  for (let i = 1; i <= endQuotient; i += 1) {
+    numbers.push((numberWidth / scale) * i)
   }
+
+  const smallerLastNumer = endRemainder !== 0
+  const lastNumberWidth = smallerLastNumer && endRemainder
+
+  const getWidth = (number, key) => {
+    if (number === 0) return numberWidth - 1
+    if (key === numbers.length - 1 && smallerLastNumer) return lastNumberWidth
+    return numberWidth
+  }
+
   return (
-    <Wrapper
-      width={width}
-      startYear={startYear}
-      endYear={endYear}
-      scale={scale}
-    >
-      <Numbers>
-        <NumbersBlock>{scaleNumberNegativ.reverse()}</NumbersBlock>
-        <NumbersBlock data-type="positive">{scaleNumberPositive}</NumbersBlock>
-      </Numbers>
+    <Wrapper paddingLeft={startRemainder}>
+      {numbers.map((number, key) => (
+        <Number
+          data-key={key}
+          width={getWidth(number, key)}
+          number={number === 0 ? 1 : number}
+        />
+      ))}
     </Wrapper>
   )
 }

@@ -57,7 +57,6 @@ export const Timeline: React.FC<TimelineProps> = React.forwardRef(
     return (
       <Wrapper ref={mergeRefs([ref, localRef])} width={width} scale={scale}>
         <TimelineNumbers
-          width={width}
           startYear={YEARS_BEFORE_ZERO}
           endYear={YEARS_AFTER_ZERO}
           scale={scale}
