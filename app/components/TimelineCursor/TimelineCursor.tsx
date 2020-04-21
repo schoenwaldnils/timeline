@@ -1,10 +1,11 @@
 /** @jsx jsx */
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from '@emotion/styled'
 import { jsx } from '@emotion/core'
 
 import { pixelToYear } from '../../js/calcTimes'
 import { ourTime } from '../../js/utils'
+import { ContextScale } from '../ContextScale'
 
 const Wrapper = styled.div`
   position: absolute;
@@ -32,11 +33,12 @@ interface TimelineCursorProps {
 export const TimelineCursor: React.FC<TimelineCursorProps> = ({
   pixelYear,
 }) => {
+  const { scale } = useContext(ContextScale)
   if (!pixelYear || pixelYear === 0) return null
 
   const properties = {
     '--TimelineCursor-left': `${pixelYear}px`,
-    '--TimelineCursor-year': `'${ourTime(pixelToYear(pixelYear))}'`,
+    '--TimelineCursor-year': `'${ourTime(pixelToYear(pixelYear / scale))}'`,
   } as React.CSSProperties
 
   return <Wrapper style={properties} />

@@ -24,9 +24,9 @@ export const formatTimelineData = (data, scale: number) => {
     ...e,
     zIndex: formatedEvents.length - key,
   }))
-  const positionedEvents = positionEvents(indexedEvents)
 
-  const scaledEvents = scaleNumbers(positionedEvents, scale, ['pixelYear'])
+  const scaledEvents = scaleNumbers(indexedEvents, scale, ['pixelYear'])
+  const positionedEvents = positionEvents(scaledEvents)
 
   // TIMESPANS
   const formatedTimespans = [
@@ -41,18 +41,17 @@ export const formatTimelineData = (data, scale: number) => {
   ]
   const filteredTimespans = formatedTimespans.filter(t => showInTimeline(t))
   const sortetTimespans = arraySort(filteredTimespans, 'startYear')
-  const positionedTimes = positionTimes(sortetTimespans)
-
-  const scaledTimespans = scaleNumbers(positionedTimes, scale, [
+  const scaledTimespans = scaleNumbers(sortetTimespans, scale, [
     'pixelStart',
     'pixelEnd',
     'pixelDuration',
     'startBlurriness',
     'endBlurriness',
   ])
+  const positionedTimes = positionTimes(scaledTimespans)
 
   return {
-    events: scaledEvents,
-    timespans: scaledTimespans,
+    events: positionedEvents,
+    timespans: positionedTimes,
   }
 }
