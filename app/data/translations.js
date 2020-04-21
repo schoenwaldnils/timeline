@@ -90,13 +90,17 @@ export default {
       en: 'change language',
       de: 'Sprache ändern',
     },
+    language: {
+      en: 'English',
+      de: 'Deutsch',
+    },
     search: {
       en: 'Search',
       de: 'Suchen',
     },
-    language: {
-      en: 'English',
-      de: 'Deutsch',
+    changeScaling: {
+      en: 'change scaling',
+      de: 'Skalierung ändern',
     },
   },
 }
