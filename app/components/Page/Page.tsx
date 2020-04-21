@@ -6,7 +6,7 @@ import { Timeline } from '../Timeline'
 import { Sidebar, SidebarContext } from '../Sidebar'
 import { useScrollPosition } from '../../customHooks/useScrollPosition'
 import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
-// import { Scaling } from '../Scaling'
+import { Scaling } from '../Scaling'
 
 const StyledPage = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ export const Page = () => {
           <Timeline {...{ events, timespans }} ref={elementRef} />
         </TimelineWrapper>
         <Sidebar {...useContext(SidebarContext)} />
-        {/* <Scaling /> */}
+        <Scaling />
       </Content>
     </StyledPage>
   )

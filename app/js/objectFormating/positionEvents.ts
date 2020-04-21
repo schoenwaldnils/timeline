@@ -2,24 +2,24 @@ export function positionEvents(events = []) {
   const occupiedSpace = [0]
 
   return events.map(event => {
-    const { pixelYear: start, name } = event
+    const { pixelYear: pixelStart, name } = event
+    const start = pixelStart
 
-    const endWithMargin = start + name.length * 8 + 10
+    const endWithMargin = Math.floor(start + name.length * 8 + 10)
 
-    let rowIndex = 0
-    ;(function testRow(row = 0) {
+    function testRow(row = 0) {
       if (Number.isInteger(occupiedSpace[row])) {
         if (start >= occupiedSpace[row]) {
           occupiedSpace[row] = endWithMargin
-          rowIndex = row
-        } else {
-          testRow(row + 1)
+          return row
         }
-      } else {
-        occupiedSpace.push(endWithMargin)
-        rowIndex = row
+        return testRow(row + 1)
       }
-    })()
+      occupiedSpace.push(endWithMargin)
+      return row
+    }
+
+    const rowIndex = testRow()
 
     return {
       ...event,

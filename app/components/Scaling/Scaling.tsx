@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 import { ContextScale } from '../ContextScale'
 import { zIndexes } from '../../data/constants'
+import { T } from '../../js/translate'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -40,9 +41,11 @@ export const Scaling: React.FC = () => {
     <Wrapper>
       <Range
         type="range"
-        min={1}
-        max={9}
+        min={2}
+        max={6}
+        step={1}
         value={valueKey}
+        aria-label={T('ui.changeScaling')}
         onChange={handleChange}
       />
     </Wrapper>

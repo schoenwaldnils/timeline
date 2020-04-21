@@ -3,22 +3,22 @@ export function positionTimes(times) {
   const positionedTimes = times.map(time => {
     const { pixelStart: start, pixelEnd: end } = time
 
-    const endWithMargin = end + 10
+    const isTooSmall = end - start < 30
+    const endWithMargin = Math.floor(isTooSmall ? start + 50 : end + 10)
 
-    let rowIndex = 0
-    ;(function testRow(row = 0) {
+    function testRow(row = 0) {
       if (Number.isInteger(occupiedSpace[row])) {
         if (start >= occupiedSpace[row]) {
           occupiedSpace[row] = endWithMargin
-          rowIndex = row
-        } else {
-          testRow(row + 1)
+          return row
         }
-      } else {
-        occupiedSpace.push(endWithMargin)
-        rowIndex = row
+        return testRow(row + 1)
       }
-    })()
+      occupiedSpace.push(endWithMargin)
+      return row
+    }
+
+    const rowIndex = testRow()
 
     return {
       ...time,
