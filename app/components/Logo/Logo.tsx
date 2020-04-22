@@ -23,6 +23,7 @@ const StyledLogo = styled(LogoFull)`
 
   @media ${viewportsJs.sm} {
     display: block;
+    width: auto;
     font-size: 2.5rem;
   }
 `
@@ -31,7 +32,7 @@ export const Logo = () => {
   return (
     <Wrapper>
       <StyledIcon />
-      <StyledLogo width="auto" />
+      <StyledLogo width={null} />
     </Wrapper>
   )
 }
