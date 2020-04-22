@@ -11,6 +11,9 @@ module.exports = (config = {}) => {
             plugins: [
               {
                 cleanupIDs: false,
+                addAttributesToSVGElement: {
+                  attributes: ['preserveAspectRatio="xMinYMid meet"'],
+                },
               },
             ],
           },
