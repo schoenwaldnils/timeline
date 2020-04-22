@@ -12,14 +12,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
-      - name: node & npm install
-        run: |
-          nvm install
-          rm -rf ./node_modules
-          npm ci
+      - name: npm install
+        run: npm ci
 
       - name: lint js
         run: npm run lint:js
@@ -32,14 +35,17 @@ jobs:
     env:
       NODE_ENV: production
     steps:
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
-      - name: node & npm install
-        run: |
-          nvm install
-          rm -rf ./node_modules
-          npm ci
+      - name: npm install
+        run: npm ci
 
       - name: export
         run: npm run export
@@ -60,14 +66,17 @@ jobs:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
     steps:
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
-      - name: node & npm install
-        run: |
-          nvm install
-          rm -rf ./node_modules
-          npm ci
+      - name: npm install
+        run: npm ci
 
       - name: Percy Test
         uses: percy/storybook-action@v0.1.2
