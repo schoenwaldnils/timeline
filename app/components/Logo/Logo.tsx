@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { ReactComponent as LogoIcon } from './logo.svg'
-import { H1 } from '../Typography'
+import { ReactComponent as LogoIcon } from './icon.svg'
+import { ReactComponent as LogoFull } from './logo.svg'
 
 import { viewportsJs } from '../../js/viewports'
 
@@ -18,12 +18,12 @@ const StyledIcon = styled(LogoIcon)`
   }
 `
 
-const StyledH1 = styled(H1)`
+const StyledLogo = styled(LogoFull)`
   display: none;
-  margin-bottom: 0;
 
   @media ${viewportsJs.sm} {
     display: block;
+    font-size: 2.5rem;
   }
 `
 
@@ -31,7 +31,7 @@ export const Logo = () => {
   return (
     <Wrapper>
       <StyledIcon />
-      <StyledH1>Timeline</StyledH1>
+      <StyledLogo width="auto" />
     </Wrapper>
   )
 }
