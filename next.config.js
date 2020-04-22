@@ -3,7 +3,13 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 const sharedConfig = require('./webpack.sharedConfig.js')
 
-module.exports = withBundleAnalyzer({
+let config = {
   exportTrailingSlash: true,
   webpack: sharedConfig,
-})
+}
+
+if (process.env.ANALYZE === 'true') {
+  config = withBundleAnalyzer(config)
+}
+
+module.exports = config
