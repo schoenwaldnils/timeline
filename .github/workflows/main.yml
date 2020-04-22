@@ -12,8 +12,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
       - name: npm install
         run: npm ci
@@ -29,8 +35,14 @@ jobs:
     env:
       NODE_ENV: production
     steps:
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
       - name: npm install
         run: npm ci
@@ -54,8 +66,14 @@ jobs:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
     steps:
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
       - name: npm install
         run: npm ci
