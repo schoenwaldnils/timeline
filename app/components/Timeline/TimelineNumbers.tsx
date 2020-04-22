@@ -85,7 +85,7 @@ export const TimelineNumbers: React.FC<TimelineNumbersProps> = ({
     <Wrapper paddingLeft={startRemainder}>
       {numbers.map((number, key) => (
         <Number
-          data-key={key}
+          key={`timelineNumber-${number}`}
           width={getWidth(number, key)}
           number={number === 0 ? 1 : number}
         />
