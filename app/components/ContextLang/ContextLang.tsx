@@ -29,7 +29,7 @@ export const LanguageProvider: React.FC = ({ children }) => {
     if (locale !== language) {
       changeLanguage(locale)
     }
-  }, [])
+  }, [language])
 
   return (
     <ContextLang.Provider

@@ -1,12 +1,12 @@
 import React from 'react'
 import App from 'next/app'
-import { ApolloProvider } from '@apollo/react-hooks'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { LanguageProvider } from '../app/components/ContextLang'
 import { ScaleProvider } from '../app/components/ContextScale'
+import { SearchProvider } from '../app/components/Search'
 import { SidebarProvider } from '../app/components/Sidebar'
-import { client } from '../app/js/cfGraphQL'
+import { withApollo } from '../app/js/apollo'
 
 class TimelineApp extends App {
   render() {
@@ -14,16 +14,16 @@ class TimelineApp extends App {
     return (
       <LanguageProvider>
         <ScaleProvider>
-          <ApolloProvider client={client}>
-            <SidebarProvider>
+          <SidebarProvider>
+            <SearchProvider>
               <GlobalStyles />
               <Component {...pageProps} />
-            </SidebarProvider>
-          </ApolloProvider>
+            </SearchProvider>
+          </SidebarProvider>
         </ScaleProvider>
       </LanguageProvider>
     )
   }
 }
 
-export default TimelineApp
+export default withApollo(TimelineApp)

@@ -22,6 +22,9 @@ export const Meta = ({ url, type, title, description, image }) => (
     <meta property="og:image:height" content="200" />
 
     <Favicons />
+
+    <link rel="preconnect" href="https://graphql.contentful.com" />
+    <link rel="preconnect" href="https://p7r800rwy1-dsn.algolia.net" />
   </>
 )
 
@@ -29,6 +32,6 @@ Meta.defaultProps = {
   url: 'https://timeline.schoenwald.media',
   type: 'website',
   title: 'Timeline',
-  description: 'Overview of biblical Persons and events',
-  image: 'https://timeline.schoen.world/static/assets/images/favicon.png',
+  description: 'Overview of biblical persons and events',
+  image: 'https://timeline.schoen.world/assets/images/favicon.png',
 }

@@ -86,5 +86,21 @@ export default {
       en: 'Close sidebar',
       de: 'Seitenleiste schließen',
     },
+    changeLanguage: {
+      en: 'change language',
+      de: 'Sprache ändern',
+    },
+    language: {
+      en: 'English',
+      de: 'Deutsch',
+    },
+    search: {
+      en: 'Search',
+      de: 'Suchen',
+    },
+    changeScaling: {
+      en: 'change scaling',
+      de: 'Skalierung ändern',
+    },
   },
 }

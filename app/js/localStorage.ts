@@ -11,11 +11,12 @@ export const setLocalStorage = (key: string, value: string | number) => {
 }
 
 export const getLocalStorage = (key: string): string => {
+  if (typeof window === 'undefined') return null
   return window.localStorage.getItem(key)
 }
 
 export const getLocalStorageNumber = (key: string): number => {
-  return parseInt(getLocalStorage(key), 10)
+  return parseFloat(getLocalStorage(key))
 }
 
 export const removeLocalStorage = (key: string) => {

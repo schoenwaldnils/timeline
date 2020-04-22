@@ -1,4 +1,4 @@
-import { t } from './translate'
+import { T } from './translate'
 
 export function getTimePeriod(startyear, endyear) {
   let calcedPeriod = endyear - startyear
@@ -18,7 +18,7 @@ export function htmlEntities(str) {
 
 export function ourTime(year: number): string {
   if (year <= 0) {
-    return `${year * -1} ${t('time.extension.negative')}`
+    return `${year * -1} ${T('time.extension.negative')}`
   }
-  return `${year} ${t('time.extension.positive')}`
+  return `${year} ${T('time.extension.positive')}`
 }

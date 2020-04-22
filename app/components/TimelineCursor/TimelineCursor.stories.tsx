@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from '@emotion/styled'
-import useMousePosition from '@react-hook/mouse-position'
+import { useMousePosition } from '../../customHooks/useMousePosition'
 
 import { TimelineCursor } from './TimelineCursor'
 
@@ -15,14 +15,12 @@ const Wrapper = styled.div`
 `
 
 export const Basic = () => {
-  const [mousePosition, ref] = useMousePosition()
+  const localRef = useRef(null)
+  const mousePosition = useMousePosition(localRef)
 
   return (
-    <Wrapper ref={ref}>
-      <TimelineCursor
-        pixelYear={mousePosition.x}
-        year={mousePosition.clientX}
-      />
+    <Wrapper ref={localRef}>
+      <TimelineCursor pixelYear={mousePosition.xElement} />
     </Wrapper>
   )
 }

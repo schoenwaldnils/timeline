@@ -7,7 +7,7 @@ import { RichText } from '../RichText'
 import { LinkToWOL } from './ContentLinkWol'
 
 import { ourTime } from '../../js/utils'
-import { t } from '../../js/translate'
+import { T } from '../../js/translate'
 
 export interface ContentTimeProps {
   id: string
@@ -31,14 +31,14 @@ export const ContentTime: React.FC<ContentTimeProps> = ({
   wolLink,
 }) => {
   let list = {
-    [t('time.start')]: ourTime(startYear),
-    [t('time.end')]: endYear ? ourTime(endYear) : t('time.ongoing'),
+    [T('time.start')]: ourTime(startYear),
+    [T('time.end')]: endYear ? ourTime(endYear) : T('time.ongoing'),
   }
 
   if (duration) {
     list = {
       ...list,
-      [t('time.duration')]: `${duration} ${t('time.years')}`,
+      [T('time.duration')]: `${duration} ${T('time.years')}`,
     }
   }
 

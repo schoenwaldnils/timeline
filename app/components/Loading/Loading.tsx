@@ -31,3 +31,25 @@ const Loader = styled.div`
 `
 
 export const Loading = () => <Loader />
+
+const loadingDots = keyframes`
+  0%,
+  100% {
+    content: '.';
+  }
+  33% {
+    content: '..';
+  }
+  67% {
+    content: '...';
+  }
+`
+
+const LoaderDots = styled.div`
+  ::before {
+    content: '...';
+    animation: ${loadingDots} 1s infinite linear;
+  }
+`
+
+export const LoadingDots = () => <LoaderDots />

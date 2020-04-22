@@ -7,7 +7,7 @@ import { H1 } from '../Typography'
 const Box = styled.div`
   margin-bottom: 1em;
 
-  :last-of-type {
+  :last-child {
     margin-bottom: 0;
   }
 `

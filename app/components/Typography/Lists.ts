@@ -8,7 +8,7 @@ export const UL = styled.ul`
   padding-left: 0;
   list-style: none;
 
-  :last-of-type {
+  :last-child {
     margin-bottom: 0;
   }
 
@@ -23,7 +23,7 @@ export const OL = styled.ol`
   list-style: none;
   counter-reset: ol;
 
-  :last-of-type {
+  :last-child {
     margin-bottom: 0;
   }
 `
@@ -41,10 +41,10 @@ export const LI = styled.li`
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 0.8em;
-    font-weight: 200;
-    line-height: calc(1.4em / 0.8);
+    font-weight: 600;
     color: ${themeColors.themeColor};
+    transform: scale(0.8);
+    transform-origin: left 65%;
   }
 
   ${UL} > &::before {

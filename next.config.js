@@ -1,5 +1,6 @@
-const withCSS = require('@zeit/next-css')
+const sharedConfig = require('./webpack.sharedConfig.js')
 
-module.exports = withCSS({
+module.exports = {
   exportTrailingSlash: true,
-})
+  webpack: sharedConfig,
+}

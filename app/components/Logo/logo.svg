@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="632px" height="156px" viewBox="0 0 632 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="78" cy="78" r="78"></circle>
+        <circle id="path-3" cx="78" cy="78" r="78"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo">
+            <g id="logo">
+                <g>
+                    <g id="right" transform="translate(417.000000, 42.000000)" fill="#000000">
+                        <polygon id="Path" points="214.85 72 174.95 72 174.95 0 214.85 0 214.85 7.96638655 183.95 7.96638655 183.95 30.4537815 213.05 30.4537815 213.05 38.3193277 183.95 38.3193277 183.95 64.0336134 214.85 64.0336134"></polygon>
+                        <path d="M156.55,72 L146.05,72 L107.85,12.2016807 L107.45,12.2016807 C107.583334,14.5546336 107.749999,17.4789741 107.95,20.9747899 C108.150001,24.4706057 108.25,28.0672084 108.25,31.7647059 L108.25,72 L99.95,72 L99.95,0 L110.35,0 L148.45,59.5966387 L148.85,59.5966387 C148.783333,58.521003 148.7,56.9075738 148.6,54.7563025 C148.5,52.6050313 148.400001,50.2521136 148.3,47.697479 C148.2,45.1428444 148.15,42.7899267 148.15,40.6386555 L148.15,0 L156.55,0 L156.55,72 Z" id="Path"></path>
+                        <polygon id="Path" points="81.15 72 55.35 72 55.35 66.7563025 63.75 64.8403361 63.75 7.2605042 55.35 5.24369748 55.35 0 81.15 0 81.15 5.24369748 72.75 7.2605042 72.75 64.8403361 81.15 66.7563025"></polygon>
+                        <polygon id="Path" points="0 72 0 0 8.95522388 0 8.95522388 63.9327731 40 63.9327731 40 72"></polygon>
+                    </g>
+                    <g id="left" transform="translate(0.000000, 42.000000)" fill="#000000">
+                        <polygon id="Path" points="214.95 72 175.05 72 175.05 0 214.95 0 214.95 7.96638655 184.05 7.96638655 184.05 30.4537815 213.15 30.4537815 213.15 38.3193277 184.05 38.3193277 184.05 64.0336134 214.95 64.0336134"></polygon>
+                        <polygon id="Path" points="128 72 111 11 111 72 103 72 103 0 116 0 132 58 150 0 162 0 162 72 154 72 154 11 136 72"></polygon>
+                        <polygon id="Path" points="88.55 72 62.75 72 62.75 66.7563025 71.15 64.8403361 71.15 7.2605042 62.75 5.24369748 62.75 0 88.55 0 88.55 5.24369748 80.15 7.2605042 80.15 64.8403361 88.55 66.7563025"></polygon>
+                        <polygon id="Path" points="28.45 72 19.45 72 19.45 7.96638655 0 7.96638655 0 0 48 0 48 7.96638655 28.45 7.96638655"></polygon>
+                    </g>
+                    <g id="Icon" transform="translate(238.000000, 0.000000)">
+                        <g>
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Mask" fill="#FFFFFF" xlink:href="#path-1"></use>
+                            <polygon id="Path" fill="#777777" fill-rule="nonzero" mask="url(#mask-2)" points="60 96 60 60 156 60 156 96"></polygon>
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <circle stroke="#B5B5B5" stroke-width="36" cx="78" cy="78" r="60"></circle>
+                            <polygon id="Minute" fill="#41AD95" fill-rule="nonzero" mask="url(#mask-4)" points="96 96 60 96 60 0 96 0"></polygon>
+                            <rect id="Center" fill="#000000" mask="url(#mask-4)" x="60" y="60" width="36" height="36"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
