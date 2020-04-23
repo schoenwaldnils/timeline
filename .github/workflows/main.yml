@@ -67,23 +67,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-
-      - name: Install nvm
-        shell: bash -l {0}
-        run: nvm install
-
-      - name: node & npm install
-        run: |
-          rm -rf ./node_modules
-          npm ci
 
       - name: Percy Test
         uses: percy/storybook-action@v0.1.2
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
         with:
-          custom-command: 'npm run snapshot'
+          percy-flags: --widths=320 -t=500
 
   #
   #
