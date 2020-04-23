@@ -68,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - run: npm i @storybook/react
+      - run: npm i @storybook/react @percy/storybook
 
       - name: Percy Test
         uses: percy/storybook-action@v0.1.2
