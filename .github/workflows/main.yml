@@ -67,7 +67,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: docker://buildkite/puppeteer:lastest
+      - uses: docker://buildkite/puppeteer:latest
 
       - name: npm install
         run: npm ci
