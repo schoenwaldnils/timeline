@@ -17,7 +17,7 @@
     "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "snapshot": "build-storybook && percy-storybook --widths=320 -t=500",
+    "snapshot": "build-storybook && percy-storybook --widths=320 -t=750",
     "analyze": "cross-env ANALYZE=true next build"
   },
   "lint-staged": {
