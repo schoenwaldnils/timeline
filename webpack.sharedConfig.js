@@ -10,7 +10,7 @@ module.exports = (config = {}) => {
           svgoConfig: {
             plugins: [
               {
-                cleanupIDs: false,
+                // cleanupIDs: false,
                 addAttributesToSVGElement: {
                   attributes: ['preserveAspectRatio="xMinYMid meet"'],
                 },
