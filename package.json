@@ -17,7 +17,7 @@
     "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "snapshot": "build-storybook && percy-storybook --widths=320 -t=500",
+    "snapshot": "build-storybook && percy-storybook --widths=320 -t=750",
     "analyze": "cross-env ANALYZE=true next build"
   },
   "lint-staged": {
@@ -47,7 +47,7 @@
     "@types/node": "13.9.2",
     "@types/react": "16.9.34",
     "accept-language": "3.0.18",
-    "algoliasearch": "4.1.0",
+    "algoliasearch": "4.2.0",
     "apollo-boost": "0.4.7",
     "array-sort": "1.0.0",
     "color": "3.1.2",
@@ -86,7 +86,7 @@
     "babel-loader": "8.1.0",
     "cli-real-favicon": "0.0.8",
     "lint-staged": "10.1.7",
-    "stylelint": "13.3.2",
+    "stylelint": "13.3.3",
     "stylelint-config-schoenwaldnils": "3.0.0",
     "stylelint-processor-styled-components": "1.10.0"
   },
