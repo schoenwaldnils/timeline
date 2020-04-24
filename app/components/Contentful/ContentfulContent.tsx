@@ -17,22 +17,18 @@ const contentfulFunctions = {
   person: {
     formatData: formatPerson,
     Component: ContentPerson,
-    Loading,
   },
   time: {
     formatData: formatTime,
     Component: ContentTime,
-    Loading,
   },
   event: {
     formatData: formatEvent,
     Component: ContentEvent,
-    Loading,
   },
   parent: {
     formatData: formatParent,
     Component: ({ name }) => <>{name}</>,
-    Loading: LoadingDots,
   },
 }
 
@@ -50,7 +46,10 @@ export const ContentfulContent: React.FC<Props> = ({
     variables: { id, locale: language },
   })
 
-  if (loading) return <Loading />
+  if (loading) {
+    if (isParent) return <LoadingDots />
+    return <Loading />
+  }
   if (error) return <div>Error! ${error}</div>
 
   const [type] = Object.keys(data).filter(
