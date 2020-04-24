@@ -1,4 +1,4 @@
-import { addDecorator } from '@storybook/react'
+import { addDecorator } from '@storybook/preact'
 import styled from '@emotion/styled'
 import { ApolloProvider } from '@apollo/react-hooks'
 
