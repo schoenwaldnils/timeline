@@ -10,6 +10,12 @@ const Wrapper = styled.input`
   padding: 0.5em 0.75em;
   border: 1px solid ${shades.cb6};
   border-radius: 4px;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+
+  :focus {
+    outline: 0;
+  }
 `
 
 export const SearchBar = ({ searchValue, setSearchValue }) => {

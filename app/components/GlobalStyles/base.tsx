@@ -10,8 +10,7 @@ export default css`
   }
 
   *:focus {
-    outline: 0;
-    box-shadow: 0 0 4px 1px ${colors.yellow};
+    outline: solid 2px ${colors.yellow};
   }
 
   html {
