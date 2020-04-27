@@ -1,13 +1,13 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from '@emotion/styled'
 
 import { T } from '../../js/translate'
-import { ContextLang } from '../ContextLang'
 import { colors, shades } from '../../js/colors'
 import translations from '../../data/translations'
 import { SUPPORTED_LANGUAGES, zIndexes } from '../../data/constants'
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { viewportsJs } from '../../js/viewports'
+import { useStore, SET_LANG } from '../Store'
 
 const Wrapper = styled.div`
   position: relative;
@@ -68,7 +68,7 @@ const Button = styled.button`
 `
 
 export const LangSwitch: React.FC = () => {
-  const { language, changeLanguage } = useContext(ContextLang)
+  const [state, dispatch] = useStore()
   const [isActive, setIsActive] = useState(false)
   const ref = useRef()
 
@@ -79,11 +79,11 @@ export const LangSwitch: React.FC = () => {
   const toggleIsActive = () => setIsActive(!isActive)
 
   const handleButtonClick = lang => {
-    changeLanguage(lang)
+    dispatch({ type: SET_LANG, lang })
     setIsActive(false)
   }
 
-  if (!language) return null
+  if (!state.lang) return null
 
   return (
     <Wrapper ref={ref}>
@@ -109,7 +109,7 @@ export const LangSwitch: React.FC = () => {
           {SUPPORTED_LANGUAGES.map(lang => (
             <Button
               key={lang}
-              disabled={lang === language}
+              disabled={lang === state.lang}
               onClick={() => handleButtonClick(lang)}
             >
               {translations.ui.language[lang]}

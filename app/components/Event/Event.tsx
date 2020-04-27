@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
-
-import { SidebarContext } from '../Sidebar/SidebarContext'
 
 import { colors, shades } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
+import { SET_SIDEBAR_ACTIVE, useStore } from '../Store'
 
 interface WrapperProps {
   pixelYear: number
@@ -63,7 +62,14 @@ export const Event: React.FC<EventProps> = ({
   rowIndex = 0,
   zIndex = zIndexes.event,
 }) => {
-  const { changeContent } = useContext(SidebarContext)
+  const [, dispatch] = useStore()
+
+  const changeContent = newId => {
+    dispatch({
+      type: SET_SIDEBAR_ACTIVE,
+      contentId: newId,
+    })
+  }
   return (
     <Wrapper
       id={id}

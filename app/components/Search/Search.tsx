@@ -1,15 +1,15 @@
-import React, { useRef, useContext, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import { connectSearchBox } from 'react-instantsearch-dom'
 import { IoIosSearch } from 'react-icons/io'
 
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
-import { SidebarContext } from '../Sidebar/SidebarContext'
 import { T } from '../../js/translate'
 
 import { zIndexes } from '../../data/constants'
 import { useClickOutside } from '../../customHooks/useClickOutside'
+import { useStore, SET_SIDEBAR_ACTIVE } from '../Store'
 
 const Wrapper = styled.div`
   position: relative;
@@ -36,8 +36,15 @@ const Icon = styled(IoIosSearch)`
 
 export const CustomSearch = ({ currentRefinement, refine }) => {
   const [isActive, setIsActive] = useState(false)
-  const { changeContent } = useContext(SidebarContext)
+  const [, dispatch] = useStore()
   const ref = useRef()
+
+  const changeContent = newId => {
+    dispatch({
+      type: SET_SIDEBAR_ACTIVE,
+      contentId: newId,
+    })
+  }
 
   useClickOutside(ref, () => {
     refine('')

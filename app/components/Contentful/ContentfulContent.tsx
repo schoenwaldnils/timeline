@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 
 import { Loading, LoadingDots } from '../Loading'
 import { ContentPerson, ContentTime, ContentEvent } from '../Content'
-import { ContextLang } from '../ContextLang'
 
 import { typeById } from '../../gql/typeById'
 import {
@@ -12,6 +11,7 @@ import {
   formatTime,
   formatEvent,
 } from '../../js/objectFormating/formatData'
+import { useStore } from '../Store'
 
 const contentfulFunctions = {
   person: {
@@ -41,9 +41,9 @@ export const ContentfulContent: React.FC<Props> = ({
   id,
   isParent = false,
 }) => {
-  const { language } = useContext(ContextLang)
+  const [state] = useStore()
   const { loading, error, data } = useQuery(typeById, {
-    variables: { id, locale: language },
+    variables: { id, locale: state.lang },
   })
 
   if (loading) {

@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
-
-import { SidebarContext } from '../Sidebar/SidebarContext'
 
 import { colors } from '../../js/colors'
 import { generateGradient } from './generateGradient'
 import { zIndexes } from '../../data/constants'
+import { useStore, SET_SIDEBAR_ACTIVE } from '../Store'
 
 const timeColors = {
   person: colors.green,
@@ -67,7 +66,14 @@ export const Timespan: React.FC<TimespanProps> = ({
   endBlurriness,
   rowIndex,
 }) => {
-  const { changeContent } = useContext(SidebarContext)
+  const [, dispatch] = useStore()
+
+  const changeContent = newId => {
+    dispatch({
+      type: SET_SIDEBAR_ACTIVE,
+      contentId: newId,
+    })
+  }
 
   const background = generateGradient(
     startBlurriness,
