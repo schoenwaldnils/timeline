@@ -1,17 +1,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { zIndexes } from '../../data/constants'
 import { T } from '../../js/translate'
 import { useStore, SET_SCALE } from '../Store'
 import { colors } from '../../js/colors'
-
-const Wrapper = styled.div`
-  position: fixed;
-  bottom: 1.5rem;
-  left: 1rem;
-  z-index: ${zIndexes.scale};
-`
 
 const Button = styled.button`
   display: flex;
@@ -35,7 +27,7 @@ const Button = styled.button`
   }
 `
 
-export const Scaling: React.FC = () => {
+export const Scaling: React.FC = props => {
   const [state, dispatch] = useStore()
   const map = {
     1: 0.0625,
@@ -71,7 +63,7 @@ export const Scaling: React.FC = () => {
   }
 
   return (
-    <Wrapper>
+    <div {...props}>
       <Button
         onClick={increaseScale}
         disabled={value >= MAX_SCALE}
@@ -86,6 +78,6 @@ export const Scaling: React.FC = () => {
       >
         -
       </Button>
-    </Wrapper>
+    </div>
   )
 }

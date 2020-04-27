@@ -10,6 +10,8 @@ import { Scaling } from '../Scaling'
 import { useStore, CLOSE_SIDEBAR } from '../Store'
 import { ContentfulContent } from '../Contentful'
 
+import { zIndexes } from '../../data/constants'
+
 const StyledPage = styled.div`
   display: grid;
   grid-template-areas:
@@ -36,6 +38,13 @@ const TimelineWrapper = styled.div`
   overflow: auto;
 `
 
+const ScalingPositioned = styled(Scaling)`
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1rem;
+  z-index: ${zIndexes.scale};
+`
+
 export const Page = () => {
   const [state, dispatch] = useStore()
   const [containerRef, elementRef] = useScrollPosition()
@@ -59,7 +68,7 @@ export const Page = () => {
           content={sidebarContent}
           closeSidebar={() => dispatch({ type: CLOSE_SIDEBAR })}
         />
-        <Scaling />
+        <ScalingPositioned />
       </Content>
     </StyledPage>
   )
