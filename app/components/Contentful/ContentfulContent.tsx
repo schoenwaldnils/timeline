@@ -50,7 +50,10 @@ export const ContentfulContent: React.FC<Props> = ({
     if (isParent) return <LoadingDots />
     return <Loading />
   }
-  if (error) return <div>Error! ${error}</div>
+  if (error) {
+    console.log(error)
+    return <div>Error!</div>
+  }
 
   const [type] = Object.keys(data).filter(
     key => data[key].items.length === 1 && key,

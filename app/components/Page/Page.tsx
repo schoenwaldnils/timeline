@@ -35,7 +35,9 @@ export const Page = () => {
     data: { events, timespans },
   } = useContentfulTimeline()
 
-  const sidebarContent = <ContentfulContent id={state.sidebar.contentId} />
+  const sidebarContent = state.sidebar.contentId ? (
+    <ContentfulContent id={state.sidebar.contentId} />
+  ) : null
 
   return (
     <StyledPage>

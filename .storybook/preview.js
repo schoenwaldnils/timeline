@@ -2,7 +2,7 @@ import { addDecorator } from '@storybook/react'
 import styled from '@emotion/styled'
 import { ApolloProvider } from '@apollo/react-hooks'
 
-import { StoreProvider } from '../app/components/Store'
+import { StoreProvider } from '../app/components/Store/StoreProvider'
 import { SearchProvider } from '../app/components/Search'
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { initApolloClient } from '../app/js/apollo'
