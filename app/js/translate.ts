@@ -1,15 +1,13 @@
-import { useContext } from 'react'
-
-import { ContextLang } from '../components/ContextLang'
 import translations from '../data/translations'
+import { useStore } from '../components/Store'
 
 export const T = (id: string): string => {
-  const { language } = useContext(ContextLang)
+  const [state] = useStore()
   const selectors = id.split('.')
   let string = translations
   selectors.forEach(selector => {
     string = string[selector]
   })
 
-  return string[language]
+  return string[state.lang]
 }

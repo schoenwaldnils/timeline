@@ -10,7 +10,7 @@ export const setLocalStorage = (key: string, value: string | number) => {
   window.localStorage.setItem(key, stringValue)
 }
 
-export const getLocalStorage = (key: string): string => {
+export const getLocalStorage = (key: string): string | any => {
   if (typeof window === 'undefined') return null
   return window.localStorage.getItem(key)
 }

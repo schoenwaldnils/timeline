@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 
-import { ContextScale } from '../ContextScale'
 import { zIndexes } from '../../data/constants'
 import { T } from '../../js/translate'
+import { useStore, SET_SCALE } from '../Store'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -13,12 +13,11 @@ const Wrapper = styled.div`
 `
 
 const Range = styled.input`
-  width: 20rem;
+  width: 16rem;
 `
 
 export const Scaling: React.FC = () => {
-  const { scale, changeScale } = useContext(ContextScale)
-
+  const [state, dispatch] = useStore()
   const map = {
     1: 0.0625,
     2: 0.125,
@@ -32,10 +31,13 @@ export const Scaling: React.FC = () => {
   }
 
   const handleChange = event => {
-    changeScale(parseFloat(map[event.currentTarget.value]))
+    dispatch({
+      type: SET_SCALE,
+      scale: parseFloat(map[event.currentTarget.value]),
+    })
   }
 
-  const [valueKey] = Object.keys(map).filter(key => map[key] === scale)
+  const [valueKey] = Object.keys(map).filter(key => map[key] === state.scale)
 
   return (
     <Wrapper>

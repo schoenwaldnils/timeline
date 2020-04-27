@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import Highlighter from 'react-highlight-words'
 
-import { ContextLang } from '../ContextLang'
 import DefaultImgUrl from './defaultImg.svg'
 
 import { shades, colors } from '../../js/colors'
+import { useStore } from '../Store'
 
 const IMAGE_SIZE = 28
 
@@ -51,7 +51,7 @@ export const SearchHit = ({
   _highlightResult,
   ...hit
 }) => {
-  const { language } = useContext(ContextLang)
+  const [state] = useStore()
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,
@@ -66,9 +66,9 @@ export const SearchHit = ({
   return (
     <Wrapper onClick={() => selectHit(objectID)} indexType={type}>
       <Highlighter
-        searchWords={_highlightResult[`name_${language}`].matchedWords}
+        searchWords={_highlightResult[`name_${state.lang}`].matchedWords}
         autoEscape={true}
-        textToHighlight={hit[`name_${language}`]}
+        textToHighlight={hit[`name_${state.lang}`]}
       />
       <Image src={imgSrc} />
     </Wrapper>
