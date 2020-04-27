@@ -17,7 +17,7 @@ export const useContentfulTimeline = () => {
   })
 
   if (data) {
-    formatedData = formatTimelineData(data, state.scale)
+    formatedData = formatTimelineData(data, state.scale, state.filter)
   }
 
   return {

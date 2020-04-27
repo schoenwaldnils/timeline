@@ -9,6 +9,11 @@ export const initialState = {
     isActive: false,
     contentId: undefined,
   },
+  filter: {
+    personsAreActive: true,
+    timesAreActive: true,
+    eventsAreActive: true,
+  },
 }
 
 type Context = [State, (action: Action) => void]

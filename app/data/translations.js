@@ -102,5 +102,21 @@ export default {
       en: 'change scaling',
       de: 'Skalierung ändern',
     },
+    filterElements: {
+      en: 'filter elements',
+      de: 'filter Elemente',
+    },
+    persons: {
+      en: 'persons',
+      de: 'Personen',
+    },
+    times: {
+      en: 'times',
+      de: 'Zeitabschnitte',
+    },
+    events: {
+      en: 'events',
+      de: 'Ereignisse',
+    },
   },
 }

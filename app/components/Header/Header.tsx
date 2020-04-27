@@ -8,6 +8,7 @@ import { Logo } from '../Logo'
 import { shades } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
 import { viewportsJs } from '../../js/viewports'
+import { Filter } from '../Filter'
 
 const Wrapper = styled.div`
   position: relative;
@@ -32,7 +33,7 @@ const Nav = styled.div`
   color: ${shades.cb3};
 
   & > * + * {
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
 
     @media ${viewportsJs.sm} {
       margin-left: 1.5rem;
@@ -46,6 +47,7 @@ export const Header = () => {
       <Logo />
       <Nav>
         <Search />
+        <Filter />
         <LangSwitch />
       </Nav>
     </Wrapper>
