@@ -21,13 +21,12 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   position: relative;
   width: ${({ width }) => `${width}px`};
-  height: 100%;
+  min-height: 100%;
   padding-bottom: 2rem;
   font-size: 12px;
 `
 
 const Content = styled.div`
-  position: relative;
   z-index: ${zIndexes.timelineContent};
   display: grid;
   grid-template-areas:
@@ -35,6 +34,7 @@ const Content = styled.div`
     'events';
   grid-gap: 0.5rem;
   padding-top: 3rem;
+  padding-bottom: 3rem;
 `
 
 interface TimelineProps {
