@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Swipe from 'react-easy-swipe'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { MdVerticalAlignBottom } from 'react-icons/md'
 
-import { getLocalStorageNumber, setLocalStorage } from '../../js/localStorage'
 import { themeColors } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
 import { T } from '../../js/translate'
@@ -97,30 +96,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isActive = false,
   content,
   closeSidebar,
-}) => {
-  const DEFAULT_SIDEBAR_WIDTH = 320
-  const LOCALSTORAGE_KEY = 'sidebarWidth'
-
-  const [sidebarWidth, setSidebarWidth] = useState(DEFAULT_SIDEBAR_WIDTH)
-
-  useEffect(() => {
-    const userSidebarWidth: number = getLocalStorageNumber(LOCALSTORAGE_KEY)
-
-    if (!userSidebarWidth) {
-      setLocalStorage(LOCALSTORAGE_KEY, sidebarWidth)
-    } else if (userSidebarWidth !== sidebarWidth) {
-      setSidebarWidth(userSidebarWidth)
-    }
-  }, [sidebarWidth])
-
-  return (
-    <Wrapper isActive={isActive} role="dialog">
-      <Swipe onSwipeRight={closeSidebar}>
-        {content && <SidebarContent>{content}</SidebarContent>}
-        <Close aria-label={T('ui.closeSidebar')} onClick={() => closeSidebar()}>
-          <Icon />
-        </Close>
-      </Swipe>
-    </Wrapper>
-  )
-}
+}) => (
+  <Wrapper isActive={isActive} role="dialog">
+    <Swipe onSwipeRight={closeSidebar}>
+      {content && <SidebarContent>{content}</SidebarContent>}
+      <Close aria-label={T('ui.closeSidebar')} onClick={() => closeSidebar()}>
+        <Icon />
+      </Close>
+    </Swipe>
+  </Wrapper>
+)

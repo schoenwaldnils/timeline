@@ -1,7 +1,6 @@
-import React, { useContext, Component } from 'react'
+import React, { Component } from 'react'
 import { Document } from '@contentful/rich-text-types'
 
-import { SidebarContext } from '../Sidebar/SidebarContext'
 import { ContentTemplate, ContentBox } from './ContentTemplate'
 import { TableList } from '../TableList'
 import { RichText } from '../RichText'
@@ -10,6 +9,7 @@ import { UL, LI, ButtonPlain } from '../Typography'
 
 import { ourTime } from '../../js/utils'
 import { T } from '../../js/translate'
+import { useStore, SET_SIDEBAR_ACTIVE } from '../Store'
 
 interface Person {
   id: string
@@ -53,7 +53,14 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   richText,
   wolLink,
 }) => {
-  const { changeContent } = useContext(SidebarContext)
+  const [, dispatch] = useStore()
+
+  const changeContent = newId => {
+    dispatch({
+      type: SET_SIDEBAR_ACTIVE,
+      contentId: newId,
+    })
+  }
 
   const yearBlur = (
     year: number,
