@@ -14,6 +14,7 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   height: 100%;
   padding-left: ${({ paddingLeft }) => `${paddingLeft}px`};
+  pointer-events: none;
 `
 
 interface NumberProps {

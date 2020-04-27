@@ -36,7 +36,7 @@ const Wrapper = styled.div<WrapperProps>`
     display: block;
     width: 1px;
     height: 100vh;
-    min-height: calc(100% + 20vh);
+    min-height: calc(100vh + 50vh);
     background-color: ${colors.red};
   }
 

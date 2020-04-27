@@ -102,6 +102,14 @@ export default {
       en: 'change scaling',
       de: 'Skalierung ändern',
     },
+    scaleUp: {
+      en: 'scale up',
+      de: 'vergrößern',
+    },
+    scaleDown: {
+      en: 'scale down',
+      de: 'verkleinern',
+    },
     filterElements: {
       en: 'filter elements',
       de: 'filter Elemente',
