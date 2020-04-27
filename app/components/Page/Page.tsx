@@ -10,22 +10,39 @@ import { Scaling } from '../Scaling'
 import { useStore, CLOSE_SIDEBAR } from '../Store'
 import { ContentfulContent } from '../Contentful'
 
+import { zIndexes } from '../../data/constants'
+
 const StyledPage = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'content';
+  grid-template-rows: max-content auto;
+  grid-template-columns: 100vw;
+  width: 100vw;
   height: 100vh;
-  max-height: 100%;
   overflow: hidden;
 `
 
 const Content = styled.div`
   position: relative;
-  flex-grow: 1;
+  grid-area: content;
 `
 
 const TimelineWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   overflow: auto;
+`
+
+const ScalingPositioned = styled(Scaling)`
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1rem;
+  z-index: ${zIndexes.scale};
 `
 
 export const Page = () => {
@@ -51,7 +68,7 @@ export const Page = () => {
           content={sidebarContent}
           closeSidebar={() => dispatch({ type: CLOSE_SIDEBAR })}
         />
-        <Scaling />
+        <ScalingPositioned />
       </Content>
     </StyledPage>
   )
