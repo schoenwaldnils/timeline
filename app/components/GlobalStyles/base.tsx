@@ -7,10 +7,11 @@ export default css`
   *::after {
     box-sizing: border-box;
     word-break: break-word;
+  }
 
-    :focus {
-      outline: solid 1px ${colors.red};
-    }
+  *:focus {
+    outline: 0;
+    box-shadow: 0 0 4px 1px ${colors.yellow};
   }
 
   html {
