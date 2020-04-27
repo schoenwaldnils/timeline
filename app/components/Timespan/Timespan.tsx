@@ -28,7 +28,7 @@ const Wrapper = styled.div<WrapperProps>`
   grid-area: times;
   width: ${({ pixelDuration }) => pixelDuration}px;
   height: 2em;
-  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 2px));
+  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 4px));
   margin-bottom: 1px;
   margin-left: ${({ pixelStart }) => pixelStart}px;
   padding-right: 0.5em;
