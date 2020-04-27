@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import { connectSearchBox } from 'react-instantsearch-dom'
-import { IoIosSearch } from 'react-icons/io'
+
+import { ReactComponent as SearchIcon } from './searchIcon.svg'
 
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
@@ -30,8 +31,12 @@ const Hits = styled.div`
   box-shadow: 0 0.125rem 0.25rem 0 #0007;
 `
 
-const Icon = styled(IoIosSearch)`
-  font-size: 1.5rem;
+const Icon = styled(SearchIcon)`
+  font-size: 1.25rem;
+
+  > path {
+    fill: currentColor;
+  }
 `
 
 export const CustomSearch = ({ currentRefinement, refine }) => {

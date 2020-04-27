@@ -1,4 +1,6 @@
 import React, { useReducer, useEffect } from 'react'
+import shallowequal from 'shallowequal'
+
 import {
   StoreContext,
   initialState,
@@ -6,6 +8,7 @@ import {
   SET_LANG,
   SET_SCALE,
   SET_SIDEBAR_ACTIVE,
+  SET_FILTER,
 } from './Store'
 import { getUserStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
@@ -23,6 +26,9 @@ export const StoreProvider = ({ children }) => {
     }
     if (localStore.scale && localStore.scale !== state.scale) {
       dispatch({ type: SET_SCALE, scale: localStore.scale })
+    }
+    if (localStore.filter && !shallowequal(localStore.filter, state.filter)) {
+      dispatch({ type: SET_FILTER, filter: localStore.filter })
     }
 
     /**
