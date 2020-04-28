@@ -10,8 +10,9 @@ import {
   SET_SIDEBAR_ACTIVE,
   SET_FILTER,
 } from './Store'
-import { getUserStore } from './userStore'
+import { getUserLocalStore, getUserSessionStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
+import { SET_THEME } from './reducer'
 
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -20,7 +21,7 @@ export const StoreProvider = ({ children }) => {
     /**
      * Load store form local storage and apply
      */
-    const localStore = getUserStore()
+    const localStore = getUserLocalStore()
     if (localStore.lang && localStore.lang !== state.lang) {
       dispatch({ type: SET_LANG, lang: localStore.lang })
     }
@@ -32,11 +33,35 @@ export const StoreProvider = ({ children }) => {
     }
 
     /**
-     * Read and listen to url hash
+     * dark mode
+     */
+    const matchDark = '(prefers-color-scheme: dark)'
+    const matcher = window.matchMedia && window.matchMedia(matchDark)
+    let preferesDark = !!matcher.matches
+
+    const sessionStore = getUserSessionStore()
+    if (typeof sessionStore.themeIsDark !== 'undefined') {
+      preferesDark = sessionStore.themeIsDark
+    }
+
+    if (preferesDark !== state.themeIsDark) {
+      dispatch({ type: SET_THEME, themeIsDark: preferesDark })
+    }
+
+    const onChange = matches =>
+      dispatch({ type: SET_THEME, themeIsDark: matches })
+    matcher.addListener(({ matches }) => onChange(matches))
+
+    /**
+     * Read url hash
      */
     const localId = getUrlHash()
     if (localId && localId !== state.sidebar.contentId) {
       dispatch({ type: SET_SIDEBAR_ACTIVE, contentId: localId })
+    }
+
+    return () => {
+      matcher.removeListener(onChange)
     }
   }, [state, dispatch])
 

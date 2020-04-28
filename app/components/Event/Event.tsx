@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { colors, shades } from '../../js/colors'
+import { colors } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
 import { SET_SIDEBAR_ACTIVE, useStore } from '../Store'
 
@@ -23,10 +23,10 @@ const Wrapper = styled.div<WrapperProps>`
   margin-left: ${({ pixelYear }) => pixelYear}px;
   padding-right: 0.5em;
   padding-left: 0.5em;
-  color: #fff;
+  color: var(--Event-color);
   white-space: nowrap;
   cursor: pointer;
-  background-color: ${shades.cb2};
+  background-color: var(--Event-backgroundColor);
 
   ::before {
     content: '';

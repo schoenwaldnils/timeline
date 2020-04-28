@@ -14,14 +14,14 @@ const Wrapper = styled.div`
   width: 1px;
   height: 100%;
   pointer-events: none;
-  background-color: #00000080;
+  background-color: var(--TimelineCursor-color);
 
   ::after {
     content: var(--TimelineCursor-year);
     position: absolute;
     top: 1.5rem;
     left: 5px;
-    color: #000;
+    color: var(--TimelineCursor-color);
     white-space: nowrap;
   }
 `

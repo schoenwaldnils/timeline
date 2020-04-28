@@ -1,4 +1,4 @@
-import { setUserStore } from './userStore'
+import { setUserLocalStore, setUserSessionStore } from './userStore'
 import { setUrlHash, removeUrlHash } from '../../js/urlHash'
 
 export const SET_LANG = 'SET_LANG'
@@ -6,12 +6,14 @@ export const SET_SCALE = 'SET_SCALE'
 export const SET_SIDEBAR_ACTIVE = 'SET_SIDEBAR_ACTIVE'
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
 export const SET_FILTER = 'SET_FILTER'
+export const SET_THEME = 'SET_THEME'
 
 type SET_LANG = 'SET_LANG'
 type SET_SCALE = 'SET_SCALE'
 type SET_SIDEBAR_ACTIVE = 'SET_SIDEBAR_ACTIVE'
 type CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
 type SET_FILTER = 'SET_FILTER'
+type SET_THEME = 'SET_THEME'
 
 export type LANGUAGES = 'en' | 'de' | string
 
@@ -27,6 +29,7 @@ export type State = {
     timesAreActive: boolean
     eventsAreActive: boolean
   }
+  themeIsDark: boolean
 }
 
 type Filter = {
@@ -41,13 +44,14 @@ export type Action =
   | { type: SET_SIDEBAR_ACTIVE; contentId: string }
   | { type: CLOSE_SIDEBAR }
   | { type: SET_FILTER; filter: Filter }
+  | { type: SET_THEME; themeIsDark: boolean }
 
 type Reducer<S, A> = (state: S, action: A) => S
 
 export const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case SET_LANG:
-      setUserStore({
+      setUserLocalStore({
         lang: action.lang,
       })
       return {
@@ -56,7 +60,7 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       }
 
     case SET_SCALE:
-      setUserStore({
+      setUserLocalStore({
         scale: action.scale,
       })
       return {
@@ -86,7 +90,7 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       }
 
     case SET_FILTER:
-      setUserStore({
+      setUserLocalStore({
         filter: {
           ...state.filter,
           ...action.filter,
@@ -98,6 +102,15 @@ export const reducer: Reducer<State, Action> = (state, action) => {
           ...state.filter,
           ...action.filter,
         },
+      }
+
+    case SET_THEME:
+      setUserSessionStore({
+        themeIsDark: action.themeIsDark,
+      })
+      return {
+        ...state,
+        themeIsDark: action.themeIsDark,
       }
 
     default:
