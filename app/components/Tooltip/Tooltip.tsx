@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   z-index: ${zIndexes.tooltip};
   padding: 0.25rem;
   overflow: auto;
-  background-color: #fff;
+  background-color: var(--Tooltip-backgroundColor);
   border-radius: 4px;
   box-shadow: 0 0.125rem 0.25rem 0 #0007;
 `

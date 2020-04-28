@@ -4,7 +4,6 @@ import { WiDaySunny, WiMoonAltWaningCrescent5 } from 'react-icons/wi'
 
 import { T } from '../../js/translate'
 import { useStore, SET_THEME } from '../Store'
-import { colors } from '../../js/colors'
 
 const Button = styled.button`
   display: flex;
@@ -16,9 +15,9 @@ const Button = styled.button`
   font-family: monospace;
   font-size: 1rem;
   line-height: 1;
-  color: ${colors.greenDarker};
+  color: var(--Button-color);
   cursor: pointer;
-  background-color: #fff;
+  background-color: var(--Button-backgroundColor);
   border: 0;
   border-radius: 4px;
   box-shadow: 0 0.125rem 0.25rem 0 #0007;

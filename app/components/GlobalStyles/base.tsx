@@ -1,5 +1,5 @@
 import { css } from '@emotion/core'
-import { themeColors, colors } from '../../js/colors'
+import { colors } from '../../js/colors'
 
 export default css`
   *,
@@ -28,7 +28,7 @@ export default css`
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: ${themeColors.textColor};
+    color: var(--body-textColor);
     text-rendering: optimizeLegibility;
     background-color: var(--body-backgroundColor);
   }
