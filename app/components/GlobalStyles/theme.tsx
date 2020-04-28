@@ -18,6 +18,8 @@ export const themeLight = css`
     --Header-backgroundColor: #fff;
     --Header-color: ${shades.cb3};
 
+    --Tooltip-backgroundColor: #fff;
+
     --TimelineNumbers-color: ${shades.cb2};
 
     --Timespan-color: ${shades.cb0};
@@ -42,6 +44,8 @@ export const themeDark = css`
 
     --Header-backgroundColor: ${shades.cb0};
     --Header-color: ${shades.cb7};
+
+    --Tooltip-backgroundColor: ${shades.cb0};
 
     --TimelineNumbers-color: #000;
 
