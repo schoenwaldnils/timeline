@@ -6,9 +6,7 @@ export const time = {
 export const CONTENTFUL_SPACE_ID = '81noh8m93vcd'
 
 export const zIndexes = {
-  filter: 1100,
-  langSwitch: 1100,
-  searchHits: 1100,
+  tooltip: 1100,
   header: 1050,
   sidebar: 1000,
   scale: 950,

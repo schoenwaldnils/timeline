@@ -4,12 +4,13 @@ import styled from '@emotion/styled'
 import { ReactComponent as LangIcon } from './langIcon.svg'
 
 import { T } from '../../js/translate'
-import { colors, shades } from '../../js/colors'
+import { shades } from '../../js/colors'
 import translations from '../../data/translations'
-import { SUPPORTED_LANGUAGES, zIndexes } from '../../data/constants'
+import { SUPPORTED_LANGUAGES } from '../../data/constants'
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { viewportsJs } from '../../js/viewports'
 import { useStore, SET_LANG } from '../Store'
+import { Tooltip } from '../Tooltip'
 
 const Wrapper = styled.div`
   position: relative;
@@ -37,23 +38,11 @@ const Text = styled.span`
   margin-left: 0.5rem;
   font-size: 0.875rem;
   font-weight: 300;
-  color: ${colors.greenDarker};
+  color: var(--LangSwitch-color);
 
   @media ${viewportsJs.sm} {
     display: block;
   }
-`
-
-const Menu = styled.div`
-  position: absolute;
-  top: calc(100% + 7px);
-  right: 0;
-  z-index: ${zIndexes.langSwitch};
-  padding: 0.25rem;
-  overflow: auto;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0.125rem 0.25rem 0 #0007;
 `
 
 const Button = styled.button`
@@ -102,7 +91,7 @@ export const LangSwitch: React.FC = () => {
       </IconButton>
 
       {isActive && (
-        <Menu>
+        <Tooltip>
           {SUPPORTED_LANGUAGES.map(lang => (
             <Button
               key={lang}
@@ -112,7 +101,7 @@ export const LangSwitch: React.FC = () => {
               {translations.ui.language[lang]}
             </Button>
           ))}
-        </Menu>
+        </Tooltip>
       )}
     </Wrapper>
   )

@@ -30,7 +30,7 @@ export default css`
     -moz-osx-font-smoothing: grayscale;
     color: ${themeColors.textColor};
     text-rendering: optimizeLegibility;
-    background-color: ${themeColors.bodyBackgroundColor};
+    background-color: var(--body-backgroundColor);
   }
 
   /* textarea:focus,

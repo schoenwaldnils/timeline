@@ -11,6 +11,7 @@ import { useStore, CLOSE_SIDEBAR } from '../Store'
 import { ContentfulContent } from '../Contentful'
 
 import { zIndexes } from '../../data/constants'
+import { ThemeSwitch } from '../ThemeSwitch'
 
 const StyledPage = styled.div`
   display: grid;
@@ -45,6 +46,13 @@ const ScalingPositioned = styled(Scaling)`
   z-index: ${zIndexes.scale};
 `
 
+const ThemeSwitchPositioned = styled(ThemeSwitch)`
+  position: fixed;
+  bottom: 1.5rem;
+  left: 2.75rem;
+  z-index: ${zIndexes.scale};
+`
+
 export const Page = () => {
   const [state, dispatch] = useStore()
   const [containerRef, elementRef] = useScrollPosition()
@@ -69,6 +77,7 @@ export const Page = () => {
           closeSidebar={() => dispatch({ type: CLOSE_SIDEBAR })}
         />
         <ScalingPositioned />
+        <ThemeSwitchPositioned />
       </Content>
     </StyledPage>
   )

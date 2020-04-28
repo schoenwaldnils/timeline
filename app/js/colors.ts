@@ -13,6 +13,7 @@ export const colors = {
   red: '#f2777a',
   orange: '#f99157',
   yellow: '#f9d75c',
+  yellowDarker: '#c39d13',
   green: '#68d4bc',
   greenDarker: '#41ad95',
   turquoise: '#6cc',
@@ -30,13 +31,4 @@ export const themeColors = {
   textColor: shades.cb0,
   linkColor: colors.greenDarker,
   linkColorHover: shades.cb0,
-
-  bodyBackgroundColor: shades.cb7,
-  bodyBackgroundShadow: shades.cb4,
-}
-
-export default {
-  ...shades,
-  ...colors,
-  ...themeColors,
 }

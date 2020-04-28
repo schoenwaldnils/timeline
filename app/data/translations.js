@@ -126,5 +126,9 @@ export default {
       en: 'events',
       de: 'Ereignisse',
     },
+    toggleDarkMode: {
+      en: 'toggle dark mode',
+      de: 'zwischen hellem und dunklen Modus wechseln',
+    },
   },
 }

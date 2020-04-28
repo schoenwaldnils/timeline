@@ -1,14 +1,18 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { colors } from '../../js/colors'
 import { generateGradient } from './generateGradient'
 import { zIndexes } from '../../data/constants'
 import { useStore, SET_SIDEBAR_ACTIVE } from '../Store'
 
 const timeColors = {
-  person: colors.green,
-  time: colors.yellow,
+  person: 'var(--Timespan-backgroundColor--person)',
+  time: 'var(--Timespan-backgroundColor--time)',
+}
+
+const transparentColors = {
+  person: 'var(--Timespan-backgroundColor--personT)',
+  time: 'var(--Timespan-backgroundColor--timeT)',
 }
 
 interface WrapperProps {
@@ -33,7 +37,7 @@ const Wrapper = styled.div<WrapperProps>`
   margin-left: ${({ pixelStart }) => pixelStart}px;
   padding-right: 0.5em;
   padding-left: 0.5em;
-  color: #000;
+  color: var(--Timespan-color);
   white-space: nowrap;
   cursor: pointer;
   background: ${({ background }) => background};
@@ -79,6 +83,7 @@ export const Timespan: React.FC<TimespanProps> = ({
     startBlurriness,
     endBlurriness,
     timeColors[type],
+    transparentColors[type],
   )
 
   return (
