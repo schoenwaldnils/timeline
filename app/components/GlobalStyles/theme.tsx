@@ -12,7 +12,7 @@ const c = color => `${Color(color).alpha(0)}`
 
 export const themeLight = css`
   :root {
-    --body-textColor: ${shades.cb0};
+    --body-textColor: ${shades.cb2};
     --body-linkColor: ${colors.greenDarker};
     --body-linkColorHover: ${shades.cb4};
     --body-backgroundColor: ${shades.cb10};
