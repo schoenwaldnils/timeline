@@ -19,7 +19,7 @@ const Wrapper = styled.div<WrapperProps>`
   grid-area: events;
   width: fit-content;
   height: 2em;
-  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 2px));
+  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 4px));
   margin-left: ${({ pixelYear }) => pixelYear}px;
   padding-right: 0.5em;
   padding-left: 0.5em;

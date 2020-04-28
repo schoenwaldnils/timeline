@@ -66,6 +66,8 @@ const Button = styled.button`
   cursor: pointer;
   background: none;
   border: 0;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
 
   :disabled {
     color: ${shades.cb4};

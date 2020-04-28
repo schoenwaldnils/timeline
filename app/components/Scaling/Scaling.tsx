@@ -21,6 +21,8 @@ const Button = styled.button`
   border: 0;
   border-radius: 4px;
   box-shadow: 0 0.125rem 0.25rem 0 #0007;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
 
   & + & {
     margin-top: 0.25em;

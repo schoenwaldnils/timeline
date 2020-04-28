@@ -20,6 +20,8 @@ const IconButton = styled.button`
   color: inherit;
   background: none;
   border: 0;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
 `
 
 const Icon = styled(FilterIcon)`
