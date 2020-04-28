@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 
 import { T } from '../../js/translate'
 import { useStore, SET_SCALE } from '../Store'
-import { colors } from '../../js/colors'
 
 const Button = styled.button`
   display: flex;
@@ -15,9 +14,9 @@ const Button = styled.button`
   font-family: monospace;
   font-size: 1rem;
   line-height: 1;
-  color: ${colors.greenDarker};
+  color: var(--Button-color);
   cursor: pointer;
-  background-color: #fff;
+  background-color: var(--Button-backgroundColor);
   border: 0;
   border-radius: 4px;
   box-shadow: 0 0.125rem 0.25rem 0 #0007;

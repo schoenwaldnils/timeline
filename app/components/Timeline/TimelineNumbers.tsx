@@ -26,7 +26,7 @@ const Number = styled.div<NumberProps>`
   width: ${({ width, number }) => `${number === 0 ? width - 1 : width}px`};
   font-family: monospace;
   font-size: 12px;
-  border-left: 1px solid;
+  border-left: 1px solid var(--TimelineNumbers-lineColor);
 
   &::before {
     content: ${({ number }) => `"${number === 0 ? 1 : number}"`};
