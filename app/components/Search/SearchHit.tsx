@@ -4,15 +4,14 @@ import Highlighter from 'react-highlight-words'
 
 import DefaultImgUrl from './defaultImg.svg'
 
-import { shades, colors } from '../../js/colors'
 import { useStore } from '../Store'
 
 const IMAGE_SIZE = 28
 
 const typeColors = {
-  person: colors.green,
-  time: colors.yellow,
-  event: shades.cb2,
+  person: 'var(--Timespan-backgroundColor--person)',
+  time: 'var(--Timespan-backgroundColor--time)',
+  event: 'var(--Event-backgroundColor)',
 }
 
 const Wrapper = styled.button<{ indexType: string }>`

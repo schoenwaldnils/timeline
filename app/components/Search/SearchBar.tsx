@@ -8,6 +8,7 @@ const Wrapper = styled.input`
   max-width: 100%;
   height: 2rem;
   padding: 0.5em 0.75em;
+  font-size: 1rem;
   border: 1px solid ${shades.cb6};
   border-radius: 4px;
   /* stylelint-disable-next-line property-no-vendor-prefix */
