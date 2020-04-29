@@ -10,6 +10,7 @@ import {
 const STORAGE_NAME = 'timeline-store'
 
 export const getUserLocalStore = () => {
+  if (typeof window === 'undefined') return {}
   const storageStoreString = getLocalStorage(STORAGE_NAME)
   const storageStore: any = JSON.parse(storageStoreString) || {}
 
@@ -34,6 +35,7 @@ export const setUserLocalStore = state => {
 }
 
 export const getUserSessionStore = () => {
+  if (typeof window === 'undefined') return {}
   const storageStoreString = getSessionStorage(STORAGE_NAME)
   const storageStore: any = JSON.parse(storageStoreString) || {}
 

@@ -109,3 +109,5 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </Wrapper>
   )
 }
+
+export default Sidebar

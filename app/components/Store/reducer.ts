@@ -83,7 +83,6 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       return {
         ...state,
         sidebar: {
-          ...state.sidebar,
           isActive: false,
           contentId: undefined,
         },

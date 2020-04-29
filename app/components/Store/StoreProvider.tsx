@@ -1,21 +1,22 @@
 import React, { useReducer, useEffect } from 'react'
 import shallowequal from 'shallowequal'
 
-import {
-  StoreContext,
-  initialState,
-  reducer,
-  SET_LANG,
-  SET_SCALE,
-  SET_SIDEBAR_ACTIVE,
-  SET_FILTER,
-} from './Store'
+import { StoreContext, initialState, reducer } from './Store'
 import { getUserLocalStore, getUserSessionStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
-import { SET_THEME } from './reducer'
+import {
+  SET_LANG,
+  SET_SCALE,
+  SET_FILTER,
+  SET_SIDEBAR_ACTIVE,
+  SET_THEME,
+} from './reducer'
 
 export const StoreProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    lang: getUserLocalStore().lang,
+  })
 
   useEffect(() => {
     /**

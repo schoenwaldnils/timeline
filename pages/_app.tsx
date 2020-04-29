@@ -1,4 +1,5 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 import App from 'next/app'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'
