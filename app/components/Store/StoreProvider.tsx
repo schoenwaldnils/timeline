@@ -13,10 +13,7 @@ import {
 } from './reducer'
 
 export const StoreProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    ...initialState,
-    lang: getUserLocalStore().lang,
-  })
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
     /**
