@@ -6,7 +6,7 @@ import { Timeline } from '../Timeline'
 import { Sidebar } from '../Sidebar'
 import { useScrollPosition } from '../../customHooks/useScrollPosition'
 import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
-import { Scaling } from '../Scaling'
+import { Scaling, ScaleIndicator } from '../Scaling'
 import { useStore, CLOSE_SIDEBAR } from '../Store'
 import { ContentfulContent } from '../Contentful'
 
@@ -39,18 +39,15 @@ const TimelineWrapper = styled.div`
   overflow: auto;
 `
 
-const ScalingPositioned = styled(Scaling)`
+const Config = styled.div`
   position: fixed;
   bottom: 1.5rem;
   left: 1rem;
   z-index: ${zIndexes.scale};
-`
 
-const ThemeSwitchPositioned = styled(ThemeSwitch)`
-  position: fixed;
-  bottom: 1.5rem;
-  left: 2.75rem;
-  z-index: ${zIndexes.scale};
+  > *:not(:last-child) {
+    margin-bottom: 0.25rem;
+  }
 `
 
 export const Page = () => {
@@ -76,8 +73,11 @@ export const Page = () => {
           content={sidebarContent}
           closeSidebar={() => dispatch({ type: CLOSE_SIDEBAR })}
         />
-        <ScalingPositioned />
-        <ThemeSwitchPositioned />
+        <Config>
+          <ThemeSwitch />
+          <Scaling />
+          <ScaleIndicator />
+        </Config>
       </Content>
     </StyledPage>
   )
