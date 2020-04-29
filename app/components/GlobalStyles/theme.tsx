@@ -23,6 +23,7 @@ export const themeLight = css`
     --Tooltip-backgroundColor: #fff;
 
     --LangSwitch-color: ${colors.greenDarker};
+    --LangSwitch-buttonDisabled: ${shades.cb6};
 
     --TimelineNumbers-color: ${shades.cb3};
     --TimelineNumbers-lineColor: ${shades.cb6};
@@ -61,6 +62,7 @@ export const themeDark = css`
     --Tooltip-backgroundColor: ${shades.cb1};
 
     --LangSwitch-color: ${colors.green};
+    --LangSwitch-buttonDisabled: ${shades.cb3};
 
     --TimelineNumbers-color: ${shades.cb4};
     --TimelineNumbers-lineColor: ${shades.cb2};

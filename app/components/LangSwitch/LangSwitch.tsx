@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import { ReactComponent as LangIcon } from './langIcon.svg'
 
 import { T } from '../../js/translate'
-import { shades } from '../../js/colors'
 import translations from '../../data/translations'
 import { SUPPORTED_LANGUAGES } from '../../data/constants'
 import { useClickOutside } from '../../customHooks/useClickOutside'
@@ -59,7 +58,7 @@ const Button = styled.button`
   -webkit-appearance: none;
 
   :disabled {
-    color: ${shades.cb4};
+    color: var(--LangSwitch-buttonDisabled);
     cursor: inherit;
   }
 `

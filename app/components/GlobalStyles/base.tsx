@@ -42,4 +42,8 @@ export default css`
     max-width: 100%;
     height: auto;
   }
+
+  button {
+    color: inherit;
+  }
 `

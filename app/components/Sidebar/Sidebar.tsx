@@ -1,7 +1,7 @@
 import React from 'react'
-import Swipe from 'react-easy-swipe'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
+import { useSwipeable } from 'react-swipeable'
 import { MdVerticalAlignBottom } from 'react-icons/md'
 
 import { zIndexes } from '../../data/constants'
@@ -95,13 +95,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isActive = false,
   content,
   closeSidebar,
-}) => (
-  <Wrapper isActive={isActive} role="dialog">
-    <Swipe onSwipeRight={closeSidebar}>
+}) => {
+  const handlers = useSwipeable({
+    onSwipedRight: eventData => closeSidebar(eventData),
+    delta: 30,
+  })
+  return (
+    <Wrapper isActive={isActive} role="dialog" {...handlers}>
       {content && <SidebarContent>{content}</SidebarContent>}
       <Close aria-label={T('ui.closeSidebar')} onClick={() => closeSidebar()}>
         <Icon />
       </Close>
-    </Swipe>
-  </Wrapper>
-)
+    </Wrapper>
+  )
+}
