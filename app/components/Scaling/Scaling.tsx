@@ -4,6 +4,10 @@ import styled from '@emotion/styled'
 import { T } from '../../js/translate'
 import { useStore, SET_SCALE } from '../Store'
 
+const Wrapper = styled.div`
+  display: flex;
+`
+
 const Button = styled.button`
   display: flex;
   justify-content: center;
@@ -24,7 +28,7 @@ const Button = styled.button`
   -webkit-appearance: none;
 
   & + & {
-    margin-top: 0.25em;
+    margin-left: 0.25em;
   }
 `
 
@@ -64,14 +68,7 @@ export const Scaling: React.FC = props => {
   }
 
   return (
-    <div {...props}>
-      <Button
-        onClick={increaseScale}
-        disabled={value >= MAX_SCALE}
-        aria-label={T('ui.scaleUp')}
-      >
-        +
-      </Button>
+    <Wrapper {...props}>
       <Button
         onClick={decreaseScale}
         disabled={value <= MIN_SCALE}
@@ -79,6 +76,13 @@ export const Scaling: React.FC = props => {
       >
         -
       </Button>
-    </div>
+      <Button
+        onClick={increaseScale}
+        disabled={value >= MAX_SCALE}
+        aria-label={T('ui.scaleUp')}
+      >
+        +
+      </Button>
+    </Wrapper>
   )
 }
