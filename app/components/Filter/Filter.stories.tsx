@@ -18,6 +18,4 @@ const props = {
   },
 }
 
-export const Icon = () => <FilterView {...props} />
-
 export const Active = () => <FilterView {...props} isActive={true} />

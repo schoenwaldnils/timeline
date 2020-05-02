@@ -2,10 +2,12 @@ import React, { useRef } from 'react'
 import styled from '@emotion/styled'
 import { useMousePosition } from '../../customHooks/useMousePosition'
 
-import { TimelineCursor } from './TimelineCursor'
+import { TimelineCursorView } from './TimelineCursorView'
 
 export default {
   title: 'TimelineCursor',
+  component: TimelineCursorView,
+  percy: { skip: true },
 }
 
 const Wrapper = styled.div`
@@ -20,7 +22,7 @@ export const Basic = () => {
 
   return (
     <Wrapper ref={localRef}>
-      <TimelineCursor pixelYear={mousePosition.xElement} />
+      <TimelineCursorView pixelYear={mousePosition.xElement} scale={1} />
     </Wrapper>
   )
 }

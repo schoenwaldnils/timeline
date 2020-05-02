@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from '@emotion/styled'
 
 import { Scaling } from './Scaling'
 import { ScaleIndicator } from './ScaleIndicator'
@@ -8,6 +9,18 @@ export default {
   component: Scaling,
 }
 
-export const Basic = () => <Scaling />
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
 
-export const Indicator = () => <ScaleIndicator />
+  > * + * {
+    margin-top: 0.5rem;
+  }
+`
+
+export const Basic = () => (
+  <Container>
+    <Scaling />
+    <ScaleIndicator />
+  </Container>
+)

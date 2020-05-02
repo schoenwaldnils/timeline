@@ -14,6 +14,4 @@ const props = {
   currentLang: 'en',
 }
 
-export const Icon = () => <LangSwitchView {...props} />
-
 export const IsActive = () => <LangSwitchView {...props} isActive={true} />
