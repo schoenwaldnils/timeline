@@ -3,30 +3,13 @@ import styled from '@emotion/styled'
 
 import { T } from '../../js/translate'
 import { useStore, SET_SCALE } from '../Store'
+import { ButtonSquare } from '../Button'
 
 const Wrapper = styled.div`
   display: flex;
 `
 
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.5em;
-  height: 1.5em;
-  padding: 0;
-  font-family: monospace;
-  font-size: 1rem;
-  line-height: 1;
-  color: var(--Button-color);
-  cursor: pointer;
-  background-color: var(--Button-backgroundColor);
-  border: 0;
-  border-radius: 4px;
-  box-shadow: 0 0.125rem 0.25rem 0 #0007;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-appearance: none;
-
+const ButtonSpaced = styled(ButtonSquare)`
   & + & {
     margin-left: 0.25em;
   }
@@ -69,20 +52,20 @@ export const Scaling: React.FC = props => {
 
   return (
     <Wrapper {...props}>
-      <Button
+      <ButtonSpaced
         onClick={decreaseScale}
         disabled={value <= MIN_SCALE}
         aria-label={T('ui.scaleDown')}
       >
         -
-      </Button>
-      <Button
+      </ButtonSpaced>
+      <ButtonSpaced
         onClick={increaseScale}
         disabled={value >= MAX_SCALE}
         aria-label={T('ui.scaleUp')}
       >
         +
-      </Button>
+      </ButtonSpaced>
     </Wrapper>
   )
 }

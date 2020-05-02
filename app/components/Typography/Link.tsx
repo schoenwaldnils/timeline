@@ -54,4 +54,4 @@ const StyledButton = styled.button`
   }
 `
 
-export const ButtonPlain = props => <StyledButton {...props} tabIndex={0} />
+export const TextButton = props => <StyledButton {...props} tabIndex={0} />
