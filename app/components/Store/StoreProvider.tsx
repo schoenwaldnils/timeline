@@ -8,8 +8,9 @@ import {
   SET_LANG,
   SET_SCALE,
   SET_FILTER,
-  SET_SIDEBAR_ACTIVE,
+  CLOSE_SIDEBAR,
   SET_THEME,
+  CHANGE_CONTENT,
 } from './reducer'
 
 export const StoreProvider = ({ children }) => {
@@ -51,15 +52,27 @@ export const StoreProvider = ({ children }) => {
     matcher.addListener(({ matches }) => onChange(matches))
 
     /**
-     * Read url hash
+     * Read and listen to url hash
      */
-    const localId = getUrlHash()
-    if (localId && localId !== state.sidebar.contentId) {
-      dispatch({ type: SET_SIDEBAR_ACTIVE, contentId: localId })
+    const handleUrlChange = () => {
+      const localId = getUrlHash()
+      if (localId) {
+        dispatch({ type: CHANGE_CONTENT, contentId: localId })
+      }
+      if (!localId && state.sidebar.isActive) {
+        dispatch({ type: CLOSE_SIDEBAR })
+      }
     }
+    window.onpopstate = () => {
+      handleUrlChange()
+    }
+    window.addEventListener('load', () => {
+      handleUrlChange()
+    })
 
     return () => {
       matcher.removeListener(onChange)
+      window.removeEventListener('load', () => {})
     }
   }, [state, dispatch])
 

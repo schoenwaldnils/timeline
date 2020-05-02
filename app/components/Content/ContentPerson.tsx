@@ -9,7 +9,7 @@ import { UL, LI, ButtonPlain } from '../Typography'
 
 import { ourTime } from '../../js/utils'
 import { T } from '../../js/translate'
-import { useStore, SET_SIDEBAR_ACTIVE } from '../Store'
+import { useStore, CHANGE_CONTENT } from '../Store'
 
 interface Person {
   id: string
@@ -57,7 +57,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
 
   const changeContent = newId => {
     dispatch({
-      type: SET_SIDEBAR_ACTIVE,
+      type: CHANGE_CONTENT,
       contentId: newId,
     })
   }
