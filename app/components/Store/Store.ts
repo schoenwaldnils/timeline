@@ -3,12 +3,18 @@ import { State, Action } from './reducer'
 import { LANGUAGES } from '../../data/constants'
 
 export const initialState = {
-  lang: LANGUAGES.DE,
+  lang: LANGUAGES.EN,
   scale: 1,
   sidebar: {
     isActive: false,
     contentId: undefined,
   },
+  filter: {
+    personsAreActive: true,
+    timesAreActive: true,
+    eventsAreActive: true,
+  },
+  themeIsDark: false,
 }
 
 type Context = [State, (action: Action) => void]

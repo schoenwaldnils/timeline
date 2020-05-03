@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { shades } from '../../js/colors'
-
 interface WrapperProps {
   paddingLeft: number
 }
@@ -14,6 +12,8 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   height: 100%;
   padding-left: ${({ paddingLeft }) => `${paddingLeft}px`};
+  color: var(--TimelineNumbers-color);
+  pointer-events: none;
 `
 
 interface NumberProps {
@@ -26,8 +26,7 @@ const Number = styled.div<NumberProps>`
   width: ${({ width, number }) => `${number === 0 ? width - 1 : width}px`};
   font-family: monospace;
   font-size: 12px;
-  color: ${shades.cb2};
-  border-left: 1px solid ${shades.cb2};
+  border-left: 1px solid var(--TimelineNumbers-lineColor);
 
   &::before {
     content: ${({ number }) => `"${number === 0 ? 1 : number}"`};

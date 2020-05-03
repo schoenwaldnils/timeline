@@ -2,16 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
-import { shades, themeColors } from '../../js/colors'
-
 const StyledA = styled.a`
-  color: ${themeColors.themeColor};
+  color: var(--body-linkColor);
   text-decoration: none;
   cursor: pointer;
   transition: 150ms;
 
   :hover {
-    color: ${shades.cb2};
+    color: var(--body-linkColorHover);
   }
 `
 
@@ -44,7 +42,7 @@ const StyledButton = styled.button`
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
-  color: ${themeColors.linkColor};
+  color: var(--body-linkColor);
   cursor: pointer;
   background: none;
   border: none;
@@ -52,8 +50,8 @@ const StyledButton = styled.button`
   transition: color 150ms;
 
   :hover {
-    color: ${themeColors.linkColorHover};
+    color: var(--body-linkColorHover);
   }
 `
 
-export const ButtonPlain = props => <StyledButton {...props} tabIndex={0} />
+export const TextButton = props => <StyledButton {...props} tabIndex={0} />

@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Timeline } from './index'
-import { TimelineNumbers } from './TimelineNumbers'
 
 export default {
   title: 'Timeline',
@@ -44,8 +43,4 @@ export const Basic = () => (
       },
     ]}
   />
-)
-
-export const Numbers = () => (
-  <TimelineNumbers startYear={-234} endYear={789} scale={1} />
 )

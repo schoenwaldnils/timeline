@@ -51,6 +51,7 @@ export const ContentfulContent: React.FC<Props> = ({
     return <Loading />
   }
   if (error) {
+    // eslint-disable-next-line no-console
     console.log(error)
     return <div>Error!</div>
   }

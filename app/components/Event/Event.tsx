@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { colors, shades } from '../../js/colors'
+import { colors } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
-import { SET_SIDEBAR_ACTIVE, useStore } from '../Store'
+import { CHANGE_CONTENT, useStore } from '../Store'
 
 interface WrapperProps {
   pixelYear: number
@@ -19,14 +19,14 @@ const Wrapper = styled.div<WrapperProps>`
   grid-area: events;
   width: fit-content;
   height: 2em;
-  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 2px));
+  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 4px));
   margin-left: ${({ pixelYear }) => pixelYear}px;
   padding-right: 0.5em;
   padding-left: 0.5em;
-  color: #fff;
+  color: var(--Event-color);
   white-space: nowrap;
   cursor: pointer;
-  background-color: ${shades.cb2};
+  background-color: var(--Event-backgroundColor);
 
   ::before {
     content: '';
@@ -36,7 +36,7 @@ const Wrapper = styled.div<WrapperProps>`
     display: block;
     width: 1px;
     height: 100vh;
-    min-height: calc(100% + 20vh);
+    min-height: calc(100vh + 50vh);
     background-color: ${colors.red};
   }
 
@@ -66,7 +66,7 @@ export const Event: React.FC<EventProps> = ({
 
   const changeContent = newId => {
     dispatch({
-      type: SET_SIDEBAR_ACTIVE,
+      type: CHANGE_CONTENT,
       contentId: newId,
     })
   }

@@ -1,10 +1,9 @@
 import React from 'react'
-import Swipe from 'react-easy-swipe'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
+import { useSwipeable } from 'react-swipeable'
 import { MdVerticalAlignBottom } from 'react-icons/md'
 
-import { themeColors } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
 import { T } from '../../js/translate'
 
@@ -32,7 +31,7 @@ const Wrapper = styled.div<WrapperProps>`
   max-width: 100vw;
   height: 100%; /* 1 */
   font-size: 1rem;
-  background-color: #fff;
+  background-color: var(--Sidebar-backgroundColor);
   opacity: 0;
   box-shadow: 1rem -0.5rem 0.75rem 1rem rgba(0, 0, 0, 0.25);
   transition: transform 300ms, opacity 100ms 200ms;
@@ -69,9 +68,9 @@ const Close = styled.button`
   margin-left: -1em;
   font-size: 1.5rem;
   line-height: 1;
-  color: #fff;
+  color: var(--Sidebar-iconColor);
   cursor: pointer;
-  background-color: ${themeColors.themeColor};
+  background-color: var(--Sidebar-iconBackgroundColor);
   border: none;
   border-radius: 50%;
   transform: rotate(-90deg);
@@ -96,13 +95,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isActive = false,
   content,
   closeSidebar,
-}) => (
-  <Wrapper isActive={isActive} role="dialog">
-    <Swipe onSwipeRight={closeSidebar}>
+}) => {
+  const handlers = useSwipeable({
+    onSwipedRight: eventData => closeSidebar(eventData),
+    delta: 30,
+  })
+  return (
+    <Wrapper isActive={isActive} role="dialog" {...handlers}>
       {content && <SidebarContent>{content}</SidebarContent>}
       <Close aria-label={T('ui.closeSidebar')} onClick={() => closeSidebar()}>
         <Icon />
       </Close>
-    </Swipe>
-  </Wrapper>
-)
+    </Wrapper>
+  )
+}
+
+export default Sidebar

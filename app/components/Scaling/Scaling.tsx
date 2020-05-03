@@ -1,22 +1,21 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { zIndexes } from '../../data/constants'
 import { T } from '../../js/translate'
 import { useStore, SET_SCALE } from '../Store'
+import { ButtonSquare } from '../Button'
 
 const Wrapper = styled.div`
-  position: fixed;
-  bottom: 1rem;
-  left: 1rem;
-  z-index: ${zIndexes.scale};
+  display: flex;
 `
 
-const Range = styled.input`
-  width: 16rem;
+const ButtonSpaced = styled(ButtonSquare)`
+  & + & {
+    margin-left: 0.25em;
+  }
 `
 
-export const Scaling: React.FC = () => {
+export const Scaling: React.FC = props => {
   const [state, dispatch] = useStore()
   const map = {
     1: 0.0625,
@@ -30,26 +29,43 @@ export const Scaling: React.FC = () => {
     9: 16,
   }
 
-  const handleChange = event => {
+  const [valueKey] = Object.keys(map).filter(key => map[key] === state.scale)
+
+  const value = parseInt(valueKey, 10)
+
+  const MIN_SCALE = 2
+  const MAX_SCALE = 6
+
+  const increaseScale = () => {
     dispatch({
       type: SET_SCALE,
-      scale: parseFloat(map[event.currentTarget.value]),
+      scale: parseFloat(map[value + 1]),
     })
   }
 
-  const [valueKey] = Object.keys(map).filter(key => map[key] === state.scale)
+  const decreaseScale = () => {
+    dispatch({
+      type: SET_SCALE,
+      scale: parseFloat(map[value - 1]),
+    })
+  }
 
   return (
-    <Wrapper>
-      <Range
-        type="range"
-        min={2}
-        max={6}
-        step={1}
-        value={valueKey}
-        aria-label={T('ui.changeScaling')}
-        onChange={handleChange}
-      />
+    <Wrapper {...props}>
+      <ButtonSpaced
+        onClick={decreaseScale}
+        disabled={value <= MIN_SCALE}
+        aria-label={T('ui.scaleDown')}
+      >
+        -
+      </ButtonSpaced>
+      <ButtonSpaced
+        onClick={increaseScale}
+        disabled={value >= MAX_SCALE}
+        aria-label={T('ui.scaleUp')}
+      >
+        +
+      </ButtonSpaced>
     </Wrapper>
   )
 }

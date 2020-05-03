@@ -17,27 +17,34 @@ const showInTimeline = ({
   return false
 }
 
-export const formatTimelineData = (data, scale: number) => {
-  const formatedEvents =
-    data.events.items && data.events.items.map(e => formatEvent(e))
-  const indexedEvents = formatedEvents.map((e, key) => ({
-    ...e,
-    zIndex: formatedEvents.length - key,
-  }))
-
-  const scaledEvents = scaleNumbers(indexedEvents, scale, ['pixelYear'])
-  const positionedEvents = positionEvents(scaledEvents)
+export const formatTimelineData = (
+  data: {
+    persons: { items: Array<any> }
+    times: { items: Array<any> }
+    events: { items: Array<any> }
+  },
+  scale: number,
+  filter?: {
+    personsAreActive: boolean
+    timesAreActive: boolean
+    eventsAreActive: boolean
+  },
+) => {
+  const {
+    personsAreActive = true,
+    timesAreActive = true,
+    eventsAreActive = true,
+  } = filter || {}
 
   // TIMESPANS
+  const persons = (personsAreActive && data.persons.items) || []
+  const times = (timesAreActive && data.times.items) || []
+
   const formatedTimespans = [
-    ...(data.persons.items &&
-      data.persons.items.map(e =>
-        updateTimeProps({ ...e, type: 'person', id: e.sys.id }),
-      )),
-    ...(data.times.items &&
-      data.times.items.map(e =>
-        updateTimeProps({ ...e, type: 'time', id: e.sys.id }),
-      )),
+    ...persons.map(e =>
+      updateTimeProps({ ...e, type: 'person', id: e.sys.id }),
+    ),
+    ...times.map(e => updateTimeProps({ ...e, type: 'time', id: e.sys.id })),
   ]
   const filteredTimespans = formatedTimespans.filter(t => showInTimeline(t))
   const sortetTimespans = arraySort(filteredTimespans, 'startYear')
@@ -50,8 +57,19 @@ export const formatTimelineData = (data, scale: number) => {
   ])
   const positionedTimes = positionTimes(scaledTimespans)
 
+  // EVENTS
+  const events = (eventsAreActive && data.events.items) || []
+  const formatedEvents = events.map(e => formatEvent(e))
+  const indexedEvents = formatedEvents.map((e, key) => ({
+    ...e,
+    zIndex: formatedEvents.length - key,
+  }))
+
+  const scaledEvents = scaleNumbers(indexedEvents, scale, ['pixelYear'])
+  const positionedEvents = positionEvents(scaledEvents)
+
   return {
-    events: positionedEvents,
     timespans: positionedTimes,
+    events: positionedEvents,
   }
 }

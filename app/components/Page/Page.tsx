@@ -1,31 +1,55 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
 import { Timeline } from '../Timeline'
-import { Sidebar } from '../Sidebar'
-import { useScrollPosition } from '../../customHooks/useScrollPosition'
-import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
-import { Scaling } from '../Scaling'
-import { useStore, CLOSE_SIDEBAR } from '../Store'
+import { ThemeSwitch } from '../ThemeSwitch'
+import { Scaling, ScaleIndicator } from '../Scaling'
 import { ContentfulContent } from '../Contentful'
 
+import { useStore, CLOSE_SIDEBAR } from '../Store'
+import { useScrollPosition } from '../../customHooks/useScrollPosition'
+import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
+import { zIndexes } from '../../data/constants'
+
+const Sidebar = dynamic(() => import('../Sidebar/Sidebar'))
+
 const StyledPage = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'content';
+  grid-template-rows: max-content auto;
+  grid-template-columns: 100vw;
+  width: 100vw;
   height: 100vh;
-  max-height: 100%;
   overflow: hidden;
 `
 
 const Content = styled.div`
   position: relative;
-  flex-grow: 1;
+  grid-area: content;
 `
 
 const TimelineWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   overflow: auto;
+`
+
+const Config = styled.div`
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1rem;
+  z-index: ${zIndexes.scale};
+
+  > *:not(:last-child) {
+    margin-bottom: 0.25rem;
+  }
 `
 
 export const Page = () => {
@@ -51,7 +75,11 @@ export const Page = () => {
           content={sidebarContent}
           closeSidebar={() => dispatch({ type: CLOSE_SIDEBAR })}
         />
-        <Scaling />
+        <Config>
+          <ThemeSwitch />
+          <Scaling />
+          <ScaleIndicator />
+        </Config>
       </Content>
     </StyledPage>
   )

@@ -102,5 +102,33 @@ export default {
       en: 'change scaling',
       de: 'Skalierung ändern',
     },
+    scaleUp: {
+      en: 'scale up',
+      de: 'vergrößern',
+    },
+    scaleDown: {
+      en: 'scale down',
+      de: 'verkleinern',
+    },
+    filterElements: {
+      en: 'filter elements',
+      de: 'filter Elemente',
+    },
+    persons: {
+      en: 'persons',
+      de: 'Personen',
+    },
+    times: {
+      en: 'times',
+      de: 'Zeitabschnitte',
+    },
+    events: {
+      en: 'events',
+      de: 'Ereignisse',
+    },
+    toggleDarkMode: {
+      en: 'toggle dark mode',
+      de: 'zwischen hellem und dunklen Modus wechseln',
+    },
   },
 }
