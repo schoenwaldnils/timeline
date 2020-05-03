@@ -1,17 +1,19 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
 import { Timeline } from '../Timeline'
-import { Sidebar } from '../Sidebar'
-import { useScrollPosition } from '../../customHooks/useScrollPosition'
-import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
+import { ThemeSwitch } from '../ThemeSwitch'
 import { Scaling, ScaleIndicator } from '../Scaling'
-import { useStore, CLOSE_SIDEBAR } from '../Store'
 import { ContentfulContent } from '../Contentful'
 
+import { useStore, CLOSE_SIDEBAR } from '../Store'
+import { useScrollPosition } from '../../customHooks/useScrollPosition'
+import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
 import { zIndexes } from '../../data/constants'
-import { ThemeSwitch } from '../ThemeSwitch'
+
+const Sidebar = dynamic(() => import('../Sidebar/Sidebar'))
 
 const StyledPage = styled.div`
   display: grid;

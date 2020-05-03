@@ -1,27 +1,28 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { Loading, LoadingDots } from './Loading'
+import { LogoView } from './LogoView'
 
 export default {
-  title: 'Loading',
+  title: 'Logo',
+  component: LogoView,
   parameters: {
-    percy: { skip: true },
+    percy: { widths: [320, 1024] },
   },
 }
 
 const Container = styled.div`
-  padding: 2rem;
+  padding: 3rem;
 `
 
 export const Basic = () => {
   return (
     <>
       <Container>
-        <Loading />
+        <LogoView />
       </Container>
-      <Container>
-        <LoadingDots />
+      <Container style={{ backgroundColor: '#000' }}>
+        <LogoView isDark={true} />
       </Container>
     </>
   )

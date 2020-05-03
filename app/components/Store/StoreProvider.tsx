@@ -1,18 +1,17 @@
 import React, { useReducer, useEffect } from 'react'
 import shallowequal from 'shallowequal'
 
-import {
-  StoreContext,
-  initialState,
-  reducer,
-  SET_LANG,
-  SET_SCALE,
-  SET_SIDEBAR_ACTIVE,
-  SET_FILTER,
-} from './Store'
+import { StoreContext, initialState, reducer } from './Store'
 import { getUserLocalStore, getUserSessionStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
-import { SET_THEME } from './reducer'
+import {
+  SET_LANG,
+  SET_SCALE,
+  SET_FILTER,
+  CLOSE_SIDEBAR,
+  SET_THEME,
+  CHANGE_CONTENT,
+} from './reducer'
 
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -53,15 +52,27 @@ export const StoreProvider = ({ children }) => {
     matcher.addListener(({ matches }) => onChange(matches))
 
     /**
-     * Read url hash
+     * Read and listen to url hash
      */
-    const localId = getUrlHash()
-    if (localId && localId !== state.sidebar.contentId) {
-      dispatch({ type: SET_SIDEBAR_ACTIVE, contentId: localId })
+    const handleUrlChange = () => {
+      const localId = getUrlHash()
+      if (localId) {
+        dispatch({ type: CHANGE_CONTENT, contentId: localId })
+      }
+      if (!localId && state.sidebar.isActive) {
+        dispatch({ type: CLOSE_SIDEBAR })
+      }
     }
+    window.onpopstate = () => {
+      handleUrlChange()
+    }
+    window.addEventListener('load', () => {
+      handleUrlChange()
+    })
 
     return () => {
       matcher.removeListener(onChange)
+      window.removeEventListener('load', () => {})
     }
   }, [state, dispatch])
 

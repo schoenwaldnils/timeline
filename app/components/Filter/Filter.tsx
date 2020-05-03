@@ -1,61 +1,8 @@
 import React, { useState, useRef } from 'react'
-import styled from '@emotion/styled'
-
-import { Tooltip } from '../Tooltip'
-
-import { ReactComponent as FilterIcon } from './filterIcon.svg'
-
-import { T } from '../../js/translate'
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { useStore, SET_FILTER } from '../Store'
 
-const Wrapper = styled.div`
-  position: relative;
-  flex-shrink: 0;
-`
-
-const IconButton = styled.button`
-  display: flex;
-  align-items: center;
-  padding: 0;
-  color: inherit;
-  background: none;
-  border: 0;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-appearance: none;
-`
-
-const Icon = styled(FilterIcon)`
-  display: block;
-  width: 1em;
-  height: 1em;
-  font-size: 1.25rem;
-
-  > path {
-    fill: currentColor;
-  }
-`
-
-const Label = styled.label`
-  padding: 0.5em 0.7em;
-  font-family: inherit;
-  font-size: 0.75rem;
-  font-weight: 300;
-  line-height: 1;
-`
-
-const InputEl = styled.div`
-  display: flex;
-  width: max-content;
-
-  > ${Label} {
-    flex-shrink: 0;
-  }
-`
-
-const Checkbox = styled.input`
-  margin: 0 0.75em 0 0;
-`
+import { FilterView } from './FilterView'
 
 export const Filter: React.FC = () => {
   const [state, dispatch] = useStore()
@@ -77,57 +24,13 @@ export const Filter: React.FC = () => {
     })
   }
 
-  const filterElements = [
-    {
-      id: 'persons',
-      label: T('ui.persons'),
-      name: 'personsAreActive',
-      value: state.filter.personsAreActive,
-    },
-    {
-      id: 'times',
-      label: T('ui.times'),
-      name: 'timesAreActive',
-      value: state.filter.timesAreActive,
-    },
-    {
-      id: 'events',
-      label: T('ui.events'),
-      name: 'eventsAreActive',
-      value: state.filter.eventsAreActive,
-    },
-  ]
-
   return (
-    <Wrapper ref={ref}>
-      <IconButton onClick={toggleIsActive} aria-label={T('ui.filterElements')}>
-        <Icon
-          aria-hidden="true"
-          focusable="false"
-          role="img"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentcolor"
-        />
-      </IconButton>
-
-      {isActive && (
-        <Tooltip>
-          {filterElements.map(({ id, name, label, value }) => (
-            <InputEl key={`checkbox_${id}`}>
-              <Label htmlFor={`checkbox_${id}`}>
-                <Checkbox
-                  id={`checkbox_${id}`}
-                  type="checkbox"
-                  name={name}
-                  onChange={handleChange}
-                  checked={value}
-                />
-                {label}
-              </Label>
-            </InputEl>
-          ))}
-        </Tooltip>
-      )}
-    </Wrapper>
+    <FilterView
+      isActive={isActive}
+      toggleIsActive={toggleIsActive}
+      handleChange={handleChange}
+      filterState={state.filter}
+      ref={ref}
+    />
   )
 }

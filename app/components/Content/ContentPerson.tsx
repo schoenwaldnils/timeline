@@ -5,11 +5,11 @@ import { ContentTemplate, ContentBox } from './ContentTemplate'
 import { TableList } from '../TableList'
 import { RichText } from '../RichText'
 import { LinkToWOL } from './ContentLinkWol'
-import { UL, LI, ButtonPlain } from '../Typography'
+import { UL, LI, TextButton } from '../Typography'
 
 import { ourTime } from '../../js/utils'
 import { T } from '../../js/translate'
-import { useStore, SET_SIDEBAR_ACTIVE } from '../Store'
+import { useStore, CHANGE_CONTENT } from '../Store'
 
 interface Person {
   id: string
@@ -57,7 +57,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
 
   const changeContent = newId => {
     dispatch({
-      type: SET_SIDEBAR_ACTIVE,
+      type: CHANGE_CONTENT,
       contentId: newId,
     })
   }
@@ -99,12 +99,12 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
     list = {
       ...list,
       [T('relations.father')]: (
-        <ButtonPlain
+        <TextButton
           onKeyUp={e => e.keyCode === 13 && changeContent(fatherID)}
           onClick={() => changeContent(fatherID)}
         >
           {father}
-        </ButtonPlain>
+        </TextButton>
       ),
     }
   }
@@ -113,12 +113,12 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
     list = {
       ...list,
       [T('relations.mother')]: (
-        <ButtonPlain
+        <TextButton
           onKeyUp={e => e.keyCode === 13 && changeContent(motherID)}
           onClick={() => changeContent(motherID)}
         >
           {mother}
-        </ButtonPlain>
+        </TextButton>
       ),
     }
   }
@@ -130,12 +130,12 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
         <UL>
           {spouse.map(({ id: spouseID, name: spouseName }) => (
             <LI key={`spouse-${spouseID}`}>
-              <ButtonPlain
+              <TextButton
                 onKeyUp={e => e.keyCode === 13 && changeContent(spouseID)}
                 onClick={() => changeContent(spouseID)}
               >
                 {spouseName}
-              </ButtonPlain>
+              </TextButton>
             </LI>
           ))}
         </UL>
@@ -145,12 +145,12 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
     list = {
       ...list,
       [T('relations.spouse')]: (
-        <ButtonPlain
+        <TextButton
           onKeyUp={e => e.keyCode === 13 && changeContent(spouse[0].id)}
           onClick={() => changeContent(spouse[0].id)}
         >
           {spouse[0].name}
-        </ButtonPlain>
+        </TextButton>
       ),
     }
   }
@@ -162,12 +162,12 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
         <UL>
           {childs.map(({ id: childID, name: childName }) => (
             <LI key={`child-${childID}`}>
-              <ButtonPlain
+              <TextButton
                 onKeyUp={e => e.keyCode === 13 && changeContent(childID)}
                 onClick={() => changeContent(childID)}
               >
                 {childName}
-              </ButtonPlain>
+              </TextButton>
             </LI>
           ))}
         </UL>

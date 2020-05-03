@@ -3,7 +3,7 @@ import { State, Action } from './reducer'
 import { LANGUAGES } from '../../data/constants'
 
 export const initialState = {
-  lang: LANGUAGES.DE,
+  lang: LANGUAGES.EN,
   scale: 1,
   sidebar: {
     isActive: false,

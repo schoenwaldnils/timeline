@@ -17,10 +17,28 @@ const showInTimeline = ({
   return false
 }
 
-export const formatTimelineData = (data, scale: number, filter) => {
+export const formatTimelineData = (
+  data: {
+    persons: { items: Array<any> }
+    times: { items: Array<any> }
+    events: { items: Array<any> }
+  },
+  scale: number,
+  filter?: {
+    personsAreActive: boolean
+    timesAreActive: boolean
+    eventsAreActive: boolean
+  },
+) => {
+  const {
+    personsAreActive = true,
+    timesAreActive = true,
+    eventsAreActive = true,
+  } = filter || {}
+
   // TIMESPANS
-  const persons = (filter.personsAreActive && data.persons.items) || []
-  const times = (filter.timesAreActive && data.times.items) || []
+  const persons = (personsAreActive && data.persons.items) || []
+  const times = (timesAreActive && data.times.items) || []
 
   const formatedTimespans = [
     ...persons.map(e =>
@@ -40,7 +58,7 @@ export const formatTimelineData = (data, scale: number, filter) => {
   const positionedTimes = positionTimes(scaledTimespans)
 
   // EVENTS
-  const events = (filter.eventsAreActive && data.events.items) || []
+  const events = (eventsAreActive && data.events.items) || []
   const formatedEvents = events.map(e => formatEvent(e))
   const indexedEvents = formatedEvents.map((e, key) => ({
     ...e,
