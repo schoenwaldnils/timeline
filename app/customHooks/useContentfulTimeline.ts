@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from 'graphql-hooks'
 
 import timelineCollection from '../gql/timelineCollection'
 import { formatTimelineData } from '../js/objectFormating/formatTimelineData'

@@ -1,17 +1,9 @@
 import React, { useReducer, useEffect } from 'react'
-import shallowequal from 'shallowequal'
 
 import { StoreContext, initialState, reducer } from './Store'
 import { getUserLocalStore, getUserSessionStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
-import {
-  SET_LANG,
-  SET_SCALE,
-  SET_FILTER,
-  CLOSE_SIDEBAR,
-  SET_THEME,
-  CHANGE_CONTENT,
-} from './reducer'
+import { CLOSE_SIDEBAR, SET_THEME, CHANGE_CONTENT } from './reducer'
 
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -20,20 +12,6 @@ export const StoreProvider = ({ children }) => {
   })
 
   useEffect(() => {
-    /**
-     * Load store form local storage and apply
-     */
-    const localStore = getUserLocalStore()
-    if (localStore.lang && localStore.lang !== state.lang) {
-      dispatch({ type: SET_LANG, lang: localStore.lang })
-    }
-    if (localStore.scale && localStore.scale !== state.scale) {
-      dispatch({ type: SET_SCALE, scale: localStore.scale })
-    }
-    if (localStore.filter && !shallowequal(localStore.filter, state.filter)) {
-      dispatch({ type: SET_FILTER, filter: localStore.filter })
-    }
-
     /**
      * dark mode
      */

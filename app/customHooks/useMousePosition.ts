@@ -1,35 +1,48 @@
-import { useLayoutEffect, useEffect, useState } from 'react'
+import {
+  useLayoutEffect,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from 'react'
 
 const isBrowser = typeof window !== 'undefined'
 
 const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect
 
-export const useMousePosition = ref => {
-  const [position, setPosition] = useState({
+export const useMousePosition = () => {
+  const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
     xElement: 0,
     yElement: 0,
   })
 
-  useIsomorphicLayoutEffect(() => {
-    const setFromEvent = e => {
-      const refBound = ref.current.getBoundingClientRect()
-      setPosition({
-        x: e.clientX,
-        y: e.clientY,
-        xElement: refBound.x * -1 + e.clientX,
-        yElement: refBound.y * -1 + e.clientY,
-      })
-    }
+  const scrollRef = useRef(null)
 
+  const handleMouseMove = useCallback(
+    e => {
+      if (scrollRef.current) {
+        const refBound = scrollRef.current.getBoundingClientRect()
+        setMousePosition({
+          x: e.clientX,
+          y: e.clientY,
+          xElement: refBound.x * -1 + e.clientX,
+          yElement: refBound.y * -1 + e.clientY,
+        })
+      }
+    },
+    [scrollRef],
+  )
+
+  useIsomorphicLayoutEffect(() => {
     if (!isBrowser) return null
 
-    window.addEventListener('mousemove', setFromEvent, { passive: true })
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     return () => {
-      window.removeEventListener('mousemove', setFromEvent)
+      window.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [ref])
+  }, [handleMouseMove])
 
-  return position
+  return { mousePosition, scrollRef }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from 'graphql-hooks'
 
 import { Loading, LoadingDots } from '../Loading'
 import { ContentPerson, ContentTime, ContentEvent } from '../Content'

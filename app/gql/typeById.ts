@@ -1,9 +1,8 @@
-import gql from 'graphql-tag'
 import personFragment from './personFragment'
 import eventFragment from './eventFragment'
 import timeFragment from './timeFragment'
 
-export const typeById = gql`
+export const typeById = `
   query($id: String!, $locale: String!) {
     person: personCollection(
       where: { sys: { id: $id } }
