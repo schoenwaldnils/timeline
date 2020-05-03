@@ -6,6 +6,9 @@ import { LogoView } from './LogoView'
 export default {
   title: 'Logo',
   component: LogoView,
+  parameters: {
+    percy: { widths: [320, 1024] },
+  },
 }
 
 const Container = styled.div`

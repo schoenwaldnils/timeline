@@ -5,7 +5,9 @@ import { Loading, LoadingDots } from './Loading'
 
 export default {
   title: 'Loading',
-  percy: { skip: true },
+  parameters: {
+    percy: { skip: true },
+  },
 }
 
 const Container = styled.div`

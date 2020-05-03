@@ -7,7 +7,9 @@ import { TimelineCursorView } from './TimelineCursorView'
 export default {
   title: 'TimelineCursor',
   component: TimelineCursorView,
-  percy: { skip: true },
+  parameters: {
+    percy: { skip: true },
+  },
 }
 
 const Wrapper = styled.div`
