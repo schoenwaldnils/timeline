@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 
 import { Header } from '../Header'
 import { ThemeSwitch } from '../ThemeSwitch'
+import { Timeline } from '../Timeline'
 import { Scaling, ScaleIndicator } from '../Scaling'
 import { ContentfulContent } from '../Contentful'
 
@@ -11,7 +12,6 @@ import { useStore, CLOSE_SIDEBAR } from '../Store'
 import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
 import { zIndexes } from '../../data/constants'
 
-const Timeline = dynamic(() => import('../Timeline/Timeline'), { ssr: false })
 const Sidebar = dynamic(() => import('../Sidebar/Sidebar'), { ssr: false })
 
 const StyledPage = styled.div`
