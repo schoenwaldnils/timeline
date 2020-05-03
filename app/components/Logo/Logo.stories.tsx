@@ -24,5 +24,3 @@ export const Basic = () => {
     </>
   )
 }
-
-export const Dark = () => <LogoView isDark={true} />
