@@ -15,4 +15,4 @@ const Wrapper = styled.div`
   box-shadow: 0 0.125rem 0.25rem 0 #0007;
 `
 
-export const Tooltip: React.FC = ({ children }) => <Wrapper>{children}</Wrapper>
+export const Tooltip: React.FC = props => <Wrapper {...props} />

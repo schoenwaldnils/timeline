@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 import { colors } from '../../js/colors'
 import { zIndexes } from '../../data/constants'
-import { SET_SIDEBAR_ACTIVE, useStore } from '../Store'
+import { CHANGE_CONTENT, useStore } from '../Store'
 
 interface WrapperProps {
   pixelYear: number
@@ -66,7 +66,7 @@ export const Event: React.FC<EventProps> = ({
 
   const changeContent = newId => {
     dispatch({
-      type: SET_SIDEBAR_ACTIVE,
+      type: CHANGE_CONTENT,
       contentId: newId,
     })
   }

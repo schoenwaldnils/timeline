@@ -1,17 +1,19 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
 import { Timeline } from '../Timeline'
-import { Sidebar } from '../Sidebar'
-import { useScrollPosition } from '../../customHooks/useScrollPosition'
-import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
-import { Scaling } from '../Scaling'
-import { useStore, CLOSE_SIDEBAR } from '../Store'
+import { ThemeSwitch } from '../ThemeSwitch'
+import { Scaling, ScaleIndicator } from '../Scaling'
 import { ContentfulContent } from '../Contentful'
 
+import { useStore, CLOSE_SIDEBAR } from '../Store'
+import { useScrollPosition } from '../../customHooks/useScrollPosition'
+import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
 import { zIndexes } from '../../data/constants'
-import { ThemeSwitch } from '../ThemeSwitch'
+
+const Sidebar = dynamic(() => import('../Sidebar/Sidebar'))
 
 const StyledPage = styled.div`
   display: grid;
@@ -39,18 +41,15 @@ const TimelineWrapper = styled.div`
   overflow: auto;
 `
 
-const ScalingPositioned = styled(Scaling)`
+const Config = styled.div`
   position: fixed;
   bottom: 1.5rem;
   left: 1rem;
   z-index: ${zIndexes.scale};
-`
 
-const ThemeSwitchPositioned = styled(ThemeSwitch)`
-  position: fixed;
-  bottom: 1.5rem;
-  left: 2.75rem;
-  z-index: ${zIndexes.scale};
+  > *:not(:last-child) {
+    margin-bottom: 0.25rem;
+  }
 `
 
 export const Page = () => {
@@ -76,8 +75,11 @@ export const Page = () => {
           content={sidebarContent}
           closeSidebar={() => dispatch({ type: CLOSE_SIDEBAR })}
         />
-        <ScalingPositioned />
-        <ThemeSwitchPositioned />
+        <Config>
+          <ThemeSwitch />
+          <Scaling />
+          <ScaleIndicator />
+        </Config>
       </Content>
     </StyledPage>
   )

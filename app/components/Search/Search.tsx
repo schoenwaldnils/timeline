@@ -9,7 +9,7 @@ import { SearchHits } from './SearchHits'
 import { T } from '../../js/translate'
 
 import { useClickOutside } from '../../customHooks/useClickOutside'
-import { useStore, SET_SIDEBAR_ACTIVE } from '../Store'
+import { useStore, CHANGE_CONTENT } from '../Store'
 import { Tooltip } from '../Tooltip'
 
 const Wrapper = styled.div`
@@ -32,7 +32,7 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
 
   const changeContent = newId => {
     dispatch({
-      type: SET_SIDEBAR_ACTIVE,
+      type: CHANGE_CONTENT,
       contentId: newId,
     })
   }

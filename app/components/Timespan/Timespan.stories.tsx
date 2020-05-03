@@ -1,30 +1,40 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 
-import { Timespan } from './index'
+import styled from '@emotion/styled'
+import { TimespanView } from './TimespanView'
 
 export default {
   title: 'Timespan',
-  component: Timespan,
+  component: TimespanView,
 }
 
-export const Time = () => (
-  <Timespan
-    id=""
-    name="Event Lorem Ipsum"
-    type="time"
-    pixelStart={50}
-    rowIndex={0}
-    pixelDuration={537}
-  />
-)
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
 
-export const Person = () => (
-  <Timespan
-    pixelStart={50}
-    rowIndex={0}
-    id=""
-    name="John Doe"
-    type="person"
-    pixelDuration={1542}
-  />
+  > * + * {
+    margin-top: 0.25rem;
+  }
+`
+
+export const Time = () => (
+  <Container>
+    <TimespanView
+      name="Event Lorem Ipsum"
+      type="time"
+      pixelStart={50}
+      pixelDuration={537}
+      rowIndex={0}
+      changeContent={action('changeContent')}
+    />
+    <TimespanView
+      name="John Doe"
+      type="person"
+      pixelStart={50}
+      pixelDuration={1542}
+      rowIndex={1}
+      changeContent={action('changeContent')}
+    />
+  </Container>
 )
