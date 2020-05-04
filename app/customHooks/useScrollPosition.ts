@@ -6,7 +6,7 @@ const isBrowser = typeof window !== 'undefined'
 const STORAGE_NAME = 'scrollPosition'
 
 function getScrollPosition(element: any) {
-  if (!isBrowser) return { left: 0, top: 0 }
+  if (!isBrowser || !element) return { left: 0, top: 0 }
 
   const position = element.getBoundingClientRect()
 
