@@ -26,7 +26,6 @@ export const withGraphQLClient = App => {
             App: <AppTree {...appProps} />,
             client: graphQLClient,
           })
-          console.log(graphQLState)
         } catch (error) {
           // Prevent GraphQL hooks client errors from crashing SSR.
           // Handle them in components via the state.error prop:

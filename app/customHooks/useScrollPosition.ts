@@ -23,9 +23,14 @@ const saveLocalScroll = (scrollP: { left: number; top: number }) => {
 }
 
 export function useScrollPosition() {
-  const position = useRef(loadLocalScroll())
+  const localScroll = loadLocalScroll()
+  const position = useRef({
+    left: localScroll.left || 0,
+    top: localScroll.top || 0,
+  })
 
   const elementRef = useRef(null)
+  const containerRef = useRef(null)
 
   const handleScroll = useCallback(() => {
     if (elementRef.current) {
@@ -43,25 +48,44 @@ export function useScrollPosition() {
     }
   }, [elementRef])
 
-  const containerRef = useCallback(
-    node => {
-      if (node !== null) {
-        const localScroll = loadLocalScroll()
-        if (localScroll) {
-          node.scrollTo(localScroll)
-        }
+  const handleScaleChanged = useCallback(
+    (e: any) => {
+      const stateScale = e.detail.state.scale
+      const actionScale = e.detail.action.scale
 
-        node.addEventListener('scroll', () => handleScroll(), {
-          passive: true,
-        })
+      const multiplier = stateScale > actionScale ? 0.5 : 2
+
+      const halfWindowWidth = window.innerWidth / 2
+      const centerPosition = position.current.left + halfWindowWidth
+      const centerPositionScaled = centerPosition * multiplier
+      const newScaledLeft = centerPositionScaled - halfWindowWidth
+
+      const scaledScrollPosition = {
+        left: newScaledLeft,
+        top: position.current.top,
       }
+
+      containerRef.current.scrollTo(scaledScrollPosition)
     },
-    [handleScroll],
+    [containerRef, position],
   )
 
   useEffect(() => {
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [containerRef, handleScroll])
+    if (containerRef.current) {
+      containerRef.current.scrollTo(position.current)
+    }
+
+    containerRef.current.addEventListener('scroll', () => handleScroll(), {
+      passive: true,
+    })
+
+    window.addEventListener('scaleChanged', handleScaleChanged)
+
+    return () => {
+      window.removeEventListener('scaleChanged', handleScaleChanged)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [position, containerRef, handleScroll, handleScaleChanged])
 
   return [containerRef, elementRef]
 }
