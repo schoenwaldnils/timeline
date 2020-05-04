@@ -1,43 +1,41 @@
-import React, { useRef, useContext, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import { connectSearchBox } from 'react-instantsearch-dom'
-import { IoIosSearch } from 'react-icons/io'
+
+import { ReactComponent as SearchIcon } from './searchIcon.svg'
 
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
-import { SidebarContext } from '../Sidebar/SidebarContext'
 import { T } from '../../js/translate'
 
-import { zIndexes } from '../../data/constants'
 import { useClickOutside } from '../../customHooks/useClickOutside'
+import { useStore, CHANGE_CONTENT } from '../Store'
+import { Tooltip } from '../Tooltip'
 
 const Wrapper = styled.div`
   position: relative;
   display: inline-block;
 `
 
-const Hits = styled.div`
-  position: absolute;
-  top: calc(100% + 7px);
-  right: 0;
-  left: 0;
-  z-index: ${zIndexes.searchHits};
-  max-height: 70vh;
-  padding: 0.25rem;
-  overflow: auto;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0.125rem 0.25rem 0 #0007;
-`
+const Icon = styled(SearchIcon)`
+  font-size: 1.25rem;
 
-const Icon = styled(IoIosSearch)`
-  font-size: 1.5rem;
+  > path {
+    fill: currentColor;
+  }
 `
 
 export const CustomSearch = ({ currentRefinement, refine }) => {
   const [isActive, setIsActive] = useState(false)
-  const { changeContent } = useContext(SidebarContext)
+  const [, dispatch] = useStore()
   const ref = useRef()
+
+  const changeContent = newId => {
+    dispatch({
+      type: CHANGE_CONTENT,
+      contentId: newId,
+    })
+  }
 
   useClickOutside(ref, () => {
     refine('')
@@ -62,9 +60,9 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
           setSearchValue={handleSearchValueChange}
         />
         {currentRefinement && (
-          <Hits>
+          <Tooltip>
             <SearchHits selectHit={handleHitSelect} />
-          </Hits>
+          </Tooltip>
         )}
       </Wrapper>
     )

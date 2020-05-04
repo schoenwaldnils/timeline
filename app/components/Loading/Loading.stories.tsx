@@ -1,11 +1,28 @@
 import React from 'react'
+import styled from '@emotion/styled'
 
 import { Loading, LoadingDots } from './Loading'
 
 export default {
   title: 'Loading',
+  parameters: {
+    percy: { skip: true },
+  },
 }
 
-export const Basic = () => <Loading />
+const Container = styled.div`
+  padding: 2rem;
+`
 
-export const Dots = () => <LoadingDots />
+export const Basic = () => {
+  return (
+    <>
+      <Container>
+        <Loading />
+      </Container>
+      <Container>
+        <LoadingDots />
+      </Container>
+    </>
+  )
+}

@@ -11,17 +11,6 @@ export default {
   title: 'Content',
 }
 
-export const Template = () => (
-  <ContentTemplate title="ContentTemplate Test">
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-      doloremque incidunt quasi fugit, nemo culpa sed reiciendis, fugiat sint
-      voluptatem rem atque suscipit excepturi quibusdam molestias eos? Eius,
-      iste corrupti?
-    </p>
-  </ContentTemplate>
-)
-
 export const TemplateWithIamge = () => (
   <ContentTemplate
     title="ContentTemplate Test"

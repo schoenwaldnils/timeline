@@ -1,29 +1,24 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 import App from 'next/app'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'
-import { LanguageProvider } from '../app/components/ContextLang'
-import { ScaleProvider } from '../app/components/ContextScale'
 import { SearchProvider } from '../app/components/Search'
-import { SidebarProvider } from '../app/components/Sidebar'
-import { withApollo } from '../app/js/apollo'
+import { StoreProvider } from '../app/components/Store/StoreProvider'
+import { withGraphQLClient } from '../app/lib/withGraphQLClient'
 
 class TimelineApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <LanguageProvider>
-        <ScaleProvider>
-          <SidebarProvider>
-            <SearchProvider>
-              <GlobalStyles />
-              <Component {...pageProps} />
-            </SearchProvider>
-          </SidebarProvider>
-        </ScaleProvider>
-      </LanguageProvider>
+      <StoreProvider>
+        <SearchProvider>
+          <GlobalStyles />
+          <Component {...pageProps} />
+        </SearchProvider>
+      </StoreProvider>
     )
   }
 }
 
-export default withApollo(TimelineApp)
+export default withGraphQLClient(TimelineApp)

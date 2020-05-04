@@ -1,15 +1,11 @@
-import { useContext } from 'react'
-import { useQuery } from '@apollo/react-hooks'
-
-import { ContextLang } from '../components/ContextLang'
-import { ContextScale } from '../components/ContextScale'
+import { useQuery } from 'graphql-hooks'
 
 import timelineCollection from '../gql/timelineCollection'
 import { formatTimelineData } from '../js/objectFormating/formatTimelineData'
+import { useStore } from '../components/Store'
 
 export const useContentfulTimeline = () => {
-  const { language } = useContext(ContextLang)
-  const { scale } = useContext(ContextScale)
+  const [state] = useStore()
 
   let formatedData = {
     events: [],
@@ -17,11 +13,11 @@ export const useContentfulTimeline = () => {
   }
 
   const { loading, error, data } = useQuery(timelineCollection, {
-    variables: { locale: language },
+    variables: { locale: state.lang },
   })
 
   if (data) {
-    formatedData = formatTimelineData(data, scale)
+    formatedData = formatTimelineData(data, state.scale, state.filter)
   }
 
   return {

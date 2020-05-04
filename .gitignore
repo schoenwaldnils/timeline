@@ -2,9 +2,7 @@
 .sass-cache
 .asset-cache
 npm-debug.log
-deploy_key
-deploy_key.pub
-lib
+_serverless/lib/
 
 node_modules
 build

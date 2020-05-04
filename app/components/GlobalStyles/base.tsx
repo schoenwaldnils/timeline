@@ -1,5 +1,5 @@
 import { css } from '@emotion/core'
-import { themeColors, colors } from '../../js/colors'
+import { colors } from '../../js/colors'
 
 export default css`
   *,
@@ -7,10 +7,10 @@ export default css`
   *::after {
     box-sizing: border-box;
     word-break: break-word;
+  }
 
-    :focus {
-      outline: solid 1px ${colors.red};
-    }
+  *:focus {
+    outline: solid 2px ${colors.yellow};
   }
 
   html {
@@ -28,9 +28,9 @@ export default css`
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: ${themeColors.textColor};
+    color: var(--body-textColor);
     text-rendering: optimizeLegibility;
-    background-color: ${themeColors.bodyBackgroundColor};
+    background-color: var(--body-backgroundColor);
   }
 
   /* textarea:focus,
@@ -41,5 +41,9 @@ export default css`
   img {
     max-width: 100%;
     height: auto;
+  }
+
+  button {
+    color: inherit;
   }
 `

@@ -1,98 +1,50 @@
-import React, { useContext } from 'react'
-import styled from '@emotion/styled'
+import React from 'react'
 
-import { SidebarContext } from '../Sidebar/SidebarContext'
+import { useStore, CHANGE_CONTENT } from '../Store'
+import { TimespanView } from './TimespanView'
 
-import { colors } from '../../js/colors'
-import { generateGradient } from './generateGradient'
-import { zIndexes } from '../../data/constants'
-
-const timeColors = {
-  person: colors.green,
-  time: colors.yellow,
-}
-
-interface WrapperProps {
-  type: string
-  isActive?: Boolean
-  pixelStart: number
-  pixelDuration: number
-  background?: string
-  rowIndex: number
-}
-
-const Wrapper = styled.div<WrapperProps>`
-  position: relative;
-  z-index: ${zIndexes.timespan};
-  display: flex;
-  align-items: center;
-  grid-area: times;
-  width: ${({ pixelDuration }) => pixelDuration}px;
-  height: 2em;
-  margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 2px));
-  margin-bottom: 1px;
-  margin-left: ${({ pixelStart }) => pixelStart}px;
-  padding-right: 0.5em;
-  padding-left: 0.5em;
-  color: #000;
-  white-space: nowrap;
-  cursor: pointer;
-  background: ${({ background }) => background};
-`
-
-interface TimespanNameProps {
-  children: string
-}
-
-const TimespanName = styled.div<TimespanNameProps>`
-  position: sticky;
-  left: 0.5em;
-`
-
-export interface TimespanProps extends WrapperProps {
+export interface TimespanProps {
   id: string
   name: string
+  type: string
+  pixelDuration: number
+  pixelStart: number
   startBlurriness?: Number
   endBlurriness?: Number
+  rowIndex: number
 }
 
 export const Timespan: React.FC<TimespanProps> = ({
   id,
-  type,
-  isActive,
   name,
+  type,
   pixelStart,
   pixelDuration,
   startBlurriness,
   endBlurriness,
   rowIndex,
 }) => {
-  const { changeContent } = useContext(SidebarContext)
+  const [, dispatch] = useStore()
 
-  const background = generateGradient(
-    startBlurriness,
-    endBlurriness,
-    timeColors[type],
-  )
+  const changeContent = () => {
+    dispatch({
+      type: CHANGE_CONTENT,
+      contentId: id,
+    })
+  }
 
   return (
-    <Wrapper
-      type={type}
-      background={background}
-      pixelStart={pixelStart}
-      pixelDuration={pixelDuration}
-      isActive={isActive}
-      role="button"
-      rowIndex={rowIndex}
-      tabIndex={0}
-      onKeyUp={e => e.keyCode === 13 && changeContent(id)}
-      onClick={() => changeContent(id)}
-    >
-      <TimespanName>{name}</TimespanName>
-    </Wrapper>
+    <TimespanView
+      {...{
+        name,
+        type,
+        pixelStart,
+        pixelDuration,
+        startBlurriness,
+        endBlurriness,
+        changeContent,
+        rowIndex,
+      }}
+    />
   )
-}
-
-Timespan.defaultProps = {
-  isActive: false,
 }
