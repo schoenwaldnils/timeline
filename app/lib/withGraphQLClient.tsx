@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { getInitialState } from 'graphql-hooks-ssr'
 import { ClientContext } from 'graphql-hooks'
 
-import initGraphQL from './init-graphql'
+import { initGraphql } from './initGraphql'
 
 export const withGraphQLClient = App => {
   return class GraphQLHooks extends React.Component {
@@ -17,7 +17,7 @@ export const withGraphQLClient = App => {
 
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
-      const graphQLClient = initGraphQL()
+      const graphQLClient = initGraphql()
       let graphQLState = {}
       if (typeof window === 'undefined') {
         try {
@@ -49,7 +49,7 @@ export const withGraphQLClient = App => {
 
     constructor(props) {
       super(props)
-      this.graphQLClient = initGraphQL(props.graphQLState)
+      this.graphQLClient = initGraphql(props.graphQLState)
     }
 
     render() {
