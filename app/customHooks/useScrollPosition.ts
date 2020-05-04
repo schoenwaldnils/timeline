@@ -23,7 +23,7 @@ const saveLocalScroll = (scrollP: { left: number; top: number }) => {
 }
 
 export function useScrollPosition() {
-  const localScroll = loadLocalScroll()
+  const localScroll = loadLocalScroll() || {}
   const position = useRef({
     left: localScroll.left || 0,
     top: localScroll.top || 0,
