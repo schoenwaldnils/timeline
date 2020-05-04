@@ -8,9 +8,11 @@ export const useClickOutside = (elRef, callback) => {
       }
     }
 
-    document.addEventListener('click', handleClickOutside, true)
+    document.addEventListener('click', handleClickOutside, {
+      passive: true,
+    })
     return () => {
-      document.removeEventListener('click', handleClickOutside, true)
+      document.removeEventListener('click', handleClickOutside)
     }
   }, [callback, elRef])
 }

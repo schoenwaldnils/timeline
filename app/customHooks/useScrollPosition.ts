@@ -79,7 +79,9 @@ export function useScrollPosition() {
       passive: true,
     })
 
-    window.addEventListener('scaleChanged', handleScaleChanged)
+    window.addEventListener('scaleChanged', handleScaleChanged, {
+      passive: true,
+    })
 
     return () => {
       window.removeEventListener('scaleChanged', handleScaleChanged)
