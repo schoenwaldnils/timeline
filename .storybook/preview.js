@@ -1,4 +1,4 @@
-import { addDecorator } from '@storybook/react'
+import { addDecorator } from '@storybook/preact'
 
 import { StoreProvider } from '../app/components/Store/StoreProvider'
 import { SearchProvider } from '../app/components/Search'
