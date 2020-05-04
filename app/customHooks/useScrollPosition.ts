@@ -71,6 +71,8 @@ export function useScrollPosition() {
   )
 
   useEffect(() => {
+    if (!isBrowser) return () => {}
+
     if (containerRef.current) {
       containerRef.current.scrollTo(position.current)
     }
