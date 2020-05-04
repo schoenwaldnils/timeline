@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 const StyledA = styled.a`
@@ -30,10 +29,6 @@ export const A: React.FC<AProps> = ({ href, ...props }) => {
   }
 
   return <StyledA {...{ href, ...props }} />
-}
-
-A.propTypes = {
-  href: PropTypes.string.isRequired,
 }
 
 const StyledButton = styled.button`
