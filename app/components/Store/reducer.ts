@@ -55,7 +55,22 @@ export type Action =
 
 type Reducer<S, A> = (state: S, action: A) => S
 
+interface ScaleChangedEvent {
+  action: any
+  state: any
+}
+
 export const reducer: Reducer<State, Action> = (state, action) => {
+  const scaleChanged: CustomEvent<ScaleChangedEvent> = new CustomEvent(
+    'scaleChanged',
+    {
+      detail: {
+        action,
+        state,
+      },
+    },
+  )
+
   switch (action.type) {
     case SET_INIT:
       return {
@@ -76,6 +91,9 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       setUserLocalStore({
         scale: action.scale,
       })
+
+      window.dispatchEvent(scaleChanged)
+
       return {
         ...state,
         scale: action.scale,

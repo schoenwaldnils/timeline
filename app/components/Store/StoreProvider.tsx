@@ -47,13 +47,13 @@ export const StoreProvider = ({ children }) => {
     window.onpopstate = () => {
       handleUrlChange()
     }
-    window.addEventListener('load', () => {
-      handleUrlChange()
+    window.addEventListener('load', handleUrlChange, {
+      passive: true,
     })
 
     return () => {
       matcher.removeListener(onChange)
-      window.removeEventListener('load', () => {})
+      window.removeEventListener('load', handleUrlChange)
     }
   }, [state, dispatch])
 

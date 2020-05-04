@@ -38,8 +38,10 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
   }
 
   useClickOutside(ref, () => {
-    refine('')
-    setIsActive(false)
+    if (isActive) {
+      refine('')
+      setIsActive(false)
+    }
   })
 
   const handleSearchValueChange = (newValue: string) => {
