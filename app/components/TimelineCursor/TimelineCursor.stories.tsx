@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import { useMousePosition } from '../../customHooks/useMousePosition'
 
@@ -19,11 +19,10 @@ const Wrapper = styled.div`
 `
 
 export const Basic = () => {
-  const localRef = useRef(null)
-  const mousePosition = useMousePosition(localRef)
+  const { mousePosition, scrollRef } = useMousePosition()
 
   return (
-    <Wrapper ref={localRef}>
+    <Wrapper ref={scrollRef}>
       <TimelineCursorView pixelYear={mousePosition.xElement} scale={1} />
     </Wrapper>
   )

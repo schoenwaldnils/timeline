@@ -34,7 +34,7 @@ export const Scaling: React.FC = props => {
   const value = parseInt(valueKey, 10)
 
   const MIN_SCALE = 2
-  const MAX_SCALE = 6
+  const MAX_SCALE = 7
 
   const increaseScale = () => {
     dispatch({

@@ -36,7 +36,9 @@ export const TimelineCursorView: React.FC<TimelineCursorViewProps> = ({
 }) => {
   const properties = {
     '--TimelineCursor-left': `${pixelYear}px`,
-    '--TimelineCursor-year': `'${ourTime(pixelToYear(pixelYear / scale))}'`,
+    '--TimelineCursor-year': `'${ourTime(
+      Math.floor(pixelToYear(pixelYear / scale)),
+    )}'`,
   } as React.CSSProperties
 
   return <Wrapper style={properties} />

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import mergeRefs from 'react-merge-refs'
 
@@ -11,13 +11,23 @@ import { getTimelineWidth } from './getTimelineWidth'
 import { zIndexes } from '../../data/constants'
 import { checkForTouchDevice } from '../../js/checkForTouchDevice'
 import { useMousePosition } from '../../customHooks/useMousePosition'
+import { useScrollPosition } from '../../customHooks/useScrollPosition'
 
-interface WrapperProps {
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+`
+
+interface ContainerProps {
   width: number
   scale: number
 }
 
-const Wrapper = styled.div<WrapperProps>`
+const Container = styled.div<ContainerProps>`
   position: relative;
   width: ${({ width }) => `${width}px`};
   min-height: 100%;
@@ -45,17 +55,27 @@ interface TimelineViewProps {
   ref?: any
 }
 
-export const TimelineView: React.FC<TimelineViewProps> = React.forwardRef(
-  ({ events = [], timespans = [], startYear, endYear, scale = 1 }, ref) => {
-    const localRef = useRef(null)
-    const mousePosition = useMousePosition(localRef)
+export const TimelineView: React.FC<TimelineViewProps> = ({
+  events = [],
+  timespans = [],
+  startYear,
+  endYear,
+  scale = 1,
+}) => {
+  const { mousePosition, scrollRef } = useMousePosition()
+  const [containerRef, elementRef] = useScrollPosition()
 
-    const width = getTimelineWidth(startYear, endYear, scale)
-    const isTouchDevice = checkForTouchDevice()
-    const showCursor = !!(!isTouchDevice && mousePosition.xElement)
+  const width = getTimelineWidth(startYear, endYear, scale)
+  const isTouchDevice = checkForTouchDevice()
+  const showCursor = !!(!isTouchDevice && mousePosition.xElement)
 
-    return (
-      <Wrapper ref={mergeRefs([ref, localRef])} width={width} scale={scale}>
+  return (
+    <Wrapper ref={containerRef}>
+      <Container
+        ref={mergeRefs([elementRef, scrollRef])}
+        width={width}
+        scale={scale}
+      >
         <TimelineNumbers
           startYear={startYear}
           endYear={endYear}
@@ -70,7 +90,7 @@ export const TimelineView: React.FC<TimelineViewProps> = React.forwardRef(
           ))}
         </Content>
         {showCursor && <TimelineCursor pixelYear={mousePosition.xElement} />}
-      </Wrapper>
-    )
-  },
-)
+      </Container>
+    </Wrapper>
+  )
+}

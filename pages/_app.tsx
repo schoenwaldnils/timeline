@@ -5,7 +5,7 @@ import App from 'next/app'
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { SearchProvider } from '../app/components/Search'
 import { StoreProvider } from '../app/components/Store/StoreProvider'
-import { withApollo } from '../app/js/apollo'
+import { withGraphQLClient } from '../app/lib/withGraphQLClient'
 
 class TimelineApp extends App {
   render() {
@@ -21,4 +21,4 @@ class TimelineApp extends App {
   }
 }
 
-export default withApollo(TimelineApp)
+export default withGraphQLClient(TimelineApp)

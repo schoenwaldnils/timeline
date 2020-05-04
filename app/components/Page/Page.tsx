@@ -3,17 +3,16 @@ import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
-import { Timeline } from '../Timeline'
 import { ThemeSwitch } from '../ThemeSwitch'
+import { Timeline } from '../Timeline'
 import { Scaling, ScaleIndicator } from '../Scaling'
 import { ContentfulContent } from '../Contentful'
 
 import { useStore, CLOSE_SIDEBAR } from '../Store'
-import { useScrollPosition } from '../../customHooks/useScrollPosition'
 import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
 import { zIndexes } from '../../data/constants'
 
-const Sidebar = dynamic(() => import('../Sidebar/Sidebar'))
+const Sidebar = dynamic(() => import('../Sidebar/Sidebar'), { ssr: false })
 
 const StyledPage = styled.div`
   display: grid;
@@ -32,15 +31,6 @@ const Content = styled.div`
   grid-area: content;
 `
 
-const TimelineWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-`
-
 const Config = styled.div`
   position: fixed;
   bottom: 1.5rem;
@@ -54,7 +44,6 @@ const Config = styled.div`
 
 export const Page = () => {
   const [state, dispatch] = useStore()
-  const [containerRef, elementRef] = useScrollPosition()
   const {
     data: { events, timespans },
   } = useContentfulTimeline()
@@ -67,9 +56,7 @@ export const Page = () => {
     <StyledPage>
       <Header />
       <Content>
-        <TimelineWrapper ref={containerRef}>
-          <Timeline {...{ events, timespans }} ref={elementRef} />
-        </TimelineWrapper>
+        <Timeline {...{ events, timespans }} />
         <Sidebar
           isActive={state.sidebar.isActive}
           content={sidebarContent}
