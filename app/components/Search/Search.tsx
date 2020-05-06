@@ -1,20 +1,18 @@
-import React, { useRef, useState } from 'react'
+import React, { useState, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
-import { connectSearchBox } from 'react-instantsearch-dom'
 
 import { ReactComponent as SearchIcon } from './searchIcon.svg'
 
-import { SearchBar } from './SearchBar'
-import { SearchHits } from './SearchHits'
-
 import { useClickOutside } from '../../hooks/useClickOutside'
-import { useStore, CHANGE_CONTENT } from '../Store'
-import { Tooltip } from '../Tooltip'
 import { useTranslation } from '../../hooks/useTranslation'
+
+const SearchContainer = dynamic(() => import('./SearchContainer'), {
+  ssr: false,
+})
 
 const Wrapper = styled.div`
   position: relative;
-  display: inline-block;
 `
 
 const Icon = styled(SearchIcon)`
@@ -25,48 +23,21 @@ const Icon = styled(SearchIcon)`
   }
 `
 
-export const CustomSearch = ({ currentRefinement, refine }) => {
+export const Search = () => {
   const { t } = useTranslation()
-  const [, dispatch] = useStore()
   const [isActive, setIsActive] = useState(false)
   const ref = useRef()
 
-  const changeContent = newId => {
-    dispatch({
-      type: CHANGE_CONTENT,
-      contentId: newId,
-    })
-  }
-
   useClickOutside(ref, () => {
     if (isActive) {
-      refine('')
       setIsActive(false)
     }
   })
 
-  const handleSearchValueChange = (newValue: string) => {
-    refine(newValue)
-  }
-
-  const handleHitSelect = (id: string) => {
-    changeContent(id)
-    refine('')
-    setIsActive(false)
-  }
-
   if (isActive) {
     return (
       <Wrapper ref={ref}>
-        <SearchBar
-          searchValue={currentRefinement}
-          setSearchValue={handleSearchValueChange}
-        />
-        {currentRefinement && (
-          <Tooltip>
-            <SearchHits selectHit={handleHitSelect} />
-          </Tooltip>
-        )}
+        <SearchContainer />
       </Wrapper>
     )
   }
@@ -79,5 +50,3 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
     />
   )
 }
-
-export const Search = connectSearchBox(CustomSearch)

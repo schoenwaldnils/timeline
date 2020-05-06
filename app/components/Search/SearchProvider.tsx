@@ -12,3 +12,5 @@ export const SearchProvider = ({ children }) => (
     {children}
   </InstantSearch>
 )
+
+export default SearchProvider

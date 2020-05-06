@@ -7,7 +7,6 @@ import { initGraphql } from './initGraphql'
 
 export const withGraphQLClient = App => {
   const GraphQLHooks = props => {
-    console.log({ props })
     const { graphQLState } = props
     const graphQLClient = initGraphql(graphQLState)
 
@@ -19,7 +18,6 @@ export const withGraphQLClient = App => {
   }
 
   GraphQLHooks.getInitialProps = async ctx => {
-    console.log(ctx)
     const { AppTree } = ctx
 
     const appProps = {}
