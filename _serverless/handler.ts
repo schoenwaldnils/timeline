@@ -15,13 +15,17 @@ export const redirectPrSubdomain = (
   const { headers } = request
   const hostHeader = headers.host[0].value
 
-  if (hostHeader.endsWith(domain)) {
+  console.log('hostHeader', hostHeader)
+  console.log('request.uri', request.uri)
+
+  if (hostHeader.endsWith(domain) && !request.uri.startsWith('/pr/')) {
     const prString = hostHeader.substring(0, hostHeader.length - domain.length)
     const prPath = prString
       .split('.')
       .reverse()
       .join('/')
     request.uri = `/${prPath}${request.uri}`
+    console.log('request.uri altered', request.uri)
   }
 
   // fix the host header so that S3 understands the request
