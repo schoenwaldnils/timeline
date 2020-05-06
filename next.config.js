@@ -4,6 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const sharedConfig = require('./webpack.sharedConfig.js')
 
 let config = {
+  exportTrailingSlash: true,
   webpack: sharedConfig,
 }
 
