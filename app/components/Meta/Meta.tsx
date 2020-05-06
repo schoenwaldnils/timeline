@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import Parser from 'html-react-parser'
 import faviconData from '../../../faviconData.json'
 
@@ -6,7 +7,7 @@ const faviconHtml = faviconData && faviconData.favicon.html_code
 const Favicons = () => <>{Parser(faviconHtml)}</>
 
 export const Meta = ({ url, type, title, description, image }) => (
-  <>
+  <Head>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
 
     <title>{title}</title>
@@ -22,10 +23,7 @@ export const Meta = ({ url, type, title, description, image }) => (
     <meta property="og:image:height" content="200" />
 
     <Favicons />
-
-    <link rel="preconnect" href="https://graphql.contentful.com" />
-    {/* <link rel="preconnect" href="https://p7r800rwy1-dsn.algolia.net" /> */}
-  </>
+  </Head>
 )
 
 Meta.defaultProps = {

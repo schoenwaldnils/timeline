@@ -1,7 +1,6 @@
 import React from 'react'
 import { NextPage, GetStaticProps } from 'next'
 
-import Head from 'next/head'
 import { Page } from '../../app/components/Page'
 import { withLocale } from '../../app/lib/withLocale'
 import { isLocale } from '../../app/utils/intl/intlConsts'
@@ -12,9 +11,7 @@ const IndexPage: NextPage = props => {
   const { t } = useTranslation()
   return (
     <>
-      <Head>
-        <Meta description={t('meta.description')} />
-      </Head>
+      <Meta description={t('meta.description')} />
       <Page {...props} />
     </>
   )
