@@ -1,7 +1,7 @@
 import React from 'react'
-import { action } from '@storybook/addon-actions'
 
 import styled from '@emotion/styled'
+import { action } from '@storybook/addon-actions'
 import { TimespanView } from './TimespanView'
 
 export default {

@@ -6,8 +6,8 @@ import { TableList } from '../TableList'
 import { RichText } from '../RichText'
 import { LinkToWOL } from './ContentLinkWol'
 
-import { ourTime } from '../../js/utils'
-import { T } from '../../js/translate'
+import { useTranslation } from '../../hooks/useTranslation'
+import { OurTime } from '../OurTime'
 
 export interface ContentTimeProps {
   id: string
@@ -30,15 +30,17 @@ export const ContentTime: React.FC<ContentTimeProps> = ({
   image,
   wolLink,
 }) => {
+  const { t } = useTranslation()
+
   let list = {
-    [T('time.start')]: ourTime(startYear),
-    [T('time.end')]: endYear ? ourTime(endYear) : T('time.ongoing'),
+    [t('time.start')]: OurTime(startYear),
+    [t('time.end')]: endYear ? OurTime(endYear) : t('time.ongoing'),
   }
 
   if (duration) {
     list = {
       ...list,
-      [T('time.duration')]: `${duration} ${T('time.years')}`,
+      [t('time.duration')]: `${duration} ${t('time.years')}`,
     }
   }
 

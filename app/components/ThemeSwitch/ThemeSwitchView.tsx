@@ -2,8 +2,8 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { WiDaySunny, WiMoonAltWaningCrescent5 } from 'react-icons/wi'
 
-import { T } from '../../js/translate'
 import { ButtonSquare } from '../Button'
+import { useTranslation } from '../../hooks/useTranslation'
 
 const IconLight = WiDaySunny
 
@@ -21,11 +21,12 @@ export const ThemeSwitchView: React.FC<ThemeSwitchViewProps> = ({
   isDark = false,
   ...props
 }) => {
+  const { t } = useTranslation()
   return (
     <ButtonSquare
       {...props}
       onClick={toggleTheme}
-      aria-label={T('ui.toggleDarkMode')}
+      aria-label={t('ui.toggleDarkMode')}
     >
       {isDark ? <IconLight /> : <IconDark />}
     </ButtonSquare>

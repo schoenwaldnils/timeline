@@ -3,15 +3,14 @@ import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
+import { Timeline } from '../Timeline'
 import { ThemeSwitch } from '../ThemeSwitch'
 import { Scaling, ScaleIndicator } from '../Scaling'
-import { ContentfulContent } from '../Contentful'
 
-import { useStore, CLOSE_SIDEBAR } from '../Store'
-import { useContentfulTimeline } from '../../customHooks/useContentfulTimeline'
+import { useContentfulTimeline } from '../../hooks/useContentfulTimeline'
 import { zIndexes } from '../../data/constants'
+import { useStore } from '../Store'
 
-const Timeline = dynamic(() => import('../Timeline/Timeline'), { ssr: false })
 const Sidebar = dynamic(() => import('../Sidebar/Sidebar'), { ssr: false })
 
 const StyledPage = styled.div`
@@ -42,26 +41,20 @@ const Config = styled.div`
   }
 `
 
-export const Page = () => {
-  const [state, dispatch] = useStore()
+export const Page: React.FC = () => {
+  const [state] = useStore()
   const {
     data: { events, timespans },
   } = useContentfulTimeline()
 
-  const sidebarContent = state.sidebar.contentId ? (
-    <ContentfulContent id={state.sidebar.contentId} />
-  ) : null
+  console.log({ events: events[0], timespans: timespans[0] })
 
   return (
     <StyledPage>
       <Header />
       <Content>
         <Timeline {...{ events, timespans }} />
-        <Sidebar
-          isActive={state.sidebar.isActive}
-          content={sidebarContent}
-          closeSidebar={() => dispatch({ type: CLOSE_SIDEBAR })}
-        />
+        <Sidebar isActive={!!state.sidebarId} contentId={state.sidebarId} />
         <Config>
           <ThemeSwitch />
           <Scaling />

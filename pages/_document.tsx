@@ -1,6 +1,5 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
-import { Meta } from '../app/components/Meta/Meta'
 
 export default class MyDocument extends Document {
   render() {
@@ -13,7 +12,9 @@ export default class MyDocument extends Document {
             name="viewport"
             content="height=device-height, initial-scale=1, minimum-scale=1"
           />
-          <Meta />
+
+          <link rel="preconnect" href="https://graphql.contentful.com" />
+          <link rel="preconnect" href="https://p7r800rwy1-dsn.algolia.net" />
         </Head>
         <body>
           <Main />

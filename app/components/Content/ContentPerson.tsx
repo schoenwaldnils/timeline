@@ -7,9 +7,9 @@ import { RichText } from '../RichText'
 import { LinkToWOL } from './ContentLinkWol'
 import { UL, LI, TextButton } from '../Typography'
 
-import { ourTime } from '../../js/utils'
-import { T } from '../../js/translate'
+import { useTranslation } from '../../hooks/useTranslation'
 import { useStore, CHANGE_CONTENT } from '../Store'
+import { OurTime } from '../OurTime'
 
 interface Person {
   id: string
@@ -54,6 +54,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   wolLink,
 }) => {
   const [, dispatch] = useStore()
+  const { t } = useTranslation()
 
   const changeContent = newId => {
     dispatch({
@@ -67,7 +68,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
     blur: number,
     type: 'start' | 'end',
   ): string => {
-    if (!blur) return ourTime(year)
+    if (!blur) return OurTime(year)
 
     let blurYear = year + blur / 2
 
@@ -75,34 +76,31 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
       blurYear = year - blur / 2
     }
 
-    return `${T('misc.approx')} ${ourTime(blurYear)} (+-${blur / 2})`
+    return `${t('misc.approx')} ${OurTime(blurYear)} (+-${blur / 2})`
   }
 
   const bornString = !startYear
-    ? T('misc.unnown')
+    ? t('misc.unnown')
     : yearBlur(startYear, startBlurriness, 'start')
 
   const deathString = !endYear
-    ? T('misc.unnown')
+    ? t('misc.unnown')
     : yearBlur(endYear, endBlurriness, 'end')
 
   let list: any = {
-    [T('life.born')]: bornString,
-    [T('life.died')]: deathString,
-    [T('life.span')]:
+    [t('life.born')]: bornString,
+    [t('life.died')]: deathString,
+    [t('life.span')]:
       age && !startBlurriness && !endBlurriness
-        ? `${age} ${T('time.years')}`
-        : T('misc.unnown'),
+        ? `${age} ${t('time.years')}`
+        : t('misc.unnown'),
   }
 
   if (father) {
     list = {
       ...list,
-      [T('relations.father')]: (
-        <TextButton
-          onKeyUp={e => e.keyCode === 13 && changeContent(fatherID)}
-          onClick={() => changeContent(fatherID)}
-        >
+      [t('relations.father')]: (
+        <TextButton onClick={() => changeContent(fatherID)}>
           {father}
         </TextButton>
       ),
@@ -112,11 +110,8 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   if (mother) {
     list = {
       ...list,
-      [T('relations.mother')]: (
-        <TextButton
-          onKeyUp={e => e.keyCode === 13 && changeContent(motherID)}
-          onClick={() => changeContent(motherID)}
-        >
+      [t('relations.mother')]: (
+        <TextButton onClick={() => changeContent(motherID)}>
           {mother}
         </TextButton>
       ),
@@ -126,14 +121,11 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   if (spouse.length > 1) {
     list = {
       ...list,
-      [T('relations.spouse')]: (
+      [t('relations.spouse')]: (
         <UL>
           {spouse.map(({ id: spouseID, name: spouseName }) => (
             <LI key={`spouse-${spouseID}`}>
-              <TextButton
-                onKeyUp={e => e.keyCode === 13 && changeContent(spouseID)}
-                onClick={() => changeContent(spouseID)}
-              >
+              <TextButton onClick={() => changeContent(spouseID)}>
                 {spouseName}
               </TextButton>
             </LI>
@@ -144,11 +136,8 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   } else if (spouse.length === 1) {
     list = {
       ...list,
-      [T('relations.spouse')]: (
-        <TextButton
-          onKeyUp={e => e.keyCode === 13 && changeContent(spouse[0].id)}
-          onClick={() => changeContent(spouse[0].id)}
-        >
+      [t('relations.spouse')]: (
+        <TextButton onClick={() => changeContent(spouse[0].id)}>
           {spouse[0].name}
         </TextButton>
       ),
@@ -158,14 +147,11 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   if (childs.length > 0) {
     list = {
       ...list,
-      [T('relations.children')]: (
+      [t('relations.children')]: (
         <UL>
           {childs.map(({ id: childID, name: childName }) => (
             <LI key={`child-${childID}`}>
-              <TextButton
-                onKeyUp={e => e.keyCode === 13 && changeContent(childID)}
-                onClick={() => changeContent(childID)}
-              >
+              <TextButton onClick={() => changeContent(childID)}>
                 {childName}
               </TextButton>
             </LI>

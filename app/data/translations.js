@@ -1,4 +1,10 @@
 export default {
+  meta: {
+    description: {
+      en: 'Overview of biblical persons and events',
+      de: 'Übersicht biblischer Personen und Events',
+    },
+  },
   time: {
     extension: {
       positive: {

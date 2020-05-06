@@ -38,6 +38,7 @@ const StyledButton = styled.button`
   font-weight: inherit;
   line-height: inherit;
   color: var(--body-linkColor);
+  text-align: left;
   cursor: pointer;
   background: none;
   border: none;
@@ -49,4 +50,4 @@ const StyledButton = styled.button`
   }
 `
 
-export const TextButton = props => <StyledButton {...props} tabIndex={0} />
+export const TextButton = props => <StyledButton {...props} />

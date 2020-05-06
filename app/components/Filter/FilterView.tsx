@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { Tooltip } from '../Tooltip'
 import { ReactComponent as FilterIcon } from './filterIcon.svg'
 
-import { T } from '../../js/translate'
+import { useTranslation } from '../../hooks/useTranslation'
 
 const Wrapper = styled.div`
   position: relative;
@@ -68,22 +68,24 @@ interface FilterViewProps {
 
 export const FilterView: React.FC<FilterViewProps> = forwardRef(
   ({ isActive = false, toggleIsActive, handleChange, filterState }, ref) => {
+    const { t } = useTranslation()
+
     const filterElements = [
       {
         id: 'persons',
-        label: T('ui.persons'),
+        label: t('ui.persons'),
         name: 'personsAreActive',
         value: filterState.personsAreActive,
       },
       {
         id: 'times',
-        label: T('ui.times'),
+        label: t('ui.times'),
         name: 'timesAreActive',
         value: filterState.timesAreActive,
       },
       {
         id: 'events',
-        label: T('ui.events'),
+        label: t('ui.events'),
         name: 'eventsAreActive',
         value: filterState.eventsAreActive,
       },
@@ -93,7 +95,7 @@ export const FilterView: React.FC<FilterViewProps> = forwardRef(
       <Wrapper ref={ref}>
         <IconButton
           onClick={toggleIsActive}
-          aria-label={T('ui.filterElements')}
+          aria-label={t('ui.filterElements')}
         >
           <Icon
             aria-hidden="true"

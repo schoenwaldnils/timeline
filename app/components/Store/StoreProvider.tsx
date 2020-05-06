@@ -3,12 +3,13 @@ import React, { useReducer, useEffect } from 'react'
 import { StoreContext, initialState, reducer } from './Store'
 import { getUserLocalStore, getUserSessionStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
-import { CLOSE_SIDEBAR, SET_THEME, CHANGE_CONTENT } from './reducer'
+import { CHANGE_CONTENT, SET_THEME, CLOSE_SIDEBAR } from './reducer'
 
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     ...getUserLocalStore(),
+    ...getUserSessionStore(),
   })
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export const StoreProvider = ({ children }) => {
       if (localId) {
         dispatch({ type: CHANGE_CONTENT, contentId: localId })
       }
-      if (!localId && state.sidebar.isActive) {
+      if (!localId && state.sidebarId) {
         dispatch({ type: CLOSE_SIDEBAR })
       }
     }
@@ -53,7 +54,7 @@ export const StoreProvider = ({ children }) => {
 
     return () => {
       matcher.removeListener(onChange)
-      window.removeEventListener('load', handleUrlChange)
+      window.removeEventListener('load', () => {})
     }
   }, [state, dispatch])
 

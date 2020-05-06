@@ -3,11 +3,11 @@ import styled from '@emotion/styled'
 
 import { ReactComponent as LangIcon } from './langIcon.svg'
 
-import { T } from '../../js/translate'
 import translations from '../../data/translations'
-import { SUPPORTED_LANGUAGES } from '../../data/constants'
 import { viewportsJs } from '../../js/viewports'
 import { Tooltip } from '../Tooltip'
+import { useTranslation } from '../../hooks/useTranslation'
+import { SUPPORTED_LOCALES, Locale } from '../../utils/intl/intlConsts'
 
 const Wrapper = styled.div`
   position: relative;
@@ -71,35 +71,37 @@ interface LangSwitchViewProps {
   isActive?: boolean
   toggleIsActive: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleButtonClick: (lang: string) => void
-  currentLang: string
+  currentLocale: Locale
   ref?: React.Ref<HTMLDivElement>
 }
 
 export const LangSwitchView: React.FC<LangSwitchViewProps> = forwardRef(
   (
-    { isActive = false, toggleIsActive, handleButtonClick, currentLang },
+    { isActive = false, toggleIsActive, handleButtonClick, currentLocale },
     ref,
   ) => {
+    const { t } = useTranslation()
+
     return (
       <Wrapper ref={ref}>
         <IconButton
           onClick={toggleIsActive}
-          aria-label={T('ui.changeLanguage')}
+          aria-label={t('ui.changeLanguage')}
         >
           <Svg aria-hidden="true" focusable="false" role="img" />
 
-          <Text>{T('ui.language')}</Text>
+          <Text>{t('ui.language')}</Text>
         </IconButton>
 
         {isActive && (
           <Menu>
-            {SUPPORTED_LANGUAGES.map(lang => (
+            {SUPPORTED_LOCALES.map(locale => (
               <Button
-                key={lang}
-                disabled={lang === currentLang}
-                onClick={() => handleButtonClick(lang)}
+                key={locale}
+                disabled={locale === currentLocale}
+                onClick={() => handleButtonClick(locale)}
               >
-                {translations.ui.language[lang]}
+                {translations.ui.language[locale]}
               </Button>
             ))}
           </Menu>

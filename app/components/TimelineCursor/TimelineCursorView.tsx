@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { jsx } from '@emotion/core'
 
 import { pixelToYear } from '../../js/calcTimes'
-import { ourTime } from '../../js/utils'
+import { OurTime } from '../OurTime'
 
 const Wrapper = styled.div`
   position: absolute;
@@ -36,7 +36,7 @@ export const TimelineCursorView: React.FC<TimelineCursorViewProps> = ({
 }) => {
   const properties = {
     '--TimelineCursor-left': `${pixelYear}px`,
-    '--TimelineCursor-year': `'${ourTime(
+    '--TimelineCursor-year': `'${OurTime(
       Math.floor(pixelToYear(pixelYear / scale)),
     )}'`,
   } as React.CSSProperties

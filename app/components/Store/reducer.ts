@@ -3,10 +3,10 @@ import {
   setUserSessionStore,
   getUserLocalStore,
 } from './userStore'
+import { isBrowser } from '../../utils/isBrowser'
 import { setUrlHash, removeUrlHash } from '../../js/urlHash'
 
 export const SET_INIT = 'SET_INIT'
-export const SET_LANG = 'SET_LANG'
 export const SET_SCALE = 'SET_SCALE'
 export const CHANGE_CONTENT = 'CHANGE_CONTENT'
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
@@ -14,7 +14,6 @@ export const SET_FILTER = 'SET_FILTER'
 export const SET_THEME = 'SET_THEME'
 
 type SET_INIT = 'SET_INIT'
-type SET_LANG = 'SET_LANG'
 type SET_SCALE = 'SET_SCALE'
 type CHANGE_CONTENT = 'CHANGE_CONTENT'
 type CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
@@ -24,12 +23,8 @@ type SET_THEME = 'SET_THEME'
 export type LANGUAGES = 'en' | 'de' | string
 
 export type State = {
-  lang: string
   scale: number
-  sidebar: {
-    isActive: boolean
-    contentId: string | undefined
-  }
+  sidebarId: string | undefined
   filter: {
     personsAreActive: boolean
     timesAreActive: boolean
@@ -46,7 +41,6 @@ type Filter = {
 
 export type Action =
   | { type: SET_INIT; [key: string]: any }
-  | { type: SET_LANG; lang: LANGUAGES }
   | { type: SET_SCALE; scale: number }
   | { type: CHANGE_CONTENT; contentId: string }
   | { type: CLOSE_SIDEBAR }
@@ -61,15 +55,17 @@ interface ScaleChangedEvent {
 }
 
 export const reducer: Reducer<State, Action> = (state, action) => {
-  const scaleChanged: CustomEvent<ScaleChangedEvent> = new CustomEvent(
-    'scaleChanged',
-    {
+  let scaleChanged: CustomEvent<ScaleChangedEvent>
+  if (typeof window !== 'undefined') {
+    scaleChanged = new CustomEvent('scaleChanged', {
       detail: {
         action,
         state,
       },
-    },
-  )
+    })
+  }
+
+  // console.log('action.type', action.type)
 
   switch (action.type) {
     case SET_INIT:
@@ -78,19 +74,12 @@ export const reducer: Reducer<State, Action> = (state, action) => {
         ...getUserLocalStore(),
       }
 
-    case SET_LANG:
-      setUserLocalStore({
-        lang: action.lang,
-      })
-      return {
-        ...state,
-        lang: action.lang,
-      }
-
     case SET_SCALE:
-      setUserLocalStore({
-        scale: action.scale,
-      })
+      if (isBrowser) {
+        setUserLocalStore({
+          scale: action.scale,
+        })
+      }
 
       window.dispatchEvent(scaleChanged)
 
@@ -103,20 +92,14 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       setUrlHash(action.contentId)
       return {
         ...state,
-        sidebar: {
-          isActive: true,
-          contentId: action.contentId,
-        },
+        sidebarId: action.contentId,
       }
 
     case CLOSE_SIDEBAR:
       removeUrlHash()
       return {
         ...state,
-        sidebar: {
-          isActive: false,
-          contentId: undefined,
-        },
+        sidebarId: undefined,
       }
 
     case SET_FILTER:
