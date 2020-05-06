@@ -7,7 +7,7 @@ const Index: React.FC = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace('/[lang]', `/${getInitialLocale()}`)
+    router.replace('/[lang]/', `/${getInitialLocale()}/`)
   })
 
   return (
