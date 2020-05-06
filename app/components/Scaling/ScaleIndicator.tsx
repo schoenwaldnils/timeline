@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { useStore } from '../Store'
-import { T } from '../../js/translate'
+import { useTranslation } from '../../hooks/useTranslation'
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,12 +37,14 @@ const Indicator = styled.div`
 `
 
 export const ScaleIndicator = props => {
+  const { t } = useTranslation()
   const [state] = useStore()
+
   const yearsPer100Pixel = 100 / state.scale
 
   return (
     <Wrapper {...props}>
-      {yearsPer100Pixel} {T('time.years')} <Indicator />
+      {yearsPer100Pixel} {t('time.years')} <Indicator />
     </Wrapper>
   )
 }

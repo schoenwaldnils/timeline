@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 import { zIndexes } from '../../data/constants'
 import { generateGradient } from './generateGradient'
+import { ButtonPlain } from '../Button'
 
 const timeColors = {
   person: 'var(--Timespan-backgroundColor--person)',
@@ -22,7 +23,7 @@ interface WrapperProps {
   rowIndex: number
 }
 
-const Wrapper = styled.div<WrapperProps>`
+const Wrapper = styled(ButtonPlain)<WrapperProps>`
   position: relative;
   z-index: ${zIndexes.timespan};
   display: flex;
@@ -33,8 +34,7 @@ const Wrapper = styled.div<WrapperProps>`
   margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 4px));
   margin-bottom: 1px;
   margin-left: ${({ pixelStart }) => pixelStart}px;
-  padding-right: 0.5em;
-  padding-left: 0.5em;
+  padding: 0 0.5em;
   color: var(--Timespan-color);
   white-space: nowrap;
   cursor: pointer;
@@ -79,9 +79,8 @@ export const TimespanView: React.FC<TimespanViewProps> = ({
       background={background}
       pixelStart={pixelStart}
       pixelDuration={pixelDuration}
-      role="button"
-      rowIndex={rowIndex}
       tabIndex={0}
+      rowIndex={rowIndex}
       onClick={changeContent}
     >
       <TimespanName>{name}</TimespanName>

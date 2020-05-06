@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { useStore, CHANGE_CONTENT } from '../Store'
 import { TimespanView } from './TimespanView'
+import { useStore, CHANGE_CONTENT } from '../Store'
 
 export interface TimespanProps {
   id: string
@@ -25,12 +25,8 @@ export const Timespan: React.FC<TimespanProps> = ({
   rowIndex,
 }) => {
   const [, dispatch] = useStore()
-
-  const changeContent = () => {
-    dispatch({
-      type: CHANGE_CONTENT,
-      contentId: id,
-    })
+  const handleClick = () => {
+    dispatch({ type: CHANGE_CONTENT, contentId: id })
   }
 
   return (
@@ -42,8 +38,8 @@ export const Timespan: React.FC<TimespanProps> = ({
         pixelDuration,
         startBlurriness,
         endBlurriness,
-        changeContent,
         rowIndex,
+        changeContent: handleClick,
       }}
     />
   )

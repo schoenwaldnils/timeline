@@ -1,14 +1,9 @@
 import { createContext, useContext } from 'react'
 import { State, Action } from './reducer'
-import { LANGUAGES } from '../../data/constants'
 
 export const initialState = {
-  lang: LANGUAGES.EN,
   scale: 1,
-  sidebar: {
-    isActive: false,
-    contentId: undefined,
-  },
+  sidebarId: undefined,
   filter: {
     personsAreActive: true,
     timesAreActive: true,

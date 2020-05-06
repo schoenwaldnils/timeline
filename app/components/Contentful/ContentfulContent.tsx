@@ -11,7 +11,7 @@ import {
   formatTime,
   formatEvent,
 } from '../../js/objectFormating/formatData'
-import { useStore } from '../Store'
+import { useLocale } from '../../context/LocaleContext'
 
 const contentfulFunctions = {
   person: {
@@ -41,9 +41,9 @@ export const ContentfulContent: React.FC<Props> = ({
   id,
   isParent = false,
 }) => {
-  const [state] = useStore()
+  const { locale } = useLocale()
   const { loading, error, data } = useQuery(typeById, {
-    variables: { id, locale: state.lang },
+    variables: { id, locale },
   })
 
   if (loading) {

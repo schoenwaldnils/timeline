@@ -6,57 +6,53 @@ import { ClientContext } from 'graphql-hooks'
 import { initGraphql } from './initGraphql'
 
 export const withGraphQLClient = App => {
-  return class GraphQLHooks extends React.Component {
-    static async getInitialProps(ctx) {
-      const { AppTree } = ctx
+  const GraphQLHooks = props => {
+    console.log({ props })
+    const { graphQLState } = props
+    const graphQLClient = initGraphql(graphQLState)
 
-      let appProps = {}
-      if (App.getInitialProps) {
-        appProps = await App.getInitialProps(ctx)
+    return (
+      <ClientContext.Provider value={graphQLClient}>
+        <App {...props} />
+      </ClientContext.Provider>
+    )
+  }
+
+  GraphQLHooks.getInitialProps = async ctx => {
+    console.log(ctx)
+    const { AppTree } = ctx
+
+    const appProps = {}
+
+    // Run all GraphQL queries in the component tree
+    // and extract the resulting data
+    const graphQLClient = initGraphql()
+    let graphQLState = {}
+    if (typeof window === 'undefined') {
+      try {
+        // Run all GraphQL queries
+
+        graphQLState = await getInitialState({
+          App: <AppTree {...appProps} />,
+          client: graphQLClient,
+        })
+      } catch (error) {
+        // Prevent GraphQL hooks client errors from crashing SSR.
+        // Handle them in components via the state.error prop:
+        // https://github.com/nearform/graphql-hooks#usequery
+        console.error('Error while running `getInitialState`', error)
       }
 
-      // Run all GraphQL queries in the component tree
-      // and extract the resulting data
-      const graphQLClient = initGraphql()
-      let graphQLState = {}
-      if (typeof window === 'undefined') {
-        try {
-          // Run all GraphQL queries
-          graphQLState = await getInitialState({
-            App: <AppTree {...appProps} />,
-            client: graphQLClient,
-          })
-        } catch (error) {
-          // Prevent GraphQL hooks client errors from crashing SSR.
-          // Handle them in components via the state.error prop:
-          // https://github.com/nearform/graphql-hooks#usequery
-          console.error('Error while running `getInitialState`', error)
-        }
-
-        // getInitialState does not call componentWillUnmount
-        // head side effect therefore need to be cleared manually
-        Head.rewind()
-      }
-
-      return {
-        ...appProps,
-        graphQLState,
-      }
+      // getInitialState does not call componentWillUnmount
+      // head side effect therefore need to be cleared manually
+      Head.rewind()
     }
 
-    graphQLClient = null
-
-    constructor(props) {
-      super(props)
-      this.graphQLClient = initGraphql(props.graphQLState)
-    }
-
-    render() {
-      return (
-        <ClientContext.Provider value={this.graphQLClient}>
-          <App {...this.props} />
-        </ClientContext.Provider>
-      )
+    return {
+      ...appProps,
+      graphQLState,
     }
   }
+
+  return GraphQLHooks
 }

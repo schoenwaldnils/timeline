@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { useMousePosition } from '../../customHooks/useMousePosition'
+import { useMousePosition } from '../../hooks/useMousePosition'
 
 import { TimelineCursorView } from './TimelineCursorView'
 

@@ -6,11 +6,11 @@ import { ReactComponent as SearchIcon } from './searchIcon.svg'
 
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
-import { T } from '../../js/translate'
 
-import { useClickOutside } from '../../customHooks/useClickOutside'
+import { useClickOutside } from '../../hooks/useClickOutside'
 import { useStore, CHANGE_CONTENT } from '../Store'
 import { Tooltip } from '../Tooltip'
+import { useTranslation } from '../../hooks/useTranslation'
 
 const Wrapper = styled.div`
   position: relative;
@@ -26,8 +26,9 @@ const Icon = styled(SearchIcon)`
 `
 
 export const CustomSearch = ({ currentRefinement, refine }) => {
-  const [isActive, setIsActive] = useState(false)
+  const { t } = useTranslation()
   const [, dispatch] = useStore()
+  const [isActive, setIsActive] = useState(false)
   const ref = useRef()
 
   const changeContent = newId => {
@@ -73,7 +74,7 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
   return (
     <Icon
       role="button"
-      aria-label={T('ui.search')}
+      aria-label={t('ui.search')}
       onClick={() => setIsActive(true)}
     />
   )

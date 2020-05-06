@@ -3,9 +3,9 @@ import React from 'react'
 import { ContentTemplate, ContentBox } from './ContentTemplate'
 import { TableList } from '../TableList'
 import { LinkToWOL } from './ContentLinkWol'
+import { OurTime } from '../OurTime'
 
-import { ourTime } from '../../js/utils'
-import { T } from '../../js/translate'
+import { useTranslation } from '../../hooks/useTranslation'
 
 interface ContentEventProps {
   id: string
@@ -22,12 +22,13 @@ export const ContentEvent: React.FC<ContentEventProps> = ({
   image,
   wolLink,
 }) => {
+  const { t } = useTranslation()
   return (
     <ContentTemplate title={name} image={image} idContentful={id}>
       <ContentBox>
         <TableList
           list={{
-            [T('time.year')]: ourTime(year),
+            [t('time.year')]: OurTime(year),
           }}
         />
       </ContentBox>
