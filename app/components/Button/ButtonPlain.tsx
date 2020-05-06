@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 const Button = styled.button`
   padding: 0;
+  font-family: inherit;
   font-size: inherit;
   line-height: inherit;
   cursor: pointer;
