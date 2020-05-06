@@ -4,7 +4,7 @@ import Highlighter from 'react-highlight-words'
 
 import DefaultImgUrl from './defaultImg.svg'
 
-import { useStore } from '../Store'
+import { useLocale } from '../../context/LocaleContext'
 
 const IMAGE_SIZE = 28
 
@@ -50,7 +50,7 @@ export const SearchHit = ({
   _highlightResult,
   ...hit
 }) => {
-  const [state] = useStore()
+  const { locale } = useLocale()
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,
@@ -65,9 +65,9 @@ export const SearchHit = ({
   return (
     <Wrapper onClick={() => selectHit(objectID)} indexType={type}>
       <Highlighter
-        searchWords={_highlightResult[`name_${state.lang}`].matchedWords}
+        searchWords={_highlightResult[`name_${locale}`].matchedWords}
         autoEscape={true}
-        textToHighlight={hit[`name_${state.lang}`]}
+        textToHighlight={hit[`name_${locale}`]}
       />
       <Image src={imgSrc} />
     </Wrapper>

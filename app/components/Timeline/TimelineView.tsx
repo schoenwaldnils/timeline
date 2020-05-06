@@ -10,8 +10,8 @@ import { Timespan, TimespanProps } from '../Timespan'
 import { getTimelineWidth } from './getTimelineWidth'
 import { zIndexes } from '../../data/constants'
 import { checkForTouchDevice } from '../../js/checkForTouchDevice'
-import { useMousePosition } from '../../customHooks/useMousePosition'
-import { useScrollPosition } from '../../customHooks/useScrollPosition'
+import { useMousePosition } from '../../hooks/useMousePosition'
+import { useScrollPosition } from '../../hooks/useScrollPosition'
 
 const Wrapper = styled.div`
   position: absolute;

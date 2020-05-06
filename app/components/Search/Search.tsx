@@ -1,20 +1,18 @@
-import React, { useRef, useState } from 'react'
+import React, { useState, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
-import { connectSearchBox } from 'react-instantsearch-dom'
 
 import { ReactComponent as SearchIcon } from './searchIcon.svg'
 
-import { SearchBar } from './SearchBar'
-import { SearchHits } from './SearchHits'
-import { T } from '../../js/translate'
+import { useClickOutside } from '../../hooks/useClickOutside'
+import { useTranslation } from '../../hooks/useTranslation'
 
-import { useClickOutside } from '../../customHooks/useClickOutside'
-import { useStore, CHANGE_CONTENT } from '../Store'
-import { Tooltip } from '../Tooltip'
+const SearchContainer = dynamic(() => import('./SearchContainer'), {
+  ssr: false,
+})
 
 const Wrapper = styled.div`
   position: relative;
-  display: inline-block;
 `
 
 const Icon = styled(SearchIcon)`
@@ -25,47 +23,21 @@ const Icon = styled(SearchIcon)`
   }
 `
 
-export const CustomSearch = ({ currentRefinement, refine }) => {
+export const Search = () => {
+  const { t } = useTranslation()
   const [isActive, setIsActive] = useState(false)
-  const [, dispatch] = useStore()
   const ref = useRef()
-
-  const changeContent = newId => {
-    dispatch({
-      type: CHANGE_CONTENT,
-      contentId: newId,
-    })
-  }
 
   useClickOutside(ref, () => {
     if (isActive) {
-      refine('')
       setIsActive(false)
     }
   })
 
-  const handleSearchValueChange = (newValue: string) => {
-    refine(newValue)
-  }
-
-  const handleHitSelect = (id: string) => {
-    changeContent(id)
-    refine('')
-    setIsActive(false)
-  }
-
   if (isActive) {
     return (
       <Wrapper ref={ref}>
-        <SearchBar
-          searchValue={currentRefinement}
-          setSearchValue={handleSearchValueChange}
-        />
-        {currentRefinement && (
-          <Tooltip>
-            <SearchHits selectHit={handleHitSelect} />
-          </Tooltip>
-        )}
+        <SearchContainer />
       </Wrapper>
     )
   }
@@ -73,10 +45,8 @@ export const CustomSearch = ({ currentRefinement, refine }) => {
   return (
     <Icon
       role="button"
-      aria-label={T('ui.search')}
+      aria-label={t('ui.search')}
       onClick={() => setIsActive(true)}
     />
   )
 }
-
-export const Search = connectSearchBox(CustomSearch)

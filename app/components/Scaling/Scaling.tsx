@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { T } from '../../js/translate'
 import { useStore, SET_SCALE } from '../Store'
 import { ButtonSquare } from '../Button'
+import { useTranslation } from '../../hooks/useTranslation'
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,6 +16,7 @@ const ButtonSpaced = styled(ButtonSquare)`
 `
 
 export const Scaling: React.FC = props => {
+  const { t } = useTranslation()
   const [state, dispatch] = useStore()
   const map = {
     1: 0.0625,
@@ -55,14 +56,14 @@ export const Scaling: React.FC = props => {
       <ButtonSpaced
         onClick={decreaseScale}
         disabled={value <= MIN_SCALE}
-        aria-label={T('ui.scaleDown')}
+        aria-label={t('ui.scaleDown')}
       >
         -
       </ButtonSpaced>
       <ButtonSpaced
         onClick={increaseScale}
         disabled={value >= MAX_SCALE}
-        aria-label={T('ui.scaleUp')}
+        aria-label={t('ui.scaleUp')}
       >
         +
       </ButtonSpaced>

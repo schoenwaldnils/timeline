@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useClickOutside } from '../../customHooks/useClickOutside'
+import { useClickOutside } from '../../hooks/useClickOutside'
 import { useStore, SET_FILTER } from '../Store'
 
 import { FilterView } from './FilterView'

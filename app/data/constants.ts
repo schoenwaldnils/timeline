@@ -16,13 +16,4 @@ export const zIndexes = {
   timelineContent: 1,
 }
 
-export const LANGUAGES = {
-  EN: 'en',
-  DE: 'de',
-}
-
-export const SUPPORTED_LANGUAGES = [LANGUAGES.EN, LANGUAGES.DE]
-
-export const DEFAULT_LANG = 'de'
-
 export const DEFAULT_SCALE = 1

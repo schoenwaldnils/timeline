@@ -1,10 +1,15 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 
-import { Event } from './index'
+import { EventView } from './EventView'
 
 export default {
   title: 'Event',
-  component: Event,
+  component: EventView,
 }
 
-export const Basic = () => <Event id="" name="Test Event" pixelYear={50} />
+export const Basic = () => (
+  <EventView pixelYear={50} changeContent={action('changeContent')}>
+    Test Event
+  </EventView>
+)

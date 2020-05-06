@@ -24,9 +24,10 @@ function create(initialState = {}) {
 export const initGraphql = (initialState = {}) => {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (typeof window === 'undefined') {
-    return create(initialState)
-  }
+
+  // if (typeof window === 'undefined') {
+  //   return create(initialState)
+  // }
 
   // Reuse client on the client-side
   if (!graphQLClient) {
