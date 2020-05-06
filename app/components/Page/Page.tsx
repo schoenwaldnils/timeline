@@ -41,7 +41,7 @@ const Config = styled.div`
   }
 `
 
-export const Page: React.FC<{ id: string }> = () => {
+export const Page: React.FC = () => {
   const [state] = useStore()
   const {
     data: { events, timespans },

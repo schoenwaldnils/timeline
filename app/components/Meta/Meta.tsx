@@ -29,7 +29,7 @@ export const Meta = ({ url, type, title, description, image }) => (
 )
 
 Meta.defaultProps = {
-  url: 'https://timeline.schoenwald.media',
+  url: 'https://timeline.schoen.world',
   type: 'website',
   title: 'Timeline',
   description: 'Overview of biblical persons and events',
