@@ -18,7 +18,6 @@ const Wrapper = styled.button<{ indexType: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 32px;
   margin-bottom: 2px;
   padding-top: 2px;
   padding-right: 0.5em;
@@ -62,10 +61,12 @@ export const SearchHit = ({
     ? `${imageUrl}?w=${IMAGE_SIZE * 2}&h=${IMAGE_SIZE * 2}&fit=fill`
     : defaultImages[type]
 
+  const searchWords = _highlightResult[`name_${locale}`]?.matchedWords || []
+
   return (
     <Wrapper onClick={() => selectHit(objectID)} indexType={type}>
       <Highlighter
-        searchWords={_highlightResult[`name_${locale}`].matchedWords}
+        searchWords={searchWords}
         autoEscape={true}
         textToHighlight={hit[`name_${locale}`]}
       />
