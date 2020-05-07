@@ -120,13 +120,25 @@ export default {
       en: 'filter elements',
       de: 'filter Elemente',
     },
+    person: {
+      en: 'persona',
+      de: 'Person',
+    },
     persons: {
       en: 'persons',
       de: 'Personen',
     },
+    time: {
+      en: 'time',
+      de: 'Zeitabschnitt',
+    },
     times: {
       en: 'times',
       de: 'Zeitabschnitte',
+    },
+    event: {
+      en: 'event',
+      de: 'Ereignis',
     },
     events: {
       en: 'events',
