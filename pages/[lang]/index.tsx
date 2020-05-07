@@ -4,17 +4,9 @@ import { NextPage, GetStaticProps } from 'next'
 import { Page } from '../../app/components/Page'
 import { withLocale } from '../../app/lib/withLocale'
 import { isLocale } from '../../app/utils/intl/intlConsts'
-import { Meta } from '../../app/components/Meta'
-import { useTranslation } from '../../app/hooks/useTranslation'
 
 const IndexPage: NextPage = props => {
-  const { t } = useTranslation()
-  return (
-    <>
-      <Meta description={t('meta.description')} />
-      <Page {...props} />
-    </>
-  )
+  return <Page {...props} />
 }
 
 export const getStaticProps: GetStaticProps = async ctx => {
