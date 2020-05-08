@@ -3,11 +3,10 @@ import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
-import { Timeline } from '../Timeline'
+import { Timeline, TimelineProps } from '../Timeline'
 import { ThemeSwitch } from '../ThemeSwitch'
 import { Scaling, ScaleIndicator } from '../Scaling'
 
-import { useContentfulTimeline } from '../../hooks/useContentfulTimeline'
 import { zIndexes } from '../../data/constants'
 import { useStore } from '../Store'
 
@@ -41,19 +40,14 @@ const Config = styled.div`
   }
 `
 
-export const Page: React.FC = () => {
+export const Page: React.FC<TimelineProps> = ({ timelineData }) => {
   const [state] = useStore()
-  const {
-    data: { events, timespans },
-  } = useContentfulTimeline()
-
-  console.log({ events: events[0], timespans: timespans[0] })
 
   return (
     <StyledPage>
       <Header />
       <Content>
-        <Timeline {...{ events, timespans }} />
+        <Timeline timelineData={timelineData} />
         <Sidebar isActive={!!state.sidebarId} contentId={state.sidebarId} />
         <Config>
           <ThemeSwitch />

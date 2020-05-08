@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { colors } from '../../js/colors'
+import { colors } from '../../data/colors'
 import { zIndexes } from '../../data/constants'
 import { ButtonPlain } from '../Button'
 

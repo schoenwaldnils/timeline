@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-import { themeColors } from '../../js/colors'
+import { themeColors } from '../../data/colors'
 
 export const UL = styled.ul`
   margin-top: 0;

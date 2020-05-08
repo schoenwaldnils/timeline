@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { themeColors, shades } from '../../js/colors'
+import { themeColors, shades } from '../../data/colors'
 
 export const P = styled.p`
   margin: 0 0 1em;

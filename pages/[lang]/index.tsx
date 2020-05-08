@@ -4,8 +4,10 @@ import { NextPage, GetStaticProps } from 'next'
 import { Page } from '../../app/components/Page'
 import { withLocale } from '../../app/lib/withLocale'
 import { isLocale } from '../../app/utils/intl/intlConsts'
+import { TimelineProps } from '../../app/components/Timeline'
+import { fetchTimelineData } from '../../app/lib/fetchTimelineData'
 
-const IndexPage: NextPage = props => {
+const IndexPage: NextPage<TimelineProps> = props => {
   return <Page {...props} />
 }
 
@@ -13,7 +15,10 @@ export const getStaticProps: GetStaticProps = async ctx => {
   if (typeof ctx.params.lang !== 'string' || !isLocale(ctx.params.lang)) {
     return { props: { locale: null } }
   }
-  return { props: { locale: ctx.params.lang } }
+
+  const data = await fetchTimelineData('timelineData', ctx.params.lang)
+
+  return { props: { locale: ctx.params.lang, timelineData: data } }
 }
 
 export async function getStaticPaths() {
