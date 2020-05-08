@@ -1,6 +1,4 @@
-import { time } from '../data/constants'
-
-const { YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO } = time
+import { YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO } from '../data/constants'
 
 // function maxEnd(value) {
 //   if (value > YEARS_AFTER_ZERO) {

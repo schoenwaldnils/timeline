@@ -2,25 +2,30 @@ import React from 'react'
 
 import { TimelineView } from './TimelineView'
 
-import { time } from '../../data/constants'
+import { YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO } from '../../data/constants'
 import { useStore } from '../Store'
+import { useTimelineData } from '../../hooks/useTimelineData'
 
-interface TimelineProps {
-  events?: Array<Object>
-  timespans?: Array<Object>
+type contentfulArray = {
+  items: Array<any>
 }
 
-export const Timeline: React.FC<TimelineProps> = ({
-  events = [],
-  timespans = [],
-}) => {
+export interface TimelineProps {
+  timelineData: {
+    persons: contentfulArray
+    times: contentfulArray
+    events: contentfulArray
+  }
+}
+
+export const Timeline: React.FC<TimelineProps> = ({ timelineData }) => {
   const [state] = useStore()
-  const { YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO } = time
+  const formatedData = useTimelineData(timelineData)
 
   return (
     <TimelineView
-      events={events}
-      timespans={timespans}
+      timespans={formatedData.timespans}
+      events={formatedData.events}
       startYear={YEARS_BEFORE_ZERO}
       endYear={YEARS_AFTER_ZERO}
       scale={state.scale}

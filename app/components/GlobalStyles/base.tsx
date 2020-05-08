@@ -1,5 +1,5 @@
 import { css } from '@emotion/core'
-import { colors } from '../../js/colors'
+import { colors } from '../../data/colors'
 
 export default css`
   *,

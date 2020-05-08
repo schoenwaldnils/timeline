@@ -1,10 +1,9 @@
 import React from 'react'
-import { useQuery } from 'graphql-hooks'
+import { useQuery } from 'react-query'
 
 import { Loading, LoadingDots } from '../Loading'
 import { ContentPerson, ContentTime, ContentEvent } from '../Content'
 
-import { typeById } from '../../gql/typeById'
 import {
   formatPerson,
   formatParent,
@@ -12,6 +11,7 @@ import {
   formatEvent,
 } from '../../js/objectFormating/formatData'
 import { useLocale } from '../../context/LocaleContext'
+import { fetchContentfulEntry } from '../../lib/fetchContentfulEntry'
 
 const contentfulFunctions = {
   person: {
@@ -42,18 +42,21 @@ export const ContentfulContent: React.FC<Props> = ({
   isParent = false,
 }) => {
   const { locale } = useLocale()
-  const { loading, error, data } = useQuery(typeById, {
-    variables: { id, locale },
-  })
 
-  if (loading) {
-    if (isParent) return <LoadingDots />
-    return <Loading />
-  }
-  if (error) {
+  const { status, data, error } = useQuery(
+    locale && id && [`contentfulEntry-${id}`, { locale, id }],
+    fetchContentfulEntry,
+  )
+
+  if (status === 'error') {
     // eslint-disable-next-line no-console
     console.log(error)
     return <div>Error!</div>
+  }
+
+  if (status === 'loading') {
+    if (isParent) return <LoadingDots />
+    return <Loading />
   }
 
   const [type] = Object.keys(data).filter(

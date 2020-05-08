@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
-import { shades } from '../../js/colors'
+import { shades } from '../../data/colors'
 import { useTranslation } from '../../hooks/useTranslation'
 
 const Wrapper = styled.input`
