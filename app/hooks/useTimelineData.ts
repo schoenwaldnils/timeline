@@ -7,6 +7,25 @@ import { useLocale } from '../context/LocaleContext'
 import { formatTimelineData } from '../js/objectFormating/formatTimelineData'
 import { fetchTimelineData } from '../lib/fetchTimelineData'
 
+type RequestIdleCallbackHandle = any
+type RequestIdleCallbackOptions = {
+  timeout: number
+}
+type RequestIdleCallbackDeadline = {
+  readonly didTimeout: boolean
+  timeRemaining: () => number
+}
+
+declare global {
+  interface Window {
+    requestIdleCallback: (
+      callback: (deadline: RequestIdleCallbackDeadline) => void,
+      opts?: RequestIdleCallbackOptions,
+    ) => RequestIdleCallbackHandle
+    cancelIdleCallback: (handle: RequestIdleCallbackHandle) => void
+  }
+}
+
 export const useTimelineData = serverData => {
   const { locale } = useLocale()
   const [state] = useStore()
@@ -21,7 +40,7 @@ export const useTimelineData = serverData => {
   if (status === 'error') console.error(error)
 
   useEffect(() => {
-    setTimeout(() => {
+    const handleIdle = () => {
       if (
         isInitial &&
         status === 'success' &&
@@ -30,7 +49,11 @@ export const useTimelineData = serverData => {
         setData(clientTimlineData)
         setIsInitial(false)
       }
-    }, 2000)
+    }
+    window.requestIdleCallback(handleIdle)
+    return () => {
+      window.cancelIdleCallback(handleIdle)
+    }
   }, [clientTimlineData, isInitial, serverData, status])
 
   let formatedData = {
