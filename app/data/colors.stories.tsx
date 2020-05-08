@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import Color from 'color'
 
 import { shades, colors, themeColors } from './colors'
-import { viewportsJs } from './viewports'
+import { viewportsJs } from '../js/viewports'
 
 export default {
   title: 'Colors',

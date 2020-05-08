@@ -1,7 +1,7 @@
 import { css } from '@emotion/core'
 import Color from 'color'
 
-import { colors, shades } from '../../js/colors'
+import { colors, shades } from '../../data/colors'
 
 /**
  * 1. setting transparent to rgba value due to a safari bug

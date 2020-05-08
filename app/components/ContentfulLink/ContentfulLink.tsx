@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 import { A } from '../Typography'
 import { CONTENTFUL_SPACE_ID } from '../../data/constants'
-import { shades } from '../../js/colors'
+import { shades } from '../../data/colors'
 import { useTranslation } from '../../hooks/useTranslation'
 
 interface ContentfulLinkProps {
