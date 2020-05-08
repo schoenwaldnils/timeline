@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 import shallowequal from 'shallowequal'
 
@@ -20,14 +20,18 @@ export const useTimelineData = serverData => {
 
   if (status === 'error') console.error(error)
 
-  if (
-    isInitial &&
-    status === 'success' &&
-    !shallowequal(serverData, clientTimlineData)
-  ) {
-    setData(clientTimlineData)
-    setIsInitial(false)
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      if (
+        isInitial &&
+        status === 'success' &&
+        !shallowequal(serverData, clientTimlineData)
+      ) {
+        setData(clientTimlineData)
+        setIsInitial(false)
+      }
+    }, 2000)
+  }, [clientTimlineData, isInitial, serverData, status])
 
   let formatedData = {
     events: [],
