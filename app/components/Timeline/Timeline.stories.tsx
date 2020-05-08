@@ -1,14 +1,16 @@
 import React from 'react'
 
-import { Timeline } from './index'
+import { TimelineView } from './TimelineView'
 
 export default {
   title: 'Timeline',
-  component: Timeline,
+  component: TimelineView,
 }
 
 export const Basic = () => (
-  <Timeline
+  <TimelineView
+    startYear={-200}
+    endYear={300}
     events={[
       {
         id: '#1',

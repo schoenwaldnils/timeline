@@ -3,7 +3,6 @@ import { jsx } from '@emotion/core'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { StoreProvider } from '../app/components/Store/StoreProvider'
-import { withGraphQLClient } from '../app/lib/withGraphQLClient'
 
 const TimelineApp = ({ Component, pageProps }) => {
   return (
@@ -14,4 +13,4 @@ const TimelineApp = ({ Component, pageProps }) => {
   )
 }
 
-export default withGraphQLClient(TimelineApp)
+export default TimelineApp
