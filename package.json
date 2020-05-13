@@ -71,7 +71,7 @@
     "react-swipeable": "5.5.1",
     "requestidlecallback-polyfill": "1.0.2",
     "shallowequal": "1.1.0",
-    "typescript": "3.8.3",
+    "typescript": "3.9.2",
     "url-loader": "4.1.0",
     "webpack": "4.43.0"
   },
