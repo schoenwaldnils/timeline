@@ -10,6 +10,7 @@ export const initialState = {
     eventsAreActive: true,
   },
   themeIsDark: false,
+  activePersons: [],
 }
 
 type Context = [State, (action: Action) => void]

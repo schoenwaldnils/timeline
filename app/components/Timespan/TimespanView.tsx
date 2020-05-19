@@ -21,6 +21,7 @@ interface WrapperProps {
   pixelDuration: number
   background?: string
   rowIndex: number
+  isActive: boolean
 }
 
 const Wrapper = styled(ButtonPlain)<WrapperProps>`
@@ -39,6 +40,12 @@ const Wrapper = styled(ButtonPlain)<WrapperProps>`
   white-space: nowrap;
   cursor: pointer;
   background: ${({ background }) => background};
+
+  ${({ isActive }) =>
+    isActive &&
+    `
+    box-shadow: 0 0 0 1px #f00;
+  `}
 `
 
 interface TimespanNameProps {
@@ -66,6 +73,7 @@ export const TimespanView: React.FC<TimespanViewProps> = ({
   pixelDuration,
   rowIndex,
   changeContent,
+  isActive,
 }) => {
   const background = generateGradient(
     startBlurriness,
@@ -80,6 +88,7 @@ export const TimespanView: React.FC<TimespanViewProps> = ({
       pixelStart={pixelStart}
       pixelDuration={pixelDuration}
       tabIndex={0}
+      isActive={isActive}
       rowIndex={rowIndex}
       onClick={changeContent}
     >

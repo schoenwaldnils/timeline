@@ -3,20 +3,30 @@ import arraySort from 'array-sort'
 import { updateTimeProps } from './updateTimeProps'
 import { updateEventProps } from './updateEventProps'
 
-const findParent = (linkedFrom, id: string, type: 'male' | 'female') => {
-  const [parent] = linkedFrom.personCollection.items.filter(
-    ({ gender, childs }) => {
-      if (gender !== type) return false
-      const childIDs =
-        childs.items &&
-        Object.keys(childs.items).map(key => childs.items[key].sys.id)
-      if (!childIDs) return false
-      if (childIDs.includes(id)) return true
-      return false
-    },
-  )
-  if (!parent) return undefined
-  return parent.sys.id
+export const findParent = (
+  linkedFrom,
+  id: string,
+  type?: 'male' | 'female',
+) => {
+  const parents = linkedFrom.personCollection.items.filter(({ childs }) => {
+    const childIDs =
+      childs.items &&
+      Object.keys(childs.items).map(key => childs.items[key].sys.id)
+    if (!childIDs) return false
+    if (childIDs.includes(id)) return true
+    return false
+  })
+  if (!parents.length) return undefined
+
+  if (type) {
+    const [parent] = parents.filter(({ gender }) => gender === type)
+    if (!parent) {
+      return undefined
+    }
+    return parent.sys.id
+  }
+
+  return parents.map(p => p.sys.id)
 }
 
 export function formatPerson(oldData) {

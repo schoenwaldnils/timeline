@@ -12,6 +12,7 @@ export const CHANGE_CONTENT = 'CHANGE_CONTENT'
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
 export const SET_FILTER = 'SET_FILTER'
 export const SET_THEME = 'SET_THEME'
+export const SET_ACTIVE_PERSONS = 'SET_ACTIVE_PERSONS'
 
 type SET_INIT = 'SET_INIT'
 type SET_SCALE = 'SET_SCALE'
@@ -19,6 +20,7 @@ type CHANGE_CONTENT = 'CHANGE_CONTENT'
 type CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
 type SET_FILTER = 'SET_FILTER'
 type SET_THEME = 'SET_THEME'
+type SET_ACTIVE_PERSONS = 'SET_ACTIVE_PERSONS'
 
 export type LANGUAGES = 'en' | 'de' | string
 
@@ -31,6 +33,7 @@ export type State = {
     eventsAreActive: boolean
   }
   themeIsDark: boolean
+  activePersons: Array<string>
 }
 
 type Filter = {
@@ -46,6 +49,7 @@ export type Action =
   | { type: CLOSE_SIDEBAR }
   | { type: SET_FILTER; filter: Filter }
   | { type: SET_THEME; themeIsDark: boolean }
+  | { type: SET_ACTIVE_PERSONS; activePersons: Array<string> }
 
 type Reducer<S, A> = (state: S, action: A) => S
 
@@ -124,6 +128,12 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       return {
         ...state,
         themeIsDark: action.themeIsDark,
+      }
+
+    case SET_ACTIVE_PERSONS:
+      return {
+        ...state,
+        activePersons: [...state.activePersons, ...action.activePersons],
       }
 
     default:
