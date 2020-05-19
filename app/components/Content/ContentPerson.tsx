@@ -76,7 +76,10 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
       blurYear = year - blur / 2
     }
 
-    return `${t('misc.approx')} ${OurTime(blurYear)} (+-${blur / 2})`
+    const blurAmount = blur / 2
+    const blurString = blurAmount <= 20 ? '' : blurAmount
+
+    return `${t('misc.approx')} ${OurTime(blurYear)} (+-${blurString})`
   }
 
   const bornString = !startYear
