@@ -106,12 +106,21 @@ jobs:
           name: nextBuild-${{github.sha}}
           path: out
 
-      - name: S3 Sync
+      - name: S3 Sync Backup
         uses: jakejarvis/s3-sync-action@v0.5.0
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          SOURCE_DIR: 'out' # optional: defaults to entire repository
-          DEST_DIR: 'production'
+          SOURCE_DIR: out
+          DEST_DIR: production/${{github.sha}}
+
+      - name: S3 Sync
+        uses: jakejarvis/s3-sync-action@v0.5.0
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          SOURCE_DIR: out
+          DEST_DIR: production
 
       - name: s3cmd edit cache header
         uses: docker://jusbrasil/s3cmd-action:master
