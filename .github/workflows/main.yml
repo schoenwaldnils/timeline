@@ -107,14 +107,14 @@ jobs:
           path: out
 
       - name: S3 Sync Backup
-        uses: jakejarvis/s3-sync-action@v0.5.0
+        uses: docker://schoenwaldnils/s3-sync-action:0.5.1
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           SOURCE_DIR: out
           DEST_DIR: production/${{github.sha}}
 
       - name: S3 Sync
-        uses: jakejarvis/s3-sync-action@v0.5.0
+        uses: docker://schoenwaldnils/s3-sync-action:0.5.1
         with:
           args: --delete
         env:
@@ -163,7 +163,7 @@ jobs:
           path: out
 
       - name: S3 Sync
-        uses: jakejarvis/s3-sync-action@v0.5.0
+        uses: docker://schoenwaldnils/s3-sync-action:0.5.1
         with:
           args: --delete
         env:
