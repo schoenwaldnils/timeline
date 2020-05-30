@@ -6,6 +6,12 @@ import { useStore } from '../components/Store'
 import { useLocale } from '../context/LocaleContext'
 import { formatTimelineData } from '../js/objectFormating/formatTimelineData'
 import { fetchTimelineData } from '../lib/fetchTimelineData'
+import { isBrowser } from '../utils/isBrowser'
+
+if (isBrowser) {
+  // eslint-disable-next-line global-require
+  require('requestidlecallback-polyfill')
+}
 
 type RequestIdleCallbackHandle = any
 type RequestIdleCallbackOptions = {
@@ -14,16 +20,6 @@ type RequestIdleCallbackOptions = {
 type RequestIdleCallbackDeadline = {
   readonly didTimeout: boolean
   timeRemaining: () => number
-}
-
-declare global {
-  interface Window {
-    requestIdleCallback: (
-      callback: (deadline: RequestIdleCallbackDeadline) => void,
-      opts?: RequestIdleCallbackOptions,
-    ) => RequestIdleCallbackHandle
-    cancelIdleCallback: (handle: RequestIdleCallbackHandle) => void
-  }
 }
 
 export const useTimelineData = serverData => {
@@ -50,9 +46,9 @@ export const useTimelineData = serverData => {
         setIsInitial(false)
       }
     }
-    window.requestIdleCallback(handleIdle)
+    const handler = window.requestIdleCallback(handleIdle)
     return () => {
-      window.cancelIdleCallback(handleIdle)
+      window.cancelIdleCallback(handler)
     }
   }, [clientTimlineData, isInitial, serverData, status])
 
