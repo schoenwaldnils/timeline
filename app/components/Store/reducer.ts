@@ -78,6 +78,9 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       }
 
     case SET_LOCALE:
+      setUserLocalStore({
+        locale: action.locale,
+      })
       return {
         ...state,
         locale: action.locale,
