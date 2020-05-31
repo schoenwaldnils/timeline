@@ -2,19 +2,12 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { ReactComponent as Icon } from './icon.svg'
-import { ReactComponent as LogoDark } from './logo.svg'
-import { ReactComponent as LogoLight } from './logo-white.svg'
+import { ReactComponent as Logo } from './logo.svg'
 
 import { viewportsJs } from '../../js/viewports'
 
 const Wrapper = styled.div`
   flex-shrink: 0;
-  display: none;
-
-  @media ${viewportsJs.sm} {
-    display: block;
-    font-size: 2.5rem;
-  }
 `
 
 const StyledIcon = styled(Icon)`
@@ -25,22 +18,25 @@ const StyledIcon = styled(Icon)`
   }
 `
 
+const StyledLogo = styled(Logo)<{ isDark: boolean }>`
+  display: none;
+  width: auto;
+  color: ${({ isDark }) => (isDark ? '#fff' : '#000')};
+
+  @media ${viewportsJs.sm} {
+    display: block;
+    font-size: 2.5rem;
+  }
+`
+
 export const LogoView: React.FC<{ isDark?: boolean }> = ({
   isDark = false,
 }) => {
-  if (isDark) {
-    return (
-      <Wrapper>
-        <StyledIcon />
-        <LogoDark width={null} css={{ width: 'auto' }} />
-      </Wrapper>
-    )
-  }
-
+  console.log({ isDark })
   return (
     <Wrapper>
       <StyledIcon />
-      <LogoLight width={null} css={{ width: 'auto' }} />
+      <StyledLogo isDark={isDark} width={null} />
     </Wrapper>
   )
 }
