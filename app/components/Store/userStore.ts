@@ -14,12 +14,12 @@ export const getUserLocalStore = () => {
   const storageStoreString = getLocalStorage(STORAGE_NAME)
   const storageStore: any = JSON.parse(storageStoreString) || {}
 
-  if (!storageStore.lang) {
+  if (!storageStore.locale) {
     acceptLanguage.languages(['en', 'de'])
     const userAcceptLanguage = window.navigator.languages
     const acceptedLanguage = acceptLanguage.get(userAcceptLanguage.join(','))
 
-    storageStore.lang = acceptedLanguage
+    storageStore.locale = acceptedLanguage
 
     setLocalStorage(STORAGE_NAME, JSON.stringify(storageStore))
   }

@@ -13,7 +13,6 @@ type contentfulArray = {
 export const Timeline: React.FC = () => {
   const [state] = useStore()
   const formatedData = useTimelineData()
-  console.log('formatedData', formatedData.events)
 
   return (
     <TimelineView
