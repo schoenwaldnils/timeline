@@ -32,7 +32,6 @@ const StyledLogo = styled(Logo)<{ isDark: boolean }>`
 export const LogoView: React.FC<{ isDark?: boolean }> = ({
   isDark = false,
 }) => {
-  console.log({ isDark })
   return (
     <Wrapper>
       <StyledIcon />
