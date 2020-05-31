@@ -4,7 +4,7 @@ import Highlighter from 'react-highlight-words'
 
 import DefaultImgUrl from './defaultImg.svg'
 
-import { useLocale } from '../../context/LocaleContext'
+import { useStore } from '../Store'
 
 const IMAGE_SIZE = 28
 
@@ -49,7 +49,8 @@ export const SearchHit = ({
   _highlightResult,
   ...hit
 }) => {
-  const { locale } = useLocale()
+  const [state] = useStore()
+  const { locale } = state
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,

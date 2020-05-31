@@ -1,3 +1,5 @@
+import acceptLanguage from 'accept-language'
+
 import {
   getLocalStorage,
   setLocalStorage,
@@ -11,6 +13,16 @@ export const getUserLocalStore = () => {
   if (typeof window === 'undefined') return {}
   const storageStoreString = getLocalStorage(STORAGE_NAME)
   const storageStore: any = JSON.parse(storageStoreString) || {}
+
+  if (!storageStore.lang) {
+    acceptLanguage.languages(['en', 'de'])
+    const userAcceptLanguage = window.navigator.languages
+    const acceptedLanguage = acceptLanguage.get(userAcceptLanguage.join(','))
+
+    storageStore.lang = acceptedLanguage
+
+    setLocalStorage(STORAGE_NAME, JSON.stringify(storageStore))
+  }
 
   return storageStore
 }

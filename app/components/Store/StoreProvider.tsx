@@ -9,7 +9,6 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     ...getUserLocalStore(),
-    ...getUserSessionStore(),
   })
 
   useEffect(() => {

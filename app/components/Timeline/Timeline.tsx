@@ -10,17 +10,10 @@ type contentfulArray = {
   items: Array<any>
 }
 
-export interface TimelineProps {
-  timelineData: {
-    persons: contentfulArray
-    times: contentfulArray
-    events: contentfulArray
-  }
-}
-
-export const Timeline: React.FC<TimelineProps> = ({ timelineData }) => {
+export const Timeline: React.FC = () => {
   const [state] = useStore()
-  const formatedData = useTimelineData(timelineData)
+  const formatedData = useTimelineData()
+  console.log('formatedData', formatedData.events)
 
   return (
     <TimelineView
