@@ -9,6 +9,12 @@ import { viewportsJs } from '../../js/viewports'
 
 const Wrapper = styled.div`
   flex-shrink: 0;
+  display: none;
+
+  @media ${viewportsJs.sm} {
+    display: block;
+    font-size: 2.5rem;
+  }
 `
 
 const StyledIcon = styled(Icon)`
@@ -22,22 +28,19 @@ const StyledIcon = styled(Icon)`
 export const LogoView: React.FC<{ isDark?: boolean }> = ({
   isDark = false,
 }) => {
-  const LogoSvg = isDark ? LogoLight : LogoDark
-
-  const StyledLogo = styled(LogoSvg)`
-    display: none;
-
-    @media ${viewportsJs.sm} {
-      display: block;
-      width: auto;
-      font-size: 2.5rem;
-    }
-  `
+  if (isDark) {
+    return (
+      <Wrapper>
+        <StyledIcon />
+        <LogoDark width={null} css={{ width: 'auto' }} />
+      </Wrapper>
+    )
+  }
 
   return (
     <Wrapper>
       <StyledIcon />
-      <StyledLogo width={null} />
+      <LogoLight width={null} css={{ width: 'auto' }} />
     </Wrapper>
   )
 }

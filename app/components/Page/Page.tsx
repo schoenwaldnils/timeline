@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 
 import { Header } from '../Header'
-import { Timeline, TimelineProps } from '../Timeline'
 import { ThemeSwitch } from '../ThemeSwitch'
 import { Scaling, ScaleIndicator } from '../Scaling'
 
@@ -11,6 +10,7 @@ import { zIndexes } from '../../data/constants'
 import { useStore } from '../Store'
 
 const Sidebar = dynamic(() => import('../Sidebar/Sidebar'), { ssr: false })
+const Timeline = dynamic(() => import('../Timeline/Timeline'), { ssr: false })
 
 const StyledPage = styled.div`
   display: grid;
@@ -40,14 +40,14 @@ const Config = styled.div`
   }
 `
 
-export const Page: React.FC<TimelineProps> = ({ timelineData }) => {
+export const Page: React.FC = () => {
   const [state] = useStore()
 
   return (
     <StyledPage>
       <Header />
       <Content>
-        <Timeline timelineData={timelineData} />
+        <Timeline />
         <Sidebar isActive={!!state.sidebarId} contentId={state.sidebarId} />
         <Config>
           <ThemeSwitch />
