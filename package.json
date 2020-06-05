@@ -85,7 +85,7 @@
     "babel-loader": "8.1.0",
     "cli-real-favicon": "0.0.8",
     "lint-staged": "10.2.7",
-    "stylelint": "13.5.0",
+    "stylelint": "13.6.0",
     "stylelint-config-schoenwaldnils": "3.0.0",
     "stylelint-processor-styled-components": "1.10.0"
   },
