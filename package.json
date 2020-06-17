@@ -17,7 +17,9 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "snapshot": "build-storybook && percy-storybook --widths=320 -t=500",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "cross-env ANALYZE=true next build",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "lint-staged": {
     "**/*.(ts|tsx)": [
@@ -75,7 +77,8 @@
     "shallowequal": "1.1.0",
     "typescript": "3.9.5",
     "url-loader": "4.1.0",
-    "webpack": "4.43.0"
+    "webpack": "4.43.0",
+    "snyk": "^1.342.2"
   },
   "devDependencies": {
     "@percy/storybook": "3.3.0",
@@ -93,5 +96,6 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "snyk": true
 }
