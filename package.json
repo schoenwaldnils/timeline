@@ -87,7 +87,7 @@
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
     "cli-real-favicon": "0.0.8",
-    "lint-staged": "10.2.9",
+    "lint-staged": "10.2.11",
     "stylelint": "13.6.0",
     "stylelint-config-schoenwaldnils": "3.0.0",
     "stylelint-processor-styled-components": "1.10.0"
