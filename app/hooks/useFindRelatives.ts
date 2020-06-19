@@ -33,7 +33,7 @@ export const useFindRelatives = () => {
   const [relatives, setRelatives] = useState([])
   const [, dispatch] = useStore()
 
-  console.log('useFindRelatives')
+  console.log('useFindRelatives', { relatives })
 
   const findRelatives = async (id: string) => {
     console.log('findRelatives')
