@@ -2,11 +2,11 @@ import React, { useState, useRef } from 'react'
 
 import { useClickOutside } from '../../hooks/useClickOutside'
 import { LangSwitchView } from './LangSwitchView'
-import { useLocale } from '../../context/LocaleContext'
 import { Locale } from '../../utils/intl/intlConsts'
+import { useStore, SET_LOCALE } from '../Store'
 
 export const LangSwitch: React.FC = () => {
-  const { locale, setLocale } = useLocale()
+  const [state, dispatch] = useStore()
   const [isActive, setIsActive] = useState(false)
   const ref = useRef()
 
@@ -17,7 +17,10 @@ export const LangSwitch: React.FC = () => {
   const toggleIsActive = () => setIsActive(!isActive)
 
   const handleButtonClick = (newLocale: Locale) => {
-    setLocale(newLocale)
+    dispatch({
+      type: SET_LOCALE,
+      locale: newLocale,
+    })
     setIsActive(false)
   }
 
@@ -26,7 +29,7 @@ export const LangSwitch: React.FC = () => {
       isActive={isActive}
       toggleIsActive={toggleIsActive}
       handleButtonClick={handleButtonClick}
-      currentLocale={locale}
+      currentLocale={state.locale}
       ref={ref}
     />
   )

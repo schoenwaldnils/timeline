@@ -1,7 +1,9 @@
 import { createContext, useContext } from 'react'
 import { State, Action } from './reducer'
+import { LOCALES } from '../../utils/intl/intlConsts'
 
 export const initialState = {
+  locale: LOCALES.EN,
   scale: 1,
   sidebarId: undefined,
   filter: {

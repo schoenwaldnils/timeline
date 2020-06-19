@@ -1,9 +1,10 @@
-import { useLocale } from '../context/LocaleContext'
 import { DEFAULT_LOCALE } from '../utils/intl/intlConsts'
 import translations from '../data/translations'
+import { useStore } from '../components/Store'
 
 export function useTranslation() {
-  const { locale } = useLocale()
+  const [state] = useStore()
+  const { locale } = state
 
   function t(key: string) {
     const selectors = key.split('.')

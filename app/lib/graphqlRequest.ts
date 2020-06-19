@@ -1,4 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
+import 'cross-fetch/polyfill'
 
 import { CONTENTFUL_SPACE_ID } from '../data/constants'
 
