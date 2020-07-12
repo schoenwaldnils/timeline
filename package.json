@@ -65,6 +65,7 @@
     "next": "9.4.4",
     "preact": "10.4.4",
     "preact-render-to-string": "5.1.9",
+    "qs": "6.9.4",
     "react": "github:preact-compat/react#1.0.0",
     "react-dom": "github:preact-compat/react-dom#1.0.0",
     "react-highlight-words": "0.16.0",
@@ -75,10 +76,10 @@
     "react-swipeable": "5.5.1",
     "requestidlecallback-polyfill": "1.0.2",
     "shallowequal": "1.1.0",
+    "snyk": "^1.342.2",
     "typescript": "3.9.5",
     "url-loader": "4.1.0",
-    "webpack": "4.43.0",
-    "snyk": "^1.342.2"
+    "webpack": "4.43.0"
   },
   "devDependencies": {
     "@percy/storybook": "3.3.0",
