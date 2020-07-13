@@ -14,7 +14,7 @@ interface ContentfulLinkProps {
 
 export const LinkToWOL: React.FC<ContentfulLinkProps> = ({ wolLink }) => {
   let pathName = wolLink
-  let paragraph: string | null = null
+  let paragraph: string | undefined
 
   if (wolLink.includes('#')) {
     let paragraphPlain: string
