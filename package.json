@@ -37,7 +37,7 @@
   "dependencies": {
     "@babel/core": "7.10.4",
     "@contentful/rich-text-react-renderer": "13.4.0",
-    "@contentful/rich-text-types": "14.1.0",
+    "@contentful/rich-text-types": "14.1.1",
     "@emotion/core": "10.0.28",
     "@emotion/styled": "10.0.27",
     "@next/bundle-analyzer": "9.4.4",
