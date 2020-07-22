@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fillAlgolia": "dotenv-load node utils/updateAlgolia.js",
-    "contentful-typescript-codegen": "dotenv-load contentful-typescript-codegen --output @types/generated/contentful.d.ts"
+    "contentful-typescript-codegen": "dotenv-load contentful-typescript-codegen --output @types/generated/contentful.d.ts",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "algoliasearch": "^4.1.0",
@@ -14,7 +16,8 @@
     "contentful-management": "^5.21.1",
     "contentful-typescript-codegen": "^3.0.1",
     "dotenv-load": "^2.0.0",
-    "source-map-support": "^0.5.10"
+    "source-map-support": "^0.5.10",
+    "snyk": "^1.364.2"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
@@ -29,5 +32,6 @@
     "webpack-node-externals": "^1.7.2"
   },
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
-  "license": "MIT"
+  "license": "MIT",
+  "snyk": true
 }
