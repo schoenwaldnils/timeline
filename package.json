@@ -84,7 +84,7 @@
   "devDependencies": {
     "@percy/storybook": "3.3.0",
     "@schoenwald/eslint-config-typescript": "4.0.0",
-    "@storybook/preact": "5.3.19",
+    "@storybook/preact": "6.0.0",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
     "cli-real-favicon": "0.0.8",
