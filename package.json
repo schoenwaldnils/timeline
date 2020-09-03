@@ -71,7 +71,7 @@
     "react-highlight-words": "0.16.0",
     "react-icons": "3.10.0",
     "react-instantsearch-dom": "6.6.0",
-    "react-merge-refs": "1.0.0",
+    "react-merge-refs": "1.1.0",
     "react-query": "1.5.8",
     "react-swipeable": "5.5.1",
     "requestidlecallback-polyfill": "1.0.2",
