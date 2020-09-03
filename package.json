@@ -79,7 +79,7 @@
     "snyk": "^1.342.2",
     "typescript": "3.9.7",
     "url-loader": "4.1.0",
-    "webpack": "4.43.0"
+    "webpack": "4.44.1"
   },
   "devDependencies": {
     "@percy/storybook": "3.3.1",
