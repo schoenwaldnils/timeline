@@ -72,7 +72,7 @@
     "react-icons": "3.11.0",
     "react-instantsearch-dom": "6.7.0",
     "react-merge-refs": "1.1.0",
-    "react-query": "2.15.4",
+    "react-query": "2.17.2",
     "react-swipeable": "5.5.1",
     "requestidlecallback-polyfill": "1.0.2",
     "shallowequal": "1.1.0",
