@@ -1,5 +1,5 @@
 # Timeline
 
-This is a page to visualize timespans described in the bible. Including lifespans of persons lived in the past.
+Managed with [Contentful](https://www.contentful.com/) as content management system, [Next.js](https://nextjs.org/) as framework and [Algolia](https://www.algolia.com/) as search engine.
 
-Managed with Contentful, Nextjs and Algolia as search engine.
+This Project visualizes lifespans and timespans described in the bible.
