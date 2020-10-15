@@ -24,8 +24,8 @@ jobs:
           rm -rf ./node_modules
           npm ci
 
-      - name: lint js
-        run: npm run lint:js
+      - name: lint ts
+        run: npm run lint:ts
 
       - name: lint css
         run: npm run lint:css
