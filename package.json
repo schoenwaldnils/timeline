@@ -12,6 +12,7 @@
     "lint:css": "stylelint '**/*.(j|t)sx'",
     "lint:ts": "eslint . --ext .ts,.tsx",
     "lint:ts-fix": "eslint . --ext .ts,.tsx --fix",
+    "lint:types": "tsc",
     "lint:html": "htmlhint out",
     "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
     "storybook": "start-storybook -p 6006",
