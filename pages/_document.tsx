@@ -10,10 +10,6 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
-          <meta
-            name="viewport"
-            content="height=device-height, initial-scale=1, minimum-scale=1"
-          />
 
           <Meta />
 
