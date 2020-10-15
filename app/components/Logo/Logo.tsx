@@ -4,7 +4,7 @@ import { useStore } from '../Store'
 import { LogoView } from './LogoView'
 
 export const Logo = () => {
-  const [state] = useStore()
+  const { store } = useStore()
 
-  return <LogoView isDark={state.themeIsDark} />
+  return <LogoView isDark={store.themeIsDark} />
 }

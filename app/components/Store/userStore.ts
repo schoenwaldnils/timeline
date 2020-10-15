@@ -27,11 +27,11 @@ export const getUserLocalStore = () => {
   return storageStore
 }
 
-export const setUserLocalStore = state => {
+export const setUserLocalStore = store => {
   const storageStoreString = getLocalStorage(STORAGE_NAME)
   const storageStore: any = JSON.parse(storageStoreString) || {}
 
-  setLocalStorage(STORAGE_NAME, JSON.stringify({ ...storageStore, ...state }))
+  setLocalStorage(STORAGE_NAME, JSON.stringify({ ...storageStore, ...store }))
 }
 
 export const getUserSessionStore = () => {
@@ -42,9 +42,9 @@ export const getUserSessionStore = () => {
   return storageStore
 }
 
-export const setUserSessionStore = state => {
+export const setUserSessionStore = store => {
   const storageStoreString = getSessionStorage(STORAGE_NAME)
   const storageStore: any = JSON.parse(storageStoreString) || {}
 
-  setSessionStorage(STORAGE_NAME, JSON.stringify({ ...storageStore, ...state }))
+  setSessionStorage(STORAGE_NAME, JSON.stringify({ ...storageStore, ...store }))
 }

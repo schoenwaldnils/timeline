@@ -3,8 +3,8 @@ import translations from '../data/translations'
 import { useStore } from '../components/Store'
 
 export function useTranslation() {
-  const [state] = useStore()
-  const { locale } = state
+  const { store } = useStore()
+  const { locale } = store
 
   function t(key: string) {
     const selectors = key.split('.')

@@ -18,7 +18,7 @@ export const Event: React.FC<EventProps> = ({
   rowIndex,
   zIndex,
 }) => {
-  const [, dispatch] = useStore()
+  const { dispatch } = useStore()
 
   const changeContent = () => {
     dispatch({

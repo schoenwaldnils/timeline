@@ -1,15 +1,12 @@
 import React, { useReducer, useEffect } from 'react'
 
-import { StoreContext, initialState, reducer } from './Store'
+import { reducer, CHANGE_CONTENT, SET_THEME, CLOSE_SIDEBAR } from './reducer'
+import { StoreContext, initialState } from './Store'
 import { getUserLocalStore, getUserSessionStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
-import { CHANGE_CONTENT, SET_THEME, CLOSE_SIDEBAR } from './reducer'
 
 export const StoreProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    ...initialState,
-    ...getUserLocalStore(),
-  })
+  const [store, dispatch] = useReducer(reducer, initialState, getUserLocalStore)
 
   useEffect(() => {
     /**
@@ -24,12 +21,13 @@ export const StoreProvider = ({ children }) => {
       preferesDark = sessionStore.themeIsDark
     }
 
-    if (preferesDark !== state.themeIsDark) {
+    if (preferesDark !== store.themeIsDark) {
       dispatch({ type: SET_THEME, themeIsDark: preferesDark })
     }
 
     const onChange = matches =>
       dispatch({ type: SET_THEME, themeIsDark: matches })
+
     matcher.addListener(({ matches }) => onChange(matches))
 
     /**
@@ -40,7 +38,7 @@ export const StoreProvider = ({ children }) => {
       if (localId) {
         dispatch({ type: CHANGE_CONTENT, contentId: localId })
       }
-      if (!localId && state.sidebarId) {
+      if (!localId && store.sidebarId) {
         dispatch({ type: CLOSE_SIDEBAR })
       }
     }
@@ -55,10 +53,10 @@ export const StoreProvider = ({ children }) => {
       matcher.removeListener(onChange)
       window.removeEventListener('load', () => {})
     }
-  }, [state, dispatch])
+  }, [store, dispatch])
 
   return (
-    <StoreContext.Provider value={[state, dispatch]}>
+    <StoreContext.Provider value={{ store, dispatch }}>
       {children}
     </StoreContext.Provider>
   )

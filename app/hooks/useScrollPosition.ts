@@ -50,10 +50,10 @@ export function useScrollPosition() {
 
   const handleScaleChanged = useCallback(
     (e: any) => {
-      const stateScale = e.detail.state.scale
+      const storeScale = e.detail.store.scale
       const actionScale = e.detail.action.scale
 
-      const multiplier = stateScale > actionScale ? 0.5 : 2
+      const multiplier = storeScale > actionScale ? 0.5 : 2
 
       const halfWindowWidth = window.innerWidth / 2
       const centerPosition = position.current.left + halfWindowWidth

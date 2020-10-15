@@ -53,7 +53,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   richText,
   wolLink,
 }) => {
-  const [, dispatch] = useStore()
+  const { dispatch } = useStore()
   const { t } = useTranslation()
 
   const changeContent = newId => {

@@ -38,9 +38,9 @@ const Indicator = styled.div`
 
 export const ScaleIndicator = props => {
   const { t } = useTranslation()
-  const [state] = useStore()
+  const { store } = useStore()
 
-  const yearsPer100Pixel = 100 / state.scale
+  const yearsPer100Pixel = 100 / store.scale
 
   return (
     <Wrapper {...props}>

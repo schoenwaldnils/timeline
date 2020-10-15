@@ -4,12 +4,12 @@ import { useStore, SET_THEME } from '../Store'
 import { ThemeSwitchView } from './ThemeSwitchView'
 
 export const ThemeSwitch: React.FC = props => {
-  const [state, dispatch] = useStore()
+  const { store, dispatch } = useStore()
 
   const toggleTheme = () => {
     dispatch({
       type: SET_THEME,
-      themeIsDark: !state.themeIsDark,
+      themeIsDark: !store.themeIsDark,
     })
   }
 
@@ -17,7 +17,7 @@ export const ThemeSwitch: React.FC = props => {
     <ThemeSwitchView
       {...props}
       toggleTheme={toggleTheme}
-      isDark={state.themeIsDark}
+      isDark={store.themeIsDark}
     />
   )
 }

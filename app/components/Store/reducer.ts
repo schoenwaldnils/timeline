@@ -23,7 +23,7 @@ type CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
 type SET_FILTER = 'SET_FILTER'
 type SET_THEME = 'SET_THEME'
 
-export type State = {
+export type Store = {
   locale: Locale
   scale: number
   sidebarId: string | undefined
@@ -50,20 +50,20 @@ export type Action =
   | { type: SET_FILTER; filter: Filter }
   | { type: SET_THEME; themeIsDark: boolean }
 
-type Reducer<S, A> = (state: S, action: A) => S
+type Reducer<S, A> = (store: S, action: A) => S
 
 interface ScaleChangedEvent {
   action: any
-  state: any
+  store: any
 }
 
-export const reducer: Reducer<State, Action> = (state, action) => {
+export const reducer: Reducer<Store, Action> = (store, action) => {
   let scaleChanged: CustomEvent<ScaleChangedEvent>
   if (typeof window !== 'undefined') {
     scaleChanged = new CustomEvent('scaleChanged', {
       detail: {
+        store,
         action,
-        state,
       },
     })
   }
@@ -73,7 +73,7 @@ export const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case SET_INIT:
       return {
-        ...state,
+        ...store,
         ...getUserLocalStore(),
       }
 
@@ -82,7 +82,7 @@ export const reducer: Reducer<State, Action> = (state, action) => {
         locale: action.locale,
       })
       return {
-        ...state,
+        ...store,
         locale: action.locale,
       }
 
@@ -96,35 +96,35 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       window.dispatchEvent(scaleChanged)
 
       return {
-        ...state,
+        ...store,
         scale: action.scale,
       }
 
     case CHANGE_CONTENT:
       setUrlHash(action.contentId)
       return {
-        ...state,
+        ...store,
         sidebarId: action.contentId,
       }
 
     case CLOSE_SIDEBAR:
       removeUrlHash()
       return {
-        ...state,
+        ...store,
         sidebarId: undefined,
       }
 
     case SET_FILTER:
       setUserLocalStore({
         filter: {
-          ...state.filter,
+          ...store.filter,
           ...action.filter,
         },
       })
       return {
-        ...state,
+        ...store,
         filter: {
-          ...state.filter,
+          ...store.filter,
           ...action.filter,
         },
       }
@@ -134,7 +134,7 @@ export const reducer: Reducer<State, Action> = (state, action) => {
         themeIsDark: action.themeIsDark,
       })
       return {
-        ...state,
+        ...store,
         themeIsDark: action.themeIsDark,
       }
 

@@ -13,7 +13,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isActive = false,
   contentId,
 }) => {
-  const [, dispatch] = useStore()
+  const { dispatch } = useStore()
   const [state, setState] = useState({ id: undefined, content: null })
 
   if (contentId && contentId !== state.id) {

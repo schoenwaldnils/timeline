@@ -6,7 +6,7 @@ import { Locale } from '../../utils/intl/intlConsts'
 import { useStore, SET_LOCALE } from '../Store'
 
 export const LangSwitch: React.FC = () => {
-  const [state, dispatch] = useStore()
+  const { store, dispatch } = useStore()
   const [isActive, setIsActive] = useState(false)
   const ref = useRef()
 
@@ -29,7 +29,7 @@ export const LangSwitch: React.FC = () => {
       isActive={isActive}
       toggleIsActive={toggleIsActive}
       handleButtonClick={handleButtonClick}
-      currentLocale={state.locale}
+      currentLocale={store.locale}
       ref={ref}
     />
   )

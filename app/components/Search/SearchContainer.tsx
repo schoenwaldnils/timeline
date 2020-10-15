@@ -10,7 +10,7 @@ import { useStore, CHANGE_CONTENT } from '../Store'
 import { Tooltip } from '../Tooltip'
 
 const CustomSearch = ({ currentRefinement, refine }) => {
-  const [, dispatch] = useStore()
+  const { dispatch } = useStore()
   const ref = useRef()
 
   const changeContent = newId => {

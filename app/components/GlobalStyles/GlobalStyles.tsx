@@ -7,10 +7,10 @@ import { useStore } from '../Store'
 import { themeDark, themeLight } from './theme'
 
 export const GlobalStyles = () => {
-  const [state] = useStore()
+  const { store } = useStore()
   return (
     <>
-      <Global styles={state.themeIsDark ? themeDark : themeLight} />
+      <Global styles={store.themeIsDark ? themeDark : themeLight} />
       <Global styles={base} />
     </>
   )
