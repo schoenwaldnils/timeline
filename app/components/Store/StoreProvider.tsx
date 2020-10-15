@@ -6,7 +6,10 @@ import { getUserLocalStore, getUserSessionStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
 
 export const StoreProvider = ({ children }) => {
-  const [store, dispatch] = useReducer(reducer, initialState, getUserLocalStore)
+  const [store, dispatch] = useReducer(reducer, {
+    ...initialState,
+    ...getUserLocalStore(),
+  })
 
   useEffect(() => {
     /**
