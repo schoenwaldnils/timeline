@@ -41,14 +41,14 @@ const Config = styled.div`
 `
 
 export const Page: React.FC = () => {
-  const [state] = useStore()
+  const { store } = useStore()
 
   return (
     <StyledPage>
       <Header />
       <Content>
         <Timeline />
-        <Sidebar isActive={!!state.sidebarId} contentId={state.sidebarId} />
+        <Sidebar isActive={!!store.sidebarId} contentId={store.sidebarId} />
         <Config>
           <ThemeSwitch />
           <Scaling />

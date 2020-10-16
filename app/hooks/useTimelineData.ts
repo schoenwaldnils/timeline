@@ -6,8 +6,8 @@ import { formatTimelineData } from '../js/objectFormating/formatTimelineData'
 import { fetchTimelineData } from '../lib/fetchTimelineData'
 
 export const useTimelineData = () => {
-  const [state] = useStore()
-  const { locale } = state
+  const { store } = useStore()
+  const { locale } = store
   const [isFetched, setIsFetched] = useState({
     en: false,
     de: false,
@@ -23,7 +23,7 @@ export const useTimelineData = () => {
   )
 
   if (isFetched[locale]) {
-    return formatTimelineData(data[locale], state.scale, state.filter)
+    return formatTimelineData(data[locale], store.scale, store.filter)
   }
 
   if (status === 'error') console.error(error)

@@ -17,7 +17,7 @@ const ButtonSpaced = styled(ButtonSquare)`
 
 export const Scaling: React.FC = props => {
   const { t } = useTranslation()
-  const [state, dispatch] = useStore()
+  const { store, dispatch } = useStore()
   const map = {
     1: 0.0625,
     2: 0.125,
@@ -30,7 +30,7 @@ export const Scaling: React.FC = props => {
     9: 16,
   }
 
-  const [valueKey] = Object.keys(map).filter(key => map[key] === state.scale)
+  const [valueKey] = Object.keys(map).filter(key => map[key] === store.scale)
 
   const value = parseInt(valueKey, 10)
 

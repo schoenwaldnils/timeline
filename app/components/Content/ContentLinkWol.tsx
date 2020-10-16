@@ -20,7 +20,7 @@ export const LinkToWOL: React.FC<ContentfulLinkProps> = ({ wolLink }) => {
     let paragraphPlain: string
     ;[pathName, paragraphPlain] = wolLink.split('#')
 
-    paragraph = qs.parse(paragraphPlain).h
+    paragraph = String(qs.parse(paragraphPlain).h)
   }
 
   const pathParts = pathName.split('/')
