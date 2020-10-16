@@ -1,6 +1,6 @@
-import { createContext, useContext } from 'react'
-import { State, Action } from './reducer'
+import { createContext, Dispatch, useContext } from 'react'
 import { LOCALES } from '../../utils/intl/intlConsts'
+import { Action } from './reducer'
 
 export const initialState = {
   locale: LOCALES.EN,
@@ -15,9 +15,14 @@ export const initialState = {
   activePersons: [],
 }
 
-type Context = [State, (action: Action) => void]
+type Context = {
+  store: typeof initialState
+  dispatch: Dispatch<Action>
+}
 
-export const StoreContext = createContext<Context>([initialState, () => {}])
+export const StoreContext = createContext<Context>({
+  store: initialState,
+  dispatch: () => {},
+})
 
 export const useStore = () => useContext(StoreContext)
-export * from './reducer'

@@ -26,7 +26,7 @@ export const Timespan: React.FC<TimespanProps> = ({
   rowIndex,
   isActive = false,
 }) => {
-  const [, dispatch] = useStore()
+  const { dispatch } = useStore()
   const handleClick = () => {
     dispatch({ type: CHANGE_CONTENT, contentId: id })
   }

@@ -5,7 +5,7 @@ import { useStore, SET_FILTER } from '../Store'
 import { FilterView } from './FilterView'
 
 export const Filter: React.FC = () => {
-  const [state, dispatch] = useStore()
+  const { store, dispatch } = useStore()
   const [isActive, setIsActive] = useState(false)
   const ref = useRef()
 
@@ -29,7 +29,7 @@ export const Filter: React.FC = () => {
       isActive={isActive}
       toggleIsActive={toggleIsActive}
       handleChange={handleChange}
-      filterState={state.filter}
+      filterState={store.filter}
       ref={ref}
     />
   )

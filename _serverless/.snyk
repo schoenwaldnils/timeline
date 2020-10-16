@@ -1,0 +1,18 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.16.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - contentful > lodash:
+        patched: '2020-07-22T13:28:02.656Z'
+    - contentful-management > lodash:
+        patched: '2020-07-22T13:28:02.656Z'
+    - contentful-typescript-codegen > lodash:
+        patched: '2020-07-22T13:28:02.656Z'
+    - contentful > contentful-resolve-response > lodash:
+        patched: '2020-07-22T13:28:02.656Z'
+    - contentful > contentful-sdk-core > lodash:
+        patched: '2020-07-22T13:28:02.656Z'
+    - contentful-management > contentful-sdk-core > lodash:
+        patched: '2020-07-22T13:28:02.656Z'

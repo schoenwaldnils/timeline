@@ -11,7 +11,7 @@ type contentfulArray = {
 }
 
 export const Timeline: React.FC = () => {
-  const [state] = useStore()
+  const { store } = useStore()
   const formatedData = useTimelineData()
 
   console.log(state.activePersons)
@@ -28,7 +28,7 @@ export const Timeline: React.FC = () => {
       events={formatedData.events}
       startYear={YEARS_BEFORE_ZERO}
       endYear={YEARS_AFTER_ZERO}
-      scale={state.scale}
+      scale={store.scale}
     />
   )
 }

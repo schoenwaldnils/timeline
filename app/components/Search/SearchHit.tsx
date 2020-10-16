@@ -49,8 +49,8 @@ export const SearchHit = ({
   _highlightResult,
   ...hit
 }) => {
-  const [state] = useStore()
-  const { locale } = state
+  const { store } = useStore()
+  const { locale } = store
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,

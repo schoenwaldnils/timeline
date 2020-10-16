@@ -41,8 +41,8 @@ export const ContentfulContent: React.FC<Props> = ({
   id,
   isParent = false,
 }) => {
-  const [state] = useStore()
-  const { locale } = state
+  const { store } = useStore()
+  const { locale } = store
 
   const { status, data, error } = useQuery(
     locale && id && [`contentfulEntry-${id}`, { locale, id }],

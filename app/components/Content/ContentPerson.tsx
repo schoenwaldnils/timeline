@@ -30,7 +30,7 @@ interface ContentPersonProps {
 }
 
 export const ContentPerson: React.FC<ContentPersonProps> = props => {
-  const [, dispatch] = useStore()
+  const { dispatch } = useStore()
   const { relatives, findRelatives } = useFindRelatives()
 
   console.log({ relatives })
