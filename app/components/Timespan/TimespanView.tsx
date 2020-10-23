@@ -21,7 +21,7 @@ interface WrapperProps {
   pixelDuration: number
   background?: string
   rowIndex: number
-  isActive: boolean
+  isActive?: boolean
 }
 
 const Wrapper = styled(ButtonPlain)<WrapperProps>`
