@@ -17,18 +17,21 @@ export const useTimelineData = () => {
     de: undefined,
   })
 
-  const { status, data: clientTimlineData, error } = useQuery(
-    locale && !isFetched[locale] && ['timelineData', locale],
+  const { isError, data: clientTimlineData, error } = useQuery(
+    ['timelineData', locale],
     fetchTimelineData,
+    {
+      enabled: locale && !isFetched[locale],
+    },
   )
 
   if (isFetched[locale]) {
     return formatTimelineData(data[locale], store.scale, store.filter)
   }
 
-  if (status === 'error') console.error(error)
+  if (isError) console.error(error)
 
-  if (status === 'success') {
+  if (clientTimlineData) {
     setIsFetched({
       ...isFetched,
       [locale]: true,

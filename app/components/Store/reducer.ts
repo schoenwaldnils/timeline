@@ -144,8 +144,8 @@ export const reducer: Reducer<Store, Action> = (store, action) => {
 
     case SET_ACTIVE_PERSONS:
       return {
-        ...state,
-        activePersons: [...state.activePersons, ...action.activePersons],
+        ...store,
+        activePersons: [...store.activePersons, ...action.activePersons],
       }
 
     default:

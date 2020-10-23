@@ -14,11 +14,11 @@ export const Timeline: React.FC = () => {
   const { store } = useStore()
   const formatedData = useTimelineData()
 
-  console.log(state.activePersons)
+  console.log(store.activePersons)
 
   const activatedTimespans = formatedData.timespans.map(t => {
     const newT = t
-    if (state.activePersons.includes(t.id)) newT.isActive = true
+    if (store.activePersons.includes(t.id)) newT.isActive = true
     return newT
   })
 

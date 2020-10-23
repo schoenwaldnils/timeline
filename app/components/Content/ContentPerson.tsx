@@ -31,11 +31,9 @@ interface ContentPersonProps {
 
 export const ContentPerson: React.FC<ContentPersonProps> = props => {
   const { dispatch } = useStore()
-  const { relatives, findRelatives } = useFindRelatives()
+  const fetchRelatives = useFindRelatives()
 
-  console.log({ relatives })
-
-  const changeContent = newId => {
+  const changeContent = (newId: string) => {
     dispatch({
       type: CHANGE_CONTENT,
       contentId: newId,
@@ -46,7 +44,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = props => {
     <ContentPersonView
       {...props}
       changeContent={changeContent}
-      findRelatives={() => findRelatives(props.id)}
+      findRelatives={() => fetchRelatives(props.id)}
     />
   )
 }

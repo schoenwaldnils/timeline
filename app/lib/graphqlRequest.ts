@@ -13,5 +13,6 @@ const client = new GraphQLClient(endpoint, {
 })
 
 export const request = async (query: string, variables) => {
+  console.log({ variables })
   return client.request(query, variables)
 }

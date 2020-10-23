@@ -1,66 +1,42 @@
-import { useState } from 'react'
-import { findParent } from '../js/objectFormating/formatData'
-import { request } from '../lib/graphqlRequest'
 import { useStore, SET_ACTIVE_PERSONS } from '../components/Store'
-
-const query = `
-query PersonById($id: String!) {
-  personCollection(where: { sys: { id: $id } }, limit: 1) {
-    items {
-      linkedFrom {
-        personCollection(locale: "en") {
-          items {
-            sys {
-              id
-            }
-            gender
-            childs: childsCollection {
-              items {
-                sys {
-                  id
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`
+import { getLocalStorage } from '../js/localStorage'
+import { getFirebaseRelatives } from '../utils/getFirebaseRelatives'
 
 export const useFindRelatives = () => {
-  const [relatives, setRelatives] = useState([])
-  const [, dispatch] = useStore()
+  const { dispatch } = useStore()
 
-  console.log('useFindRelatives', { relatives })
-
-  const findRelatives = async (id: string) => {
+  const fetchRelatives = async (id: string) => {
     console.log('findRelatives')
-    const data = await request(query, { id })
-    const parents = findParent(data.personCollection.items[0].linkedFrom, id)
-    if (
-      parents &&
-      parents.length &&
-      !parents.every((a: string) => relatives.includes(a))
-    ) {
+    const localRelatives = JSON.parse(getLocalStorage('relatives')) || {}
+
+    if (localRelatives[id]) {
       dispatch({
         type: SET_ACTIVE_PERSONS,
-        activePersons: parents,
+        activePersons: localRelatives[id].ancestors,
       })
+      return
+    }
 
-      setRelatives(currentRelatives => [...currentRelatives, ...parents])
+    const dbRelatives = await getFirebaseRelatives(id)
 
-      await Promise.all(
-        parents.map(async (parentId: string) => {
-          await findRelatives(parentId)
-        }),
-      )
+    if (dbRelatives) {
+      // setLocalStorage(
+      //   'relatives',
+      //   JSON.stringify({
+      //     ...localRelatives,
+      //     [id]: dbRelatives,
+      //   }),
+      // )
+
+      dispatch({
+        type: SET_ACTIVE_PERSONS,
+        activePersons:
+          [...dbRelatives.ancestors, ...dbRelatives.descendants] || [],
+      })
+    } else {
+      console.log('No relatives found')
     }
   }
 
-  return {
-    relatives,
-    findRelatives,
-  }
+  return fetchRelatives
 }
