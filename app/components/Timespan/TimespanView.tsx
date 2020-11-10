@@ -21,7 +21,8 @@ interface WrapperProps {
   pixelDuration: number
   background?: string
   rowIndex: number
-  isActive?: boolean
+  isAncestor?: boolean
+  isDescendant?: boolean
 }
 
 const Wrapper = styled(ButtonPlain)<WrapperProps>`
@@ -41,10 +42,16 @@ const Wrapper = styled(ButtonPlain)<WrapperProps>`
   cursor: pointer;
   background: ${({ background }) => background};
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ isAncestor }) =>
+    isAncestor &&
     `
-    box-shadow: 0 0 0 1px #f00;
+    border-bottom: 2px solid rebeccapurple;
+  `}
+
+  ${({ isDescendant }) =>
+    isDescendant &&
+    `
+    border-bottom: 2px solid #f00;
   `}
 `
 
@@ -73,7 +80,8 @@ export const TimespanView: React.FC<TimespanViewProps> = ({
   pixelDuration,
   rowIndex,
   changeContent,
-  isActive,
+  isAncestor,
+  isDescendant,
 }) => {
   const background = generateGradient(
     startBlurriness,
@@ -88,7 +96,8 @@ export const TimespanView: React.FC<TimespanViewProps> = ({
       pixelStart={pixelStart}
       pixelDuration={pixelDuration}
       tabIndex={0}
-      isActive={isActive}
+      isAncestor={isAncestor}
+      isDescendant={isDescendant}
       rowIndex={rowIndex}
       onClick={changeContent}
     >

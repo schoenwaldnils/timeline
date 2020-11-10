@@ -14,7 +14,7 @@ export const CHANGE_CONTENT = 'CHANGE_CONTENT'
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
 export const SET_FILTER = 'SET_FILTER'
 export const SET_THEME = 'SET_THEME'
-export const SET_ACTIVE_PERSONS = 'SET_ACTIVE_PERSONS'
+export const SET_RELATIVES = 'SET_RELATIVES'
 
 type SET_INIT = 'SET_INIT'
 type SET_LOCALE = 'SET_LOCALE'
@@ -23,7 +23,7 @@ type CHANGE_CONTENT = 'CHANGE_CONTENT'
 type CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
 type SET_FILTER = 'SET_FILTER'
 type SET_THEME = 'SET_THEME'
-type SET_ACTIVE_PERSONS = 'SET_ACTIVE_PERSONS'
+type SET_RELATIVES = 'SET_RELATIVES'
 
 export type Store = {
   locale: Locale
@@ -35,7 +35,9 @@ export type Store = {
     eventsAreActive: boolean
   }
   themeIsDark: boolean
-  activePersons: Array<string>
+  currentPerson: string | undefined
+  ancestors: Array<string>
+  descendants: Array<string>
 }
 
 type Filter = {
@@ -52,7 +54,12 @@ export type Action =
   | { type: CLOSE_SIDEBAR }
   | { type: SET_FILTER; filter: Filter }
   | { type: SET_THEME; themeIsDark: boolean }
-  | { type: SET_ACTIVE_PERSONS; activePersons: Array<string> }
+  | {
+      type: SET_RELATIVES
+      currentPerson: string
+      ancestors: Array<string>
+      descendants: Array<string>
+    }
 
 type Reducer<S, A> = (store: S, action: A) => S
 
@@ -109,6 +116,9 @@ export const reducer: Reducer<Store, Action> = (store, action) => {
       return {
         ...store,
         sidebarId: action.contentId,
+        currentPerson: undefined,
+        ancestors: [],
+        descendants: [],
       }
 
     case CLOSE_SIDEBAR:
@@ -142,10 +152,12 @@ export const reducer: Reducer<Store, Action> = (store, action) => {
         themeIsDark: action.themeIsDark,
       }
 
-    case SET_ACTIVE_PERSONS:
+    case SET_RELATIVES:
       return {
         ...store,
-        activePersons: [...store.activePersons, ...action.activePersons],
+        currentPerson: action.currentPerson,
+        ancestors: [...store.ancestors, ...action.ancestors],
+        descendants: [...store.descendants, ...action.descendants],
       }
 
     default:

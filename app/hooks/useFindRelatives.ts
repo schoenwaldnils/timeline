@@ -1,42 +1,52 @@
-import { useStore, SET_ACTIVE_PERSONS } from '../components/Store'
-import { getLocalStorage } from '../js/localStorage'
-import { getFirebaseRelatives } from '../utils/getFirebaseRelatives'
+import { useCallback, useEffect, useRef } from 'react'
+import { useStore, SET_RELATIVES } from '../components/Store'
+import { getLocalStorage, setLocalStorage } from '../js/localStorage'
+import { useFirebaseRelatives } from './useFirebaseRelatives'
 
 export const useFindRelatives = () => {
   const { dispatch } = useStore()
+  const { loadRelatives, data, loading, error } = useFirebaseRelatives()
+  const currentId = useRef(undefined)
+  const localRelatives = useRef([undefined])
 
-  const fetchRelatives = async (id: string) => {
-    console.log('findRelatives')
-    const localRelatives = JSON.parse(getLocalStorage('relatives')) || {}
+  const getRelatives = useCallback(
+    async (id: string) => {
+      currentId.current = id
+      console.log('findRelatives')
+      localRelatives.current = JSON.parse(getLocalStorage('relatives')) || {}
 
-    if (localRelatives[id]) {
+      if (localRelatives[id]) {
+        dispatch({
+          type: SET_RELATIVES,
+          currentPerson: id,
+          ancestors: localRelatives[id].ancestors as string[],
+          descendants: localRelatives[id].descendants as string[],
+        })
+        return
+      }
+      loadRelatives(id)
+    },
+    [dispatch, loadRelatives],
+  )
+
+  useEffect(() => {
+    if (data) {
+      setLocalStorage(
+        'relatives',
+        JSON.stringify({
+          ...localRelatives.current,
+          [currentId.current]: data,
+        }),
+      )
+
       dispatch({
-        type: SET_ACTIVE_PERSONS,
-        activePersons: localRelatives[id].ancestors,
+        type: SET_RELATIVES,
+        currentPerson: currentId.current,
+        ancestors: (data.ancestors as string[]) || [],
+        descendants: (data.descendants as string[]) || [],
       })
-      return
     }
+  }, [data])
 
-    const dbRelatives = await getFirebaseRelatives(id)
-
-    if (dbRelatives) {
-      // setLocalStorage(
-      //   'relatives',
-      //   JSON.stringify({
-      //     ...localRelatives,
-      //     [id]: dbRelatives,
-      //   }),
-      // )
-
-      dispatch({
-        type: SET_ACTIVE_PERSONS,
-        activePersons:
-          [...dbRelatives.ancestors, ...dbRelatives.descendants] || [],
-      })
-    } else {
-      console.log('No relatives found')
-    }
-  }
-
-  return fetchRelatives
+  return { getRelatives, data, loading, error }
 }

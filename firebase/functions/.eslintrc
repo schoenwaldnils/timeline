@@ -1,0 +1,8 @@
+{
+  "root": true,
+  "extends": "@schoenwald/eslint-config-typescript",
+  "rules": {
+    "@typescript-eslint/no-extra-semi": 0,
+    "@typescript-eslint/camelcase": 0
+  }
+}

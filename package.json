@@ -80,6 +80,7 @@
     "snyk": "1.414.1",
     "typescript": "4.0.3",
     "url-loader": "4.1.1",
+    "use-http": "1.0.15",
     "webpack": "4.44.2"
   },
   "devDependencies": {

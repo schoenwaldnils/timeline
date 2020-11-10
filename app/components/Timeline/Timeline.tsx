@@ -14,11 +14,10 @@ export const Timeline: React.FC = () => {
   const { store } = useStore()
   const formatedData = useTimelineData()
 
-  console.log(store.activePersons)
-
   const activatedTimespans = formatedData.timespans.map(t => {
     const newT = t
-    if (store.activePersons.includes(t.id)) newT.isActive = true
+    if (store.ancestors.includes(t.id)) newT.isAncestor = true
+    if (store.descendants.includes(t.id)) newT.isDescendant = true
     return newT
   })
 

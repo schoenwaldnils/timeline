@@ -31,7 +31,7 @@ interface ContentPersonProps {
 
 export const ContentPerson: React.FC<ContentPersonProps> = props => {
   const { dispatch } = useStore()
-  const fetchRelatives = useFindRelatives()
+  const { getRelatives } = useFindRelatives()
 
   const changeContent = (newId: string) => {
     dispatch({
@@ -44,7 +44,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = props => {
     <ContentPersonView
       {...props}
       changeContent={changeContent}
-      findRelatives={() => fetchRelatives(props.id)}
+      findRelatives={() => getRelatives(props.id)}
     />
   )
 }

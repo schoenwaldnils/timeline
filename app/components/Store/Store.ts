@@ -12,7 +12,9 @@ export const initialState = {
     eventsAreActive: true,
   },
   themeIsDark: false,
-  activePersons: [],
+  currentPerson: undefined,
+  ancestors: [],
+  descendants: [],
 }
 
 type Context = {
