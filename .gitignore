@@ -8,5 +8,4 @@ node_modules
 build
 out
 .next
-.env
 storybook-static
