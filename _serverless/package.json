@@ -17,7 +17,7 @@
     "contentful-typescript-codegen": "^3.0.1",
     "dotenv-load": "^2.0.0",
     "source-map-support": "^0.5.10",
-    "snyk": "^1.364.2"
+    "snyk": "^1.425.4"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
