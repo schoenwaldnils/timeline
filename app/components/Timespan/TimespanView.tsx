@@ -21,6 +21,8 @@ interface WrapperProps {
   pixelDuration: number
   background?: string
   rowIndex: number
+  isAncestor?: boolean
+  isDescendant?: boolean
 }
 
 const Wrapper = styled(ButtonPlain)<WrapperProps>`
@@ -39,6 +41,18 @@ const Wrapper = styled(ButtonPlain)<WrapperProps>`
   white-space: nowrap;
   cursor: pointer;
   background: ${({ background }) => background};
+
+  ${({ isAncestor }) =>
+    isAncestor &&
+    `
+    border-bottom: 2px solid rebeccapurple;
+  `}
+
+  ${({ isDescendant }) =>
+    isDescendant &&
+    `
+    border-bottom: 2px solid #f00;
+  `}
 `
 
 interface TimespanNameProps {
@@ -66,6 +80,8 @@ export const TimespanView: React.FC<TimespanViewProps> = ({
   pixelDuration,
   rowIndex,
   changeContent,
+  isAncestor,
+  isDescendant,
 }) => {
   const background = generateGradient(
     startBlurriness,
@@ -80,6 +96,8 @@ export const TimespanView: React.FC<TimespanViewProps> = ({
       pixelStart={pixelStart}
       pixelDuration={pixelDuration}
       tabIndex={0}
+      isAncestor={isAncestor}
+      isDescendant={isDescendant}
       rowIndex={rowIndex}
       onClick={changeContent}
     >

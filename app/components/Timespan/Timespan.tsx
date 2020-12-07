@@ -12,6 +12,8 @@ export interface TimespanProps {
   startBlurriness?: Number
   endBlurriness?: Number
   rowIndex: number
+  isAncestor?: boolean
+  isDescendant?: boolean
 }
 
 export const Timespan: React.FC<TimespanProps> = ({
@@ -23,6 +25,8 @@ export const Timespan: React.FC<TimespanProps> = ({
   startBlurriness,
   endBlurriness,
   rowIndex,
+  isAncestor,
+  isDescendant,
 }) => {
   const { dispatch } = useStore()
   const handleClick = () => {
@@ -40,6 +44,8 @@ export const Timespan: React.FC<TimespanProps> = ({
         endBlurriness,
         rowIndex,
         changeContent: handleClick,
+        isAncestor,
+        isDescendant,
       }}
     />
   )

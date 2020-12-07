@@ -14,9 +14,16 @@ export const Timeline: React.FC = () => {
   const { store } = useStore()
   const formatedData = useTimelineData()
 
+  const activatedTimespans = formatedData.timespans.map(t => {
+    const newT = t
+    if (store.ancestors.includes(t.id)) newT.isAncestor = true
+    if (store.descendants.includes(t.id)) newT.isDescendant = true
+    return newT
+  })
+
   return (
     <TimelineView
-      timespans={formatedData.timespans}
+      timespans={activatedTimespans}
       events={formatedData.events}
       startYear={YEARS_BEFORE_ZERO}
       endYear={YEARS_AFTER_ZERO}
