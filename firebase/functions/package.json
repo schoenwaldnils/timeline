@@ -1,11 +1,13 @@
 {
   "name": "functions",
   "scripts": {
+    "dev": "nodemon",
+    "start": "ts-node src/rest/index.ts",
     "lint": "eslint \"src/**/*\"",
     "build": "tsc",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
+    "startFire": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
@@ -15,7 +17,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@types/cors": "^2.8.8",
-    "contentful": "^7.14.8",
+    "contentful": "^7.14.12",
     "cors": "^2.8.5",
     "cross-fetch": "^3.0.6",
     "firebase-admin": "^8.10.0",
@@ -30,6 +32,8 @@
     "eslint": "^7.6.0",
     "eslint-plugin-import": "^2.22.0",
     "firebase-functions-test": "^0.2.0",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.0.0",
     "typescript": "^3.8.0"
   },
   "private": true
