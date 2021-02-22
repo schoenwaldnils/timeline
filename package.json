@@ -61,7 +61,7 @@
     "graphql-tag": "2.11.0",
     "html-react-parser": "0.14.1",
     "htmlhint": "0.14.2",
-    "husky": "4.3.0",
+    "husky": "5.1.1",
     "isomorphic-unfetch": "3.1.0",
     "next": "10.0.1",
     "preact": "10.5.7",
