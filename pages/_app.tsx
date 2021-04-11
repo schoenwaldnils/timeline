@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { StoreProvider } from '../app/components/Store/StoreProvider'

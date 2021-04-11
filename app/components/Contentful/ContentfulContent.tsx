@@ -61,7 +61,7 @@ export const ContentfulContent: React.FC<Props> = ({
   }
 
   const [type] = Object.keys(data).filter(
-    key => data[key].items.length === 1 && key,
+    (key) => data[key].items.length === 1 && key,
   )
 
   const fixedType = isParent ? 'parent' : type

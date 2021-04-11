@@ -1,15 +1,11 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { css } from '@emotion/core'
+import { FC } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { MdVerticalAlignBottom } from 'react-icons/md'
+import styled from '@emotion/styled'
 
 import { zIndexes } from '../../data/constants'
 import { useTranslation } from '../../hooks/useTranslation'
-
-interface WrapperProps {
-  isActive: boolean
-}
+import { css } from '@emotion/react'
 
 const isActiveStyles = css`
   opacity: 1;
@@ -20,7 +16,9 @@ const isActiveStyles = css`
 // 1. https://developers.google.com/web/updates/2016/12/url-bar-resizing
 // 2. Set height of swipable div
 
-const Wrapper = styled.div<WrapperProps>`
+const Wrapper = styled.div<{
+  isActive: boolean
+}>`
   position: absolute;
   top: 0;
   left: 100%;
@@ -36,7 +34,7 @@ const Wrapper = styled.div<WrapperProps>`
   box-shadow: 1rem -0.5rem 0.75rem 1rem rgba(0, 0, 0, 0.25);
   transition: transform 300ms, opacity 100ms 200ms;
 
-  ${({ isActive }) => isActive && isActiveStyles}
+  ${(p) => p.isActive && isActiveStyles}
 
   > div {
     min-height: 100%; /* 2 */
@@ -87,23 +85,24 @@ const Icon = styled(MdVerticalAlignBottom)`
 
 interface SidebarViewProps {
   isActive: boolean
-  closeSidebar: Function
+  closeSidebar: () => void
 }
 
-export const SidebarView: React.FC<SidebarViewProps> = ({
+export const SidebarView: FC<SidebarViewProps> = ({
   isActive = false,
   children,
   closeSidebar,
 }) => {
   const { t } = useTranslation()
   const handlers = useSwipeable({
-    onSwipedRight: eventData => closeSidebar(eventData),
+    onSwipedRight: () => closeSidebar(),
     delta: 30,
   })
+
   return (
     <Wrapper isActive={isActive} role="dialog" {...handlers}>
       {children && <SidebarContent>{children}</SidebarContent>}
-      <Close aria-label={t('ui.closeSidebar')} onClick={() => closeSidebar()}>
+      <Close aria-label={t('ui.closeSidebar')} onClick={closeSidebar}>
         <Icon />
       </Close>
     </Wrapper>

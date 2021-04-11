@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import { jsx, Global } from '@emotion/core'
+import { jsx, Global } from '@emotion/react'
 
 import base from './base'
 import { useStore } from '../Store'

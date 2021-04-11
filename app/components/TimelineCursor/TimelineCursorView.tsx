@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from 'react'
 import styled from '@emotion/styled'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 
 import { pixelToYear } from '../../js/calcTimes'
 import { OurTime } from '../OurTime'

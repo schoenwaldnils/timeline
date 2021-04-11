@@ -28,11 +28,6 @@ export const StoreProvider = ({ children }) => {
       dispatch({ type: SET_THEME, themeIsDark: preferesDark })
     }
 
-    const onChange = matches =>
-      dispatch({ type: SET_THEME, themeIsDark: matches })
-
-    matcher.addListener(({ matches }) => onChange(matches))
-
     /**
      * Read and listen to url hash
      */
@@ -53,7 +48,6 @@ export const StoreProvider = ({ children }) => {
     })
 
     return () => {
-      matcher.removeListener(onChange)
       window.removeEventListener('load', () => {})
     }
   }, [store, dispatch])
