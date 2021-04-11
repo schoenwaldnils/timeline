@@ -8,6 +8,10 @@ import { Scaling, ScaleIndicator } from '../Scaling'
 
 import { zIndexes } from '../../data/constants'
 import { useStore } from '../Store'
+import {
+  formatTimelineData,
+  ContentfulTimelineData,
+} from '../../js/objectFormating/formatTimelineData'
 
 const Sidebar = dynamic(() => import('../Sidebar/Sidebar'), { ssr: false })
 const Timeline = dynamic(() => import('../Timeline/Timeline'), { ssr: false })
@@ -40,14 +44,22 @@ const Config = styled.div`
   }
 `
 
-export const Page: React.FC = () => {
+export const Page: React.FC<{
+  timelineData: { en: ContentfulTimelineData; de: ContentfulTimelineData }
+}> = ({ timelineData }) => {
   const { store } = useStore()
+
+  const formatedData = formatTimelineData(
+    timelineData[store.locale],
+    store.scale,
+    store.filter,
+  )
 
   return (
     <StyledPage>
       <Header />
       <Content>
-        <Timeline />
+        <Timeline data={formatedData} />
         <Sidebar isActive={!!store.sidebarId} contentId={store.sidebarId} />
         <Config>
           <ThemeSwitch />

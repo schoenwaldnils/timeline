@@ -1,4 +1,6 @@
-export default `
+import { gql } from 'graphql-request'
+
+export default gql`
   query($locale: String!) {
     persons: personCollection(
       locale: $locale

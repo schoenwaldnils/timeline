@@ -17,19 +17,26 @@ const showInTimeline = ({
   return false
 }
 
+export type ContentfulTimelineData = {
+  persons: { items: Array<any> }
+  times: { items: Array<any> }
+  events: { items: Array<any> }
+}
+
+export type TimelineData = {
+  timespans: any
+  events: any
+}
+
 export const formatTimelineData = (
-  data: {
-    persons: { items: Array<any> }
-    times: { items: Array<any> }
-    events: { items: Array<any> }
-  },
+  data: ContentfulTimelineData,
   scale: number,
   filter?: {
     personsAreActive: boolean
     timesAreActive: boolean
     eventsAreActive: boolean
   },
-) => {
+): TimelineData => {
   const {
     personsAreActive = true,
     timesAreActive = true,
