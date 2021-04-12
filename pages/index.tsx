@@ -1,9 +1,4 @@
-import {
-  GetStaticPathsResult,
-  GetStaticProps,
-  GetStaticPropsResult,
-  NextPage,
-} from 'next'
+import { GetStaticProps, GetStaticPropsResult, NextPage } from 'next'
 
 import { Page } from '../app/components/Page'
 import { ContentfulTimelineData } from '../app/js/objectFormating/formatTimelineData'
