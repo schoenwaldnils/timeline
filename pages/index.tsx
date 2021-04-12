@@ -42,10 +42,3 @@ export const getStaticProps: GetStaticProps = async ({
     },
   }
 }
-
-export const getStaticPaths = async (): Promise<GetStaticPathsResult> => {
-  return {
-    paths: ['/'],
-    fallback: true,
-  }
-}
