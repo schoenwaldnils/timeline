@@ -1,9 +1,9 @@
-import React from 'react'
+import { FC } from 'react'
 
 import {
-  ContentTemplate,
   ContentEvent,
   ContentPerson,
+  ContentTemplate,
   ContentTime,
 } from './index'
 
@@ -11,7 +11,7 @@ export default {
   title: 'Content',
 }
 
-export const TemplateWithIamge = () => (
+export const TemplateWithIamge: FC = () => (
   <ContentTemplate
     title="ContentTemplate Test"
     image="https://picsum.photos/id/1010/500/300"
@@ -23,18 +23,19 @@ export const TemplateWithIamge = () => (
   </ContentTemplate>
 )
 
-export const Event = () => (
+export const Event: FC = () => (
   <ContentEvent id="abc" name="ContentEvent Test" year={2000} />
 )
-export const Person = () => (
+export const Person: FC = () => (
   <ContentPerson
     id="abc"
     name="Jon Doe"
     startYear={1900}
     image="https://picsum.photos/id/1010/500/300"
     fatherID="8d9htmcSCAAyIKoQqqSAm" // Isaak
+    wolLink="#"
   />
 )
-export const Time = () => (
+export const Time: FC = () => (
   <ContentTime id="abc" name="Test time" startYear={100} />
 )

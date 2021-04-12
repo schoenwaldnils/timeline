@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 
 import { RichText } from './index'
 import { richText } from './richText.mock' // contentful ID 4iGBcSU5HQj2vEcHn0Huts
@@ -8,4 +8,4 @@ export default {
   component: RichText,
 }
 
-export const Basic = () => <RichText content={richText} />
+export const Basic: FC = () => <RichText content={richText} />

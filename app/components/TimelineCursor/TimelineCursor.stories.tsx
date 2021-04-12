@@ -1,7 +1,7 @@
-import React from 'react'
 import styled from '@emotion/styled'
-import { useMousePosition } from '../../hooks/useMousePosition'
+import { FC } from 'react'
 
+import { useMousePosition } from '../../hooks/useMousePosition'
 import { TimelineCursorView } from './TimelineCursorView'
 
 export default {
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   background-color: #ff000050;
 `
 
-export const Basic = () => {
+export const Basic: FC = () => {
   const { mousePosition, scrollRef } = useMousePosition()
 
   return (

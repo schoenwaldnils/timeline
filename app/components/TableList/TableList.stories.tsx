@@ -1,4 +1,5 @@
-import React from 'react'
+import { FC } from 'react'
+
 import { TableList } from './index'
 
 export default {
@@ -9,7 +10,7 @@ export default {
   },
 }
 
-export const Basic = () => (
+export const Basic: FC = () => (
   <TableList
     list={{
       TestItem1: 'Lorem',

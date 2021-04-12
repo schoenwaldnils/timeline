@@ -1,4 +1,4 @@
-import { YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO } from '../data/constants'
+import { YEARS_AFTER_ZERO, YEARS_BEFORE_ZERO } from '../data/constants'
 
 // function maxEnd(value) {
 //   if (value > YEARS_AFTER_ZERO) {
@@ -16,7 +16,17 @@ interface Props {
   type?: 'person' | 'time'
 }
 
-export const calcTimes = ({ startYear, endYear, stillActive, type }: Props) => {
+export const calcTimes = ({
+  startYear,
+  endYear,
+  stillActive,
+  type,
+}: Props): {
+  pixelStart: number
+  pixelEnd: number
+  duration: number
+  pixelDuration: number
+} => {
   let correctedEndYear = endYear
   let pixelStart: number
   let pixelEnd: number
@@ -47,7 +57,7 @@ export const calcTimes = ({ startYear, endYear, stillActive, type }: Props) => {
   }
 }
 
-export function pixelToYear(pixel: number) {
+export function pixelToYear(pixel: number): number {
   const year = pixel - YEARS_BEFORE_ZERO
   return year
 }

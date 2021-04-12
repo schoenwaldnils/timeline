@@ -1,7 +1,7 @@
-import React from 'react'
-
 import styled from '@emotion/styled'
 import { action } from '@storybook/addon-actions'
+import { FC } from 'react'
+
 import { TimespanView } from './TimespanView'
 
 export default {
@@ -18,9 +18,10 @@ const Container = styled.div`
   }
 `
 
-export const Time = () => (
+export const Time: FC = () => (
   <Container>
     <TimespanView
+      id="bla"
       name="Event Lorem Ipsum"
       type="time"
       pixelStart={50}
@@ -29,6 +30,7 @@ export const Time = () => (
       changeContent={action('changeContent')}
     />
     <TimespanView
+      id="bla"
       name="John Doe"
       type="person"
       pixelStart={50}

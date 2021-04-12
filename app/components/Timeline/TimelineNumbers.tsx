@@ -1,5 +1,5 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
 
 interface WrapperProps {
   paddingLeft: number
@@ -42,7 +42,7 @@ interface TimelineNumbersProps {
   scale: number
 }
 
-export const TimelineNumbers: React.FC<TimelineNumbersProps> = ({
+export const TimelineNumbers: FC<TimelineNumbersProps> = ({
   startYear,
   endYear,
   scale,

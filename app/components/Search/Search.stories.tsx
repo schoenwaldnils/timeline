@@ -1,9 +1,9 @@
-import React from 'react'
-
 import styled from '@emotion/styled'
+import { FC } from 'react'
+
+import { Search } from './Search'
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
-import { Search } from './Search'
 
 export default {
   title: 'Search',
@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 `
 
-export const Basic = () => (
+export const Basic: FC = () => (
   <Container>
     <Search />
     <SearchBar searchValue="" setSearchValue={() => null} />

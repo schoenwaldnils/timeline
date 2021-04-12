@@ -1,5 +1,5 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
 
 import { Loading, LoadingDots } from './Loading'
 
@@ -14,7 +14,7 @@ const Container = styled.div`
   padding: 2rem;
 `
 
-export const Basic = () => {
+export const Basic: FC = () => {
   return (
     <>
       <Container>

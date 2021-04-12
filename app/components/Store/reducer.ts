@@ -1,11 +1,11 @@
+import { removeUrlHash, setUrlHash } from '../../js/urlHash'
+import { Locale } from '../../utils/intl/intlConsts'
+import { isBrowser } from '../../utils/isBrowser'
 import {
+  getUserLocalStore,
   setUserLocalStore,
   setUserSessionStore,
-  getUserLocalStore,
 } from './userStore'
-import { isBrowser } from '../../utils/isBrowser'
-import { setUrlHash, removeUrlHash } from '../../js/urlHash'
-import { Locale } from '../../utils/intl/intlConsts'
 
 export const SET_INIT = 'SET_INIT'
 export const SET_LOCALE = 'SET_LOCALE'
@@ -26,7 +26,7 @@ type SET_THEME = 'SET_THEME'
 export type Store = {
   locale: Locale
   scale: number
-  sidebarId: string | undefined
+  sidebarId?: string
   filter: {
     personsAreActive: boolean
     timesAreActive: boolean
@@ -42,7 +42,7 @@ type Filter = {
 }
 
 export type Action =
-  | { type: SET_INIT; [key: string]: any }
+  | { type: SET_INIT }
   | { type: SET_LOCALE; locale: string }
   | { type: SET_SCALE; scale: number }
   | { type: CHANGE_CONTENT; contentId: string }
@@ -53,8 +53,8 @@ export type Action =
 type Reducer<S, A> = (store: S, action: A) => S
 
 interface ScaleChangedEvent {
-  action: any
-  store: any
+  action: Action
+  store: Store
 }
 
 export const reducer: Reducer<Store, Action> = (store, action) => {

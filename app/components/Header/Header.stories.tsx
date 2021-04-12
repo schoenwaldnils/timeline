@@ -1,8 +1,8 @@
-import React from 'react'
-
 import styled from '@emotion/styled'
-import { Header } from './Header'
+import { FC } from 'react'
+
 import { shades } from '../../data/colors'
+import { Header } from './Header'
 
 export default {
   title: 'Header',
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   background-color: ${shades.cb4};
 `
 
-export const Basic = () => (
+export const Basic: FC = () => (
   <Wrapper>
     <Header />
   </Wrapper>

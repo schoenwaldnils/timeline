@@ -1,27 +1,13 @@
-import React from 'react'
+import { FC } from 'react'
 
-import { ContentTemplate, ContentBox } from './ContentTemplate'
+import { Event } from '../../../@types/Event'
+import { useTranslation } from '../../hooks/useTranslation'
+import { OurTime } from '../OurTime'
 import { TableList } from '../TableList'
 import { LinkToWOL } from './ContentLinkWol'
-import { OurTime } from '../OurTime'
+import { ContentBox, ContentTemplate } from './ContentTemplate'
 
-import { useTranslation } from '../../hooks/useTranslation'
-
-interface ContentEventProps {
-  id: string
-  name: string
-  year: number
-  image?: string
-  wolLink?: string
-}
-
-export const ContentEvent: React.FC<ContentEventProps> = ({
-  id,
-  name,
-  year,
-  image,
-  wolLink,
-}) => {
+export const ContentEvent: FC<Event> = ({ id, name, year, image, wolLink }) => {
   const { t } = useTranslation()
   return (
     <ContentTemplate title={name} image={image} idContentful={id}>

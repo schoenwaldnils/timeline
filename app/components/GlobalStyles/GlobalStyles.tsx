@@ -1,12 +1,13 @@
 /** @jsx jsx */
 
-import { jsx, Global } from '@emotion/react'
+import { Global, jsx } from '@emotion/react'
+import { FC } from 'react'
 
-import base from './base'
 import { useStore } from '../Store'
+import base from './base'
 import { themeDark, themeLight } from './theme'
 
-export const GlobalStyles = () => {
+export const GlobalStyles: FC = () => {
   const { store } = useStore()
   return (
     <>

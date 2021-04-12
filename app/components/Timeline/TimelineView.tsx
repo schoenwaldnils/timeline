@@ -1,17 +1,18 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
 import mergeRefs from 'react-merge-refs'
 
-import { Event, EventProps } from '../Event'
-import { TimelineNumbers } from './TimelineNumbers'
-import { TimelineCursor } from '../TimelineCursor'
-import { Timespan, TimespanProps } from '../Timespan'
-
-import { getTimelineWidth } from './getTimelineWidth'
+import { TimelineEvent } from '../../../@types/TimelineEvent.d'
+import { Timespan as TimespanType } from '../../../@types/Timespan.d'
 import { zIndexes } from '../../data/constants'
-import { checkForTouchDevice } from '../../js/checkForTouchDevice'
 import { useMousePosition } from '../../hooks/useMousePosition'
 import { useScrollPosition } from '../../hooks/useScrollPosition'
+import { checkForTouchDevice } from '../../js/checkForTouchDevice'
+import { Event } from '../Event'
+import { TimelineCursor } from '../TimelineCursor'
+import { Timespan } from '../Timespan'
+import { getTimelineWidth } from './getTimelineWidth'
+import { TimelineNumbers } from './TimelineNumbers'
 
 const Wrapper = styled.div`
   position: absolute;
@@ -47,15 +48,15 @@ const Content = styled.div`
 `
 
 interface TimelineViewProps {
-  events?: Array<Object>
-  timespans?: Array<Object>
+  events?: TimelineEvent[]
+  timespans?: TimespanType[]
   startYear: number
   endYear: number
   scale?: number
-  ref?: any
+  ref?: HTMLElement
 }
 
-export const TimelineView: React.FC<TimelineViewProps> = ({
+export const TimelineView: FC<TimelineViewProps> = ({
   events = [],
   timespans = [],
   startYear,
@@ -82,10 +83,10 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
           scale={scale}
         />
         <Content>
-          {timespans.map((timespan: TimespanProps) => (
+          {timespans.map((timespan) => (
             <Timespan {...timespan} key={timespan.id} />
           ))}
-          {events.map((event: EventProps) => (
+          {events.map((event) => (
             <Event {...event} key={event.id} />
           ))}
         </Content>

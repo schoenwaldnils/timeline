@@ -1,9 +1,10 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC, MouseEvent } from 'react'
 
+import { Timespan as TimespanType } from '../../../@types/Timespan'
 import { zIndexes } from '../../data/constants'
-import { generateGradient } from './generateGradient'
 import { ButtonPlain } from '../Button'
+import { generateGradient } from './generateGradient'
 
 const timeColors = {
   person: 'var(--Timespan-backgroundColor--person)',
@@ -16,7 +17,6 @@ const transparentColors = {
 }
 
 interface WrapperProps {
-  type: string
   pixelStart: number
   pixelDuration: number
   background?: string
@@ -50,14 +50,11 @@ const TimespanName = styled.div<TimespanNameProps>`
   left: 0.5em;
 `
 
-export interface TimespanViewProps extends WrapperProps {
-  name: string
-  startBlurriness?: Number
-  endBlurriness?: Number
-  changeContent: (event: React.MouseEvent<HTMLDivElement>) => void
+export type TimespanViewProps = TimespanType & {
+  changeContent: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
-export const TimespanView: React.FC<TimespanViewProps> = ({
+export const TimespanView: FC<TimespanViewProps> = ({
   type,
   name,
   startBlurriness,
@@ -75,7 +72,6 @@ export const TimespanView: React.FC<TimespanViewProps> = ({
   )
   return (
     <Wrapper
-      type={type}
       background={background}
       pixelStart={pixelStart}
       pixelDuration={pixelDuration}

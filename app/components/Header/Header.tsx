@@ -1,13 +1,12 @@
-import React from 'react'
 import styled from '@emotion/styled'
-
-import { Search } from '../Search'
-import { LangSwitch } from '../LangSwitch'
-import { Logo } from '../Logo'
-import { Filter } from '../Filter'
+import { FC } from 'react'
 
 import { zIndexes } from '../../data/constants'
 import { viewportsJs } from '../../js/viewports'
+import { Filter } from '../Filter'
+import { LangSwitch } from '../LangSwitch'
+import { Logo } from '../Logo'
+import { Search } from '../Search'
 
 const Wrapper = styled.div`
   position: relative;
@@ -41,7 +40,7 @@ const Nav = styled.div`
   }
 `
 
-export const Header = () => (
+export const Header: FC = () => (
   <Wrapper>
     <Logo />
     <Nav>

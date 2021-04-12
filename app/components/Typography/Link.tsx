@@ -1,5 +1,5 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC } from 'react'
 
 const StyledA = styled.a`
   color: var(--body-linkColor);
@@ -12,12 +12,10 @@ const StyledA = styled.a`
   }
 `
 
-interface AProps {
-  href: string
-  [key: string]: any
-}
-
-export const A: React.FC<AProps> = ({ href, ...props }) => {
+export const A: FC<AnchorHTMLAttributes<HTMLAnchorElement>> = ({
+  href,
+  ...props
+}) => {
   if (href.includes('http') && !href.includes('localhost:3003')) {
     return (
       <StyledA
@@ -50,4 +48,6 @@ const StyledButton = styled.button`
   }
 `
 
-export const TextButton = props => <StyledButton {...props} />
+export const TextButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (
+  props,
+) => <StyledButton {...props} />

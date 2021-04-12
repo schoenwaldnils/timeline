@@ -1,11 +1,11 @@
-import { FC } from 'react'
-import { useSwipeable } from 'react-swipeable'
-import { MdVerticalAlignBottom } from 'react-icons/md'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
+import { MdVerticalAlignBottom } from 'react-icons/md'
+import { useSwipeable } from 'react-swipeable'
 
 import { zIndexes } from '../../data/constants'
 import { useTranslation } from '../../hooks/useTranslation'
-import { css } from '@emotion/react'
 
 const isActiveStyles = css`
   opacity: 1;

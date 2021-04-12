@@ -1,18 +1,13 @@
-import React, { useState, useRef } from 'react'
+import { ClickAwayListener } from '@material-ui/core'
+import { FC, useState } from 'react'
 
-import { useClickOutside } from '../../hooks/useClickOutside'
-import { LangSwitchView } from './LangSwitchView'
 import { Locale } from '../../utils/intl/intlConsts'
-import { useStore, SET_LOCALE } from '../Store'
+import { SET_LOCALE, useStore } from '../Store'
+import { LangSwitchView } from './LangSwitchView'
 
-export const LangSwitch: React.FC = () => {
+export const LangSwitch: FC = () => {
   const { store, dispatch } = useStore()
   const [isActive, setIsActive] = useState(false)
-  const ref = useRef()
-
-  useClickOutside(ref, () => {
-    if (isActive) setIsActive(false)
-  })
 
   const toggleIsActive = () => setIsActive(!isActive)
 
@@ -25,12 +20,13 @@ export const LangSwitch: React.FC = () => {
   }
 
   return (
-    <LangSwitchView
-      isActive={isActive}
-      toggleIsActive={toggleIsActive}
-      handleButtonClick={handleButtonClick}
-      currentLocale={store.locale}
-      ref={ref}
-    />
+    <ClickAwayListener onClickAway={() => isActive && setIsActive(false)}>
+      <LangSwitchView
+        isActive={isActive}
+        toggleIsActive={toggleIsActive}
+        handleButtonClick={handleButtonClick}
+        currentLocale={store.locale}
+      />
+    </ClickAwayListener>
   )
 }

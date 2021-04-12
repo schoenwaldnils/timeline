@@ -1,10 +1,9 @@
-import React, { forwardRef } from 'react'
 import styled from '@emotion/styled'
-
-import { Tooltip } from '../Tooltip'
-import { ReactComponent as FilterIcon } from './filterIcon.svg'
+import { ChangeEvent, FC, forwardRef, MouseEvent, Ref } from 'react'
 
 import { useTranslation } from '../../hooks/useTranslation'
+import { Tooltip } from '../Tooltip'
+import { ReactComponent as FilterIcon } from './filterIcon.svg'
 
 const Wrapper = styled.div`
   position: relative;
@@ -56,17 +55,17 @@ const Checkbox = styled.input`
 
 interface FilterViewProps {
   isActive?: boolean
-  toggleIsActive: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  toggleIsActive: (event: MouseEvent) => void
+  handleChange: (event: ChangeEvent) => void
   filterState: {
     personsAreActive: boolean
     timesAreActive: boolean
     eventsAreActive: boolean
   }
-  ref?: React.Ref<HTMLDivElement>
+  ref?: Ref<HTMLDivElement>
 }
 
-export const FilterView: React.FC<FilterViewProps> = forwardRef(
+export const FilterView: FC<FilterViewProps> = forwardRef(
   ({ isActive = false, toggleIsActive, handleChange, filterState }, ref) => {
     const { t } = useTranslation()
 

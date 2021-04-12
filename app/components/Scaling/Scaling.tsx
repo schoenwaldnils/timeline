@@ -1,9 +1,9 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
 
-import { useStore, SET_SCALE } from '../Store'
-import { ButtonSquare } from '../Button'
 import { useTranslation } from '../../hooks/useTranslation'
+import { ButtonSquare } from '../Button'
+import { SET_SCALE, useStore } from '../Store'
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const ButtonSpaced = styled(ButtonSquare)`
   }
 `
 
-export const Scaling: React.FC = props => {
+export const Scaling: FC = (props) => {
   const { t } = useTranslation()
   const { store, dispatch } = useStore()
   const map = {
@@ -30,7 +30,7 @@ export const Scaling: React.FC = props => {
     9: 16,
   }
 
-  const [valueKey] = Object.keys(map).filter(key => map[key] === store.scale)
+  const [valueKey] = Object.keys(map).filter((key) => map[key] === store.scale)
 
   const value = parseInt(valueKey, 10)
 

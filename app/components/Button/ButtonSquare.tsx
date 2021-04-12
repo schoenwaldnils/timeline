@@ -1,5 +1,5 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { ButtonHTMLAttributes, FC } from 'react'
 
 const Button = styled.button`
   display: flex;
@@ -21,6 +21,8 @@ const Button = styled.button`
   -webkit-appearance: none;
 `
 
-export const ButtonSquare = props => {
+export const ButtonSquare: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (
+  props,
+) => {
   return <Button {...props} />
 }

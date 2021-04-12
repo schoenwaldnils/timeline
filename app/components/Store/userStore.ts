@@ -2,17 +2,19 @@ import acceptLanguage from 'accept-language'
 
 import {
   getLocalStorage,
-  setLocalStorage,
   getSessionStorage,
+  setLocalStorage,
   setSessionStorage,
 } from '../../js/localStorage'
+import { Store } from './reducer'
 
 const STORAGE_NAME = 'timeline-store'
 
-export const getUserLocalStore = () => {
+export const getUserLocalStore = (): Partial<Store> => {
   if (typeof window === 'undefined') return {}
   const storageStoreString = getLocalStorage(STORAGE_NAME)
-  const storageStore: any = JSON.parse(storageStoreString) || {}
+  const storageStore: Record<string, unknown> =
+    JSON.parse(storageStoreString) || {}
 
   if (!storageStore.locale) {
     acceptLanguage.languages(['en', 'de'])
@@ -27,24 +29,27 @@ export const getUserLocalStore = () => {
   return storageStore
 }
 
-export const setUserLocalStore = store => {
+export const setUserLocalStore = (store: Partial<Store>): void => {
   const storageStoreString = getLocalStorage(STORAGE_NAME)
-  const storageStore: any = JSON.parse(storageStoreString) || {}
+  const storageStore: Record<string, unknown> =
+    JSON.parse(storageStoreString) || {}
 
   setLocalStorage(STORAGE_NAME, JSON.stringify({ ...storageStore, ...store }))
 }
 
-export const getUserSessionStore = () => {
+export const getUserSessionStore = (): Partial<Store> => {
   if (typeof window === 'undefined') return {}
   const storageStoreString = getSessionStorage(STORAGE_NAME)
-  const storageStore: any = JSON.parse(storageStoreString) || {}
+  const storageStore: Record<string, unknown> =
+    JSON.parse(storageStoreString) || {}
 
   return storageStore
 }
 
-export const setUserSessionStore = store => {
+export const setUserSessionStore = (store: Partial<Store>): void => {
   const storageStoreString = getSessionStorage(STORAGE_NAME)
-  const storageStore: any = JSON.parse(storageStoreString) || {}
+  const storageStore: Record<string, unknown> =
+    JSON.parse(storageStoreString) || {}
 
   setSessionStorage(STORAGE_NAME, JSON.stringify({ ...storageStore, ...store }))
 }

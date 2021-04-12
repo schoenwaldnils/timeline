@@ -1,9 +1,9 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC, MouseEvent } from 'react'
 import { WiDaySunny, WiMoonAltWaningCrescent5 } from 'react-icons/wi'
 
-import { ButtonSquare } from '../Button'
 import { useTranslation } from '../../hooks/useTranslation'
+import { ButtonSquare } from '../Button'
 
 const IconLight = WiDaySunny
 
@@ -12,11 +12,11 @@ const IconDark = styled(WiMoonAltWaningCrescent5)`
 `
 
 interface ThemeSwitchViewProps {
-  toggleTheme: (event: React.MouseEvent<HTMLButtonElement>) => void
+  toggleTheme: (event: MouseEvent) => void
   isDark?: boolean
 }
 
-export const ThemeSwitchView: React.FC<ThemeSwitchViewProps> = ({
+export const ThemeSwitchView: FC<ThemeSwitchViewProps> = ({
   toggleTheme,
   isDark = false,
   ...props

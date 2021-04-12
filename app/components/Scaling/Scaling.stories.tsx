@@ -1,8 +1,8 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
 
-import { Scaling } from './Scaling'
 import { ScaleIndicator } from './ScaleIndicator'
+import { Scaling } from './Scaling'
 
 export default {
   title: 'Scaling',
@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 `
 
-export const Basic = () => (
+export const Basic: FC = () => (
   <Container>
     <Scaling />
     <ScaleIndicator />

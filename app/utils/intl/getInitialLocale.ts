@@ -1,5 +1,5 @@
-import { Locale, isLocale, DEFAULT_LOCALE } from './intlConsts'
 import { isBrowser } from '../isBrowser'
+import { DEFAULT_LOCALE, isLocale, Locale } from './intlConsts'
 
 export function getInitialLocale(): Locale {
   if (!isBrowser) return DEFAULT_LOCALE

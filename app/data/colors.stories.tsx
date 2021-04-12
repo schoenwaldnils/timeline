@@ -1,15 +1,15 @@
-import React from 'react'
 import styled from '@emotion/styled'
 import Color from 'color'
+import { FC } from 'react'
 
-import { shades, colors, themeColors } from './colors'
 import { viewportsJs } from '../js/viewports'
+import { colors, shades, themeColors } from './colors'
 
 export default {
   title: 'Colors',
 }
 
-const isDark = color => Color(color).isDark()
+const isDark = (color) => Color(color).isDark()
 
 const Wrapper = styled.div`
   display: grid;
@@ -35,11 +35,11 @@ const Box = styled.div`
   background-color: ${({ color }) => color};
 `
 
-export const Basic = () => (
+export const Basic: FC = () => (
   <>
     <h1>Shades</h1>
     <Wrapper>
-      {Object.keys(shades).map(i => (
+      {Object.keys(shades).map((i) => (
         <Box color={shades[i]} key={i}>
           {i}
         </Box>
@@ -47,14 +47,18 @@ export const Basic = () => (
     </Wrapper>
     <h1>Colors</h1>
     <Wrapper>
-      {Object.keys(colors).map(i => (
-        <Box color={colors[i]}>{i}</Box>
+      {Object.keys(colors).map((i) => (
+        <Box color={colors[i]} key={`color-${i}`}>
+          {i}
+        </Box>
       ))}
     </Wrapper>
     <h1>ThemeColors</h1>
     <Wrapper>
-      {Object.keys(themeColors).map(i => (
-        <Box color={themeColors[i]}>{i}</Box>
+      {Object.keys(themeColors).map((i) => (
+        <Box color={themeColors[i]} key={`themeColor-${i}`}>
+          {i}
+        </Box>
       ))}
     </Wrapper>
   </>

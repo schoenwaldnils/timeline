@@ -1,9 +1,9 @@
-import React from 'react'
 import styled from '@emotion/styled'
-import { Index, connectHits } from 'react-instantsearch-dom'
+import { FC } from 'react'
+import { connectHits, Index } from 'react-instantsearch-dom'
 
-import { SearchHit } from './SearchHit'
 import { useTranslation } from '../../hooks/useTranslation'
+import { HitType, SearchHit } from './SearchHit'
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,12 +19,12 @@ const HitsTitle = styled.div`
 `
 
 interface HitProps {
-  hits: any
+  hits: HitType[]
   type: 'person' | 'time' | 'event'
-  selectHit: Function
+  selectHit: () => void
 }
 
-const Hits: React.FC<HitProps> = ({ hits, type, selectHit }) => {
+const Hits: FC<HitProps> = ({ hits, type, selectHit }) => {
   const { t } = useTranslation()
 
   if (!hits.length) return null
@@ -36,7 +36,7 @@ const Hits: React.FC<HitProps> = ({ hits, type, selectHit }) => {
       <HitsTitle>
         {hits.length} {t(`ui.${type}${plural}`)}
       </HitsTitle>
-      {hits.map(hit => (
+      {hits.map((hit) => (
         <SearchHit
           key={hit.objectID}
           type={type}
@@ -50,12 +50,12 @@ const Hits: React.FC<HitProps> = ({ hits, type, selectHit }) => {
 const CustomHits = connectHits(Hits)
 
 interface SearchHitsProps {
-  selectHit: Function
+  selectHit: (id: string) => void
 }
 
-export const SearchHits: React.FC<SearchHitsProps> = ({ selectHit }) => (
+export const SearchHits: FC<SearchHitsProps> = ({ selectHit }) => (
   <Wrapper>
-    {indicies.map(index => (
+    {indicies.map((index) => (
       <Index key={`index-${index}`} indexName={index}>
         <CustomHits type={index} selectHit={selectHit} />
       </Index>

@@ -1,5 +1,5 @@
-import React from 'react'
 import { action } from '@storybook/addon-actions'
+import { FC } from 'react'
 
 import { SidebarView } from './SidebarView'
 
@@ -8,7 +8,7 @@ export default {
   component: SidebarView,
 }
 
-export const Basic = () => (
+export const Basic: FC = () => (
   <SidebarView isActive={true} closeSidebar={action('close sidebar')}>
     <div>Test</div>
   </SidebarView>

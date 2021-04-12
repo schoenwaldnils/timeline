@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
+import { FC, Fragment } from 'react'
 
 const List = styled.div`
   display: inline-grid;
@@ -9,21 +9,15 @@ const List = styled.div`
 
 const ListItem = styled.div``
 
-interface TableListProps {
-  list: object
-}
-
-export const TableList: React.FC<TableListProps> = ({ list }) => (
+export const TableList: FC<{
+  list: Record<string, unknown>
+}> = ({ list }) => (
   <List>
-    {Object.keys(list).map(item => (
-      <Fragment key={item}>
-        <ListItem>{item}:</ListItem>
-        <ListItem>{list[item]}</ListItem>
+    {Object.keys(list).map((key) => (
+      <Fragment key={key}>
+        <ListItem>{key}:</ListItem>
+        <ListItem>{list[key]}</ListItem>
       </Fragment>
     ))}
   </List>
 )
-
-TableList.defaultProps = {
-  list: {},
-}

@@ -1,13 +1,13 @@
 import cookie from 'cookie'
 
 // from https://www.quirksmode.org/js/cookies.html
-export const readCookie = (name: string) => {
-  let aCookie = false
+export const readCookie = (name: string): string => {
+  let aCookie: string = undefined
   if (typeof document !== 'undefined' && navigator && navigator.cookieEnabled) {
     const cookies = cookie.parse(document.cookie)
 
     if (!name) {
-      return cookies
+      return null
     }
 
     if (cookies[name]) {
@@ -25,7 +25,7 @@ export const createCookie = (
     maxAgeInDays = 365,
     ...params
   }: { maxAgeInDays?: number; expires?: Date } = {},
-) => {
+): void => {
   const defaultParams = {
     maxAge: maxAgeInDays * 24 * 60 * 60, // 356 days in seconds
     path: '/',
@@ -37,7 +37,7 @@ export const createCookie = (
   })
 }
 
-export const eraseCookie = (name: string) => {
+export const eraseCookie = (name: string): void => {
   createCookie(name, '', {
     maxAgeInDays: -1,
     expires: new Date('Thu, 01 Jan 1970 00:00:00 GMT'),

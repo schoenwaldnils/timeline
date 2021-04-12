@@ -1,5 +1,5 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { ButtonHTMLAttributes, FC } from 'react'
 
 const Button = styled.button`
   padding: 0;
@@ -13,4 +13,6 @@ const Button = styled.button`
   -webkit-appearance: none;
 `
 
-export const ButtonPlain = props => <Button {...props} />
+export const ButtonPlain: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (
+  props,
+) => <Button {...props} />

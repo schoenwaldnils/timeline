@@ -1,17 +1,16 @@
-import React from 'react'
-import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
-
-import { Header } from '../Header'
-import { ThemeSwitch } from '../ThemeSwitch'
-import { Scaling, ScaleIndicator } from '../Scaling'
+import dynamic from 'next/dynamic'
+import { FC } from 'react'
 
 import { zIndexes } from '../../data/constants'
-import { useStore } from '../Store'
 import {
-  formatTimelineData,
   ContentfulTimelineData,
+  formatTimelineData,
 } from '../../js/objectFormating/formatTimelineData'
+import { Header } from '../Header'
+import { ScaleIndicator, Scaling } from '../Scaling'
+import { useStore } from '../Store'
+import { ThemeSwitch } from '../ThemeSwitch'
 
 const Sidebar = dynamic(() => import('../Sidebar/Sidebar'), { ssr: false })
 const Timeline = dynamic(() => import('../Timeline/Timeline'), { ssr: false })
@@ -44,7 +43,7 @@ const Config = styled.div`
   }
 `
 
-export const Page: React.FC<{
+export const Page: FC<{
   timelineData: { en: ContentfulTimelineData; de: ContentfulTimelineData }
 }> = ({ timelineData }) => {
   const { store } = useStore()

@@ -1,7 +1,9 @@
-export function positionEvents(events = []) {
+import { TimelineEvent } from '../../../@types/TimelineEvent'
+
+export function positionEvents(events: TimelineEvent[]): TimelineEvent[] {
   const occupiedSpace = [0]
 
-  return events.map(event => {
+  return events.map((event) => {
     const { pixelYear: pixelStart, name } = event
     const start = pixelStart
 

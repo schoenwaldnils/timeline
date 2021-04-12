@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   GetStaticPathsResult,
   GetStaticProps,
@@ -7,8 +6,8 @@ import {
 } from 'next'
 
 import { Page } from '../app/components/Page'
-import { fetchTimelineData } from '../app/lib/fetchTimelineData'
 import { ContentfulTimelineData } from '../app/js/objectFormating/formatTimelineData'
+import { fetchTimelineData } from '../app/lib/fetchTimelineData'
 
 const IndexPage: NextPage<{
   timelineData: { en: ContentfulTimelineData; de: ContentfulTimelineData }
@@ -19,13 +18,15 @@ export default IndexPage
 export const getStaticProps: GetStaticProps = async ({
   params,
   preview = false,
-}): Promise<GetStaticPropsResult<{
-  preview: boolean
-  timelineData: {
-    en: ContentfulTimelineData
-    de: ContentfulTimelineData
-  }
-}>> => {
+}): Promise<
+  GetStaticPropsResult<{
+    preview: boolean
+    timelineData: {
+      en: ContentfulTimelineData
+      de: ContentfulTimelineData
+    }
+  }>
+> => {
   // TODO fetch preview
   const dataEn = await fetchTimelineData('en')
   const dataDe = await fetchTimelineData('de')
@@ -34,8 +35,8 @@ export const getStaticProps: GetStaticProps = async ({
     props: {
       preview,
       timelineData: {
-        en: dataEn ?? null,
-        de: dataDe ?? null,
+        en: dataEn || null,
+        de: dataDe || null,
       },
       ...params,
     },

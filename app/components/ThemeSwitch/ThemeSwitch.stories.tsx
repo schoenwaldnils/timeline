@@ -1,6 +1,6 @@
-import React from 'react'
-import { action } from '@storybook/addon-actions'
 import styled from '@emotion/styled'
+import { action } from '@storybook/addon-actions'
+import { FC } from 'react'
 
 import { ThemeSwitchView } from './ThemeSwitchView'
 
@@ -22,7 +22,7 @@ const props = {
   toggleTheme: action('toggle theme'),
 }
 
-export const Basic = () => (
+export const Basic: FC = () => (
   <Container>
     <ThemeSwitchView {...props} />
     <ThemeSwitchView {...props} isDark={true} />

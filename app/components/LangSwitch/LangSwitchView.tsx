@@ -1,13 +1,12 @@
-import React, { forwardRef } from 'react'
 import styled from '@emotion/styled'
-
-import { ReactComponent as LangIcon } from './langIcon.svg'
+import { FC, forwardRef, MouseEvent, Ref } from 'react'
 
 import translations from '../../data/translations'
-import { viewportsJs } from '../../js/viewports'
-import { Tooltip } from '../Tooltip'
 import { useTranslation } from '../../hooks/useTranslation'
-import { SUPPORTED_LOCALES, Locale } from '../../utils/intl/intlConsts'
+import { viewportsJs } from '../../js/viewports'
+import { Locale, SUPPORTED_LOCALES } from '../../utils/intl/intlConsts'
+import { Tooltip } from '../Tooltip'
+import { ReactComponent as LangIcon } from './langIcon.svg'
 
 const Wrapper = styled.div`
   position: relative;
@@ -69,13 +68,13 @@ const Menu = styled(Tooltip)`
 
 interface LangSwitchViewProps {
   isActive?: boolean
-  toggleIsActive: (event: React.MouseEvent<HTMLButtonElement>) => void
+  toggleIsActive: (event: MouseEvent<HTMLButtonElement>) => void
   handleButtonClick: (lang: string) => void
   currentLocale: Locale
-  ref?: React.Ref<HTMLDivElement>
+  ref?: Ref<HTMLDivElement>
 }
 
-export const LangSwitchView: React.FC<LangSwitchViewProps> = forwardRef(
+export const LangSwitchView: FC<LangSwitchViewProps> = forwardRef(
   (
     { isActive = false, toggleIsActive, handleButtonClick, currentLocale },
     ref,
@@ -95,7 +94,7 @@ export const LangSwitchView: React.FC<LangSwitchViewProps> = forwardRef(
 
         {isActive && (
           <Menu>
-            {SUPPORTED_LOCALES.map(locale => (
+            {SUPPORTED_LOCALES.map((locale) => (
               <Button
                 key={locale}
                 disabled={locale === currentLocale}
@@ -110,3 +109,5 @@ export const LangSwitchView: React.FC<LangSwitchViewProps> = forwardRef(
     )
   },
 )
+
+LangSwitchView.displayName = 'LangSwitchView'

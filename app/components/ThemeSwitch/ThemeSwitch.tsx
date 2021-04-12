@@ -1,9 +1,9 @@
-import React from 'react'
+import { FC } from 'react'
 
-import { useStore, SET_THEME } from '../Store'
+import { SET_THEME, useStore } from '../Store'
 import { ThemeSwitchView } from './ThemeSwitchView'
 
-export const ThemeSwitch: React.FC = props => {
+export const ThemeSwitch: FC = (props) => {
   const { store, dispatch } = useStore()
 
   const toggleTheme = () => {

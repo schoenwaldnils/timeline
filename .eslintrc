@@ -1,8 +1,10 @@
 {
   "extends": "@schoenwald/eslint-config-typescript",
   "rules": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "@typescript-eslint/no-extra-semi": 0
-  }
+    "react/react-in-jsx-scope": 0,
+    "react/self-closing-comp": ["error", {
+      "component": true,
+      "html": true
+    }]
+    }
 }

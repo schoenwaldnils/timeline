@@ -1,7 +1,5 @@
-/** @jsx jsx */
-import React from 'react'
 import styled from '@emotion/styled'
-import { jsx } from '@emotion/react'
+import { CSSProperties, FC } from 'react'
 
 import { pixelToYear } from '../../js/calcTimes'
 import { OurTime } from '../OurTime'
@@ -30,7 +28,7 @@ interface TimelineCursorViewProps {
   scale: number
 }
 
-export const TimelineCursorView: React.FC<TimelineCursorViewProps> = ({
+export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
   pixelYear,
   scale,
 }) => {
@@ -39,7 +37,7 @@ export const TimelineCursorView: React.FC<TimelineCursorViewProps> = ({
     '--TimelineCursor-year': `'${OurTime(
       Math.floor(pixelToYear(pixelYear / scale)),
     )}'`,
-  } as React.CSSProperties
+  } as CSSProperties
 
   return <Wrapper style={properties} />
 }

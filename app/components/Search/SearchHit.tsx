@@ -1,10 +1,9 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
 import Highlighter from 'react-highlight-words'
 
-import DefaultImgUrl from './defaultImg.svg'
-
 import { useStore } from '../Store'
+import DefaultImgUrl from './defaultImg.svg'
 
 const IMAGE_SIZE = 28
 
@@ -41,7 +40,24 @@ const Image = styled.img`
   border-radius: 0.3em;
 `
 
-export const SearchHit = ({
+type HighlightResult = {
+  value: string
+  matchLevel: string
+  matchedWords: string[]
+}
+
+export type HitType = {
+  type: 'person' | 'time' | 'event'
+  objectID: string
+  imageUrl: string
+  selectHit: (id: string) => void
+  _highlightResult: {
+    name_en: HighlightResult
+    name_de: HighlightResult
+  }
+}
+
+export const SearchHit: FC<HitType> = ({
   type,
   objectID,
   imageUrl,
@@ -60,7 +76,7 @@ export const SearchHit = ({
 
   const imgSrc = imageUrl
     ? `${imageUrl}?w=${IMAGE_SIZE * 2}&h=${IMAGE_SIZE * 2}&fit=fill`
-    : defaultImages[type]
+    : (defaultImages[type] as string)
 
   const searchWords = _highlightResult[`name_${locale}`]?.matchedWords || []
 

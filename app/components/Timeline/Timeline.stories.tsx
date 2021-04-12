@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 
 import { TimelineView } from './TimelineView'
 
@@ -7,7 +7,7 @@ export default {
   component: TimelineView,
 }
 
-export const Basic = () => (
+export const Basic: FC = () => (
   <TimelineView
     startYear={-200}
     endYear={300}

@@ -1,6 +1,6 @@
-import React from 'react'
-import qs from 'qs'
 import styled from '@emotion/styled'
+import qs from 'qs'
+import { FC } from 'react'
 
 import { A } from '../Typography'
 
@@ -12,7 +12,7 @@ interface ContentfulLinkProps {
   wolLink: string
 }
 
-export const LinkToWOL: React.FC<ContentfulLinkProps> = ({ wolLink }) => {
+export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
   let pathName = wolLink
   let paragraph: string | undefined
 

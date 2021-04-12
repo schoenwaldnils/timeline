@@ -1,11 +1,10 @@
-import React, { useState, useRef } from 'react'
-import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
+import { ClickAwayListener } from '@material-ui/core'
+import dynamic from 'next/dynamic'
+import { FC, useState } from 'react'
 
-import { ReactComponent as SearchIcon } from './searchIcon.svg'
-
-import { useClickOutside } from '../../hooks/useClickOutside'
 import { useTranslation } from '../../hooks/useTranslation'
+import { ReactComponent as SearchIcon } from './searchIcon.svg'
 
 const SearchContainer = dynamic(() => import('./SearchContainer'), {
   ssr: false,
@@ -23,22 +22,17 @@ const Icon = styled(SearchIcon)`
   }
 `
 
-export const Search = () => {
+export const Search: FC = () => {
   const { t } = useTranslation()
   const [isActive, setIsActive] = useState(false)
-  const ref = useRef()
-
-  useClickOutside(ref, () => {
-    if (isActive) {
-      setIsActive(false)
-    }
-  })
 
   if (isActive) {
     return (
-      <Wrapper ref={ref}>
-        <SearchContainer />
-      </Wrapper>
+      <ClickAwayListener onClickAway={() => isActive && setIsActive(false)}>
+        <Wrapper>
+          <SearchContainer />
+        </Wrapper>
+      </ClickAwayListener>
     )
   }
 

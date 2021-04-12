@@ -10,7 +10,7 @@ export default `
             id
           }
           gender
-          childs: childsCollection {
+          childsCollection {
             items {
               sys {
                 id
@@ -31,7 +31,7 @@ export default `
     endYear
     endBlurriness
     stillActive
-    spouse: spouseCollection {
+    spouseCollection {
       items {
         sys {
           id
@@ -39,7 +39,7 @@ export default `
         name
       }
     }
-    childs: childsCollection {
+    childsCollection {
       items {
         sys {
           id

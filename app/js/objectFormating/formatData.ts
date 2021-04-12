@@ -1,25 +1,38 @@
-import arraySort from 'array-sort'
+import { orderBy } from 'lodash'
 
-import { updateTimeProps } from './updateTimeProps'
+import { Event } from '../../../@types/Event'
+import { CEvent, CPerson, CTime } from '../../../@types/generated/contentful'
+import { Parent } from '../../../@types/Parent'
+import { Person } from '../../../@types/Person'
+import { Time } from '../../../@types/Time'
 import { updateEventProps } from './updateEventProps'
 
-const findParent = (linkedFrom, id: string, type: 'male' | 'female') => {
-  const [parent] = linkedFrom.personCollection.items.filter(
-    ({ gender, childs }) => {
+const findParent = (
+  linkedFrom,
+  id: string,
+  type: 'male' | 'female',
+): string | undefined => {
+  const parents = (linkedFrom.personCollection.items as CPerson[]).filter(
+    ({ gender, childsCollection }) => {
       if (gender !== type) return false
       const childIDs =
-        childs.items &&
-        Object.keys(childs.items).map(key => childs.items[key].sys.id)
+        childsCollection.items &&
+        Object.keys(childsCollection.items).map(
+          (key) => childsCollection.items[key].sys.id,
+        )
       if (!childIDs) return false
       if (childIDs.includes(id)) return true
       return false
     },
   )
+
+  const parent = parents[0] || undefined
+
   if (!parent) return undefined
   return parent.sys.id
 }
 
-export function formatPerson(oldData) {
+export function formatPerson(oldData: CPerson): Person {
   const data = {
     type: 'person',
     id: oldData.sys.id,
@@ -39,43 +52,37 @@ export function formatPerson(oldData) {
     richText: oldData.richText?.json,
   }
 
-  if (oldData.spouse && oldData.spouse.items.length) {
-    const spouse = oldData.spouse.items.map(({ sys: { id }, name }) => {
-      return { id, name }
-    })
-
-    data.spouse = arraySort(
-      spouse,
-      (a: { name: string }, b: { name: string }) =>
-        a.name.localeCompare(b.name),
+  if (oldData.spouseCollection && oldData.spouseCollection.items.length) {
+    const spouse = oldData.spouseCollection.items.map(
+      ({ sys: { id }, name }) => {
+        return { id, name }
+      },
     )
+
+    data.spouse = orderBy(spouse, ['name'])
   }
 
-  if (oldData.childs && oldData.childs.items.length) {
-    const childs = oldData.childs.items.map(({ sys: { id }, name }) => {
-      return { id, name }
-    })
-
-    data.childs = arraySort(
-      childs,
-      (a: { name: string }, b: { name: string }) =>
-        a.name.localeCompare(b.name),
+  if (oldData.childsCollection && oldData.childsCollection.items.length) {
+    const childs = oldData.childsCollection.items.map(
+      ({ sys: { id }, name }) => {
+        return { id, name }
+      },
     )
-  }
 
-  return updateTimeProps(data)
-}
-
-export function formatParent(oldData) {
-  const data = {
-    type: 'parent',
-    name: oldData.name,
+    data.childs = orderBy(childs, ['name'])
   }
 
   return data
 }
 
-export function formatTime(oldData) {
+export function formatParent(oldData: CPerson): Parent {
+  return {
+    type: 'parent',
+    name: oldData.name,
+  }
+}
+
+export function formatTime(oldData: CTime): Time {
   const data = {
     type: 'time',
     id: oldData.sys.id,
@@ -87,12 +94,12 @@ export function formatTime(oldData) {
     wolLink: oldData.wolLink,
   }
 
-  return updateTimeProps(data)
+  return data
 }
 
-export function formatEvent(oldData) {
+export function formatEvent(oldData: CEvent): Event {
   const data = {
-    id: oldData.sys?.id,
+    id: oldData.sys.id,
     name: oldData.name,
     image: oldData.image?.url,
     year: oldData.year,

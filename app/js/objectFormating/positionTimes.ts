@@ -1,6 +1,8 @@
-export function positionTimes(times) {
+import { Timespan } from '../../../@types/Timespan'
+
+export function positionTimes(times: Timespan[]): Timespan[] {
   const occupiedSpace = [0]
-  const positionedTimes = times.map(time => {
+  const positionedTimes = times.map((time) => {
     const { pixelStart: start, pixelEnd: end } = time
 
     const isTooSmall = end - start < 30

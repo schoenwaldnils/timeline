@@ -1,26 +1,14 @@
-import React from 'react'
-import { Document } from '@contentful/rich-text-types'
+import { FC } from 'react'
 
-import { ContentTemplate, ContentBox } from './ContentTemplate'
-import { TableList } from '../TableList'
-import { RichText } from '../RichText'
-import { LinkToWOL } from './ContentLinkWol'
-
+import { Time } from '../../../@types/Time'
 import { useTranslation } from '../../hooks/useTranslation'
 import { OurTime } from '../OurTime'
+import { RichText } from '../RichText'
+import { TableList } from '../TableList'
+import { LinkToWOL } from './ContentLinkWol'
+import { ContentBox, ContentTemplate } from './ContentTemplate'
 
-export interface ContentTimeProps {
-  id: string
-  name: string
-  startYear: number
-  endYear?: number
-  duration?: number
-  richText?: Document
-  image?: string
-  wolLink?: string
-}
-
-export const ContentTime: React.FC<ContentTimeProps> = ({
+export const ContentTime: FC<Time> = ({
   id,
   name,
   startYear,

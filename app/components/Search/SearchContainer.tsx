@@ -1,28 +1,26 @@
-import React, { useRef } from 'react'
+import { ClickAwayListener } from '@material-ui/core'
+import { FC } from 'react'
 import { connectSearchBox } from 'react-instantsearch-dom'
 
+import { CHANGE_CONTENT, useStore } from '../Store'
+import { Tooltip } from '../Tooltip'
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
 import { SearchProvider } from './SearchProvider'
 
-import { useClickOutside } from '../../hooks/useClickOutside'
-import { useStore, CHANGE_CONTENT } from '../Store'
-import { Tooltip } from '../Tooltip'
-
 const CustomSearch = ({ currentRefinement, refine }) => {
   const { dispatch } = useStore()
-  const ref = useRef()
 
-  const changeContent = newId => {
+  const changeContent = (newId) => {
     dispatch({
       type: CHANGE_CONTENT,
       contentId: newId,
     })
   }
 
-  useClickOutside(ref, () => {
+  const clearSearch = () => {
     refine('')
-  })
+  }
 
   const handleSearchValueChange = (newValue: string) => {
     refine(newValue)
@@ -30,11 +28,11 @@ const CustomSearch = ({ currentRefinement, refine }) => {
 
   const handleHitSelect = (id: string) => {
     changeContent(id)
-    refine('')
+    clearSearch()
   }
 
   return (
-    <div ref={ref}>
+    <ClickAwayListener onClickAway={clearSearch}>
       <SearchBar
         searchValue={currentRefinement}
         setSearchValue={handleSearchValueChange}
@@ -44,13 +42,13 @@ const CustomSearch = ({ currentRefinement, refine }) => {
           <SearchHits selectHit={handleHitSelect} />
         </Tooltip>
       )}
-    </div>
+    </ClickAwayListener>
   )
 }
 
 const SearchBox = connectSearchBox(CustomSearch)
 
-export const SearchContainer: React.FC = () => {
+export const SearchContainer: FC = () => {
   return (
     <SearchProvider>
       <SearchBox />

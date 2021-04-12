@@ -1,8 +1,9 @@
 import { createContext, Dispatch, useContext } from 'react'
-import { LOCALES } from '../../utils/intl/intlConsts'
-import { Action } from './reducer'
 
-export const initialState = {
+import { LOCALES } from '../../utils/intl/intlConsts'
+import { Action, Store } from './reducer'
+
+export const initialState: Store = {
   locale: LOCALES.EN,
   scale: 1,
   sidebarId: undefined,
@@ -15,13 +16,13 @@ export const initialState = {
 }
 
 type Context = {
-  store: typeof initialState
+  store: Store
   dispatch: Dispatch<Action>
 }
 
 export const StoreContext = createContext<Context>({
   store: initialState,
-  dispatch: () => {},
+  dispatch: () => null,
 })
 
-export const useStore = () => useContext(StoreContext)
+export const useStore = (): Context => useContext(StoreContext)

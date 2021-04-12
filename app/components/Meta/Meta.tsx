@@ -1,11 +1,26 @@
-import React from 'react'
 import Parser from 'html-react-parser'
+import { FC } from 'react'
+
 import faviconData from '../../../faviconData.json'
 
 const faviconHtml = faviconData && faviconData.favicon.html_code
 const Favicons = () => <>{Parser(faviconHtml)}</>
 
-export const Meta = ({ url, type, title, description, image }) => (
+type Props = {
+  url?: string
+  type?: string
+  title?: string
+  description?: string
+  image?: string
+}
+
+export const Meta: FC<Props> = ({
+  url = 'https://timeline.schoen.world',
+  type = 'website',
+  title = 'Timeline',
+  description = 'Overview of biblical persons and events',
+  image = 'https://timeline.schoen.world/assets/images/favicon.png',
+}) => (
   <>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
 
@@ -24,11 +39,3 @@ export const Meta = ({ url, type, title, description, image }) => (
     <Favicons />
   </>
 )
-
-Meta.defaultProps = {
-  url: 'https://timeline.schoen.world',
-  type: 'website',
-  title: 'Timeline',
-  description: 'Overview of biblical persons and events',
-  image: 'https://timeline.schoen.world/assets/images/favicon.png',
-}

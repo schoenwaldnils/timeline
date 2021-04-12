@@ -1,6 +1,7 @@
+import { Timespan } from '../../../@types/Timespan'
 import { calcTimes } from '../calcTimes'
 
-export const updateTimeProps = time => {
+export const updateTimeProps = (time: Timespan): Timespan => {
   const {
     startYear,
     startBlurriness,

@@ -1,16 +1,25 @@
 import {
-  useLayoutEffect,
-  useEffect,
-  useState,
-  useRef,
+  LegacyRef,
   useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
 } from 'react'
 
 const isBrowser = typeof window !== 'undefined'
 
 const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect
 
-export const useMousePosition = () => {
+export const useMousePosition = (): {
+  mousePosition: {
+    x: number
+    y: number
+    xElement: number
+    yElement: number
+  }
+  scrollRef: LegacyRef<HTMLDivElement>
+} => {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
@@ -21,7 +30,7 @@ export const useMousePosition = () => {
   const scrollRef = useRef(null)
 
   const handleMouseMove = useCallback(
-    e => {
+    (e) => {
       if (scrollRef.current) {
         const refBound = scrollRef.current.getBoundingClientRect()
         setMousePosition({

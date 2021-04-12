@@ -1,4 +1,4 @@
-export const checkForTouchDevice = () => {
+export const checkForTouchDevice = (): boolean => {
   if (typeof window === 'undefined') return false
 
   return (

@@ -1,11 +1,12 @@
-import { useRef, useEffect, useCallback } from 'react'
-import { setLocalStorage, getLocalStorage } from '../js/localStorage'
+import { LegacyRef, useCallback, useEffect, useRef } from 'react'
+
+import { getLocalStorage, setLocalStorage } from '../js/localStorage'
 
 const isBrowser = typeof window !== 'undefined'
 
 const STORAGE_NAME = 'scrollPosition'
 
-function getScrollPosition(element: any) {
+function getScrollPosition(element: HTMLElement) {
   if (!isBrowser || !element) return { left: 0, top: 0 }
 
   const position = element.getBoundingClientRect()
@@ -22,15 +23,18 @@ const saveLocalScroll = (scrollP: { left: number; top: number }) => {
   setLocalStorage(STORAGE_NAME, JSON.stringify(scrollP))
 }
 
-export function useScrollPosition() {
+export function useScrollPosition(): [
+  LegacyRef<HTMLDivElement>,
+  LegacyRef<HTMLDivElement>,
+] {
   const localScroll = loadLocalScroll() || {}
   const position = useRef({
     left: localScroll.left || 0,
     top: localScroll.top || 0,
   })
 
-  const elementRef = useRef(null)
-  const containerRef = useRef(null)
+  const elementRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const handleScroll = useCallback(() => {
     if (elementRef.current) {
@@ -49,7 +53,7 @@ export function useScrollPosition() {
   }, [elementRef])
 
   const handleScaleChanged = useCallback(
-    (e: any) => {
+    (e: CustomEvent) => {
       const storeScale = e.detail.store.scale
       const actionScale = e.detail.action.scale
 
@@ -71,7 +75,7 @@ export function useScrollPosition() {
   )
 
   useEffect(() => {
-    if (!isBrowser) return () => {}
+    if (!isBrowser) return
 
     if (containerRef.current) {
       containerRef.current.scrollTo(position.current)

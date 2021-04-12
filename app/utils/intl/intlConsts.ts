@@ -1,4 +1,4 @@
-export type Locale = 'de' | 'en'
+export type Locale = 'de' | 'en' | string
 
 type LocalesType = {
   EN: Locale
@@ -15,5 +15,5 @@ export const SUPPORTED_LOCALES = [LOCALES.EN, LOCALES.DE]
 export const DEFAULT_LOCALE = LOCALES.EN
 
 export function isLocale(tested: string): tested is Locale {
-  return SUPPORTED_LOCALES.some(locale => locale === tested)
+  return SUPPORTED_LOCALES.some((locale) => locale === tested)
 }

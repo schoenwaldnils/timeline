@@ -1,11 +1,11 @@
-import React, { useReducer, useEffect } from 'react'
+import { FC, useEffect, useReducer } from 'react'
 
-import { reducer, CHANGE_CONTENT, SET_THEME, CLOSE_SIDEBAR } from './reducer'
-import { StoreContext, initialState } from './Store'
-import { getUserLocalStore, getUserSessionStore } from './userStore'
 import { getUrlHash } from '../../js/urlHash'
+import { CHANGE_CONTENT, CLOSE_SIDEBAR, reducer, SET_THEME } from './reducer'
+import { initialState, StoreContext } from './Store'
+import { getUserLocalStore, getUserSessionStore } from './userStore'
 
-export const StoreProvider = ({ children }) => {
+export const StoreProvider: FC = ({ children }) => {
   const [store, dispatch] = useReducer(reducer, {
     ...initialState,
     ...getUserLocalStore(),
@@ -48,7 +48,7 @@ export const StoreProvider = ({ children }) => {
     })
 
     return () => {
-      window.removeEventListener('load', () => {})
+      window.removeEventListener('load', () => null)
     }
   }, [store, dispatch])
 

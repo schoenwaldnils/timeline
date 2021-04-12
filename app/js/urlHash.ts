@@ -2,7 +2,7 @@ import shallowequal from 'shallowequal'
 
 const hasWindowLocation = !!(typeof window !== 'undefined' && window.location)
 
-export const setUrlHash = (hash: string, pushState = true) => {
+export const setUrlHash = (hash: string, pushState = true): void => {
   if (!hasWindowLocation) return null
 
   const currentState = window.location.hash.replace(/^#/, '')
@@ -17,7 +17,7 @@ export const setUrlHash = (hash: string, pushState = true) => {
     window.history.replaceState(null, null, path)
   }
 
-  return hash
+  return
 }
 
 export const getUrlHash = (): string => {
@@ -27,7 +27,7 @@ export const getUrlHash = (): string => {
   return currentState
 }
 
-export const removeUrlHash = () => {
+export const removeUrlHash = (): void => {
   if (!hasWindowLocation) return null
 
   window.history.replaceState(null, null, window.location.pathname)

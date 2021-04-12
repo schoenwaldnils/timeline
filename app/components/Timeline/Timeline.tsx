@@ -1,12 +1,11 @@
-import React from 'react'
+import { FC } from 'react'
 
+import { YEARS_AFTER_ZERO, YEARS_BEFORE_ZERO } from '../../data/constants'
+import { TimelineData } from '../../js/objectFormating/formatTimelineData'
+import { useStore } from '../Store'
 import { TimelineView } from './TimelineView'
 
-import { YEARS_BEFORE_ZERO, YEARS_AFTER_ZERO } from '../../data/constants'
-import { useStore } from '../Store'
-import { TimelineData } from '../../js/objectFormating/formatTimelineData'
-
-export const Timeline: React.FC<{ data: TimelineData }> = ({ data }) => {
+export const Timeline: FC<{ data: TimelineData }> = ({ data }) => {
   const { store } = useStore()
 
   return (

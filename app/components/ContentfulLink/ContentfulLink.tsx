@@ -1,10 +1,9 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
 
-import { A } from '../Typography'
-import { CONTENTFUL_SPACE_ID } from '../../data/constants'
 import { shades } from '../../data/colors'
 import { useTranslation } from '../../hooks/useTranslation'
+import { A } from '../Typography'
 
 interface ContentfulLinkProps {
   id: string
@@ -14,12 +13,12 @@ const StyledA = styled(A)`
   color: ${shades.cb4};
 `
 
-export const ContentfulLink: React.FC<ContentfulLinkProps> = ({ id }) => {
+export const ContentfulLink: FC<ContentfulLinkProps> = ({ id }) => {
   const { t } = useTranslation()
 
   return (
     <StyledA
-      href={`https://app.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries/${id}`}
+      href={`https://app.contentful.com/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/entries/${id}`}
       target="_blank"
       rel="noopener noreferrer"
     >

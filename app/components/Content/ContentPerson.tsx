@@ -1,41 +1,16 @@
-import React, { Component } from 'react'
-import { Document } from '@contentful/rich-text-types'
+import { FC } from 'react'
 
-import { ContentTemplate, ContentBox } from './ContentTemplate'
-import { TableList } from '../TableList'
-import { RichText } from '../RichText'
-import { LinkToWOL } from './ContentLinkWol'
-import { UL, LI, TextButton } from '../Typography'
-
+import { Person } from '../../../@types/Person'
 import { useTranslation } from '../../hooks/useTranslation'
-import { useStore, CHANGE_CONTENT } from '../Store'
 import { OurTime } from '../OurTime'
+import { RichText } from '../RichText'
+import { CHANGE_CONTENT, useStore } from '../Store'
+import { TableList } from '../TableList'
+import { LI, TextButton, UL } from '../Typography'
+import { LinkToWOL } from './ContentLinkWol'
+import { ContentBox, ContentTemplate } from './ContentTemplate'
 
-interface Person {
-  id: string
-  name: string
-}
-
-interface ContentPersonProps {
-  id: string
-  name: string
-  image?: string
-  startYear?: number
-  startBlurriness?: number
-  endYear?: number
-  endBlurriness?: number
-  duration?: number
-  spouse?: Array<Person>
-  fatherID?: string
-  father?: Component
-  motherID?: string
-  mother?: Component
-  childs?: Array<Person>
-  richText?: Document
-  wolLink?: string
-}
-
-export const ContentPerson: React.FC<ContentPersonProps> = ({
+export const ContentPerson: FC<Person> = ({
   id,
   name,
   image,
@@ -56,7 +31,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
   const { dispatch } = useStore()
   const { t } = useTranslation()
 
-  const changeContent = newId => {
+  const changeContent = (newId) => {
     dispatch({
       type: CHANGE_CONTENT,
       contentId: newId,
@@ -90,7 +65,7 @@ export const ContentPerson: React.FC<ContentPersonProps> = ({
     ? t('misc.unnown')
     : yearBlur(endYear, endBlurriness, 'end')
 
-  let list: any = {
+  let list: Record<string, unknown> = {
     [t('life.born')]: bornString,
     [t('life.died')]: deathString,
     [t('life.span')]:

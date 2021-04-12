@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from '@emotion/styled'
 import { keyframes } from '@emotion/react'
+import styled from '@emotion/styled'
+import { FC } from 'react'
 
 import { themeColors } from '../../data/colors'
 
@@ -30,7 +30,7 @@ const Loader = styled.div`
   }
 `
 
-export const Loading = () => <Loader />
+export const Loading: FC = () => <Loader />
 
 const loadingDots = keyframes`
   0%,
@@ -52,4 +52,4 @@ const LoaderDots = styled.div`
   }
 `
 
-export const LoadingDots = () => <LoaderDots />
+export const LoadingDots: FC = () => <LoaderDots />

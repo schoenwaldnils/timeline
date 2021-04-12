@@ -1,4 +1,4 @@
-import { setUrlHash, getUrlHash, removeUrlHash } from '../../js/urlHash'
+import { getUrlHash, removeUrlHash, setUrlHash } from '../../js/urlHash'
 
 export const getUserContentID = (): string => {
   const urlID = getUrlHash()
@@ -8,10 +8,10 @@ export const getUserContentID = (): string => {
   return null
 }
 
-export const setUserContentID = (id: string) => {
+export const setUserContentID = (id: string): void => {
   setUrlHash(id)
 }
 
-export const removeUserContentID = () => {
+export const removeUserContentID = (): void => {
   removeUrlHash()
 }

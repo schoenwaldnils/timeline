@@ -1,5 +1,5 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC, MouseEvent } from 'react'
 
 import { colors } from '../../data/colors'
 import { zIndexes } from '../../data/constants'
@@ -54,10 +54,10 @@ export interface EventProps extends WrapperProps {
   pixelYear: number
   rowIndex?: number
   zIndex?: number
-  changeContent: (event: React.MouseEvent<HTMLDivElement>) => void
+  changeContent: (event: MouseEvent) => void
 }
 
-export const EventView: React.FC<EventProps> = ({
+export const EventView: FC<EventProps> = ({
   pixelYear,
   rowIndex = 0,
   zIndex = zIndexes.event,

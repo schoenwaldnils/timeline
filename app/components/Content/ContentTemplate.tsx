@@ -1,8 +1,9 @@
-import React, { ReactChildren, ReactChild } from 'react'
 import styled from '@emotion/styled'
-import { ContentImage } from './ContentImage'
+import { FC, ReactChild, ReactChildren } from 'react'
+
 import { ContentfulLink } from '../ContentfulLink'
 import { H1 } from '../Typography'
+import { ContentImage } from './ContentImage'
 
 const Box = styled.div`
   margin-bottom: 1em;
@@ -16,7 +17,7 @@ export interface ContentBoxProps {
   children: ReactChildren | ReactChild
 }
 
-export const ContentBox: React.FC<ContentBoxProps> = ({ children }) => (
+export const ContentBox: FC<ContentBoxProps> = ({ children }) => (
   <Box>{children}</Box>
 )
 
@@ -26,7 +27,7 @@ export interface ContentTemplateProps {
   image?: string
 }
 
-export const ContentTemplate: React.FC<ContentTemplateProps> = ({
+export const ContentTemplate: FC<ContentTemplateProps> = ({
   idContentful,
   title,
   image,
@@ -50,7 +51,3 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
     )}
   </>
 )
-
-ContentTemplate.defaultProps = {
-  idContentful: undefined,
-}

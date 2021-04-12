@@ -17,7 +17,7 @@ export const fetchGraphQL = async (
       body: JSON.stringify({ query }),
     },
   )
-    .then(response => {
+    .then((response) => {
       if (response.status === 200) {
         return response.json()
       }
@@ -25,7 +25,7 @@ export const fetchGraphQL = async (
       console.error(query)
       throw new Error()
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err)
     })
 }

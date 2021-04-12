@@ -1,5 +1,5 @@
-import personFragment from './personFragment'
 import eventFragment from './eventFragment'
+import personFragment from './personFragment'
 import timeFragment from './timeFragment'
 
 export const typeById = `

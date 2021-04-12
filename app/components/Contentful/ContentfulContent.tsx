@@ -1,17 +1,18 @@
-import React from 'react'
+import { FC } from 'react'
 import { useQuery } from 'react-query'
 
-import { Loading, LoadingDots } from '../Loading'
-import { ContentPerson, ContentTime, ContentEvent } from '../Content'
-
 import {
-  formatPerson,
-  formatParent,
-  formatTime,
   formatEvent,
+  formatParent,
+  formatPerson,
+  formatTime,
 } from '../../js/objectFormating/formatData'
 import { fetchContentfulEntry } from '../../lib/fetchContentfulEntry'
+import { ContentEvent, ContentPerson, ContentTime } from '../Content'
+import { Loading, LoadingDots } from '../Loading'
 import { useStore } from '../Store'
+
+const ContentParent = (p) => <>{p.name}</>
 
 const contentfulFunctions = {
   person: {
@@ -28,7 +29,7 @@ const contentfulFunctions = {
   },
   parent: {
     formatData: formatParent,
-    Component: ({ name }) => <>{name}</>,
+    Component: ContentParent,
   },
 }
 
@@ -37,10 +38,7 @@ interface Props {
   isParent?: boolean
 }
 
-export const ContentfulContent: React.FC<Props> = ({
-  id,
-  isParent = false,
-}) => {
+export const ContentfulContent: FC<Props> = ({ id, isParent = false }) => {
   const { store } = useStore()
   const { locale } = store
 
@@ -83,5 +81,5 @@ export const ContentfulContent: React.FC<Props> = ({
     }
     return <Component {...cleanedItem} />
   }
-  return <div>Error! No event found</div>
+  return <div>Error! No Item found</div>
 }

@@ -1,17 +1,18 @@
-import { GraphQLClient } from 'graphql-request'
 import 'cross-fetch/polyfill'
 
-import { CONTENTFUL_SPACE_ID } from '../data/constants'
+import { GraphQLClient } from 'graphql-request'
 
-const endpoint = `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`
-const token = '8a320342ff838c8f3e85fdc93d40ae562ecc1d65744737c2b63624ef12d4b4a3'
+const endpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`
 
 const client = new GraphQLClient(endpoint, {
   headers: {
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN}`,
   },
 })
 
-export const request = async (query: string, variables) => {
+export const request = async (
+  query: string,
+  variables: Record<string, string>,
+): Promise<unknown> => {
   return client.request(query, variables)
 }

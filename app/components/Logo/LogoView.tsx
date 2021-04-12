@@ -1,10 +1,9 @@
-import React from 'react'
 import styled from '@emotion/styled'
-
-import { ReactComponent as Icon } from './icon.svg'
-import { ReactComponent as Logo } from './logo.svg'
+import { FC } from 'react'
 
 import { viewportsJs } from '../../js/viewports'
+import { ReactComponent as Icon } from './icon.svg'
+import { ReactComponent as Logo } from './logo.svg'
 
 const Wrapper = styled.div`
   flex-shrink: 0;
@@ -29,9 +28,7 @@ const StyledLogo = styled(Logo)<{ isDark: boolean }>`
   }
 `
 
-export const LogoView: React.FC<{ isDark?: boolean }> = ({
-  isDark = false,
-}) => {
+export const LogoView: FC<{ isDark?: boolean }> = ({ isDark = false }) => {
   return (
     <Wrapper>
       <StyledIcon />

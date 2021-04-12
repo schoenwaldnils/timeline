@@ -1,26 +1,29 @@
-import React from 'react'
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
+import { ReactNode } from 'react'
 
 import { Meta } from '../app/components/Meta'
 
-export default class MyDocument extends Document {
-  render() {
-    return (
-      <Html>
-        <Head>
-          <meta charSet="utf-8" />
-          <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
+const TimelineDocument = (): ReactNode => {
+  return (
+    <Html>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
 
-          <Meta />
+        <Meta />
 
-          <link rel="preconnect" href="https://graphql.contentful.com" />
-          <link rel="preconnect" href="https://p7r800rwy1-dsn.algolia.net" />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
-  }
+        <link rel="preconnect" href="https://graphql.contentful.com" />
+        <link rel="preconnect" href="https://p7r800rwy1-dsn.algolia.net" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
 }
+
+TimelineDocument.getInitialProps = Document.getInitialProps
+TimelineDocument.renderDocument = Document.renderDocument
+
+export default TimelineDocument

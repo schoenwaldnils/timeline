@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
+import { FC, useEffect, useRef } from 'react'
+
 import { shades } from '../../data/colors'
 import { useTranslation } from '../../hooks/useTranslation'
 
@@ -19,7 +20,10 @@ const Wrapper = styled.input`
   }
 `
 
-export const SearchBar = ({ searchValue, setSearchValue }) => {
+export const SearchBar: FC<{
+  searchValue: string
+  setSearchValue: (value: string) => void
+}> = ({ searchValue, setSearchValue }) => {
   const { t } = useTranslation()
   const inputRef = useRef(null)
 
@@ -34,7 +38,7 @@ export const SearchBar = ({ searchValue, setSearchValue }) => {
         type="search"
         value={searchValue}
         placeholder={`${t('ui.search')}...`}
-        onChange={event => setSearchValue(event.currentTarget.value)}
+        onChange={(event) => setSearchValue(event.currentTarget.value)}
       />
     </form>
   )

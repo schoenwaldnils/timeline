@@ -1,29 +1,12 @@
-import React from 'react'
+import { FC } from 'react'
 
+import { Timespan as TimespanType } from '../../../@types/Timespan'
+import { CHANGE_CONTENT, useStore } from '../Store'
 import { TimespanView } from './TimespanView'
-import { useStore, CHANGE_CONTENT } from '../Store'
 
-export interface TimespanProps {
-  id: string
-  name: string
-  type: string
-  pixelDuration: number
-  pixelStart: number
-  startBlurriness?: Number
-  endBlurriness?: Number
-  rowIndex: number
-}
+export const Timespan: FC<TimespanType> = (props) => {
+  const { id } = props
 
-export const Timespan: React.FC<TimespanProps> = ({
-  id,
-  name,
-  type,
-  pixelStart,
-  pixelDuration,
-  startBlurriness,
-  endBlurriness,
-  rowIndex,
-}) => {
   const { dispatch } = useStore()
   const handleClick = () => {
     dispatch({ type: CHANGE_CONTENT, contentId: id })
@@ -32,13 +15,7 @@ export const Timespan: React.FC<TimespanProps> = ({
   return (
     <TimespanView
       {...{
-        name,
-        type,
-        pixelStart,
-        pixelDuration,
-        startBlurriness,
-        endBlurriness,
-        rowIndex,
+        ...props,
         changeContent: handleClick,
       }}
     />

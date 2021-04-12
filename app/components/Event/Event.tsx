@@ -1,17 +1,10 @@
-import React from 'react'
+import { FC } from 'react'
 
+import { TimelineEvent } from '../../../@types/TimelineEvent.d'
 import { CHANGE_CONTENT, useStore } from '../Store'
 import { EventView } from './EventView'
 
-export interface EventProps {
-  id: string
-  name: string
-  pixelYear: number
-  rowIndex?: number
-  zIndex?: number
-}
-
-export const Event: React.FC<EventProps> = ({
+export const Event: FC<TimelineEvent> = ({
   id,
   name,
   pixelYear,

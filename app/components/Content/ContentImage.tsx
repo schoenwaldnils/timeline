@@ -1,5 +1,5 @@
-import React from 'react'
 import styled from '@emotion/styled'
+import { FC } from 'react'
 
 const Wrapper = styled.div`
   max-width: 300px;
@@ -10,7 +10,7 @@ export interface ContentImageProps {
   title: string
 }
 
-export const ContentImage: React.FC<ContentImageProps> = ({
+export const ContentImage: FC<ContentImageProps> = ({
   image,
   title,
   ...props

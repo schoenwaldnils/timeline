@@ -1,13 +1,7 @@
+import { Event } from '../../../@types/Event'
 import { calcTimes } from '../calcTimes'
 
-interface Props {
-  id: string
-  name: string
-  year: number
-  [key: string]: any
-}
-
-export const updateEventProps = (event: Props) => {
+export const updateEventProps = (event: Event): Event => {
   const { pixelStart } = calcTimes({
     startYear: event.year,
   })

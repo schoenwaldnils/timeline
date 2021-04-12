@@ -1,5 +1,5 @@
-import React from 'react'
 import { action } from '@storybook/addon-actions'
+import { FC } from 'react'
 
 import { FilterView } from './FilterView'
 
@@ -18,4 +18,4 @@ const props = {
   },
 }
 
-export const Active = () => <FilterView {...props} isActive={true} />
+export const Active: FC = () => <FilterView {...props} isActive={true} />
