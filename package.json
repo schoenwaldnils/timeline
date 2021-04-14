@@ -90,7 +90,7 @@
     "@graphql-codegen/typescript": "1.21.1",
     "@percy/storybook": "3.3.1",
     "@schoenwald/eslint-config-typescript": "5.0.0",
-    "@storybook/preact": "6.2.7",
+    "@storybook/preact": "6.2.8",
     "@types/cookie": "0.4.0",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.2.2",
