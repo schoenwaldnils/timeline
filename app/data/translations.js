@@ -121,7 +121,7 @@ export default {
       de: 'filter Elemente',
     },
     person: {
-      en: 'persona',
+      en: 'person',
       de: 'Person',
     },
     persons: {
@@ -143,6 +143,10 @@ export default {
     events: {
       en: 'events',
       de: 'Ereignisse',
+    },
+    notFound: {
+      en: 'No %value% found',
+      de: 'Keine %value% gefunden',
     },
     toggleDarkMode: {
       en: 'toggle dark mode',

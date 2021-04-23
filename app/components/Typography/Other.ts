@@ -12,6 +12,7 @@ export const P = styled.p`
 `
 
 export const HR = styled.hr`
+  width: 100%;
   height: 1px;
   background-color: ${themeColors.themeColor};
   border: 0;

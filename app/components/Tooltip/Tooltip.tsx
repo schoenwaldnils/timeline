@@ -6,7 +6,7 @@ import { zIndexes } from '../../data/constants'
 const Wrapper = styled.div`
   position: absolute;
   top: calc(100% + 7px);
-  right: 0;
+  left: 0;
   z-index: ${zIndexes.tooltip};
   padding: 0.25rem;
   overflow: auto;

@@ -22,6 +22,8 @@ export const themeLight = css`
 
     --Tooltip-backgroundColor: #fff;
 
+    --Search-titleColor: ${colors.greenDarker};
+
     --LangSwitch-color: ${colors.greenDarker};
     --LangSwitch-buttonDisabled: ${shades.cb6};
 
@@ -61,6 +63,8 @@ export const themeDark = css`
 
     --Tooltip-backgroundColor: ${shades.cb1};
 
+    --Search-titleColor: ${colors.green};
+
     --LangSwitch-color: ${colors.green};
     --LangSwitch-buttonDisabled: ${shades.cb3};
 
@@ -81,7 +85,7 @@ export const themeDark = css`
     --Sidebar-color: ${shades.cb10};
     --Sidebar-backgroundColor: ${shades.cb1};
     --Sidebar-iconColor: #fff;
-    --Sidebar-iconBackgroundColor: ${shades.cb2};
+    --Sidebar-iconBackgroundColor: ${colors.greenDark};
 
     --Button-color: #fff;
     --Button-backgroundColor: ${shades.cb2};
