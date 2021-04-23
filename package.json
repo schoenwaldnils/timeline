@@ -76,7 +76,7 @@
     "snyk": "1.530.0",
     "typescript": "4.2.4",
     "url-loader": "4.1.1",
-    "use-http": "1.0.19",
+    "use-http": "1.0.20",
     "webpack": "5.31.2"
   },
   "devDependencies": {
