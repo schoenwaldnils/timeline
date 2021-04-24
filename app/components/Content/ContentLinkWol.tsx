@@ -16,7 +16,7 @@ export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
   let pathName = wolLink
   let paragraph: string | undefined
 
-  if (wolLink.includes('#')) {
+  if (wolLink && wolLink.includes('#')) {
     let paragraphPlain: string
     ;[pathName, paragraphPlain] = wolLink.split('#')
 
@@ -28,7 +28,7 @@ export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
   const docid = pathParts[pathParts.length - 1]
 
   const localePlain = pathParts[pathParts.length - 2]
-  const [, wtlocale] = localePlain.split('-')
+  const [, wtlocale] = localePlain ? localePlain.split('-') : []
 
   if (!docid || !wtlocale) {
     console.error('"docid" or "wtlocale" missing!')

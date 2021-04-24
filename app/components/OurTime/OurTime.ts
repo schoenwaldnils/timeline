@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { useTranslation } from '../../hooks/useTranslation'
 
-export function OurTime(year: number): string {
+export const OurTime = (year: number): string => {
   const { t } = useTranslation()
 
   const timeExtension = useMemo(() => t('time.extension.positive'), [t])

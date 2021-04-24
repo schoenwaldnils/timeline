@@ -33,7 +33,7 @@ export const Person: FC = () => (
     startYear={1900}
     image="https://picsum.photos/id/1010/500/300"
     fatherID="8d9htmcSCAAyIKoQqqSAm" // Isaak
-    wolLink="#"
+    wolLink="#asd"
   />
 )
 export const Time: FC = () => (

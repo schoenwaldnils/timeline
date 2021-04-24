@@ -73,11 +73,11 @@
     "react-swipeable": "6.1.0",
     "requestidlecallback-polyfill": "1.0.2",
     "shallowequal": "1.1.0",
+    "simple-git": "2.38.0",
     "snyk": "1.563.0",
     "typescript": "4.2.4",
     "url-loader": "4.1.1",
-    "use-http": "1.0.20",
-    "webpack": "5.35.1"
+    "use-http": "1.0.20"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.4",

@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { FC } from 'react'
 
-import { useMousePosition } from '../../hooks/useMousePosition'
 import { TimelineCursorView } from './TimelineCursorView'
 
 export default {
@@ -19,11 +18,9 @@ const Wrapper = styled.div`
 `
 
 export const Basic: FC = () => {
-  const { mousePosition, scrollRef } = useMousePosition()
-
   return (
-    <Wrapper ref={scrollRef}>
-      <TimelineCursorView pixelYear={mousePosition.xElement} scale={1} />
+    <Wrapper>
+      <TimelineCursorView pixelYear={100} scale={1} />
     </Wrapper>
   )
 }
