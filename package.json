@@ -94,7 +94,7 @@
     "eslint": "7.24.0",
     "lint-staged": "10.5.4",
     "prettier": "2.2.1",
-    "stylelint": "13.12.0",
+    "stylelint": "13.13.0",
     "stylelint-config-schoenwaldnils": "3.0.0",
     "stylelint-processor-styled-components": "1.10.0"
   },
