@@ -3,7 +3,6 @@ import { CSSProperties, FC, useEffect, useMemo, useState } from 'react'
 
 import { useTranslation } from '../../hooks/useTranslation'
 import { pixelToYear } from '../../js/calcTimes'
-import { OurTime } from '../OurTime'
 
 const Wrapper = styled.div`
   position: absolute;
