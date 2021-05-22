@@ -3,10 +3,16 @@ import { FC } from 'react'
 
 import { zIndexes } from '../../data/constants'
 
-const Wrapper = styled.div`
+type TooltipType = {
+  alignRight?: boolean
+}
+
+const TooltipWrapper = styled.div<TooltipType>`
   position: absolute;
   top: calc(100% + 7px);
-  left: 0;
+
+  ${(p) => (p.alignRight ? 'right: 0;' : 'left: 0;')}
+
   z-index: ${zIndexes.tooltip};
   padding: 0.25rem;
   overflow: auto;
@@ -15,4 +21,4 @@ const Wrapper = styled.div`
   box-shadow: 0 0.125rem 0.25rem 0 #0007;
 `
 
-export const Tooltip: FC = (props) => <Wrapper {...props} />
+export const Tooltip: FC<TooltipType> = (props) => <TooltipWrapper {...props} />

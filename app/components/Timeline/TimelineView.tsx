@@ -14,23 +14,18 @@ import { Timespan } from '../Timespan'
 import { getTimelineWidth } from './getTimelineWidth'
 import { TimelineNumbers } from './TimelineNumbers'
 
-const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-`
+const TimelineWrapper = styled.div``
 
 interface ContainerProps {
+  rows: number
   width: number
   scale: number
 }
 
-const Container = styled.div<ContainerProps>`
+const TimelineContainer = styled.div<ContainerProps>`
   position: relative;
   width: ${({ width }) => `${width}px`};
+  height: calc(${(p) => p.rows} * (2em + 5px));
   min-height: 100%;
   padding-bottom: 2rem;
   font-size: 12px;
@@ -48,6 +43,7 @@ const Content = styled.div`
 `
 
 interface TimelineViewProps {
+  rows: number
   events?: TimelineEvent[]
   timespans?: TimespanType[]
   startYear: number
@@ -57,6 +53,7 @@ interface TimelineViewProps {
 }
 
 export const TimelineView: FC<TimelineViewProps> = ({
+  rows,
   events = [],
   timespans = [],
   startYear,
@@ -71,9 +68,10 @@ export const TimelineView: FC<TimelineViewProps> = ({
   const showCursor = !!(!isTouchDevice && mousePosition.xElement)
 
   return (
-    <Wrapper ref={containerRef}>
-      <Container
+    <TimelineWrapper ref={containerRef}>
+      <TimelineContainer
         ref={mergeRefs([elementRef, scrollRef])}
+        rows={rows}
         width={width}
         scale={scale}
       >
@@ -82,16 +80,17 @@ export const TimelineView: FC<TimelineViewProps> = ({
           endYear={endYear}
           scale={scale}
         />
+
         <Content>
-          {timespans.map((timespan) => (
-            <Timespan {...timespan} key={timespan.id} />
-          ))}
           {events.map((event) => (
             <Event {...event} key={event.id} />
           ))}
+          {timespans.map((timespan) => (
+            <Timespan {...timespan} key={timespan.id} />
+          ))}
         </Content>
         {showCursor && <TimelineCursor pixelYear={mousePosition.xElement} />}
-      </Container>
-    </Wrapper>
+      </TimelineContainer>
+    </TimelineWrapper>
   )
 }

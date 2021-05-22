@@ -4,6 +4,6 @@ export type Event = {
   year: number
   image?: string
   wolLink?: string
-  pixelYear?: number
+  pixelStart?: number
   rowIndex?: number
 }

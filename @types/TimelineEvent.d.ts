@@ -1,7 +1,8 @@
 export type TimelineEvent = {
+  type: 'event'
   id: string
   name: string
-  pixelYear: number
+  pixelStart: number
   rowIndex?: number
   zIndex?: number
 }

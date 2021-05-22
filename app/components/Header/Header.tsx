@@ -8,7 +8,7 @@ import { LangSwitch } from '../LangSwitch'
 import { Logo } from '../Logo'
 import { Search } from '../Search'
 
-const Wrapper = styled.div`
+const HeaderWrapper = styled.div`
   position: relative;
   z-index: ${zIndexes.header};
   display: flex;
@@ -41,12 +41,12 @@ const Nav = styled.div`
 `
 
 export const Header: FC = () => (
-  <Wrapper>
+  <HeaderWrapper>
     <Logo />
     <Nav>
       <Search />
       <Filter />
       <LangSwitch />
     </Nav>
-  </Wrapper>
+  </HeaderWrapper>
 )

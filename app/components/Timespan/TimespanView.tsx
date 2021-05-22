@@ -23,8 +23,8 @@ interface WrapperProps {
   rowIndex: number
 }
 
-const Wrapper = styled(ButtonPlain)<WrapperProps>`
-  position: relative;
+const TimespanWrapper = styled(ButtonPlain)<WrapperProps>`
+  position: absolute;
   z-index: ${zIndexes.timespan};
   display: flex;
   align-items: center;
@@ -70,8 +70,9 @@ export const TimespanView: FC<TimespanViewProps> = ({
     timeColors[type],
     transparentColors[type],
   )
+
   return (
-    <Wrapper
+    <TimespanWrapper
       background={background}
       pixelStart={pixelStart}
       pixelDuration={pixelDuration}
@@ -80,6 +81,6 @@ export const TimespanView: FC<TimespanViewProps> = ({
       onClick={changeContent}
     >
       <TimespanName>{name}</TimespanName>
-    </Wrapper>
+    </TimespanWrapper>
   )
 }

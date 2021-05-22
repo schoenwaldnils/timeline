@@ -5,6 +5,7 @@ import { CEvent, CPerson, CTime } from '../../../@types/generated/contentful'
 import { Parent } from '../../../@types/Parent'
 import { Person } from '../../../@types/Person'
 import { Time } from '../../../@types/Time'
+import { getTimePeriod } from '../utils'
 import { updateEventProps } from './updateEventProps'
 
 const findParent = (
@@ -43,6 +44,10 @@ export function formatPerson(oldData: CPerson): Person {
     startBlurriness: oldData.startBlurriness,
     endYear: oldData.endYear,
     endBlurriness: oldData.endBlurriness,
+    age:
+      oldData.startYear && oldData.endYear
+        ? getTimePeriod(oldData.startYear, oldData.endYear)
+        : undefined,
     stillActive: oldData.stillActive,
     fatherID: findParent(oldData.linkedFrom, oldData.sys.id, 'male'),
     motherID: findParent(oldData.linkedFrom, oldData.sys.id, 'female'),
@@ -98,11 +103,13 @@ export function formatTime(oldData: CTime): Time {
 }
 
 export function formatEvent(oldData: CEvent): Event {
+  const year = oldData.year === 2020 ? new Date().getFullYear() : oldData.year
+
   const data = {
     id: oldData.sys.id,
     name: oldData.name,
     image: oldData.image?.url,
-    year: oldData.year,
+    year,
     richText: oldData.richText?.json,
     wolLink: oldData.wolLink,
   }

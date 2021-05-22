@@ -30,6 +30,14 @@ const StyledPage = styled.div`
 const Content = styled.div`
   position: relative;
   grid-area: content;
+  overflow: auto;
+`
+
+const SidebarWrapper = styled.div`
+  position: relative;
+  grid-area: content;
+  overflow: hidden;
+  pointer-events: none;
 `
 
 const Config = styled.div`
@@ -59,13 +67,15 @@ export const Page: FC<{
       <Header />
       <Content>
         <Timeline data={formatedData} />
-        <Sidebar isActive={!!store.sidebarId} contentId={store.sidebarId} />
         <Config>
           <ThemeSwitch />
           <Scaling />
           <ScaleIndicator />
         </Config>
       </Content>
+      <SidebarWrapper>
+        <Sidebar isActive={!!store.sidebarId} contentId={store.sidebarId} />
+      </SidebarWrapper>
     </StyledPage>
   )
 }

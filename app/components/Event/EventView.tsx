@@ -6,13 +6,13 @@ import { zIndexes } from '../../data/constants'
 import { ButtonPlain } from '../Button'
 
 interface WrapperProps {
-  pixelYear: number
+  pixelStart: number
   rowIndex?: number
   zIndex?: number
 }
 
-const Wrapper = styled(ButtonPlain)<WrapperProps>`
-  position: relative;
+const EventWrapper = styled(ButtonPlain)<WrapperProps>`
+  position: absolute;
   z-index: ${({ zIndex }) => zIndex + zIndexes.event};
   display: inline-flex;
   align-items: center;
@@ -20,7 +20,7 @@ const Wrapper = styled(ButtonPlain)<WrapperProps>`
   width: fit-content;
   height: 2em;
   margin-top: calc(${({ rowIndex }) => rowIndex} * (2em + 4px));
-  margin-left: ${({ pixelYear }) => pixelYear}px;
+  margin-left: ${({ pixelStart }) => pixelStart}px;
   padding-right: 0.5em;
   padding-left: 0.5em;
   color: var(--Event-color);
@@ -31,8 +31,9 @@ const Wrapper = styled(ButtonPlain)<WrapperProps>`
   ::before {
     content: '';
     position: absolute;
-    right: 100%;
     bottom: 0;
+    left: 0;
+    z-index: 1;
     display: block;
     width: 1px;
     height: 100vh;
@@ -51,27 +52,27 @@ const Wrapper = styled(ButtonPlain)<WrapperProps>`
 `
 
 export interface EventProps extends WrapperProps {
-  pixelYear: number
+  pixelStart: number
   rowIndex?: number
   zIndex?: number
   changeContent: (event: MouseEvent) => void
 }
 
 export const EventView: FC<EventProps> = ({
-  pixelYear,
+  pixelStart,
   rowIndex = 0,
   zIndex = zIndexes.event,
   changeContent,
   children,
 }) => {
   return (
-    <Wrapper
-      pixelYear={pixelYear}
+    <EventWrapper
+      pixelStart={pixelStart}
       rowIndex={rowIndex}
       zIndex={zIndex}
       onClick={changeContent}
     >
       {children}
-    </Wrapper>
+    </EventWrapper>
   )
 }

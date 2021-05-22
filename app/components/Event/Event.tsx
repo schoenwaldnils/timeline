@@ -7,7 +7,7 @@ import { EventView } from './EventView'
 export const Event: FC<TimelineEvent> = ({
   id,
   name,
-  pixelYear,
+  pixelStart,
   rowIndex,
   zIndex,
 }) => {
@@ -19,9 +19,10 @@ export const Event: FC<TimelineEvent> = ({
       contentId: id,
     })
   }
+
   return (
     <EventView
-      pixelYear={pixelYear}
+      pixelStart={pixelStart}
       rowIndex={rowIndex}
       zIndex={zIndex}
       changeContent={changeContent}

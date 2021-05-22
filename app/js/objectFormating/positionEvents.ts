@@ -4,12 +4,12 @@ export function positionEvents(events: TimelineEvent[]): TimelineEvent[] {
   const occupiedSpace = [0]
 
   return events.map((event) => {
-    const { pixelYear: pixelStart, name } = event
+    const { pixelStart, name } = event
     const start = pixelStart
 
     const endWithMargin = Math.floor(start + name.length * 8 + 10)
 
-    function testRow(row = 0) {
+    const testRow = (row = 0) => {
       if (Number.isInteger(occupiedSpace[row])) {
         if (start >= occupiedSpace[row]) {
           occupiedSpace[row] = endWithMargin

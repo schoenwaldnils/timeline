@@ -13,15 +13,17 @@ export const Basic: FC = () => (
     endYear={300}
     events={[
       {
+        type: 'event',
         id: '#1',
         name: 'Test Event',
-        pixelYear: 50,
+        pixelStart: 50,
         rowIndex: 0,
       },
       {
+        type: 'event',
         id: '#2',
         name: 'Test Event',
-        pixelYear: 90,
+        pixelStart: 90,
         rowIndex: 1,
       },
     ]}

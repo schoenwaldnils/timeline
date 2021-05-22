@@ -9,7 +9,7 @@ export default {
 }
 
 export const Basic: FC = () => (
-  <EventView pixelYear={50} changeContent={action('changeContent')}>
+  <EventView pixelStart={50} changeContent={action('changeContent')}>
     Test Event
   </EventView>
 )

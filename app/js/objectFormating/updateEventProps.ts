@@ -8,6 +8,6 @@ export const updateEventProps = (event: Event): Event => {
 
   return {
     ...event,
-    pixelYear: pixelStart,
+    pixelStart,
   }
 }

@@ -86,6 +86,7 @@
     "@schoenwald/eslint-config-typescript": "5.0.0",
     "@storybook/preact": "6.2.9",
     "@types/cookie": "0.4.0",
+    "@types/color": "3.0.1",
     "@types/react-instantsearch-dom": "6.10.0",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.2.2",
