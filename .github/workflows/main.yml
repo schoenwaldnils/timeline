@@ -88,6 +88,116 @@ jobs:
         with:
           custom-command: 'npm run snapshot'
 
+  #
+  #
+  # DEPLOYMENT
+  #
+
+  deploy-main:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: [test, build]
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'eu-central-1' # optional: defaults to us-east-1
+
+    steps:
+      - name: Download nextBuild
+        uses: actions/download-artifact@v1
+        with:
+          name: nextBuild-${{github.sha}}
+          path: out
+
+      - name: S3 Sync Backup
+        uses: docker://schoenwaldnils/s3-sync-action:0.5.1
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          SOURCE_DIR: out
+          DEST_DIR: production/${{github.sha}}
+
+      - name: S3 Sync
+        uses: docker://schoenwaldnils/s3-sync-action:0.5.1
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          SOURCE_DIR: out
+          DEST_DIR: production
+
+      - name: s3cmd edit cache header
+        uses: docker://jusbrasil/s3cmd-action:master
+        with:
+          args: modify --recursive --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg" --add-header="Cache-Control:public,max-age=31536000" s3://${{ secrets.AWS_S3_BUCKET }}/production/
+        env:
+          ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Invalidate Cloudfront
+        uses: chetan/invalidate-cloudfront-action@v1.0
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          PATHS: '/*'
+
+      - name: action-slack
+        uses: 8398a7/action-slack@v2.7.0
+        with:
+          status: ${{ job.status }}
+          author_name: Github deployment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  deploy-pr:
+    if: contains(github.ref, 'pull')
+    runs-on: ubuntu-latest
+    needs: [test, build]
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'eu-central-1' # optional: defaults to us-east-1
+
+    steps:
+      - name: Download nextBuild
+        uses: actions/download-artifact@v1
+        with:
+          name: nextBuild-${{github.sha}}
+          path: out
+
+      - name: S3 Sync
+        uses: docker://schoenwaldnils/s3-sync-action:0.5.1
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          SOURCE_DIR: 'out'
+          DEST_DIR: 'pr/${{github.event.number}}'
+
+      - name: s3cmd edit cache header
+        uses: docker://jusbrasil/s3cmd-action:master
+        with:
+          args: modify --recursive --exclude "*" --include "*.css" --include "*.js" --include "*.png" --include "*.jpg" --include "*.gif" --include "*.svg" --add-header="Cache-Control:public,max-age=31536000" s3://${{ secrets.AWS_S3_BUCKET }}/pr/${{github.event.number}}/
+        env:
+          ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Invalidate Cloudfront
+        uses: chetan/invalidate-cloudfront-action@v1.0
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION_PR }}
+          PATHS: '/*'
+
+      - name: action-slack
+        uses: 8398a7/action-slack@v2.7.0
+        with:
+          status: ${{ job.status }}
+          author_name: Github deployment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
+
   lighthouse-check:
     runs-on: ubuntu-latest
     needs: [deploy-pr]
