@@ -10,7 +10,7 @@ export type Person = {
   startBlurriness?: number
   endYear?: number
   endBlurriness?: number
-  duration?: number
+  age?: number
   spouse?: Person[]
   fatherID?: string
   father?: Parent

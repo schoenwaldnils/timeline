@@ -10,6 +10,7 @@ export const Timeline: FC<{ data: TimelineData }> = ({ data }) => {
 
   return (
     <TimelineView
+      rows={data.rows}
       timespans={data.timespans}
       events={data.events}
       startYear={YEARS_BEFORE_ZERO}

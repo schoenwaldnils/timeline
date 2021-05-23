@@ -5,7 +5,7 @@ interface WrapperProps {
   paddingLeft: number
 }
 
-const Wrapper = styled.div<WrapperProps>`
+const TimelineNumbersWrapper = styled.div<WrapperProps>`
   position: absolute;
   top: 0;
   left: 0;
@@ -81,7 +81,7 @@ export const TimelineNumbers: FC<TimelineNumbersProps> = ({
   }
 
   return (
-    <Wrapper paddingLeft={startRemainder}>
+    <TimelineNumbersWrapper paddingLeft={startRemainder}>
       {numbers.map((number, key) => (
         <Number
           key={`timelineNumber-${number}`}
@@ -89,6 +89,6 @@ export const TimelineNumbers: FC<TimelineNumbersProps> = ({
           number={number === 0 ? 1 : number}
         />
       ))}
-    </Wrapper>
+    </TimelineNumbersWrapper>
   )
 }

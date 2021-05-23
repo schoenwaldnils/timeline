@@ -2,11 +2,11 @@ import styled from '@emotion/styled'
 import { FC } from 'react'
 
 import { ScaleIndicator } from './ScaleIndicator'
-import { Scaling } from './Scaling'
+import { Scaling as ScalingComponent } from './Scaling'
 
 export default {
   title: 'Scaling',
-  component: Scaling,
+  component: ScalingComponent,
 }
 
 const Container = styled.div`
@@ -18,9 +18,9 @@ const Container = styled.div`
   }
 `
 
-export const Basic: FC = () => (
+export const Scaling: FC = () => (
   <Container>
-    <Scaling />
+    <ScalingComponent />
     <ScaleIndicator />
   </Container>
 )

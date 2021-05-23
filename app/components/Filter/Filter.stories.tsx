@@ -18,4 +18,4 @@ const props = {
   },
 }
 
-export const Active: FC = () => <FilterView {...props} isActive={true} />
+export const Filter: FC = () => <FilterView {...props} isActive={true} />

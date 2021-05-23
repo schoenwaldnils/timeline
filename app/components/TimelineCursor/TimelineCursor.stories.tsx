@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { TimelineCursorView } from './TimelineCursorView'
 
 export default {
-  title: 'TimelineCursor',
+  title: 'Timeline Cursor',
   component: TimelineCursorView,
   parameters: {
     percy: { skip: true },
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   background-color: #ff000050;
 `
 
-export const Basic: FC = () => {
+export const TimelineCursor: FC = () => {
   return (
     <Wrapper>
       <TimelineCursorView pixelYear={100} scale={1} />

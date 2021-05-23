@@ -8,8 +8,8 @@ export default {
   component: EventView,
 }
 
-export const Basic: FC = () => (
-  <EventView pixelYear={50} changeContent={action('changeContent')}>
+export const Event: FC = () => (
+  <EventView pixelStart={50} changeContent={action('changeContent')}>
     Test Event
   </EventView>
 )

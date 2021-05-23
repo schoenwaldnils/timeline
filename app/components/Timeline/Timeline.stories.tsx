@@ -7,22 +7,25 @@ export default {
   component: TimelineView,
 }
 
-export const Basic: FC = () => (
+export const Timeline: FC = () => (
   <TimelineView
+    rows={4}
     startYear={-200}
     endYear={300}
     events={[
       {
+        type: 'event',
         id: '#1',
         name: 'Test Event',
-        pixelYear: 50,
-        rowIndex: 0,
+        pixelStart: 60,
+        rowIndex: 2,
       },
       {
+        type: 'event',
         id: '#2',
         name: 'Test Event',
-        pixelYear: 90,
-        rowIndex: 1,
+        pixelStart: 90,
+        rowIndex: 3,
       },
     ]}
     timespans={[

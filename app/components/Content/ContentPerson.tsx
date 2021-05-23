@@ -18,7 +18,7 @@ export const ContentPerson: FC<Person> = ({
   startBlurriness,
   endYear,
   endBlurriness,
-  duration: age,
+  age,
   spouse = [],
   fatherID,
   father,
@@ -31,7 +31,7 @@ export const ContentPerson: FC<Person> = ({
   const { dispatch } = useStore()
   const { t } = useTranslation()
 
-  const changeContent = (newId) => {
+  const changeContent = (newId: string) => {
     dispatch({
       type: CHANGE_CONTENT,
       contentId: newId,
@@ -57,21 +57,27 @@ export const ContentPerson: FC<Person> = ({
     return `${t('misc.approx')} ${OurTime(blurYear)} (+-${blurString})`
   }
 
-  const bornString = !startYear
-    ? t('misc.unnown')
-    : yearBlur(startYear, startBlurriness, 'start')
+  let list: Record<string, unknown> = {}
 
-  const deathString = !endYear
-    ? t('misc.unnown')
-    : yearBlur(endYear, endBlurriness, 'end')
+  if (startYear) {
+    list = {
+      ...list,
+      [t('life.born')]: yearBlur(startYear, startBlurriness, 'start'),
+    }
+  }
 
-  let list: Record<string, unknown> = {
-    [t('life.born')]: bornString,
-    [t('life.died')]: deathString,
-    [t('life.span')]:
-      age && !startBlurriness && !endBlurriness
-        ? `${age} ${t('time.years')}`
-        : t('misc.unnown'),
+  if (endYear) {
+    list = {
+      ...list,
+      [t('life.died')]: yearBlur(endYear, endBlurriness, 'end'),
+    }
+  }
+
+  if (age && !startBlurriness && !endBlurriness) {
+    list = {
+      ...list,
+      [t('life.span')]: `${age} ${t('time.years')}`,
+    }
   }
 
   if (father) {

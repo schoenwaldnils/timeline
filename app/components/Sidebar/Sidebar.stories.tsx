@@ -8,7 +8,7 @@ export default {
   component: SidebarView,
 }
 
-export const Basic: FC = () => (
+export const Sidebar: FC = () => (
   <SidebarView isActive={true} closeSidebar={action('close sidebar')}>
     <div>Test</div>
   </SidebarView>

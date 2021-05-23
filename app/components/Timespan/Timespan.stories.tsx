@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 `
 
-export const Time: FC = () => (
+export const Timespan: FC = () => (
   <Container>
     <TimespanView
       id="bla"

@@ -5,7 +5,7 @@ import { FC } from 'react'
 import { ThemeSwitchView } from './ThemeSwitchView'
 
 export default {
-  title: 'ThemeSwitch',
+  title: 'Theme Switch',
   component: ThemeSwitchView,
 }
 
@@ -22,7 +22,7 @@ const props = {
   toggleTheme: action('toggle theme'),
 }
 
-export const Basic: FC = () => (
+export const ThemeSwitch: FC = () => (
   <Container>
     <ThemeSwitchView {...props} />
     <ThemeSwitchView {...props} isDark={true} />

@@ -106,7 +106,7 @@ export const FilterView: FC<FilterViewProps> = forwardRef(
         </IconButton>
 
         {isActive && (
-          <Tooltip>
+          <Tooltip alignRight>
             {filterElements.map(({ id, name, label, value }) => (
               <InputEl key={`checkbox_${id}`}>
                 <Label htmlFor={`checkbox_${id}`}>

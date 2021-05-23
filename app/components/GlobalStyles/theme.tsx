@@ -8,7 +8,7 @@ import { colors, shades } from '../../data/colors'
  *    https://css-tricks.com/thing-know-gradients-transparent-black/
  */
 
-const c = (color) => `${Color(color).alpha(0)}`
+const c = (color: string) => `${Color(color).alpha(0)}`
 
 export const themeLight = css`
   :root {

@@ -5,7 +5,6 @@ import { TimelineEvent } from '../../../@types/TimelineEvent'
 import { Timespan } from '../../../@types/Timespan'
 import { scaleNumber, scaleNumbers } from '../scaleNumbers'
 import { formatEvent } from './formatData'
-import { positionEvents } from './positionEvents'
 import { positionTimes } from './positionTimes'
 import { updateTimeProps } from './updateTimeProps'
 
@@ -21,6 +20,7 @@ export type ContentfulTimelineData = {
 }
 
 export type TimelineData = {
+  rows: number
   timespans: Timespan[]
   events: TimelineEvent[]
 }
@@ -58,8 +58,7 @@ export const formatTimelineData = (
     'pixelDuration',
     'startBlurriness',
     'endBlurriness',
-  ])
-  const positionedTimes = positionTimes(scaledTimespans as Timespan[])
+  ]) as Timespan[]
 
   // EVENTS
   const events = (eventsAreActive && data.events.items) || []
@@ -68,14 +67,19 @@ export const formatTimelineData = (
     (e, key) =>
       ({
         ...e,
+        type: 'event',
         zIndex: formatedEvents.length - key,
-        pixelYear: scaleNumber(e.pixelYear, scale),
+        pixelStart: scaleNumber(e.pixelStart, scale),
       } as TimelineEvent),
   )
 
-  const positionedEvents = positionEvents(indexedEvents)
+  const { rows, positionedTimes, positionedEvents } = positionTimes(
+    scaledTimespans,
+    indexedEvents,
+  )
 
   return {
+    rows,
     timespans: positionedTimes,
     events: positionedEvents,
   }

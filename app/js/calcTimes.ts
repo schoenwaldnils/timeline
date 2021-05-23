@@ -37,7 +37,7 @@ export const calcTimes = ({
 
   if (startYear) {
     pixelStart = startYear + YEARS_BEFORE_ZERO
-    if (startYear + YEARS_BEFORE_ZERO >= 0) {
+    if (pixelStart >= 0) {
       pixelStart -= 1
     }
   }
@@ -59,5 +59,10 @@ export const calcTimes = ({
 
 export function pixelToYear(pixel: number): number {
   const year = pixel - YEARS_BEFORE_ZERO
+
+  if (year >= 0) {
+    return year + 1
+  }
+
   return year
 }

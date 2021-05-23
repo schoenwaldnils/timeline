@@ -2,10 +2,14 @@ import styled from '@emotion/styled'
 import { FC } from 'react'
 
 import { shades } from '../../data/colors'
-import { Header } from './Header'
+import { Header as HeaderComponent } from './Header'
 
 export default {
   title: 'Header',
+  component: HeaderComponent,
+  parameters: {
+    layout: 'fullscreen',
+  },
 }
 
 const Wrapper = styled.div`
@@ -13,8 +17,8 @@ const Wrapper = styled.div`
   background-color: ${shades.cb4};
 `
 
-export const Basic: FC = () => (
+export const Header: FC = () => (
   <Wrapper>
-    <Header />
+    <HeaderComponent />
   </Wrapper>
 )

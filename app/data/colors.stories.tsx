@@ -35,7 +35,7 @@ const Box = styled.div`
   background-color: ${({ color }) => color};
 `
 
-export const Basic: FC = () => (
+export const Colors: FC = () => (
   <>
     <h1>Shades</h1>
     <Wrapper>

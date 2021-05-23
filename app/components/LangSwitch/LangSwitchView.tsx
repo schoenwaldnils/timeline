@@ -61,7 +61,7 @@ const Button = styled.button`
   }
 `
 
-const Menu = styled(Tooltip)`
+const StyledTooltip = styled(Tooltip)`
   display: flex;
   flex-direction: column;
 `
@@ -93,7 +93,7 @@ export const LangSwitchView: FC<LangSwitchViewProps> = forwardRef(
         </IconButton>
 
         {isActive && (
-          <Menu>
+          <StyledTooltip alignRight>
             {SUPPORTED_LOCALES.map((locale) => (
               <Button
                 key={locale}
@@ -103,7 +103,7 @@ export const LangSwitchView: FC<LangSwitchViewProps> = forwardRef(
                 {translations.ui.language[locale]}
               </Button>
             ))}
-          </Menu>
+          </StyledTooltip>
         )}
       </Wrapper>
     )
