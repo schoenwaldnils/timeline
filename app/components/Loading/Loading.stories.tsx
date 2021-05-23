@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 import { FC } from 'react'
 
-import { Loading, LoadingDots } from './Loading'
+import { Loading as LoadingComponent, LoadingDots } from './Loading'
 
 export default {
   title: 'Loading',
+  component: LoadingComponent,
   parameters: {
     percy: { skip: true },
   },
@@ -14,11 +15,11 @@ const Container = styled.div`
   padding: 2rem;
 `
 
-export const Basic: FC = () => {
+export const Loading: FC = () => {
   return (
     <>
       <Container>
-        <Loading />
+        <LoadingComponent />
       </Container>
       <Container>
         <LoadingDots />

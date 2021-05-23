@@ -1,12 +1,13 @@
 import styled from '@emotion/styled'
 import { FC } from 'react'
 
-import { Search } from './Search'
+import { Search as SearchComponent } from './Search'
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
 
 export default {
   title: 'Search',
+  component: SearchComponent,
 }
 
 const Container = styled.div`
@@ -18,9 +19,9 @@ const Container = styled.div`
   }
 `
 
-export const Basic: FC = () => (
+export const Search: FC = () => (
   <Container>
-    <Search />
+    <SearchComponent />
     <SearchBar searchValue="" setSearchValue={() => null} />
     <SearchHits selectHit={() => null} />
   </Container>

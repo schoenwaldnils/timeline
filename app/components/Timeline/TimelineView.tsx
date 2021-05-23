@@ -23,9 +23,10 @@ interface ContainerProps {
 }
 
 const TimelineContainer = styled.div<ContainerProps>`
+  --paddingTop: 4rem;
   position: relative;
   width: ${({ width }) => `${width}px`};
-  height: calc(${(p) => p.rows} * (2em + 5px));
+  height: calc(${(p) => p.rows} * (2em + 5px) + var(--paddingTop));
   min-height: 100%;
   padding-bottom: 2rem;
   font-size: 12px;

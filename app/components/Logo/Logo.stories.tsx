@@ -15,7 +15,7 @@ const Container = styled.div`
   padding: 3rem;
 `
 
-export const Basic: FC = () => {
+export const Logo: FC = () => {
   return (
     <>
       <Container>
