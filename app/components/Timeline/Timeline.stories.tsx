@@ -9,6 +9,7 @@ export default {
 
 export const Basic: FC = () => (
   <TimelineView
+    rows={4}
     startYear={-200}
     endYear={300}
     events={[
