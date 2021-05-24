@@ -81,19 +81,24 @@ jobs:
   wait-for-vercel-deployment:
     runs-on: ubuntu-18.04
     steps:
-      - name: Get deployment URL
-        id: deployment
-        uses: dorshinar/get-deployment-url@master
-        timeout-minutes: 5
+      - name: vercel-preview-url
+        uses: zentered/vercel-preview-url@v1.0.0
+        id: vercel_preview_url
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          vercel_team_id: 'schoenwaldnils'
+          vercel_project_id: 'timeline'
+
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
 
       - uses: UnlyEd/github-action-await-vercel@v1.1.0
         id: await-vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          deployment-url: ${{ steps.deployment.outputs.deployment }}
+          deployment-url: ${{ steps.vercel_preview_url.outputs.preview_url }}
           timeout: 180 # Wait for 3 minutes before failing
 
       - name: Display deployment status
@@ -105,12 +110,14 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Get deployment URL
-        id: deployment
-        uses: dorshinar/get-deployment-url@master
-        timeout-minutes: 5
+      - name: vercel-preview-url
+        uses: zentered/vercel-preview-url@v1.0.0
+        id: vercel_preview_url
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          vercel_team_id: 'schoenwaldnils'
+          vercel_project_id: 'timeline'
 
       - name: Run Lighthouse
         uses: foo-software/lighthouse-check-action@v1.0.10
@@ -123,7 +130,7 @@ jobs:
           awsAccessKeyId: ${{ secrets.AWS_ACCESS_KEY_ID }}
           awsSecretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           branch: ${{ github.ref }}
-          urls: ${{ steps.deployment.outputs.deployment }}
+          urls: 'https://${{ steps.vercel_preview_url.outputs.preview_url }}'
           sha: ${{ github.sha }}
 
       - name: Handle Lighthouse Check results
