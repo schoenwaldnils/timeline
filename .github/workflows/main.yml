@@ -93,7 +93,7 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          deployment-url: ${{ steps.deployment.outputs.deployment#https:// }}
+          deployment-url: ${{ steps.deployment.outputs.deployment//https:// }}
           timeout: 180 # Wait for 3 minutes before failing
 
       - name: Display deployment status
