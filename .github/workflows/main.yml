@@ -83,7 +83,7 @@ jobs:
     steps:
       - name: Get deployment URL
         id: deployment
-        uses: dorshinar/get-deployment-url@master
+        uses: schoenwaldnils/get-deployment-url@master
         timeout-minutes: 5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -92,10 +92,9 @@ jobs:
         id: await-vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          DEPLOY_URL: ${{ steps.deployment.outputs.deployment }}
         with:
-          deployment-url: ${DEPLOY_URL#https://}
-          timeout: 180 # Wait for 3 minutes before failing
+          deployment-url: ${{ steps.deployment.outputs.deployment }}
+          timeout: 150 # Wait for 2.5 minutes before failing
 
       - name: Display deployment status
         run: 'echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}'
