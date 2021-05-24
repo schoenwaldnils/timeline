@@ -78,8 +78,30 @@ jobs:
         with:
           custom-command: 'npm run snapshot'
 
+  wait-for-vercel-deployment:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Get deployment URL
+        id: deployment
+        uses: dorshinar/get-deployment-url@master
+        timeout-minutes: 5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: UnlyEd/github-action-await-vercel@v1.1.0
+        id: await-vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          deployment-url: ${{ steps.deployment.outputs.deployment }}
+          timeout: 10 # Wait for 10 seconds before failing
+
+      - name: Display deployment status
+        run: 'echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}'
+
   lighthouse-check:
     runs-on: ubuntu-latest
+    needs: [wait-for-vercel-deployment]
     steps:
       - uses: actions/checkout@master
 
