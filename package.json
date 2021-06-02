@@ -93,7 +93,7 @@
     "cli-real-favicon": "0.0.8",
     "dotenv-flow": "3.2.0",
     "eslint": "7.25.0",
-    "lint-staged": "10.5.4",
+    "lint-staged": "11.0.0",
     "prettier": "2.2.1",
     "stylelint": "13.13.1",
     "stylelint-config-schoenwaldnils": "3.0.0",
