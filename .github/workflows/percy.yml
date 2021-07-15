@@ -1,0 +1,31 @@
+name: percy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_run:
+    workflows: ['PR Check']
+    types:
+      - completed
+
+jobs:
+  visual-regression-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: npm install
+        run: npm ci
+
+      - name: Percy Test
+        uses: percy/storybook-action@v0.1.6
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+        with:
+          custom-command: 'npm run snapshot'

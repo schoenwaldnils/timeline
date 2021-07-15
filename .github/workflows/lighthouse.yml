@@ -1,81 +1,15 @@
-name: timeline
+name: lighthouse
 
 on:
   push:
     branches:
       - main
-  pull_request_target:
-    branches:
-      - main
-  
-permissions:
-  contents: read
-  pull-requests: write
+  workflow_run:
+    workflows: ['PR Check']
+    types:
+      - completed
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: npm install
-        run:
-          npm ci
-
-      - name: lint ts
-        run: npm run lint:ts
-
-      - name: lint types
-        run: npm run lint:types
-
-      - name: lint css
-        run: npm run lint:css
-
-  build:
-    runs-on: ubuntu-latest
-    env:
-      NODE_ENV: production
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: npm install
-        run:
-          npm ci
-
-      - name: build
-        run: npm run build
-
-  visual-regression-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: npm install
-        run:
-          npm ci
-
-      - name: Percy Test
-        uses: percy/storybook-action@v0.1.6
-        env:
-          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-        with:
-          custom-command: 'npm run snapshot'
-
   wait-for-vercel-deployment:
     runs-on: ubuntu-18.04
     steps:
