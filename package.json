@@ -41,7 +41,7 @@
     "@storybook/addon-actions": "6.2.9",
     "@svgr/webpack": "5.5.0",
     "@types/node": "15.6.2",
-    "@types/react": "17.0.7",
+    "@types/react": "17.0.9",
     "accept-language": "3.0.18",
     "algoliasearch": "4.9.1",
     "array-sort": "1.0.0",
