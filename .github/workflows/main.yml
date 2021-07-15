@@ -4,11 +4,8 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
   workflow_run:
-    workflows: ["Dependabot PR Check"]
+    workflows: ["PR"]
     types: 
       - completed
 
