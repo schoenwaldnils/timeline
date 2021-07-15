@@ -7,21 +7,22 @@ on:
   pull_request_target:
     branches:
       - main
+  workflow_run:
+    workflows: ["Dependabot PR Check"]
+    types: 
+      - completed
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-      - name: Install nvm
-        shell: bash -l {0}
-        run: nvm install
-
-      - name: node & npm install
-        run: |
-          rm -rf ./node_modules
+      - name: npm install
+        run:
           npm ci
 
       - name: lint ts
@@ -38,16 +39,13 @@ jobs:
     env:
       NODE_ENV: production
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-      - name: Install nvm
-        shell: bash -l {0}
-        run: nvm install
-
-      - name: node & npm install
-        run: |
-          rm -rf ./node_modules
+      - name: npm install
+        run:
           npm ci
 
       - name: build
@@ -59,16 +57,13 @@ jobs:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-      - name: Install nvm
-        shell: bash -l {0}
-        run: nvm install
-
-      - name: node & npm install
-        run: |
-          rm -rf ./node_modules
+      - name: npm install
+        run:
           npm ci
 
       - name: Percy Test
