@@ -1,11 +1,12 @@
 name: percy
 
 on:
-  workflow_run:
-    workflows:
-      - BranchCheck
-    types:
-      - completed
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   visual-regression-test:
