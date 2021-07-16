@@ -1,11 +1,9 @@
 name: lighthouse
 
 on:
-  push:
-    branches:
-      - main
   workflow_run:
-    workflows: ['PR Check']
+    workflows:
+      - BranchCheck
     types:
       - completed
 

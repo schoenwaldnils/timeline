@@ -1,7 +1,10 @@
 ### .github/workflows/dependabot_pr.yml
 ### This workflow doesn't have access to secrets and has a read-only token
-name: PR Check
+name: BranchCheck
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
