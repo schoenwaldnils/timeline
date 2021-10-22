@@ -8,7 +8,7 @@
     "build": "next build",
     "export": "NODE_ENV=production next build && next export",
     "test": "npm run lint",
-    "lint": "npm run lint:css && npm run lint:ts",
+    "lint": "npm run lint:css && npm run lint:ts && npm run lint:types",
     "lint:css": "stylelint '**/*.tsx'",
     "lint:ts": "eslint . --ext .ts,.tsx",
     "lint:ts-fix": "eslint . --ext .ts,.tsx --fix",

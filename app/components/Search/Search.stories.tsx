@@ -22,7 +22,7 @@ const Container = styled.div`
 export const Search: FC = () => (
   <Container>
     <SearchComponent />
-    <SearchBar searchValue="" setSearchValue={() => null} />
-    <SearchHits selectHit={() => null} />
+    <SearchBar />
+    <SearchHits onHitClick={() => null} />
   </Container>
 )

@@ -1,5 +1,5 @@
 {
-  "typescript.tsdk": "/Users/nils/repos/schoenwaldnils/timeline/node_modules/typescript/lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#27af90",
     "activityBar.activeBorder": "#f5e5f9",
