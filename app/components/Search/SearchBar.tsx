@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { FC, useEffect, useRef } from 'react'
+import { useSearchBox } from 'react-instantsearch-hooks'
 
 import { shades } from '../../data/colors'
 import { useTranslation } from '../../hooks/useTranslation'
@@ -20,25 +21,24 @@ const Wrapper = styled.input`
   }
 `
 
-export const SearchBar: FC<{
-  searchValue: string
-  setSearchValue: (value: string) => void
-}> = ({ searchValue, setSearchValue }) => {
+export const SearchBar: FC = () => {
+  const { query, refine } = useSearchBox()
+
   const { t } = useTranslation()
   const inputRef = useRef(null)
 
   useEffect(() => {
     inputRef.current.focus()
-  })
+  }, [])
 
   return (
     <form noValidate action="" role="search">
       <Wrapper
         ref={inputRef}
         type="search"
-        value={searchValue}
+        value={query}
         placeholder={`${t('ui.search')}...`}
-        onChange={(event) => setSearchValue(event.currentTarget.value)}
+        onChange={(event) => refine(event.currentTarget.value)}
       />
     </form>
   )

@@ -1,6 +1,6 @@
 import algoliasearch from 'algoliasearch/lite'
 import { FC } from 'react'
-import { InstantSearch } from 'react-instantsearch-dom'
+import { InstantSearch } from 'react-instantsearch-hooks'
 
 const searchClient = algoliasearch(
   'P7R800RWY1',

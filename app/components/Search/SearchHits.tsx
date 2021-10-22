@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { FC } from 'react'
-import { connectHits, Index } from 'react-instantsearch-dom'
+import { Index, useHits } from 'react-instantsearch-hooks'
 
 import { useTranslation } from '../../hooks/useTranslation'
 import { HR } from '../Typography'
@@ -21,16 +21,13 @@ const HitsTitle = styled.div`
   color: var(--Search-titleColor);
 `
 
-interface HitProps {
-  hits: HitType[]
-  type: 'person' | 'time' | 'event'
-  selectHit: (id: string) => void
-}
-
-const Hits: FC<HitProps> = ({ hits, type, selectHit }) => {
+const Hits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
   const { t } = useTranslation()
+  const { hits, results } = useHits()
 
-  const plural = hits.length > 1 ? 's' : ''
+  const plural = results.nbHits > 1 ? 's' : ''
+
+  const type = results.index
 
   const typeString = t(`ui.${type}${plural}`)
 
@@ -43,32 +40,29 @@ const Hits: FC<HitProps> = ({ hits, type, selectHit }) => {
   return (
     <>
       <HitsTitle>
-        {hits.length} {typeString}
+        {results.nbHits} {typeString}
       </HitsTitle>
       {hits.map((hit) => (
         <SearchHit
           key={hit.objectID}
-          type={type}
-          selectHit={selectHit}
-          {...hit}
+          {...(({
+            onHitClick,
+            type,
+            ...hit,
+          } as unknown) as HitType)}
         />
       ))}
     </>
   )
 }
 
-const CustomHits = connectHits(Hits)
-
-export const SearchHits: FC<Pick<HitProps, 'selectHit'>> = ({ selectHit }) => {
+export const SearchHits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
   return (
     <SearchHitsContainer>
       {indicies.map((index) => (
         <>
           <Index key={`index-${index}`} indexName={index}>
-            <CustomHits
-              type={index as HitProps['type']}
-              selectHit={selectHit}
-            />
+            <Hits onHitClick={onHitClick} />
           </Index>
           <HR />
         </>

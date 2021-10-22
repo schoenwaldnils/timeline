@@ -1,6 +1,4 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/react'
-import { AppProps } from 'next/dist/next-server/lib/router/router'
+import { AppProps } from 'next/app'
 import { ReactNode } from 'react'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'

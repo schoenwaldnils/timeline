@@ -30,7 +30,7 @@ export const Search: FC = () => {
     return (
       <ClickAwayListener onClickAway={() => isActive && setIsActive(false)}>
         <Wrapper>
-          <SearchContainer />
+          <SearchContainer onHitClick={() => setIsActive(false)} />
         </Wrapper>
       </ClickAwayListener>
     )
