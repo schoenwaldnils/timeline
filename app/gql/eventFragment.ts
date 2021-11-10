@@ -8,6 +8,8 @@ export default `
     image {
       fileName
       url
+      width
+      height
     }
     richText {
       json

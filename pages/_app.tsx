@@ -1,12 +1,10 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/react'
-import { AppProps } from 'next/dist/next-server/lib/router/router'
-import { ReactNode } from 'react'
+import { AppProps } from 'next/app'
+import { FC } from 'react'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { StoreProvider } from '../app/components/Store/StoreProvider'
 
-const TimelineApp = ({ Component, pageProps }: AppProps): ReactNode => {
+const TimelineApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <StoreProvider>
       <GlobalStyles />
