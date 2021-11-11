@@ -1,6 +1,4 @@
-/** @jsx jsx */
-
-import { Global, jsx } from '@emotion/react'
+import { Global } from '@emotion/react'
 import { FC } from 'react'
 
 import { useStore } from '../Store'

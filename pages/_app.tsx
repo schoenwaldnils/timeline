@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/react'
 import { AppProps } from 'next/dist/next-server/lib/router/router'
 import { ReactNode } from 'react'
 
