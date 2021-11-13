@@ -7,6 +7,8 @@ export default `
     image {
       fileName
       url
+      width
+      height
     }
     startYear
     endYear

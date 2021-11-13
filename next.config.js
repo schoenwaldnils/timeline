@@ -3,9 +3,11 @@
 const sharedConfig = require('./webpack.sharedConfig.js')
 
 let config = {
-  webpack5: false,
   trailingSlash: true,
   webpack: sharedConfig,
+  images: {
+    domains: ['ctfassets.net', 'images.ctfassets.net'],
+  },
 }
 
 // config = withBundleAnalyzer(config)

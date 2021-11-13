@@ -24,6 +24,8 @@ export default `
     image {
       fileName
       url
+      width
+      height
     }
     gender
     startYear

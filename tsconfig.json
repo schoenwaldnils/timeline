@@ -3,7 +3,11 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -12,8 +16,19 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "incremental": true
   },
-  "exclude": ["node_modules", "_serverless"],
-  "include": ["next-env.d.ts", "custom.d.ts", "**/*.ts", "**/*.tsx", "**/*.svg"]
+  "exclude": [
+    "node_modules",
+    "_serverless"
+  ],
+  "include": [
+    "next.config.js",
+    "next-env.d.ts",
+    "custom.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.svg"
+  ]
 }

@@ -7,6 +7,10 @@ export type Time = {
   endYear?: number
   duration?: number
   richText?: Document
-  image?: string
+  image?: {
+    src: string
+    width: number
+    height: number
+  }
   wolLink?: string
 }

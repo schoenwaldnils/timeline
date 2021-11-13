@@ -2,8 +2,8 @@ import styled from '@emotion/styled'
 import { FC, ReactChild, ReactChildren } from 'react'
 
 import { ContentfulLink } from '../ContentfulLink'
+import { Image } from '../Image'
 import { H1 } from '../Typography'
-import { ContentImage } from './ContentImage'
 
 const Box = styled.div`
   margin-bottom: 1em;
@@ -24,7 +24,11 @@ export const ContentBox: FC<ContentBoxProps> = ({ children }) => (
 export interface ContentTemplateProps {
   idContentful?: string
   title?: string
-  image?: string
+  image?: {
+    src: string
+    width: number
+    height: number
+  }
 }
 
 export const ContentTemplate: FC<ContentTemplateProps> = ({
@@ -36,7 +40,12 @@ export const ContentTemplate: FC<ContentTemplateProps> = ({
   <>
     {image && (
       <Box>
-        <ContentImage image={image} title={title} />
+        <Image
+          src={image.src}
+          width={image.width}
+          height={image.height}
+          alt={title}
+        />
       </Box>
     )}
 

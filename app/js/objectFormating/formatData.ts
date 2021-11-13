@@ -38,7 +38,11 @@ export function formatPerson(oldData: CPerson): Person {
     type: 'person',
     id: oldData.sys.id,
     name: oldData.name,
-    image: oldData.image?.url,
+    image: oldData.image && {
+      src: oldData.image.url,
+      width: oldData.image.width,
+      height: oldData.image.height,
+    },
     gender: oldData.gender,
     startYear: oldData.startYear,
     startBlurriness: oldData.startBlurriness,
@@ -92,7 +96,11 @@ export function formatTime(oldData: CTime): Time {
     type: 'time',
     id: oldData.sys.id,
     name: oldData.name,
-    image: oldData.image?.url,
+    image: oldData.image && {
+      src: oldData.image.url,
+      width: oldData.image.width,
+      height: oldData.image.height,
+    },
     startYear: oldData.startYear,
     endYear: oldData.endYear,
     richText: oldData.richText?.json,
@@ -108,7 +116,11 @@ export function formatEvent(oldData: CEvent): Event {
   const data = {
     id: oldData.sys.id,
     name: oldData.name,
-    image: oldData.image?.url,
+    image: oldData.image && {
+      src: oldData.image.url,
+      width: oldData.image.width,
+      height: oldData.image.height,
+    },
     year,
     richText: oldData.richText?.json,
     wolLink: oldData.wolLink,
