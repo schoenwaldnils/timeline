@@ -24,6 +24,5 @@ const TimelineDocument = (): ReactNode => {
 }
 
 TimelineDocument.getInitialProps = Document.getInitialProps
-TimelineDocument.renderDocument = Document.renderDocument
 
 export default TimelineDocument

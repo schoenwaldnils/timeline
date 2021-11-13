@@ -17,10 +17,10 @@ const StyledIcon = styled(Icon)`
   }
 `
 
-const StyledLogo = styled(Logo)<{ isDark: boolean }>`
+const StyledLogo = styled(Logo)<{ color: string }>`
   display: none;
   width: auto;
-  color: ${({ isDark }) => (isDark ? '#fff' : '#000')};
+  color: ${({ color }) => color};
 
   @media ${viewportsJs.sm} {
     display: block;
@@ -32,7 +32,7 @@ export const LogoView: FC<{ isDark?: boolean }> = ({ isDark = false }) => {
   return (
     <Wrapper>
       <StyledIcon />
-      <StyledLogo isDark={isDark} width={null} />
+      <StyledLogo color={isDark ? '#fff' : '#000'} width={null} />
     </Wrapper>
   )
 }
