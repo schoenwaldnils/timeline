@@ -3,5 +3,5 @@ module.exports = {
     builder: 'webpack5',
   },
   stories: ['../app/**/*.stories.tsx'],
-  addons: ['@storybook/addon-actions', '@next/plugin-storybook'],
+  addons: ['@storybook/addon-actions'],
 }
