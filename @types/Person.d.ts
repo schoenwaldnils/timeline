@@ -5,7 +5,11 @@ import { Parent } from './Parent.d'
 export type Person = {
   id: string
   name: string
-  image?: string
+  image?: {
+    src: string
+    width: number
+    height: number
+  }
   startYear?: number
   startBlurriness?: number
   endYear?: number

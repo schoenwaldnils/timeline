@@ -1,6 +1,7 @@
 module.exports = (config = {}) => {
   config.module.rules.push({
     test: /\.svg$/,
+    issuer: /\.(ts|tsx|js|jsx|md|mdx)$/,
     use: [
       {
         loader: '@svgr/webpack',
@@ -19,8 +20,11 @@ module.exports = (config = {}) => {
           },
         },
       },
-      'url-loader',
+      {
+        loader: 'url-loader',
+      },
     ],
+    type: 'javascript/auto',
   })
 
   return config

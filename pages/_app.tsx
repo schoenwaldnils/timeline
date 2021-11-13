@@ -1,10 +1,10 @@
 import { AppProps } from 'next/app'
-import { ReactNode } from 'react'
+import { FC } from 'react'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'
 import { StoreProvider } from '../app/components/Store/StoreProvider'
 
-const TimelineApp = ({ Component, pageProps }: AppProps): ReactNode => {
+const TimelineApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <StoreProvider>
       <GlobalStyles />
