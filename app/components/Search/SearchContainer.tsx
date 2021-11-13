@@ -1,4 +1,3 @@
-import { ClickAwayListener } from '@material-ui/core'
 import { FC } from 'react'
 import { connectSearchBox } from 'react-instantsearch-dom'
 
@@ -32,7 +31,7 @@ const CustomSearch = ({ currentRefinement, refine }) => {
   }
 
   return (
-    <ClickAwayListener onClickAway={clearSearch}>
+    <>
       <SearchBar
         searchValue={currentRefinement}
         setSearchValue={handleSearchValueChange}
@@ -42,7 +41,7 @@ const CustomSearch = ({ currentRefinement, refine }) => {
           <SearchHits selectHit={handleHitSelect} />
         </Tooltip>
       )}
-    </ClickAwayListener>
+    </>
   )
 }
 
