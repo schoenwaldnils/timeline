@@ -46,10 +46,10 @@ export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
     [tempPixelYear],
   )
 
-  const year = useMemo(() => Math.floor(pixelToYear(pixelYear / scale)), [
-    pixelYear,
-    scale,
-  ])
+  const year = useMemo(
+    () => Math.floor(pixelToYear(pixelYear / scale)),
+    [pixelYear, scale],
+  )
 
   const isNegative = year <= 0
 

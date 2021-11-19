@@ -15,8 +15,7 @@ export const TemplateWithIamge: FC = () => (
   <ContentTemplate
     title="ContentTemplate Test"
     image={{
-      src:
-        'https://images.ctfassets.net/81noh8m93vcd/7QNjYQCgQ8qaaikGqm2eG/080dccea68b8cb219b132d8928a1ccfe/1102013272_univ_sqr_xl.jpg',
+      src: 'https://images.ctfassets.net/81noh8m93vcd/7QNjYQCgQ8qaaikGqm2eG/080dccea68b8cb219b132d8928a1ccfe/1102013272_univ_sqr_xl.jpg',
       width: 500,
       height: 500,
     }}
@@ -37,8 +36,7 @@ export const Person: FC = () => (
     name="Jon Doe"
     startYear={1900}
     image={{
-      src:
-        'https://images.ctfassets.net/81noh8m93vcd/7QNjYQCgQ8qaaikGqm2eG/080dccea68b8cb219b132d8928a1ccfe/1102013272_univ_sqr_xl.jpg',
+      src: 'https://images.ctfassets.net/81noh8m93vcd/7QNjYQCgQ8qaaikGqm2eG/080dccea68b8cb219b132d8928a1ccfe/1102013272_univ_sqr_xl.jpg',
       width: 500,
       height: 500,
     }}
