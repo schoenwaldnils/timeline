@@ -1,12 +1,11 @@
 .publish
 .sass-cache
 .asset-cache
+.eslintcache
 npm-debug.log
 _serverless/lib/
 
 node_modules
-build
-out
 .next
 .env
 storybook-static
