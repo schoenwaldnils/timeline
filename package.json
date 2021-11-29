@@ -9,11 +9,11 @@
     "export": "NODE_ENV=production next build && next export",
     "test": "npm run lint",
     "lint": "npm run lint:css && npm run lint:ts && npm run lint:types",
+    "lint-prod": "NODE_ENV=production npm run lint",
     "lint:css": "stylelint '**/*.tsx'",
     "lint:ts": "eslint . --ext .ts,.tsx",
     "lint:ts-fix": "eslint . --ext .ts,.tsx --fix",
     "lint:types": "tsc",
-    "lint:html": "htmlhint out",
     "gen:types-contentful": "graphql-codegen --config codegen.yml -r dotenv-flow/config",
     "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
     "storybook": "start-storybook -p 6006 --quiet",
@@ -21,7 +21,7 @@
     "snapshot": "npm run build-storybook && percy-storybook --widths=320 -t=500",
     "analyze": "cross-env ANALYZE=true next build",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect && .husky/install.sh"
   },
   "keywords": [],
   "repository": "github:schoenwaldnils/timeline",
@@ -55,8 +55,6 @@
     "graphql-request": "^3.4.0",
     "graphql-tag": "^2.12.5",
     "html-react-parser": "^1.2.6",
-    "htmlhint": "^0.14.2",
-    "husky": "^6.0.0",
     "lodash": "^4.17.21",
     "next": "^12.0.4",
     "qs": "^6.10.1",
@@ -69,7 +67,7 @@
     "react-query": "^2.26.4",
     "react-swipeable": "^6.1.2",
     "shallowequal": "^1.1.0",
-    "snyk": "^1.763.0",
+    "snyk": "^1.777.0",
     "typescript": "^4.5.2",
     "url-loader": "^4.1.1",
     "use-http": "^1.0.20"
@@ -90,22 +88,12 @@
     "cli-real-favicon": "^0.0.8",
     "eslint": "^7.25.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "lint-staged": "^10.5.4",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
     "prettier": "^2.4.1",
     "stylelint": "^13.13.1",
     "stylelint-config-schoenwaldnils": "^3.0.0",
     "stylelint-processor-styled-components": "^1.10.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "NODE_ENV=production lint-staged && npm run lint:types"
-    }
-  },
-  "lint-staged": {
-    "**/*.(ts|tsx)": [
-      "eslint --fix",
-      "stylelint --formatter verbose"
-    ]
   },
   "snyk": true
 }
