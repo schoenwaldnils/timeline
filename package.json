@@ -21,7 +21,7 @@
     "snapshot": "npm run build-storybook && percy-storybook --widths=320 -t=500",
     "analyze": "cross-env ANALYZE=true next build",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect && husky install"
+    "prepare": "npm run snyk-protect && .husky/install.sh"
   },
   "keywords": [],
   "repository": "github:schoenwaldnils/timeline",
