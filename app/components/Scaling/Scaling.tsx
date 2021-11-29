@@ -19,23 +19,24 @@ export const Scaling: FC = (props) => {
   const { t } = useTranslation()
   const { store, dispatch } = useStore()
   const map = {
-    1: 0.0625,
-    2: 0.125,
-    3: 0.25,
-    4: 0.5,
-    5: 1,
-    6: 2,
-    7: 4,
-    8: 8,
-    9: 16,
+    1: 1 / 8,
+    2: 1 / 6,
+    3: 1 / 4,
+    4: 1 / 3,
+    5: 1 / 2, // 200 years = 100px
+    6: 1,
+    7: 2,
+    8: 4,
+    9: 8,
+    10: 16,
   }
 
   const [valueKey] = Object.keys(map).filter((key) => map[key] === store.scale)
 
   const value = parseInt(valueKey, 10)
 
-  const MIN_SCALE = 2
-  const MAX_SCALE = 7
+  const MIN_SCALE = 1
+  const MAX_SCALE = 8
 
   const increaseScale = () => {
     dispatch({
