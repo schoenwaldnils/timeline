@@ -18,17 +18,17 @@ export const ContentTime: FC<Time> = ({
   image,
   wolLink,
 }) => {
-  const { t } = useTranslation('time')
+  const { t } = useTranslation()
 
   let list = {
-    [t('start')]: OurTime(startYear),
-    [t('end')]: endYear ? OurTime(endYear) : t('ongoing'),
+    [t('time.start')]: OurTime(startYear),
+    [t('time.end')]: endYear ? OurTime(endYear) : t('time.ongoing'),
   }
 
   if (duration) {
     list = {
       ...list,
-      [t('duration')]: `${duration} ${t('years')}`,
+      [t('time.duration')]: `${duration} ${t('time.years')}`,
     }
   }
 

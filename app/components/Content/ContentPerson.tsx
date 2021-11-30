@@ -29,8 +29,7 @@ export const ContentPerson: FC<Person> = ({
   wolLink,
 }) => {
   const { dispatch } = useStore()
-  const { t: tC } = useTranslation('common')
-  const { t: tT } = useTranslation('time')
+  const { t } = useTranslation()
 
   const changeContent = (newId: string) => {
     dispatch({
@@ -55,7 +54,7 @@ export const ContentPerson: FC<Person> = ({
     const blurAmount = blur / 2
     const blurString = blurAmount <= 20 ? '' : blurAmount
 
-    return `${tC('approx')} ${OurTime(blurYear)} (+-${blurString})`
+    return `${t('approx')} ${OurTime(blurYear)} (+-${blurString})`
   }
 
   let list: Record<string, unknown> = {}
@@ -63,28 +62,28 @@ export const ContentPerson: FC<Person> = ({
   if (startYear) {
     list = {
       ...list,
-      [tT('born')]: yearBlur(startYear, startBlurriness, 'start'),
+      [t('time.born')]: yearBlur(startYear, startBlurriness, 'start'),
     }
   }
 
   if (endYear) {
     list = {
       ...list,
-      [tT('died')]: yearBlur(endYear, endBlurriness, 'end'),
+      [t('time.died')]: yearBlur(endYear, endBlurriness, 'end'),
     }
   }
 
   if (age && !startBlurriness && !endBlurriness) {
     list = {
       ...list,
-      [tT('span')]: `${age} ${tT('years')}`,
+      [t('time.span')]: `${age} ${t('time.years')}`,
     }
   }
 
   if (father) {
     list = {
       ...list,
-      [tC('relations-father')]: (
+      [t('relations.father')]: (
         <TextButton onClick={() => changeContent(fatherID)}>
           {father}
         </TextButton>
@@ -95,7 +94,7 @@ export const ContentPerson: FC<Person> = ({
   if (mother) {
     list = {
       ...list,
-      [tC('relations-mother')]: (
+      [t('relations.mother')]: (
         <TextButton onClick={() => changeContent(motherID)}>
           {mother}
         </TextButton>
@@ -106,7 +105,7 @@ export const ContentPerson: FC<Person> = ({
   if (spouse.length > 1) {
     list = {
       ...list,
-      [tC('relations-spouse')]: (
+      [t('relations.spouse')]: (
         <UL>
           {spouse.map(({ id: spouseID, name: spouseName }) => (
             <LI key={`spouse-${spouseID}`}>
@@ -121,7 +120,7 @@ export const ContentPerson: FC<Person> = ({
   } else if (spouse.length === 1) {
     list = {
       ...list,
-      [tC('relations-spouse')]: (
+      [t('relations.spouse')]: (
         <TextButton onClick={() => changeContent(spouse[0].id)}>
           {spouse[0].name}
         </TextButton>
@@ -132,7 +131,7 @@ export const ContentPerson: FC<Person> = ({
   if (childs.length > 0) {
     list = {
       ...list,
-      [tC('relations-children')]: (
+      [t('relations.children')]: (
         <UL>
           {childs.map(({ id: childID, name: childName }) => (
             <LI key={`child-${childID}`}>

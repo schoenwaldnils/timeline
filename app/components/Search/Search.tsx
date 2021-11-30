@@ -23,7 +23,7 @@ const Icon = styled(SearchIcon)`
 `
 
 export const Search: FC = () => {
-  const { t } = useTranslation('ui')
+  const { t } = useTranslation()
   const [isActive, setIsActive] = useState(false)
 
   if (isActive) {
@@ -39,7 +39,7 @@ export const Search: FC = () => {
   return (
     <Icon
       role="button"
-      aria-label={t('search')}
+      aria-label={t('ui.search')}
       onClick={() => setIsActive(true)}
     />
   )

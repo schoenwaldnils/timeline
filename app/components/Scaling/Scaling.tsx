@@ -16,7 +16,7 @@ const ButtonSpaced = styled(ButtonSquare)`
 `
 
 export const Scaling: FC = (props) => {
-  const { t } = useTranslation('ui')
+  const { t } = useTranslation()
   const { store, dispatch } = useStore()
   const map = {
     1: 1 / 8,
@@ -57,16 +57,16 @@ export const Scaling: FC = (props) => {
       <ButtonSpaced
         onClick={decreaseScale}
         disabled={value <= MIN_SCALE}
-        title={t('scale-down')}
-        aria-label={t('scale-down')}
+        title={t('ui.scale-down')}
+        aria-label={t('ui.scale-down')}
       >
         -
       </ButtonSpaced>
       <ButtonSpaced
         onClick={increaseScale}
         disabled={value >= MAX_SCALE}
-        title={t('scale-up')}
-        aria-label={t('scale-up')}
+        title={t('ui.scale-up')}
+        aria-label={t('ui.scale-up')}
       >
         +
       </ButtonSpaced>

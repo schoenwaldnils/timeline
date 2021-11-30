@@ -31,7 +31,7 @@ export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
   pixelYear,
   scale,
 }) => {
-  const { t } = useTranslation('time')
+  const { t } = useTranslation()
   const [tempPixelYear, setTempPixelYear] = useState(pixelYear)
 
   useEffect(() => {
@@ -57,7 +57,9 @@ export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
     <Wrapper style={properties}>
       <Time>
         {isNegative ? year * -1 : year}{' '}
-        {isNegative ? t('extension-negative') : t('extension-positive')}
+        {isNegative
+          ? t('time.extension-negative')
+          : t('time.extension-positive')}
       </Time>
     </Wrapper>
   )

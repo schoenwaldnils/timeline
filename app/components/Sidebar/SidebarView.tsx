@@ -81,7 +81,7 @@ export const SidebarView: FC<SidebarViewProps> = ({
   children,
   closeSidebar,
 }) => {
-  const { t } = useTranslation('ui')
+  const { t } = useTranslation()
   const handlers = useSwipeable({
     onSwipedRight: () => closeSidebar(),
     delta: 30,
@@ -91,7 +91,7 @@ export const SidebarView: FC<SidebarViewProps> = ({
     <SidebarContainer isActive={isActive} role="dialog" {...handlers}>
       {children && <SidebarContent>{children}</SidebarContent>}
       <ButtonWrapper>
-        <Close aria-label={t('closeSidebar')} onClick={closeSidebar}>
+        <Close aria-label={t('ui.closeSidebar')} onClick={closeSidebar}>
           <Icon />
         </Close>
       </ButtonWrapper>

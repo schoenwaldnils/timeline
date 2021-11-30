@@ -14,7 +14,7 @@ const StyledA = styled(A)`
 `
 
 export const ContentfulLink: FC<ContentfulLinkProps> = ({ id }) => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
 
   return (
     <StyledA

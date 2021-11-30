@@ -1,11 +1,19 @@
 import { addDecorator } from '@storybook/react'
 import * as NextImage from 'next/image'
-import { I18nextProvider } from 'react-i18next'
 import i18n from './i18n'
 
 import { StoreProvider } from '../app/components/Store/StoreProvider'
 import { SearchProvider } from '../app/components/Search'
 import { GlobalStyles } from '../app/components/GlobalStyles'
+
+export const parameters = {
+  i18n,
+  locale: 'en',
+  locales: {
+    en: 'English',
+    de: 'Deutsch',
+  },
+}
 
 const OriginalNextImage = NextImage.default
 
@@ -19,12 +27,10 @@ Object.defineProperty(NextImage, 'default', {
 })
 
 addDecorator((storyFn) => (
-  <I18nextProvider i18n={i18n}>
-    <StoreProvider>
-      <SearchProvider>
-        <GlobalStyles />
-        <div>{storyFn()}</div>
-      </SearchProvider>
-    </StoreProvider>
-  </I18nextProvider>
+  <StoreProvider>
+    <SearchProvider>
+      <GlobalStyles />
+      <div>{storyFn()}</div>
+    </SearchProvider>
+  </StoreProvider>
 ))

@@ -21,13 +21,13 @@ export const ThemeSwitchView: FC<ThemeSwitchViewProps> = ({
   isDark = false,
   ...props
 }) => {
-  const { t } = useTranslation('ui')
+  const { t } = useTranslation()
   return (
     <ButtonSquare
       {...props}
       onClick={toggleTheme}
-      title={t('toggle-dark-mode')}
-      aria-label={t('toggle-dark-mode')}
+      title={t('ui.toggle-dark-mode')}
+      aria-label={t('ui.toggle-dark-mode')}
     >
       {isDark ? <IconLight /> : <IconDark />}
     </ButtonSquare>
