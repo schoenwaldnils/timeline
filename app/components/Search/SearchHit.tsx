@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 import Highlighter from 'react-highlight-words'
 
-import { useStore } from '../Store'
 import DefaultImgUrl from './defaultImg.svg'
 
 const IMAGE_SIZE = 28
@@ -65,8 +65,7 @@ export const SearchHit: FC<HitType> = ({
   _highlightResult,
   ...hit
 }) => {
-  const { store } = useStore()
-  const { locale } = store
+  const { i18n } = useTranslation('common')
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,
@@ -78,14 +77,15 @@ export const SearchHit: FC<HitType> = ({
     ? `${imageUrl}?w=${IMAGE_SIZE * 2}&h=${IMAGE_SIZE * 2}&fit=fill`
     : (defaultImages[type] as string)
 
-  const searchWords = _highlightResult[`name_${locale}`]?.matchedWords || []
+  const searchWords =
+    _highlightResult[`name_${i18n.language}`]?.matchedWords || []
 
   return (
     <Wrapper onClick={() => selectHit(objectID)} indexType={type}>
       <Highlighter
         searchWords={searchWords}
         autoEscape={true}
-        textToHighlight={hit[`name_${locale}`]}
+        textToHighlight={hit[`name_${i18n.language}`]}
       />
       <Image src={imgSrc} />
     </Wrapper>

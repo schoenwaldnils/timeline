@@ -1,7 +1,7 @@
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 
 import { Time } from '../../../@types/Time'
-import { useTranslation } from '../../hooks/useTranslation'
 import { OurTime } from '../OurTime'
 import { RichText } from '../RichText'
 import { TableList } from '../TableList'
@@ -18,17 +18,17 @@ export const ContentTime: FC<Time> = ({
   image,
   wolLink,
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('time')
 
   let list = {
-    [t('time.start')]: OurTime(startYear),
-    [t('time.end')]: endYear ? OurTime(endYear) : t('time.ongoing'),
+    [t('start')]: OurTime(startYear),
+    [t('end')]: endYear ? OurTime(endYear) : t('ongoing'),
   }
 
   if (duration) {
     list = {
       ...list,
-      [t('time.duration')]: `${duration} ${t('time.years')}`,
+      [t('duration')]: `${duration} ${t('years')}`,
     }
   }
 

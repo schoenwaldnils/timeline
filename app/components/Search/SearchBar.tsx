@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC, useEffect, useRef } from 'react'
 
 import { shades } from '../../data/colors'
-import { useTranslation } from '../../hooks/useTranslation'
 
 const Wrapper = styled.input`
   width: 12rem;
@@ -24,7 +24,7 @@ export const SearchBar: FC<{
   searchValue: string
   setSearchValue: (value: string) => void
 }> = ({ searchValue, setSearchValue }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('ui')
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const SearchBar: FC<{
         ref={inputRef}
         type="search"
         value={searchValue}
-        placeholder={`${t('ui.search')}...`}
+        placeholder={`${t('search')}...`}
         onChange={(event) => setSearchValue(event.currentTarget.value)}
       />
     </form>

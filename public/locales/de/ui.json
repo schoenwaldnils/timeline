@@ -1,0 +1,18 @@
+{
+  "close-sidebar": "Seitenleiste schließen",
+  "change-language": "Sprache ändern",
+  "language": "Deutsch",
+  "search": "Suchen",
+  "change-scaling": "Skalierung ändern",
+  "scale-up": "vergrößern",
+  "scale-down": "verkleinern",
+  "filter-elements": "filter Elemente",
+  "person": "Person",
+  "persons": "Personen",
+  "time": "Zeitabschnitt",
+  "times": "Zeitabschnitte",
+  "event": "Ereignis",
+  "events": "Ereignisse",
+  "not-found": "Keine %value% gefunden",
+  "toggle-dark-mode": "zwischen hellem und dunklem Modus wechseln"
+}

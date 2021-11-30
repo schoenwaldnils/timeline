@@ -1,10 +1,8 @@
 import { createContext, Dispatch, useContext } from 'react'
 
-import { LOCALES } from '../../utils/intl/intlConsts'
 import { Action, Store } from './reducer'
 
 export const initialState: Store = {
-  locale: LOCALES.EN,
   scale: 1,
   sidebarId: undefined,
   filter: {

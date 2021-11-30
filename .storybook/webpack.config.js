@@ -12,5 +12,12 @@ module.exports = ({ config }) => {
 
   config.resolve.extensions.push('.ts', '.tsx', '.svg')
 
+  // to solve "Can't resolve 'fs' in 'node_modules/next-i18next'"
+  // https://github.com/isaachinman/next-i18next/issues/935#issuecomment-784668711
+  config.resolve.alias = {
+    ...config.resolve.alias,
+    'next-i18next': 'react-i18next',
+  }
+
   return sharedConfig(config)
 }
