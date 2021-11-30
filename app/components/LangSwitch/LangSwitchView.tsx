@@ -77,17 +77,20 @@ export const LangSwitchView: FC<LangSwitchViewProps> = forwardRef(
     { isActive = false, toggleIsActive, handleButtonClick, currentLocale },
     ref,
   ) => {
-    const { t } = useTranslation('ui')
+    const { t } = useTranslation()
 
     const supportedLocales = ['en', 'de']
     const locales = { en: 'English', de: 'Deutsch' }
 
     return (
       <Wrapper ref={ref}>
-        <IconButton onClick={toggleIsActive} aria-label={t('changeanguage')}>
+        <IconButton
+          onClick={toggleIsActive}
+          aria-label={t('ui.change-language')}
+        >
           <Svg aria-hidden="true" focusable="false" role="img" />
 
-          <Text>{t('language')}</Text>
+          <Text>{t('ui.language')}</Text>
         </IconButton>
 
         {isActive && (

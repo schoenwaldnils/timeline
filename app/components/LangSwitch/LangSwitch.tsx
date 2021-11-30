@@ -8,7 +8,7 @@ import { LangSwitchView } from './LangSwitchView'
 
 export const LangSwitch: FC = () => {
   const router = useRouter()
-  const { i18n } = useTranslation('common')
+  const { i18n } = useTranslation()
   const [, setCookie] = useCookies(['NEXT_LOCALE'])
   const [isActive, setIsActive] = useState(false)
 

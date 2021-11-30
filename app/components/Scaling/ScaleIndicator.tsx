@@ -37,14 +37,14 @@ const Indicator = styled.div`
 `
 
 export const ScaleIndicator: FC = () => {
-  const { t } = useTranslation('time')
+  const { t } = useTranslation()
   const { store } = useStore()
 
   const yearsPer100Pixel = 100 / store.scale
 
   return (
     <Wrapper>
-      {yearsPer100Pixel} {t('years')} <Indicator />
+      {yearsPer100Pixel} {t('time.years')} <Indicator />
     </Wrapper>
   )
 }

@@ -24,7 +24,7 @@ export const SearchBar: FC<{
   searchValue: string
   setSearchValue: (value: string) => void
 }> = ({ searchValue, setSearchValue }) => {
-  const { t } = useTranslation('ui')
+  const { t } = useTranslation()
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const SearchBar: FC<{
         ref={inputRef}
         type="search"
         value={searchValue}
-        placeholder={`${t('search')}...`}
+        placeholder={`${t('ui.search')}...`}
         onChange={(event) => setSearchValue(event.currentTarget.value)}
       />
     </form>

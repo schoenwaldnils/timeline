@@ -65,7 +65,7 @@ export const SearchHit: FC<HitType> = ({
   _highlightResult,
   ...hit
 }) => {
-  const { i18n } = useTranslation('common')
+  const { i18n } = useTranslation()
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,

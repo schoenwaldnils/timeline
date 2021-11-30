@@ -28,14 +28,16 @@ interface HitProps {
 }
 
 const Hits: FC<HitProps> = ({ hits, type, selectHit }) => {
-  const { t } = useTranslation('ui')
+  const { t } = useTranslation()
 
   const plural = hits.length > 1 ? 's' : ''
 
-  const typeString = t(`${type}${plural}`)
+  const typeString = t(`ui.${type}${plural}`)
 
   if (!hits.length) {
-    return <HitsTitle>{t(`notFound`, { value: t(`${type}s`) })}</HitsTitle>
+    return (
+      <HitsTitle>{t(`ui.notFound`, { value: t(`ui.${type}s`) })}</HitsTitle>
+    )
   }
 
   return (

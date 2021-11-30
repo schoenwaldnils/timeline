@@ -3,8 +3,41 @@
   "unnown": "unbekannt",
   "approx": "ca.",
   "contentful-edit": "In Contentful editieren",
-  "relations-spouse": "Ehepartner",
-  "relations-father": "Vater",
-  "relations-mother": "Mutter",
-  "relations-children": "Kinder"
+  "relations": {
+    "spouse": "Ehepartner",
+    "father": "Vater",
+    "mother": "Mutter",
+    "children": "Kinder"
+  },
+  "time": {
+    "extension-positive": "u.Z.",
+    "extension-negative": "v.u.Z.",
+    "year": "Jahr",
+    "years": "Jahre",
+    "start": "Start",
+    "end": "Ende",
+    "duration": "Dauer",
+    "ongoing": "andauernd",
+    "born": "geboren",
+    "died": "gestorben",
+    "span": "Lebensdauer"
+  },
+  "ui": {
+    "close-sidebar": "Seitenleiste schließen",
+    "change-language": "Sprache ändern",
+    "language": "Deutsch",
+    "search": "Suchen",
+    "change-scaling": "Skalierung ändern",
+    "scale-up": "vergrößern",
+    "scale-down": "verkleinern",
+    "filter-elements": "filter Elemente",
+    "person": "Person",
+    "persons": "Personen",
+    "time": "Zeitabschnitt",
+    "times": "Zeitabschnitte",
+    "event": "Ereignis",
+    "events": "Ereignisse",
+    "not-found": "Keine %value% gefunden",
+    "toggle-dark-mode": "zwischen hellem und dunklem Modus wechseln"
+  }
 }

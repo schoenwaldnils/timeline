@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async ({
     props: {
       preview,
       timelineData,
-      ...(await serverSideTranslations(locale, ['common', 'time', 'ui'])),
+      ...(await serverSideTranslations(locale, ['common'])),
       ...params,
     },
   }

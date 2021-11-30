@@ -67,24 +67,24 @@ interface FilterViewProps {
 
 export const FilterView: FC<FilterViewProps> = forwardRef(
   ({ isActive = false, toggleIsActive, handleChange, filterState }, ref) => {
-    const { t } = useTranslation('ui')
+    const { t } = useTranslation()
 
     const filterElements = [
       {
         id: 'persons',
-        label: t('persons'),
+        label: t('ui.persons'),
         name: 'personsAreActive',
         value: filterState.personsAreActive,
       },
       {
         id: 'times',
-        label: t('times'),
+        label: t('ui.times'),
         name: 'timesAreActive',
         value: filterState.timesAreActive,
       },
       {
         id: 'events',
-        label: t('events'),
+        label: t('ui.events'),
         name: 'eventsAreActive',
         value: filterState.eventsAreActive,
       },
@@ -92,7 +92,10 @@ export const FilterView: FC<FilterViewProps> = forwardRef(
 
     return (
       <Wrapper ref={ref}>
-        <IconButton onClick={toggleIsActive} aria-label={t('filter-elements')}>
+        <IconButton
+          onClick={toggleIsActive}
+          aria-label={t('ui.filter-elements')}
+        >
           <Icon
             aria-hidden="true"
             focusable="false"
