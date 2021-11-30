@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 
-import { useTranslation } from '../../hooks/useTranslation'
 import { useStore } from '../Store'
 
 const Wrapper = styled.div`
@@ -37,14 +37,14 @@ const Indicator = styled.div`
 `
 
 export const ScaleIndicator: FC = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('time')
   const { store } = useStore()
 
   const yearsPer100Pixel = 100 / store.scale
 
   return (
     <Wrapper>
-      {yearsPer100Pixel} {t('time.years')} <Indicator />
+      {yearsPer100Pixel} {t('years')} <Indicator />
     </Wrapper>
   )
 }

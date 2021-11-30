@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC, MouseEvent } from 'react'
 import { WiDaySunny, WiMoonAltWaningCrescent5 } from 'react-icons/wi'
 
-import { useTranslation } from '../../hooks/useTranslation'
 import { ButtonSquare } from '../Button'
 
 const IconLight = WiDaySunny
@@ -21,12 +21,13 @@ export const ThemeSwitchView: FC<ThemeSwitchViewProps> = ({
   isDark = false,
   ...props
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('ui')
   return (
     <ButtonSquare
       {...props}
       onClick={toggleTheme}
-      aria-label={t('ui.toggleDarkMode')}
+      title={t('toggle-dark-mode')}
+      aria-label={t('toggle-dark-mode')}
     >
       {isDark ? <IconLight /> : <IconDark />}
     </ButtonSquare>

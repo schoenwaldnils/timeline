@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 import { connectHits, Index } from 'react-instantsearch-dom'
 
-import { useTranslation } from '../../hooks/useTranslation'
 import { HR } from '../Typography'
 import { HitType, SearchHit } from './SearchHit'
 
@@ -28,16 +28,14 @@ interface HitProps {
 }
 
 const Hits: FC<HitProps> = ({ hits, type, selectHit }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('ui')
 
   const plural = hits.length > 1 ? 's' : ''
 
-  const typeString = t(`ui.${type}${plural}`)
+  const typeString = t(`${type}${plural}`)
 
   if (!hits.length) {
-    return (
-      <HitsTitle>{t(`ui.notFound`, { value: t(`ui.${type}s`) })}</HitsTitle>
-    )
+    return <HitsTitle>{t(`notFound`, { value: t(`${type}s`) })}</HitsTitle>
   }
 
   return (

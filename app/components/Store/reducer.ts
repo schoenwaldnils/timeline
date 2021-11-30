@@ -1,5 +1,4 @@
 import { removeUrlHash, setUrlHash } from '../../js/urlHash'
-import { Locale } from '../../utils/intl/intlConsts'
 import { isBrowser } from '../../utils/isBrowser'
 import {
   getUserLocalStore,
@@ -8,7 +7,6 @@ import {
 } from './userStore'
 
 export const SET_INIT = 'SET_INIT'
-export const SET_LOCALE = 'SET_LOCALE'
 export const SET_SCALE = 'SET_SCALE'
 export const CHANGE_CONTENT = 'CHANGE_CONTENT'
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
@@ -16,7 +14,6 @@ export const SET_FILTER = 'SET_FILTER'
 export const SET_THEME = 'SET_THEME'
 
 type SET_INIT = 'SET_INIT'
-type SET_LOCALE = 'SET_LOCALE'
 type SET_SCALE = 'SET_SCALE'
 type CHANGE_CONTENT = 'CHANGE_CONTENT'
 type CLOSE_SIDEBAR = 'CLOSE_SIDEBAR'
@@ -24,7 +21,6 @@ type SET_FILTER = 'SET_FILTER'
 type SET_THEME = 'SET_THEME'
 
 export type Store = {
-  locale: Locale
   scale: number
   sidebarId?: string
   filter: {
@@ -43,7 +39,6 @@ type Filter = {
 
 export type Action =
   | { type: SET_INIT }
-  | { type: SET_LOCALE; locale: string }
   | { type: SET_SCALE; scale: number }
   | { type: CHANGE_CONTENT; contentId: string }
   | { type: CLOSE_SIDEBAR }
@@ -75,15 +70,6 @@ export const reducer: Reducer<Store, Action> = (store, action) => {
       return {
         ...store,
         ...getUserLocalStore(),
-      }
-
-    case SET_LOCALE:
-      setUserLocalStore({
-        locale: action.locale,
-      })
-      return {
-        ...store,
-        locale: action.locale,
       }
 
     case SET_SCALE:

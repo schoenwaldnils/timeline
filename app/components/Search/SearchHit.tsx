@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import Highlighter from 'react-highlight-words'
 
-import { useStore } from '../Store'
 import DefaultImgUrl from './defaultImg.svg'
 
 const IMAGE_SIZE = 28
@@ -65,8 +65,7 @@ export const SearchHit: FC<HitType> = ({
   _highlightResult,
   ...hit
 }) => {
-  const { store } = useStore()
-  const { locale } = store
+  const { locale } = useRouter()
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,
