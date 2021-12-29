@@ -43,8 +43,6 @@ export const ScaleIndicator: FC = () => {
 
   const yearsPer100Pixel = 100 / store.scale
 
-  console.log({ yearsPer100Pixel, scale: store.scale })
-
   return (
     <Wrapper>
       {yearsPer100Pixel} {t('time.year', { count: yearsPer100Pixel })}{' '}
