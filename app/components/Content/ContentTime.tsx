@@ -28,7 +28,9 @@ export const ContentTime: FC<Time> = ({
   if (duration) {
     list = {
       ...list,
-      [t('time.duration')]: `${duration} ${t('time.years')}`,
+      [t('time.duration')]: `${duration} ${t('time.year', {
+        count: duration,
+      })}`,
     }
   }
 

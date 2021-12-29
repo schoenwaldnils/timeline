@@ -7,13 +7,14 @@
     "spouse": "Ehepartner",
     "father": "Vater",
     "mother": "Mutter",
-    "children": "Kinder"
+    "child_one": "Kind",
+    "child_other": "Kinder"
   },
   "time": {
     "extension-positive": "u.Z.",
     "extension-negative": "v.u.Z.",
-    "year": "Jahr",
-    "years": "Jahre",
+    "year_one": "Jahr",
+    "year_other": "Jahre",
     "start": "Start",
     "end": "Ende",
     "duration": "Dauer",
@@ -31,13 +32,14 @@
     "scale-up": "vergrößern",
     "scale-down": "verkleinern",
     "filter-elements": "filter Elemente",
-    "person": "Person",
-    "persons": "Personen",
-    "time": "Zeitabschnitt",
-    "times": "Zeitabschnitte",
-    "event": "Ereignis",
-    "events": "Ereignisse",
-    "not-found": "Keine %value% gefunden",
+    "person_one": "Person",
+    "person_other": "Personen",
+    "time_one": "Zeitabschnitt",
+    "time_other": "Zeitabschnitte",
+    "event_one": "Ereignis",
+    "event_other": "Ereignisse",
+    "not-found": "Kein {{type}} gefunden",
+    "not-found_female": "Keine {{type}} gefunden",
     "toggle-dark-mode": "zwischen hellem und dunklem Modus wechseln"
   }
 }

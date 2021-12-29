@@ -4,16 +4,18 @@
   "approx": "approx.",
   "contentful-edit": "Edit in Contentful",
   "relations": {
-    "spouse": "spouse",
+    "spouse_one": "spouse",
+    "spouse_other": "spouses",
     "father": "father",
     "mother": "mother",
-    "children": "children"
+    "child_one": "child",
+    "child_other": "children"
   },
   "time": {
     "extension-positive": "C.E.",
     "extension-negative": "B.C.E.",
-    "year": "year",
-    "years": "years",
+    "year_one": "year",
+    "year_other": "years",
     "start": "start",
     "end": "end",
     "duration": "duration",
@@ -31,13 +33,13 @@
     "scale-up": "scale up",
     "scale-down": "scale down",
     "filter-elements": "filter elements",
-    "person": "person",
-    "persons": "persons",
-    "time": "time",
-    "times": "times",
-    "event": "event",
-    "events": "events",
-    "not-found": "No %value% found",
+    "person_one": "person",
+    "person_other": "persons",
+    "time_one": "time",
+    "time_other": "times",
+    "event_one": "event",
+    "event_other": "events",
+    "not-found": "No {{type}} found",
     "toggle-dark-mode": "toggle dark mode"
   }
 }

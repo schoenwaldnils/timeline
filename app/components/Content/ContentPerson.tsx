@@ -76,7 +76,7 @@ export const ContentPerson: FC<Person> = ({
   if (age && !startBlurriness && !endBlurriness) {
     list = {
       ...list,
-      [t('time.span')]: `${age} ${t('time.years')}`,
+      [t('time.span')]: `${age} ${t('time.year', { count: age })}`,
     }
   }
 
@@ -102,10 +102,10 @@ export const ContentPerson: FC<Person> = ({
     }
   }
 
-  if (spouse.length > 1) {
+  if (spouse.length >= 2) {
     list = {
       ...list,
-      [t('relations.spouse')]: (
+      [t('relations.spouse', { count: spouse.length })]: (
         <UL>
           {spouse.map(({ id: spouseID, name: spouseName }) => (
             <LI key={`spouse-${spouseID}`}>
@@ -120,7 +120,7 @@ export const ContentPerson: FC<Person> = ({
   } else if (spouse.length === 1) {
     list = {
       ...list,
-      [t('relations.spouse')]: (
+      [t('relations.spouse', { count: 1 })]: (
         <TextButton onClick={() => changeContent(spouse[0].id)}>
           {spouse[0].name}
         </TextButton>
@@ -128,19 +128,28 @@ export const ContentPerson: FC<Person> = ({
     }
   }
 
-  if (childs.length > 0) {
+  if (childs.length >= 2) {
     list = {
       ...list,
-      [t('relations.children')]: (
+      [t('relations.child', { count: childs.length })]: (
         <UL>
-          {childs.map(({ id: childID, name: childName }) => (
-            <LI key={`child-${childID}`}>
-              <TextButton onClick={() => changeContent(childID)}>
-                {childName}
+          {childs.map(({ id: childsID, name: childsName }) => (
+            <LI key={`child-${childsID}`}>
+              <TextButton onClick={() => changeContent(childsID)}>
+                {childsName}
               </TextButton>
             </LI>
           ))}
         </UL>
+      ),
+    }
+  } else if (childs.length === 1) {
+    list = {
+      ...list,
+      [t('relations.child', { count: 1 })]: (
+        <TextButton onClick={() => changeContent(childs[0].id)}>
+          {childs[0].name}
+        </TextButton>
       ),
     }
   }

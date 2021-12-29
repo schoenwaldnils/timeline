@@ -9,13 +9,17 @@ const List = styled.div`
 
 const ListItem = styled.div``
 
+const ListKey = styled(ListItem)`
+  text-transform: capitalize;
+`
+
 export const TableList: FC<{
   list: Record<string, unknown>
 }> = ({ list }) => (
   <List>
     {Object.keys(list).map((key) => (
       <Fragment key={key}>
-        <ListItem>{key}:</ListItem>
+        <ListKey>{key}:</ListKey>
         <ListItem>{list[key]}</ListItem>
       </Fragment>
     ))}
