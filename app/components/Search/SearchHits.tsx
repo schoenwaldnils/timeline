@@ -36,7 +36,12 @@ const Hits: FC<HitProps> = ({ hits, type, selectHit }) => {
 
   if (!hits.length) {
     return (
-      <HitsTitle>{t(`ui.notFound`, { value: t(`ui.${type}s`) })}</HitsTitle>
+      <HitsTitle>
+        {t(`ui.not-found`, {
+          type: t(`ui.${type}`, { count: 1 }),
+          context: type === 'person' ? 'female' : null,
+        })}
+      </HitsTitle>
     )
   }
 
