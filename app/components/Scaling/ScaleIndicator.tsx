@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: baseline;
   font-size: 0.675rem;
+  text-transform: capitalize;
 `
 
 const Indicator = styled.div`
@@ -42,9 +43,12 @@ export const ScaleIndicator: FC = () => {
 
   const yearsPer100Pixel = 100 / store.scale
 
+  console.log({ yearsPer100Pixel, scale: store.scale })
+
   return (
     <Wrapper>
-      {yearsPer100Pixel} {t('time.years')} <Indicator />
+      {yearsPer100Pixel} {t('time.year', { count: yearsPer100Pixel })}{' '}
+      <Indicator />
     </Wrapper>
   )
 }

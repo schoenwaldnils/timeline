@@ -7,13 +7,14 @@
     "spouse": "Ehepartner",
     "father": "Vater",
     "mother": "Mutter",
-    "children": "Kinder"
+    "child_one": "Kind",
+    "child_other": "Kinder"
   },
   "time": {
     "extension-positive": "u.Z.",
     "extension-negative": "v.u.Z.",
-    "year": "Jahr",
-    "years": "Jahre",
+    "year_one": "Jahr",
+    "year_other": "Jahre",
     "start": "Start",
     "end": "Ende",
     "duration": "Dauer",

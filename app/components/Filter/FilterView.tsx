@@ -38,6 +38,7 @@ const Label = styled.label`
   font-size: 0.75rem;
   font-weight: 300;
   line-height: 1;
+  text-transform: capitalize;
 `
 
 const InputEl = styled.div`
@@ -72,19 +73,19 @@ export const FilterView: FC<FilterViewProps> = forwardRef(
     const filterElements = [
       {
         id: 'persons',
-        label: t('ui.persons'),
+        label: t('ui.person', { count: 2 }),
         name: 'personsAreActive',
         value: filterState.personsAreActive,
       },
       {
         id: 'times',
-        label: t('ui.times'),
+        label: t('ui.time', { count: 2 }),
         name: 'timesAreActive',
         value: filterState.timesAreActive,
       },
       {
         id: 'events',
-        label: t('ui.events'),
+        label: t('ui.event', { count: 2 }),
         name: 'eventsAreActive',
         value: filterState.eventsAreActive,
       },
