@@ -14,7 +14,7 @@ export const ContentEvent: FC<Event> = ({ id, name, year, image, wolLink }) => {
       <ContentBox>
         <TableList
           list={{
-            [t('time.year')]: OurTime(year),
+            [t('time.year', { count: 1 })]: OurTime(year),
           }}
         />
       </ContentBox>

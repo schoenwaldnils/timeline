@@ -21,6 +21,10 @@ const HitsTitle = styled.div`
   color: var(--Search-titleColor);
 `
 
+const HitsType = styled.span`
+  text-transform: capitalize;
+`
+
 interface HitProps {
   hits: HitType[]
   type: 'person' | 'time' | 'event'
@@ -30,9 +34,7 @@ interface HitProps {
 const Hits: FC<HitProps> = ({ hits, type, selectHit }) => {
   const { t } = useTranslation()
 
-  const plural = hits.length > 1 ? 's' : ''
-
-  const typeString = t(`ui.${type}${plural}`)
+  const typeString = t(`ui.${type}`, { count: hits.length })
 
   if (!hits.length) {
     return (
@@ -48,7 +50,7 @@ const Hits: FC<HitProps> = ({ hits, type, selectHit }) => {
   return (
     <>
       <HitsTitle>
-        {hits.length} {typeString}
+        {hits.length} <HitsType>{typeString}</HitsType>
       </HitsTitle>
       {hits.map((hit) => (
         <SearchHit
