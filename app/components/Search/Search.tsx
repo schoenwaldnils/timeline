@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { FC, useState } from 'react'
 
 import { useTranslation } from '../../hooks/useTranslation'
-import { ReactComponent as SearchIcon } from './searchIcon.svg'
+import { IconPadded } from '../Icon'
 
 const SearchContainer = dynamic(() => import('./SearchContainer'), {
   ssr: false,
@@ -14,12 +14,9 @@ const Wrapper = styled.div`
   position: relative;
 `
 
-const Icon = styled(SearchIcon)`
+const Icon = styled(IconPadded)`
   font-size: 1.25rem;
-
-  > path {
-    fill: currentColor;
-  }
+  cursor: pointer;
 `
 
 export const Search: FC = () => {
@@ -38,6 +35,7 @@ export const Search: FC = () => {
 
   return (
     <Icon
+      icon="search"
       role="button"
       aria-label={t('ui.search')}
       onClick={() => setIsActive(true)}

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { FC, useEffect, useRef } from 'react'
+import { FC, useCallback, useEffect, useRef } from 'react'
 import { useSearchBox } from 'react-instantsearch-hooks'
 
 import { shades } from '../../data/colors'
@@ -22,7 +22,7 @@ const Wrapper = styled.input`
 `
 
 export const SearchBar: FC = () => {
-  const { query, refine } = useSearchBox()
+  const { query, refine, clear } = useSearchBox()
 
   const { t } = useTranslation()
   const inputRef = useRef(null)
@@ -31,6 +31,17 @@ export const SearchBar: FC = () => {
     inputRef.current.focus()
   }, [])
 
+  const onChange = useCallback(
+    (value) => {
+      if (value) {
+        refine(value)
+      } else {
+        clear()
+      }
+    },
+    [clear, refine],
+  )
+
   return (
     <form noValidate action="" role="search">
       <Wrapper
@@ -38,7 +49,7 @@ export const SearchBar: FC = () => {
         type="search"
         value={query}
         placeholder={`${t('ui.search')}...`}
-        onChange={(event) => refine(event.currentTarget.value)}
+        onChange={(event) => onChange(event.currentTarget.value)}
       />
     </form>
   )

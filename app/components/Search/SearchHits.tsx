@@ -45,11 +45,11 @@ const Hits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
       {hits.map((hit) => (
         <SearchHit
           key={hit.objectID}
-          {...(({
+          {...({
             onHitClick,
             type,
             ...hit,
-          } as unknown) as HitType)}
+          } as unknown as HitType)}
         />
       ))}
     </>
