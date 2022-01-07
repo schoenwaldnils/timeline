@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useTranslation } from 'next-i18next'
 import { FC, useState } from 'react'
 
-import { IconPadded } from '../Icon'
+import { Icon } from '../Icon'
 
 const SearchContainer = dynamic(() => import('./SearchContainer'), {
   ssr: false,
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   position: relative;
 `
 
-const Icon = styled(IconPadded)`
+const IconStyled = styled(Icon)`
   font-size: 1.25rem;
   cursor: pointer;
 `
@@ -34,7 +34,7 @@ export const Search: FC = () => {
   }
 
   return (
-    <Icon
+    <IconStyled
       icon="search"
       role="button"
       aria-label={t('ui.search')}
