@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 import Highlighter from 'react-highlight-words'
 
+import { CHANGE_CONTENT, useStore } from '../Store'
 import DefaultImgUrl from './defaultImg.svg'
 
 const IMAGE_SIZE = 28
@@ -46,26 +47,38 @@ type HighlightResult = {
   matchedWords: string[]
 }
 
+type _HighlightResult = {
+  name_en: HighlightResult
+  name_de: HighlightResult
+}
+
 export type HitType = {
+  onHitClick: () => void
   type: 'person' | 'time' | 'event'
   objectID: string
-  imageUrl: string
+  imageUrl?: string
   selectHit: (id: string) => void
-  _highlightResult: {
-    name_en: HighlightResult
-    name_de: HighlightResult
-  }
+  _highlightResult: _HighlightResult
 }
 
 export const SearchHit: FC<HitType> = ({
+  onHitClick,
   type,
   objectID,
   imageUrl,
-  selectHit,
   _highlightResult,
   ...hit
 }) => {
+  const { dispatch } = useStore()
   const { i18n } = useTranslation()
+
+  const handleHitSelect = () => {
+    dispatch({
+      type: CHANGE_CONTENT,
+      contentId: objectID,
+    })
+    onHitClick()
+  }
 
   const defaultImages = {
     person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,
@@ -81,7 +94,7 @@ export const SearchHit: FC<HitType> = ({
     _highlightResult[`name_${i18n.language}`]?.matchedWords || []
 
   return (
-    <Wrapper onClick={() => selectHit(objectID)} indexType={type}>
+    <Wrapper onClick={handleHitSelect} indexType={type}>
       <Highlighter
         searchWords={searchWords}
         autoEscape={true}
