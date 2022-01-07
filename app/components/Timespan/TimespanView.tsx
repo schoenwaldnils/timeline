@@ -39,6 +39,7 @@ const TimespanWrapper = styled(ButtonPlain)<WrapperProps>`
   white-space: nowrap;
   cursor: pointer;
   background: ${({ background }) => background};
+  border-radius: 2px;
 `
 
 interface TimespanNameProps {

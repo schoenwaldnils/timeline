@@ -1,9 +1,19 @@
 import { addDecorator } from '@storybook/react'
 import * as NextImage from 'next/image'
+import i18n from './i18n'
 
 import { StoreProvider } from '../app/components/Store/StoreProvider'
 import { SearchProvider } from '../app/components/Search'
 import { GlobalStyles } from '../app/components/GlobalStyles'
+
+export const parameters = {
+  i18n,
+  locale: 'en',
+  locales: {
+    en: 'English',
+    de: 'Deutsch',
+  },
+}
 
 const OriginalNextImage = NextImage.default
 

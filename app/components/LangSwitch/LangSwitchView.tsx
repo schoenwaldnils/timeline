@@ -1,10 +1,8 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC, forwardRef, MouseEvent, Ref } from 'react'
 
-import translations from '../../data/translations'
-import { useTranslation } from '../../hooks/useTranslation'
 import { viewportsJs } from '../../js/viewports'
-import { Locale, SUPPORTED_LOCALES } from '../../utils/intl/intlConsts'
 import { Tooltip } from '../Tooltip'
 import { ReactComponent as LangIcon } from './langIcon.svg'
 
@@ -70,7 +68,7 @@ interface LangSwitchViewProps {
   isActive?: boolean
   toggleIsActive: (event: MouseEvent<HTMLButtonElement>) => void
   handleButtonClick: (lang: string) => void
-  currentLocale: Locale
+  currentLocale: string
   ref?: Ref<HTMLDivElement>
 }
 
@@ -81,11 +79,14 @@ export const LangSwitchView: FC<LangSwitchViewProps> = forwardRef(
   ) => {
     const { t } = useTranslation()
 
+    const supportedLocales = ['en', 'de']
+    const locales = { en: 'English', de: 'Deutsch' }
+
     return (
       <Wrapper ref={ref}>
         <IconButton
           onClick={toggleIsActive}
-          aria-label={t('ui.changeLanguage')}
+          aria-label={t('ui.change-language')}
         >
           <Svg aria-hidden="true" focusable="false" role="img" />
 
@@ -94,13 +95,13 @@ export const LangSwitchView: FC<LangSwitchViewProps> = forwardRef(
 
         {isActive && (
           <StyledTooltip alignRight>
-            {SUPPORTED_LOCALES.map((locale) => (
+            {supportedLocales.map((locale) => (
               <Button
                 key={locale}
                 disabled={locale === currentLocale}
                 onClick={() => handleButtonClick(locale)}
               >
-                {translations.ui.language[locale]}
+                {locales[locale]}
               </Button>
             ))}
           </StyledTooltip>

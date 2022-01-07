@@ -1,12 +1,12 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { IconButton } from '@material-ui/core'
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 import { MdVerticalAlignBottom } from 'react-icons/md'
 import { useSwipeable } from 'react-swipeable'
 
 import { zIndexes } from '../../data/constants'
-import { useTranslation } from '../../hooks/useTranslation'
 
 const isActiveStyles = css`
   opacity: 1;

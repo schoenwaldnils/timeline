@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 
 import { shades } from '../../data/colors'
-import { useTranslation } from '../../hooks/useTranslation'
 import { A } from '../Typography'
 
 interface ContentfulLinkProps {
@@ -22,7 +22,7 @@ export const ContentfulLink: FC<ContentfulLinkProps> = ({ id }) => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      {t('misc.contentfulEdit')}
+      {t('contentful-edit')}
     </StyledA>
   )
 }

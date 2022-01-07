@@ -1,0 +1,45 @@
+{
+  "meta-description": "Overview of biblical persons and events",
+  "unnown": "unnown",
+  "approx": "approx.",
+  "contentful-edit": "Edit in Contentful",
+  "relations": {
+    "spouse_one": "spouse",
+    "spouse_other": "spouses",
+    "father": "father",
+    "mother": "mother",
+    "child_one": "child",
+    "child_other": "children"
+  },
+  "time": {
+    "extension-positive": "C.E.",
+    "extension-negative": "B.C.E.",
+    "year_one": "year",
+    "year_other": "years",
+    "start": "start",
+    "end": "end",
+    "duration": "duration",
+    "ongoing": "ongoing",
+    "born": "born",
+    "died": "died",
+    "span": "lifespan"
+  },
+  "ui": {
+    "close-sidebar": "Close sidebar",
+    "change-language": "change language",
+    "language": "English",
+    "search": "Search",
+    "change-scaling": "change scaling",
+    "scale-up": "scale up",
+    "scale-down": "scale down",
+    "filter-elements": "filter elements",
+    "person_one": "person",
+    "person_other": "persons",
+    "time_one": "time",
+    "time_other": "times",
+    "event_one": "event",
+    "event_other": "events",
+    "not-found": "No {{type}} found",
+    "toggle-dark-mode": "toggle dark mode"
+  }
+}

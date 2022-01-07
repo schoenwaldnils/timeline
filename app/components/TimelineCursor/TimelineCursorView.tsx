@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { CSSProperties, FC, useEffect, useMemo, useState } from 'react'
 
-import { useTranslation } from '../../hooks/useTranslation'
 import { pixelToYear } from '../../js/calcTimes'
 
 const Wrapper = styled.div`
@@ -58,8 +58,8 @@ export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
       <Time>
         {isNegative ? year * -1 : year}{' '}
         {isNegative
-          ? t('time.extension.negative')
-          : t('time.extension.positive')}
+          ? t('time.extension-negative')
+          : t('time.extension-positive')}
       </Time>
     </Wrapper>
   )

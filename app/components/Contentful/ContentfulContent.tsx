@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { useQuery } from 'react-query'
 
@@ -10,7 +11,6 @@ import {
 import { fetchContentfulEntry } from '../../lib/fetchContentfulEntry'
 import { ContentEvent, ContentPerson, ContentTime } from '../Content'
 import { Loading, LoadingDots } from '../Loading'
-import { useStore } from '../Store'
 
 const ContentParent = (p) => <>{p.name}</>
 
@@ -39,8 +39,7 @@ interface Props {
 }
 
 export const ContentfulContent: FC<Props> = ({ id, isParent = false }) => {
-  const { store } = useStore()
-  const { locale } = store
+  const { locale } = useRouter()
 
   const { status, data, error } = useQuery(
     locale && id && [`contentfulEntry-${id}`, { locale, id }],

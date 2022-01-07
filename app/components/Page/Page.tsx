@@ -52,12 +52,12 @@ const Config = styled.div`
 `
 
 export const Page: FC<{
-  timelineData: { en: ContentfulTimelineData; de: ContentfulTimelineData }
+  timelineData: ContentfulTimelineData
 }> = ({ timelineData }) => {
   const { store } = useStore()
 
   const formatedData = formatTimelineData(
-    timelineData[store.locale],
+    timelineData,
     store.scale,
     store.filter,
   )

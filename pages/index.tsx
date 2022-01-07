@@ -1,38 +1,34 @@
 import { GetStaticProps, GetStaticPropsResult, NextPage } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { Page } from '../app/components/Page'
 import { ContentfulTimelineData } from '../app/js/objectFormating/formatTimelineData'
 import { fetchTimelineData } from '../app/lib/fetchTimelineData'
 
 const IndexPage: NextPage<{
-  timelineData: { en: ContentfulTimelineData; de: ContentfulTimelineData }
+  timelineData: ContentfulTimelineData
 }> = ({ timelineData }) => <Page timelineData={timelineData} />
 
 export default IndexPage
 
 export const getStaticProps: GetStaticProps = async ({
   params,
+  locale,
   preview = false,
 }): Promise<
   GetStaticPropsResult<{
     preview: boolean
-    timelineData: {
-      en: ContentfulTimelineData
-      de: ContentfulTimelineData
-    }
+    timelineData: ContentfulTimelineData
   }>
 > => {
   // TODO fetch preview
-  const dataEn = await fetchTimelineData('en')
-  const dataDe = await fetchTimelineData('de')
+  const timelineData = await fetchTimelineData(locale as 'en' | 'de')
 
   return {
     props: {
       preview,
-      timelineData: {
-        en: dataEn || null,
-        de: dataDe || null,
-      },
+      timelineData,
+      ...(await serverSideTranslations(locale, ['common'])),
       ...params,
     },
   }

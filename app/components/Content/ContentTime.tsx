@@ -1,7 +1,7 @@
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 
 import { Time } from '../../../@types/Time'
-import { useTranslation } from '../../hooks/useTranslation'
 import { OurTime } from '../OurTime'
 import { RichText } from '../RichText'
 import { TableList } from '../TableList'
@@ -28,7 +28,9 @@ export const ContentTime: FC<Time> = ({
   if (duration) {
     list = {
       ...list,
-      [t('time.duration')]: `${duration} ${t('time.years')}`,
+      [t('time.duration')]: `${duration} ${t('time.year', {
+        count: duration,
+      })}`,
     }
   }
 

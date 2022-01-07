@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app'
+import { appWithTranslation } from 'next-i18next'
 import { FC } from 'react'
 
 import { GlobalStyles } from '../app/components/GlobalStyles'
@@ -13,4 +14,4 @@ const TimelineApp: FC<AppProps> = ({ Component, pageProps }) => {
   )
 }
 
-export default TimelineApp
+export default appWithTranslation(TimelineApp)

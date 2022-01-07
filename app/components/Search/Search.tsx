@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import { ClickAwayListener } from '@material-ui/core'
 import dynamic from 'next/dynamic'
+import { useTranslation } from 'next-i18next'
 import { FC, useState } from 'react'
 
-import { useTranslation } from '../../hooks/useTranslation'
 import { IconPadded } from '../Icon'
 
 const SearchContainer = dynamic(() => import('./SearchContainer'), {

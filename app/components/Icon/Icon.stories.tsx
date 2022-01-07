@@ -7,6 +7,4 @@ export default {
   component: IconComponent,
 }
 
-export const Icon: FC = () => (
-  <IconComponent />
-)
+export const Icon: FC = () => <IconComponent icon="search" />

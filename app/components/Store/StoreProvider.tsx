@@ -32,6 +32,7 @@ export const StoreProvider: FC = ({ children }) => {
      * Read and listen to url hash
      */
     const handleUrlChange = () => {
+      // TODO: refactor to use next/router
       const localId = getUrlHash()
       if (localId) {
         dispatch({ type: CHANGE_CONTENT, contentId: localId })

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 import { Index, useHits } from 'react-instantsearch-hooks'
 
-import { useTranslation } from '../../hooks/useTranslation'
 import { HR } from '../Typography'
 import { HitType, SearchHit } from './SearchHit'
 
@@ -21,26 +21,34 @@ const HitsTitle = styled.div`
   color: var(--Search-titleColor);
 `
 
-const Hits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
+const HitsType = styled.span`
+  text-transform: capitalize;
+`
+
+const Hits: FC<{
+  type: 'person' | 'time' | 'event'
+  onHitClick: () => void
+}> = ({ type, onHitClick }) => {
   const { t } = useTranslation()
   const { hits, results } = useHits()
 
-  const plural = results.nbHits > 1 ? 's' : ''
-
-  const type = results.index
-
-  const typeString = t(`ui.${type}${plural}`)
+  const typeString = t(`ui.${type}`, { count: hits.length })
 
   if (!hits.length) {
     return (
-      <HitsTitle>{t(`ui.notFound`, { value: t(`ui.${type}s`) })}</HitsTitle>
+      <HitsTitle>
+        {t(`ui.not-found`, {
+          type: t(`ui.${type}`, { count: 1 }),
+          context: type === 'person' ? 'female' : null,
+        })}
+      </HitsTitle>
     )
   }
 
   return (
     <>
       <HitsTitle>
-        {results.nbHits} {typeString}
+        {results.nbHits} <HitsType>{typeString}</HitsType>
       </HitsTitle>
       {hits.map((hit) => (
         <SearchHit
@@ -59,10 +67,10 @@ const Hits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
 export const SearchHits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
   return (
     <SearchHitsContainer>
-      {indicies.map((index) => (
+      {indicies.map((index: 'person' | 'time' | 'event') => (
         <>
           <Index key={`index-${index}`} indexName={index}>
-            <Hits onHitClick={onHitClick} />
+            <Hits type={index} onHitClick={onHitClick} />
           </Index>
           <HR />
         </>

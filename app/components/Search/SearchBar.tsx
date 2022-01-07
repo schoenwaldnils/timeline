@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC, useCallback, useEffect, useRef } from 'react'
 import { useSearchBox } from 'react-instantsearch-hooks'
 
 import { shades } from '../../data/colors'
-import { useTranslation } from '../../hooks/useTranslation'
 
 const Wrapper = styled.input`
   width: 12rem;

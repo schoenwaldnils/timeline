@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 import Highlighter from 'react-highlight-words'
 
@@ -68,9 +69,8 @@ export const SearchHit: FC<HitType> = ({
   _highlightResult,
   ...hit
 }) => {
-  const { store, dispatch } = useStore()
-
-  const { locale } = store
+  const { dispatch } = useStore()
+  const { i18n } = useTranslation()
 
   const handleHitSelect = () => {
     dispatch({
@@ -90,14 +90,15 @@ export const SearchHit: FC<HitType> = ({
     ? `${imageUrl}?w=${IMAGE_SIZE * 2}&h=${IMAGE_SIZE * 2}&fit=fill`
     : (defaultImages[type] as string)
 
-  const searchWords = _highlightResult[`name_${locale}`]?.matchedWords || []
+  const searchWords =
+    _highlightResult[`name_${i18n.language}`]?.matchedWords || []
 
   return (
     <Wrapper onClick={handleHitSelect} indexType={type}>
       <Highlighter
         searchWords={searchWords}
         autoEscape={true}
-        textToHighlight={hit[`name_${locale}`]}
+        textToHighlight={hit[`name_${i18n.language}`]}
       />
       <Image src={imgSrc} />
     </Wrapper>

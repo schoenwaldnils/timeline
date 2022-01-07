@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
+import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 
-import { useTranslation } from '../../hooks/useTranslation'
 import { ButtonSquare } from '../Button'
 import { SET_SCALE, useStore } from '../Store'
 
@@ -57,14 +57,16 @@ export const Scaling: FC = (props) => {
       <ButtonSpaced
         onClick={decreaseScale}
         disabled={value <= MIN_SCALE}
-        aria-label={t('ui.scaleDown')}
+        title={t('ui.scale-down')}
+        aria-label={t('ui.scale-down')}
       >
         -
       </ButtonSpaced>
       <ButtonSpaced
         onClick={increaseScale}
         disabled={value >= MAX_SCALE}
-        aria-label={t('ui.scaleUp')}
+        title={t('ui.scale-up')}
+        aria-label={t('ui.scale-up')}
       >
         +
       </ButtonSpaced>
