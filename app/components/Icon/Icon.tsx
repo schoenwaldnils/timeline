@@ -8,13 +8,13 @@ const IconContainer = styled.div`
   padding: 0.225em;
 `
 
-const StyledIcon = ({ Icon }: { Icon: SvgrComponent }) => {
+const StyledIcon = ({ Icon, ...props }: { Icon: SvgrComponent }) => {
   const StIcon = styled(Icon)`
     > path {
       fill: currentColor;
     }
   `
-  return <StIcon />
+  return <StIcon {...props} />
 }
 
 type IconProps = SVGProps<SVGSVGElement> & { icon: 'search' }
