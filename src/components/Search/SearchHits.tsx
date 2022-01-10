@@ -3,8 +3,11 @@ import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 import { Index, useHits } from 'react-instantsearch-hooks'
 
+import { useStore } from '@/components/Store'
 import { HR } from '@/components/Typography'
 
+import { ReactComponent as AlgoliaLogoBlue } from './algolia-blue.svg'
+import { ReactComponent as AlgoliaLogoWhite } from './algolia-white.svg'
 import { HitType, SearchHit } from './SearchHit'
 
 const SearchHitsContainer = styled.div`
@@ -14,7 +17,21 @@ const SearchHitsContainer = styled.div`
   font-size: 12px;
 `
 
-const indicies = ['person', 'time', 'event']
+const AlgoliaLogoWrapper = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5ch;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  color: inherit;
+  text-decoration: none;
+
+  > svg {
+    width: 4em !important;
+  }
+`
 
 const HitsTitle = styled.div`
   margin: 0.25em;
@@ -25,6 +42,8 @@ const HitsTitle = styled.div`
 const HitsType = styled.span`
   text-transform: capitalize;
 `
+
+const indicies = ['person', 'time', 'event']
 
 const Hits: FC<{
   type: 'person' | 'time' | 'event'
@@ -66,6 +85,9 @@ const Hits: FC<{
 }
 
 export const SearchHits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
+  const {
+    store: { themeIsDark },
+  } = useStore()
   return (
     <SearchHitsContainer>
       {indicies.map((index: 'person' | 'time' | 'event') => (
@@ -76,6 +98,14 @@ export const SearchHits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
           <HR />
         </>
       ))}
+      <AlgoliaLogoWrapper
+        href="https://www.algolia.com/"
+        target="_blank"
+        rel="nofollow"
+      >
+        <span>Search by</span>
+        {themeIsDark ? <AlgoliaLogoWhite /> : <AlgoliaLogoBlue />}
+      </AlgoliaLogoWrapper>
     </SearchHitsContainer>
   )
 }
