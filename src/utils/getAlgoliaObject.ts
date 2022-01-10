@@ -1,4 +1,4 @@
-interface Person {
+export interface Entry {
   sys: {
     id: string
   }
@@ -28,7 +28,7 @@ export interface AlgoliaPerson {
   imageUrl?: string
 }
 
-export const getAlgoliaObject = (entry: Person | any): AlgoliaPerson => {
+export const getAlgoliaObject = (entry: Entry): AlgoliaPerson => {
   return {
     objectID: entry.sys.id,
     name_en: entry.fields.name.en,
