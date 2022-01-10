@@ -14,8 +14,8 @@
     "lint:ts": "eslint . --ext .ts,.tsx",
     "lint:ts-fix": "eslint . --ext .ts,.tsx --fix",
     "lint:types": "tsc --noEmit",
-    "gen:types-contentful": "graphql-codegen --config codegen.yml -r dotenv-flow/config",
-    "favicons-generate": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
+    "generate:types-contentful": "graphql-codegen --config codegen.yml -r dotenv-flow/config",
+    "generate:favicons": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
     "storybook": "start-storybook -p 6006 --quiet",
     "build-storybook": "build-storybook --loglevel warn",
     "snapshot": "npm run build-storybook && percy-storybook --widths=320 -t=500",
@@ -51,6 +51,7 @@
     "cookie": "^0.4.1",
     "cross-env": "^7.0.3",
     "cross-fetch": "^3.1.4",
+    "eslint-import-resolver-typescript": "^2.5.0",
     "graphql": "^15.5.0",
     "graphql-hooks-memcache": "^2.1.2",
     "graphql-request": "^3.4.0",
@@ -100,7 +101,8 @@
     "storybook-react-i18next": "^1.0.13",
     "stylelint": "^13.13.1",
     "stylelint-config-schoenwaldnils": "^3.0.0",
-    "stylelint-processor-styled-components": "^1.10.0"
+    "stylelint-processor-styled-components": "^1.10.0",
+    "tsconfig-paths-webpack-plugin": "^3.5.2"
   },
   "snyk": true
 }

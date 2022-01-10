@@ -3,11 +3,9 @@
     "plugin:@next/next/recommended",
     "@schoenwald/eslint-config-typescript"
   ],
-  "rules": {
-    "react/react-in-jsx-scope": 0,
-    "react/self-closing-comp": ["error", {
-      "component": true,
-      "html": true
-    }]
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
   }
 }

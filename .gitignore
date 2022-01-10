@@ -9,3 +9,4 @@ node_modules
 .next
 .env
 storybook-static
+tsconfig.tsbuildinfo
