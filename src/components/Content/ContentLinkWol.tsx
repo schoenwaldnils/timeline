@@ -38,7 +38,6 @@ export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
   const jwFinderParams = {
     wtlocale: wtlocale.toUpperCase(),
     docid,
-    srctype: 'schoenwaldnils-timeline',
     srcid: 'link',
     paragraph,
   }
