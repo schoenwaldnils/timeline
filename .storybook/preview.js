@@ -2,9 +2,9 @@ import { addDecorator } from '@storybook/react'
 import * as NextImage from 'next/image'
 import i18n from './i18n'
 
-import { StoreProvider } from '../src/components/Store/StoreProvider'
-import { SearchProvider } from '../src/components/Search'
-import { GlobalStyles } from '../src/components/GlobalStyles'
+import { StoreProvider } from '@/components/Store/StoreProvider'
+import { SearchProvider } from '@/components/Search'
+import { GlobalStyles } from '@/components/GlobalStyles'
 
 export const parameters = {
   i18n,

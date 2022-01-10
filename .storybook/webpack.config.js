@@ -1,3 +1,4 @@
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const sharedConfig = require('../webpack.sharedConfig.js')
 
 module.exports = ({ config }) => {
@@ -18,6 +19,8 @@ module.exports = ({ config }) => {
     ...config.resolve.alias,
     'next-i18next': 'react-i18next',
   }
+
+  config.resolve.plugins = [new TsconfigPathsPlugin()]
 
   return sharedConfig(config)
 }
