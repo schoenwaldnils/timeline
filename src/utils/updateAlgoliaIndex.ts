@@ -1,4 +1,5 @@
 import algoliasearch from 'algoliasearch'
+
 import { AlgoliaPerson } from './getAlgoliaObject'
 
 interface Options {
@@ -7,17 +8,23 @@ interface Options {
   indexName: 'person' | 'timespan' | 'event'
 }
 
-export const updateAlgoliaIndex = (
-  entries: Array<AlgoliaPerson>,
+export const updateAlgoliaIndex = async (
+  entries: AlgoliaPerson[],
   { applicationId, apiKey, indexName }: Options,
-) => {
+): Promise<string[]> => {
   const clientAlgolia = algoliasearch(applicationId, apiKey)
   const index = clientAlgolia.initIndex(indexName)
 
-  index
+  let result: string[]
+
+  await index
     .partialUpdateObjects(entries, { createIfNotExists: true })
     .then(({ objectIDs }) => {
-      console.log({ objectIDs })
+      result = objectIDs
     })
-    .catch(console.error)
+    .catch((error) => {
+      throw error
+    })
+
+  return result
 }
