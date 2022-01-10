@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useHits } from 'react-instantsearch-hooks'
 
 import { Tooltip } from '@/components/Tooltip'
 
@@ -7,12 +8,16 @@ import { SearchHits } from './SearchHits'
 import { SearchProvider } from './SearchProvider'
 
 const SearchBox: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
+  const { results } = useHits()
+
   return (
     <>
       <SearchBar />
-      <Tooltip>
-        <SearchHits onHitClick={onHitClick} />
-      </Tooltip>
+      {results.query && (
+        <Tooltip>
+          <SearchHits onHitClick={onHitClick} />
+        </Tooltip>
+      )}
     </>
   )
 }
