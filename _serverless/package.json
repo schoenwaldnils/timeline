@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fillAlgolia": "dotenv-load node utils/updateAlgolia.js",
-    "contentful-typescript-codegen": "dotenv-load contentful-typescript-codegen --output @types/generated/contentful.d.ts",
+    "contentful-typescript-codegen": "dotenv-load contentful-typescript-codegen --output src/@types/generated/contentful.d.ts",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect"
   },
