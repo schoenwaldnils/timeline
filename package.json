@@ -100,7 +100,7 @@
     "lint-staged": "^12.1.2",
     "prettier": "^2.4.1",
     "storybook-react-i18next": "^1.0.13",
-    "stylelint": "^13.13.1",
+    "stylelint": "^14.8.0",
     "stylelint-config-schoenwaldnils": "^3.0.0",
     "stylelint-processor-styled-components": "^1.10.0",
     "tsconfig-paths-webpack-plugin": "^3.5.2"
