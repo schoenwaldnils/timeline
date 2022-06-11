@@ -156,7 +156,7 @@ export const ContentPerson: FC<Person> = ({
   }
 
   return (
-    <ContentTemplate title={name} image={image} idContentful={id}>
+    <ContentTemplate title={name} idContentful={id}>
       <ContentBox>
         <TableList list={list} />
       </ContentBox>
