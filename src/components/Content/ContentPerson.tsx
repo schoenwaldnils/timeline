@@ -14,7 +14,6 @@ import { ContentBox, ContentTemplate } from './ContentTemplate'
 export const ContentPerson: FC<Person> = ({
   id,
   name,
-  image,
   startYear,
   startBlurriness,
   endYear,
