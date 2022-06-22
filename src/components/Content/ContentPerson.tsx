@@ -85,7 +85,7 @@ export const ContentPerson: FC<Person> = ({
       ...list,
       [t('relations.father')]: (
         <TextButton onClick={() => changeContent(fatherID)}>
-          {father}
+          {father as unknown as string}
         </TextButton>
       ),
     }
@@ -96,7 +96,7 @@ export const ContentPerson: FC<Person> = ({
       ...list,
       [t('relations.mother')]: (
         <TextButton onClick={() => changeContent(motherID)}>
-          {mother}
+          {mother as unknown as string}
         </TextButton>
       ),
     }

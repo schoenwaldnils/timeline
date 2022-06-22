@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 import { zIndexes } from '@/data/constants'
 
 type TooltipType = {
   alignRight?: boolean
+  children: ReactNode
 }
 
 const TooltipWrapper = styled.div<TooltipType>`

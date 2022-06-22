@@ -1,4 +1,4 @@
-import { FC, useEffect, useReducer } from 'react'
+import { FC, ReactNode, useEffect, useReducer } from 'react'
 
 import { getUrlHash } from '@/js/urlHash'
 
@@ -6,7 +6,7 @@ import { CHANGE_CONTENT, CLOSE_SIDEBAR, reducer, SET_THEME } from './reducer'
 import { initialState, StoreContext } from './Store'
 import { getUserLocalStore, getUserSessionStore } from './userStore'
 
-export const StoreProvider: FC = ({ children }) => {
+export const StoreProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [store, dispatch] = useReducer(reducer, {
     ...initialState,
     ...getUserLocalStore(),
