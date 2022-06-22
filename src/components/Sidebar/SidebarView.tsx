@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { IconButton } from '@material-ui/core'
 import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { MdVerticalAlignBottom } from 'react-icons/md'
 import { useSwipeable } from 'react-swipeable'
 
@@ -74,6 +74,7 @@ const Icon = styled(MdVerticalAlignBottom)`
 interface SidebarViewProps {
   isActive: boolean
   closeSidebar: () => void
+  children: ReactNode
 }
 
 export const SidebarView: FC<SidebarViewProps> = ({

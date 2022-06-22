@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { FC, MouseEvent } from 'react'
+import { FC, MouseEvent, ReactNode } from 'react'
 
 import { ButtonPlain } from '@/components/Button'
 import { colors } from '@/data/colors'
@@ -56,6 +56,7 @@ export interface EventProps extends WrapperProps {
   rowIndex?: number
   zIndex?: number
   changeContent: (event: MouseEvent) => void
+  children: ReactNode
 }
 
 export const EventView: FC<EventProps> = ({

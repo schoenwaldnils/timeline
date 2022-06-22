@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { FC, ReactChild, ReactChildren } from 'react'
+import { FC, ReactNode } from 'react'
 
 import { ContentfulLink } from '@/components/ContentfulLink'
 import { Image } from '@/components/Image'
@@ -14,7 +14,7 @@ const Box = styled.div`
 `
 
 export interface ContentBoxProps {
-  children: ReactChildren | ReactChild
+  children: ReactNode
 }
 
 export const ContentBox: FC<ContentBoxProps> = ({ children }) => (
@@ -29,6 +29,7 @@ export interface ContentTemplateProps {
     width: number
     height: number
   }
+  children: ReactNode
 }
 
 export const ContentTemplate: FC<ContentTemplateProps> = ({

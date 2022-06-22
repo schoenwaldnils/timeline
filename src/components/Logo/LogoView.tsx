@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 
 const StyledIcon = styled(Icon)`
   font-size: 2rem;
+  color: #000;
 
   @media ${viewportsJs.sm} {
     display: none;

@@ -20,7 +20,7 @@ export const TableList: FC<{
     {Object.keys(list).map((key) => (
       <Fragment key={key}>
         <ListKey>{key}:</ListKey>
-        <ListItem>{list[key]}</ListItem>
+        <ListItem>{list[key] as string}</ListItem>
       </Fragment>
     ))}
   </List>

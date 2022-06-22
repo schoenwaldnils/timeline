@@ -21,9 +21,7 @@ const OriginalNextImage = NextImage.default
 // https://github.com/vercel/next.js/issues/18393#issuecomment-955577890
 Object.defineProperty(NextImage, 'default', {
   configurable: true,
-  value: (props) => (
-    <OriginalNextImage {...props} unoptimized blurDataURL={props.src} />
-  ),
+  value: (props) => <img {...props} />,
 })
 
 addDecorator((storyFn) => (

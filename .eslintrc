@@ -7,5 +7,10 @@
     "import/resolver": {
       "typescript": {}
     }
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": 2,
+    "react/display-name": 0,
+    "@typescript-eslint/no-empty-interface": 0
   }
 }

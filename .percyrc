@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "snapshot": {
+    "widths": [320],
+    "min-height": 320
+  },
+  "discovery": {
+    "network-idle-timeout": 500
+  }
+}
