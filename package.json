@@ -18,7 +18,7 @@
     "generate:favicons": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
     "storybook": "start-storybook -p 6006 --quiet",
     "build-storybook": "build-storybook --loglevel warn",
-    "snapshot": "npm run build-storybook && percy storybook ./storybook-static",
+    "snapshot": "npm run build-storybook && percy storybook -c .percyrc ./storybook-static",
     "analyze": "cross-env ANALYZE=true next build",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect && .husky/install.sh"
