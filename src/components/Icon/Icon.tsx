@@ -1,40 +1,17 @@
 import styled from '@emotion/styled'
-import { FC, MouseEventHandler, SVGProps } from 'react'
-
-import { ReactComponent as SearchIcon } from './searchIcon.svg'
+import { FC, MouseEventHandler, ReactNode } from 'react'
 
 const IconContainer = styled.div`
   display: inline-block;
   padding: 0.225em;
 `
 
-const StyledIcon = ({ Icon, ...props }: { Icon: SvgrComponent }) => {
-  const StIcon = styled(Icon)`
-    > path {
-      fill: currentColor;
-    }
-  `
-  return <StIcon {...props} />
-}
-
-type IconProps = SVGProps<SVGSVGElement> & { icon: 'search' }
-
-export const Icon: FC<IconProps> = ({ icon, ...props }) => {
-  switch (icon) {
-    case 'search':
-      return <StyledIcon {...props} Icon={SearchIcon} />
-
-    default:
-      return null
-  }
-}
-
-export const IconPadded: FC<
-  IconProps & {
-    onClick: MouseEventHandler<HTMLDivElement>
-  }
-> = ({ className, onClick, ...props }) => (
+export const IconPadded: FC<{
+  children: ReactNode
+  onClick?: MouseEventHandler<HTMLDivElement>
+  className?: string
+}> = ({ className, onClick, children }) => (
   <IconContainer className={className} onClick={onClick}>
-    <Icon {...props} />
+    {children}
   </IconContainer>
 )

@@ -46,5 +46,6 @@ export default css`
 
   button {
     color: inherit;
+    all: unset;
   }
 `
