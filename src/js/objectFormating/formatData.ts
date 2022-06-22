@@ -1,4 +1,4 @@
-import { orderBy } from 'lodash'
+import orderBy from 'lodash/orderBy'
 
 import { Event } from '@/@types/Event'
 import { CEvent, CPerson, CTime } from '@/@types/generated/contentful'

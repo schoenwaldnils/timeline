@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { FC } from 'react'
-import mergeRefs from 'react-merge-refs'
+import { mergeRefs } from 'react-merge-refs'
 
 import { TimelineEvent } from '@/@types/TimelineEvent.d'
 import { Timespan as TimespanType } from '@/@types/Timespan.d'
