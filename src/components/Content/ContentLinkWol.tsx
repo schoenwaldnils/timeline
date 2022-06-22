@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import qs from 'qs'
+import { parse as qsParse, stringify as qsStringify } from 'qs'
 import { FC } from 'react'
 
 import { A } from '@/components/Typography'
@@ -20,7 +20,7 @@ export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
     let paragraphPlain: string
     ;[pathName, paragraphPlain] = wolLink.split('#')
 
-    paragraph = String(qs.parse(paragraphPlain).h)
+    paragraph = String(qsParse(paragraphPlain).h)
   }
 
   const pathParts = pathName.split('/')
@@ -42,7 +42,7 @@ export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
     paragraph,
   }
 
-  const jwFinderLink = `https://www.jw.org/finder?${qs.stringify(
+  const jwFinderLink = `https://www.jw.org/finder?${qsStringify(
     jwFinderParams,
   )}`
 
