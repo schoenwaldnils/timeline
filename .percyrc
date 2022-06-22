@@ -1,0 +1,8 @@
+{
+  "snapshot": {
+    "widths": [320]
+  },
+  "discovery": {
+    "network-idle-timeout": 500
+  }
+}
