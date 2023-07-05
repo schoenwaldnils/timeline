@@ -25,6 +25,7 @@ interface WrapperProps {
 }
 
 const TimespanWrapper = styled(ButtonPlain)<WrapperProps>`
+  box-sizing: border-box;
   position: absolute;
   z-index: ${zIndexes.timespan};
   display: flex;
