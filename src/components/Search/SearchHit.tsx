@@ -5,7 +5,7 @@ import Highlighter from 'react-highlight-words'
 
 import { CHANGE_CONTENT, useStore } from '@/components/Store'
 
-import DefaultImgUrl from './defaultImg.svg'
+// import DefaultImgUrl from './defaultImg.svg'
 
 const IMAGE_SIZE = 28
 
@@ -19,6 +19,7 @@ const Wrapper = styled.button<{ indexType: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: ${IMAGE_SIZE + 2 + 2}px;
   margin-bottom: 2px;
   padding-top: 2px;
   padding-right: 0.5em;
@@ -36,11 +37,11 @@ const Wrapper = styled.button<{ indexType: string }>`
   }
 `
 
-const Image = styled.img`
-  width: ${IMAGE_SIZE}px;
-  margin-left: 1em;
-  border-radius: 0.3em;
-`
+// const Image = styled.img`
+//   width: ${IMAGE_SIZE}px;
+//   margin-left: 1em;
+//   border-radius: 0.3em;
+// `
 
 type HighlightResult = {
   value: string
@@ -66,7 +67,7 @@ export const SearchHit: FC<HitType> = ({
   onHitClick,
   type,
   objectID,
-  imageUrl,
+  // imageUrl,
   _highlightResult,
   ...hit
 }) => {
@@ -81,15 +82,15 @@ export const SearchHit: FC<HitType> = ({
     onHitClick()
   }
 
-  const defaultImages = {
-    person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,
-    time: DefaultImgUrl,
-    event: DefaultImgUrl,
-  }
+  // const defaultImages = {
+  //   person: `//secure.gravatar.com/avatar/?s=${IMAGE_SIZE * 2}&d=mm`,
+  //   time: DefaultImgUrl,
+  //   event: DefaultImgUrl,
+  // }
 
-  const imgSrc = imageUrl
-    ? `${imageUrl}?w=${IMAGE_SIZE * 2}&h=${IMAGE_SIZE * 2}&fit=fill`
-    : (defaultImages[type] as string)
+  // const imgSrc = imageUrl
+  //   ? `${imageUrl}?w=${IMAGE_SIZE * 2}&h=${IMAGE_SIZE * 2}&fit=fill`
+  //   : (defaultImages[type] as string)
 
   const searchWords =
     _highlightResult[`name_${i18n.language}`]?.matchedWords || []
@@ -101,7 +102,7 @@ export const SearchHit: FC<HitType> = ({
         autoEscape={true}
         textToHighlight={hit[`name_${i18n.language}`]}
       />
-      <Image src={imgSrc} />
+      {/* <Image src={imgSrc} /> */}
     </Wrapper>
   )
 }

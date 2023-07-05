@@ -37,14 +37,14 @@ export const calcTimes = ({
 
   if (startYear) {
     pixelStart = startYear + YEARS_BEFORE_ZERO
-    if (pixelStart >= 0) {
+    if (startYear >= 0) {
       pixelStart -= 1
     }
   }
 
   if (correctedEndYear) {
     pixelEnd = correctedEndYear + YEARS_BEFORE_ZERO
-    if (correctedEndYear + YEARS_BEFORE_ZERO >= 0) {
+    if (correctedEndYear >= 0) {
       pixelEnd -= 1
     }
   }
@@ -53,7 +53,7 @@ export const calcTimes = ({
     pixelStart,
     pixelEnd,
     duration: endYear ? pixelEnd - pixelStart : null,
-    pixelDuration: pixelEnd - pixelStart,
+    pixelDuration: pixelEnd - pixelStart + 1, // add 1 to include starting- and end-year
   }
 }
 

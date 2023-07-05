@@ -22,7 +22,7 @@ export function positionTimes(
     if (item.type === 'person' || item.type === 'time') {
       const tempEnd = (item as Timespan).pixelEnd
       const isTooSmall = tempEnd - start < 30
-      end = Math.floor(isTooSmall ? start + 50 : tempEnd + 10)
+      end = Math.floor(isTooSmall ? start + 50 : tempEnd + 20)
     }
 
     if (item.type === 'event') {
