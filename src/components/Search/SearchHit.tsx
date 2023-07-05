@@ -7,7 +7,7 @@ import { CHANGE_CONTENT, useStore } from '@/components/Store'
 
 // import DefaultImgUrl from './defaultImg.svg'
 
-// const IMAGE_SIZE = 28
+const IMAGE_SIZE = 28
 
 const typeColors = {
   person: 'var(--Timespan-backgroundColor--person)',
@@ -19,6 +19,7 @@ const Wrapper = styled.button<{ indexType: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: ${IMAGE_SIZE + 2 + 2}px;
   margin-bottom: 2px;
   padding-top: 2px;
   padding-right: 0.5em;
