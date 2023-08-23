@@ -1,8 +1,9 @@
+'use client'
 import styled from '@emotion/styled'
 import { ClickAwayListener } from '@material-ui/core'
 import dynamic from 'next/dynamic'
-import { useTranslation } from 'next-i18next'
 import { FC, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 import { ReactComponent as SearchIcon } from '../../svgs/searchIcon.svg'
 
@@ -20,7 +21,7 @@ const Button = styled.button`
 `
 
 export const Search: FC = () => {
-  const { t } = useTranslation()
+  const t = useTranslations()
   const [isActive, setIsActive] = useState(false)
 
   if (isActive) {

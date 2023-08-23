@@ -1,3 +1,4 @@
+'use client'
 import algoliasearch from 'algoliasearch/lite'
 import { FC, ReactNode } from 'react'
 import { InstantSearch } from 'react-instantsearch-hooks'

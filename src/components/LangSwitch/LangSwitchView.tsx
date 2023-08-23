@@ -1,10 +1,13 @@
 import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
-import { FC, forwardRef, MouseEvent, Ref } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { forwardRef, MouseEvent, Ref } from 'react'
 
 import { Tooltip } from '@/components/Tooltip'
-import { viewportsJs } from '@/js/viewports'
+import { viewportsJs } from '@/utils/viewports'
 
+import { i18n } from '../../../i18n-config'
 import { ReactComponent as LangIcon } from './langIcon.svg'
 
 const Wrapper = styled.div`
@@ -41,7 +44,7 @@ const Text = styled.span`
   }
 `
 
-const Button = styled.button`
+const Button = styled(Link)`
   padding: 0.5em 0.7em;
   font-family: inherit;
   font-size: 0.75rem;
@@ -53,6 +56,7 @@ const Button = styled.button`
   border: 0;
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-appearance: none;
+  text-decoration: none;
 
   :disabled {
     color: var(--LangSwitch-buttonDisabled);
@@ -68,19 +72,25 @@ const StyledTooltip = styled(Tooltip)`
 interface LangSwitchViewProps {
   isActive?: boolean
   toggleIsActive: (event: MouseEvent<HTMLButtonElement>) => void
-  handleButtonClick: (lang: string) => void
+  handleButtonClick: (locale: string) => void
   currentLocale: string
-  ref?: Ref<HTMLDivElement>
 }
 
-export const LangSwitchView: FC<LangSwitchViewProps> = forwardRef(
+export const LangSwitchView = forwardRef(
   (
-    { isActive = false, toggleIsActive, handleButtonClick, currentLocale },
-    ref,
+    { isActive = false, toggleIsActive }: LangSwitchViewProps,
+    ref: Ref<HTMLDivElement>,
   ) => {
-    const { t } = useTranslation()
+    const t = useTranslations()
 
-    const supportedLocales = ['en', 'de']
+    const pathName = usePathname()
+    const redirectedPathName = (locale: string) => {
+      if (!pathName) return '/'
+      const segments = pathName.split('/')
+      segments[1] = locale
+      return segments.join('/')
+    }
+
     const locales = { en: 'English', de: 'Deutsch' }
 
     return (
@@ -96,11 +106,12 @@ export const LangSwitchView: FC<LangSwitchViewProps> = forwardRef(
 
         {isActive && (
           <StyledTooltip alignRight>
-            {supportedLocales.map((locale) => (
+            {i18n.locales.map((locale) => (
               <Button
                 key={locale}
-                disabled={locale === currentLocale}
-                onClick={() => handleButtonClick(locale)}
+                // onClick={() => handleButtonClick(locale)}
+                locale={locale}
+                href={redirectedPathName(locale)}
               >
                 {locales[locale]}
               </Button>

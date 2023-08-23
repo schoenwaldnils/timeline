@@ -1,9 +1,7 @@
 import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
 import Highlighter from 'react-highlight-words'
 
-import { CHANGE_CONTENT, useStore } from '@/components/Store'
+import { useStore } from '@/hooks/useStore'
 
 import DefaultImgUrl from './defaultImg.svg'
 
@@ -29,7 +27,8 @@ const Wrapper = styled.button<{ indexType: string }>`
   cursor: pointer;
   background: none;
   border: 0;
-  border-left: 0.125em solid ${({ indexType }) => typeColors[indexType]};
+  border-left: 0.125em solid
+    ${({ indexType }) => typeColors[indexType as keyof typeof typeColors]};
 
   :last-child {
     margin-bottom: 0;
@@ -62,22 +61,19 @@ export type HitType = {
   _highlightResult: _HighlightResult
 }
 
-export const SearchHit: FC<HitType> = ({
+export const SearchHit = ({
   onHitClick,
   type,
   objectID,
   imageUrl,
   _highlightResult,
   ...hit
-}) => {
-  const { dispatch } = useStore()
-  const { i18n } = useTranslation()
+}: HitType) => {
+  const setSidebarId = useStore((state) => state.setSidebarId)
+  const locale = useStore((state) => state.locale)
 
   const handleHitSelect = () => {
-    dispatch({
-      type: CHANGE_CONTENT,
-      contentId: objectID,
-    })
+    setSidebarId(objectID)
     onHitClick()
   }
 
@@ -91,15 +87,14 @@ export const SearchHit: FC<HitType> = ({
     ? `${imageUrl}?w=${IMAGE_SIZE * 2}&h=${IMAGE_SIZE * 2}&fit=fill`
     : (defaultImages[type] as string)
 
-  const searchWords =
-    _highlightResult[`name_${i18n.language}`]?.matchedWords || []
+  const searchWords = _highlightResult[`name_${locale}`]?.matchedWords || []
 
   return (
     <Wrapper onClick={handleHitSelect} indexType={type}>
       <Highlighter
         searchWords={searchWords}
         autoEscape={true}
-        textToHighlight={hit[`name_${i18n.language}`]}
+        textToHighlight={hit[`name_${locale}` as keyof typeof hit]}
       />
       <Image src={imgSrc} />
     </Wrapper>

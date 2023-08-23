@@ -21,10 +21,6 @@ module.exports = (config = {}) => {
                 },
               },
               {
-                name: 'removeViewBox',
-                active: false,
-              },
-              {
                 name: 'addAttributesToSVGElement',
                 params: {
                   attributes: [{ preserveAspectRatio: 'xMinYMid meet' }],

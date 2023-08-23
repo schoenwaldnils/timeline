@@ -1,12 +1,12 @@
+'use client'
 import styled from '@emotion/styled'
-import { FC } from 'react'
 
-import { Filter } from '@/components/Filter'
+// import { Filter } from '@/components/Filter'
 import { LangSwitch } from '@/components/LangSwitch'
 import { Logo } from '@/components/Logo'
-import { Search } from '@/components/Search'
+// import { Search } from '@/components/Search'
 import { zIndexes } from '@/data/constants'
-import { viewportsJs } from '@/js/viewports'
+import { viewportsJs } from '@/utils/viewports'
 
 const HeaderWrapper = styled.div`
   position: relative;
@@ -19,7 +19,7 @@ const HeaderWrapper = styled.div`
   line-height: 1;
   color: var(--Header-color);
   background-color: var(--Header-backgroundColor);
-  box-shadow: 0 -1rem 0.75rem 1rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -1rem 0.75rem 1rem rgba(0 0 0 / 25%);
 
   @media ${viewportsJs.sm} {
     padding: 0.5rem 1rem;
@@ -40,12 +40,12 @@ const Nav = styled.div`
   }
 `
 
-export const Header: FC = () => (
+export const Header = () => (
   <HeaderWrapper>
     <Logo />
     <Nav>
-      <Search />
-      <Filter />
+      {/* <Search />
+      <Filter /> */}
       <LangSwitch />
     </Nav>
   </HeaderWrapper>

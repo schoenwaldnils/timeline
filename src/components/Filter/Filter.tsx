@@ -1,22 +1,20 @@
+'use client'
 import { ClickAwayListener } from '@material-ui/core'
-import { FC, useState } from 'react'
-
-import { SET_FILTER, useStore } from '@/components/Store'
+import { ChangeEvent, FC, useState } from 'react'
 
 import { FilterView } from './FilterView'
+import { Store, useStore } from '@/hooks/useStore'
 
 export const Filter: FC = () => {
-  const { store, dispatch } = useStore()
+  const filter = useStore((state) => state.filter)
+  const setFilter = useStore((state) => state.setFilter)
   const [isActive, setIsActive] = useState(false)
 
   const toggleIsActive = () => setIsActive(!isActive)
 
-  const handleChange = (clickedRef) => {
-    dispatch({
-      type: SET_FILTER,
-      filter: {
-        [clickedRef.target.name]: clickedRef.target.checked,
-      },
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFilter({
+      [event.target.name]: event.target.checked,
     })
   }
 
@@ -26,7 +24,7 @@ export const Filter: FC = () => {
         isActive={isActive}
         toggleIsActive={toggleIsActive}
         handleChange={handleChange}
-        filterState={store.filter}
+        filterState={filter}
       />
     </ClickAwayListener>
   )

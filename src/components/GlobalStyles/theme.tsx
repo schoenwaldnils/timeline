@@ -47,6 +47,7 @@ export const themeLight = css`
     --Sidebar-iconBackgroundColor: ${colors.green};
 
     --Button-color: ${colors.greenDarker};
+    --Button-color--disabled: ${shades.cb7};
     --Button-backgroundColor: #fff;
   }
 `
@@ -88,6 +89,7 @@ export const themeDark = css`
     --Sidebar-iconBackgroundColor: ${colors.greenDark};
 
     --Button-color: #fff;
+    --Button-color--disabled: ${shades.cb4};
     --Button-backgroundColor: ${shades.cb2};
   }
 `

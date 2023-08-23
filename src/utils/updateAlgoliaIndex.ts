@@ -15,16 +15,12 @@ export const updateAlgoliaIndex = async (
   const clientAlgolia = algoliasearch(applicationId, apiKey)
   const index = clientAlgolia.initIndex(indexName)
 
-  let result: string[]
-
-  await index
+  return await index
     .partialUpdateObjects(entries, { createIfNotExists: true })
     .then(({ objectIDs }) => {
-      result = objectIDs
+      return objectIDs
     })
     .catch((error) => {
       throw error
     })
-
-  return result
 }

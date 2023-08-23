@@ -1,19 +1,19 @@
+'use client'
 import styled from '@emotion/styled'
-import dynamic from 'next/dynamic'
-import { FC } from 'react'
 
 import { Header } from '@/components/Header'
 import { ScaleIndicator, Scaling } from '@/components/Scaling'
-import { useStore } from '@/components/Store'
 import { ThemeSwitch } from '@/components/ThemeSwitch'
 import { zIndexes } from '@/data/constants'
+import { useStore } from '@/hooks/useStore'
 import {
   ContentfulTimelineData,
   formatTimelineData,
-} from '@/js/objectFormating/formatTimelineData'
+} from '@/utils/objectFormating/formatTimelineData'
 
-const Sidebar = dynamic(() => import('../Sidebar/Sidebar'), { ssr: false })
-const Timeline = dynamic(() => import('../Timeline/Timeline'), { ssr: false })
+import { Timeline } from '../Timeline'
+
+// const Sidebar = dynamic(() => import('../Sidebar/Sidebar'), { ssr: false })
 
 const StyledPage = styled.div`
   display: grid;
@@ -33,12 +33,12 @@ const Content = styled.div`
   overflow: auto;
 `
 
-const SidebarWrapper = styled.div`
-  position: relative;
-  grid-area: content;
-  overflow: hidden;
-  pointer-events: none;
-`
+// const SidebarWrapper = styled.div`
+//   position: relative;
+//   grid-area: content;
+//   overflow: hidden;
+//   pointer-events: none;
+// `
 
 const Config = styled.div`
   position: fixed;
@@ -51,16 +51,15 @@ const Config = styled.div`
   }
 `
 
-export const Page: FC<{
+export const Page = ({
+  timelineData,
+}: {
   timelineData: ContentfulTimelineData
-}> = ({ timelineData }) => {
-  const { store } = useStore()
+}) => {
+  const scale = useStore((state) => state.scale)
+  const filter = useStore((state) => state.filter)
 
-  const formatedData = formatTimelineData(
-    timelineData,
-    store.scale,
-    store.filter,
-  )
+  const formatedData = formatTimelineData(timelineData, scale, filter)
 
   return (
     <StyledPage>
@@ -73,9 +72,23 @@ export const Page: FC<{
           <ScaleIndicator />
         </Config>
       </Content>
-      <SidebarWrapper>
-        <Sidebar isActive={!!store.sidebarId} contentId={store.sidebarId} />
-      </SidebarWrapper>
     </StyledPage>
   )
+
+  // return (
+  //   <StyledPage>
+  //     <Header />
+  //     <Content>
+  //       <Timeline data={formatedData} />
+  //       <Config>
+  //         <ThemeSwitch />
+  //         <Scaling />
+  //         <ScaleIndicator />
+  //       </Config>
+  //     </Content>
+  //     {/* <SidebarWrapper>
+  //       <Sidebar isActive={!!store.sidebarId} contentId={store.sidebarId} />
+  //     </SidebarWrapper> */}
+  //   </StyledPage>
+  // )
 }

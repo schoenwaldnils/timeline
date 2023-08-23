@@ -1,6 +1,6 @@
 import { LegacyRef, useCallback, useEffect, useRef } from 'react'
 
-import { getLocalStorage, setLocalStorage } from '@/js/localStorage'
+import { getLocalStorage, setLocalStorage } from '@/utils/localStorage'
 
 const isBrowser = typeof window !== 'undefined'
 
@@ -69,7 +69,7 @@ export function useScrollPosition(): [
         top: position.current.top,
       }
 
-      containerRef.current.scrollTo(scaledScrollPosition)
+      containerRef.current?.scrollTo(scaledScrollPosition)
     },
     [containerRef, position],
   )
@@ -81,7 +81,7 @@ export function useScrollPosition(): [
       containerRef.current.scrollTo(position.current)
     }
 
-    containerRef.current.addEventListener('scroll', () => handleScroll(), {
+    containerRef.current?.addEventListener('scroll', () => handleScroll(), {
       passive: true,
     })
 

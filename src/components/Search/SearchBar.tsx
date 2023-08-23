@@ -1,9 +1,10 @@
+'use client'
 import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
 import { FC, useCallback, useEffect, useRef } from 'react'
 import { useSearchBox } from 'react-instantsearch-hooks'
 
 import { shades } from '@/data/colors'
+import { useTranslations } from 'next-intl'
 
 const Wrapper = styled.input`
   width: 12rem;
@@ -24,7 +25,7 @@ const Wrapper = styled.input`
 export const SearchBar: FC = () => {
   const { query, refine, clear } = useSearchBox()
 
-  const { t } = useTranslation()
+  const t = useTranslations()
   const inputRef = useRef(null)
 
   useEffect(() => {

@@ -1,32 +1,23 @@
-import { FC } from 'react'
-
-import { TimelineEvent } from '@/@types/TimelineEvent.d'
-import { CHANGE_CONTENT, useStore } from '@/components/Store'
+import type { TimelineEvent } from '@/@types/TimelineEvent.d'
+import { useStore } from '@/hooks/useStore'
 
 import { EventView } from './EventView'
 
-export const Event: FC<TimelineEvent> = ({
+export const Event = ({
   id,
   name,
   pixelStart,
   rowIndex,
   zIndex,
-}) => {
-  const { dispatch } = useStore()
-
-  const changeContent = () => {
-    dispatch({
-      type: CHANGE_CONTENT,
-      contentId: id,
-    })
-  }
+}: TimelineEvent) => {
+  const setSidebarId = useStore((state) => state.setSidebarId)
 
   return (
     <EventView
       pixelStart={pixelStart}
       rowIndex={rowIndex}
       zIndex={zIndex}
-      changeContent={changeContent}
+      changeContent={() => setSidebarId(id)}
     >
       {name}
     </EventView>

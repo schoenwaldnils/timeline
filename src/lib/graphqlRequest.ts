@@ -6,7 +6,7 @@ const endpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env
 
 const client = new GraphQLClient(endpoint, {
   headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN}`,
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_CONTENTFUL_DELIVERY_TOKEN}`,
   },
 })
 

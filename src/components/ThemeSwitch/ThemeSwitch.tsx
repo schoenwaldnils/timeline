@@ -1,24 +1,32 @@
-import { FC } from 'react'
+import styled from '@emotion/styled'
+import { useTranslations } from 'next-intl'
+import { ButtonHTMLAttributes } from 'react'
+import { WiDaySunny, WiMoonAltWaningCrescent5 } from 'react-icons/wi'
 
-import { SET_THEME, useStore } from '@/components/Store'
+import { ButtonSquare } from '@/components/Button'
+import { useStore } from '@/hooks/useStore'
 
-import { ThemeSwitchView } from './ThemeSwitchView'
+const IconLight = WiDaySunny
 
-export const ThemeSwitch: FC = (props) => {
-  const { store, dispatch } = useStore()
+const IconDark = styled(WiMoonAltWaningCrescent5)`
+  transform: rotate(-30deg);
+`
 
-  const toggleTheme = () => {
-    dispatch({
-      type: SET_THEME,
-      themeIsDark: !store.themeIsDark,
-    })
-  }
+export type ThemeSwitchProps = ButtonHTMLAttributes<HTMLButtonElement>
+
+export const ThemeSwitch = (props: ThemeSwitchProps) => {
+  const t = useTranslations()
+  const themeIsDark = useStore((state) => state.theme === 'dark')
+  const toggleTheme = useStore((state) => state.toggleTheme)
 
   return (
-    <ThemeSwitchView
+    <ButtonSquare
       {...props}
-      toggleTheme={toggleTheme}
-      isDark={store.themeIsDark}
-    />
+      onClick={toggleTheme}
+      title={t('ui.toggle-dark-mode')}
+      aria-label={t('ui.toggle-dark-mode')}
+    >
+      {themeIsDark ? <IconLight /> : <IconDark />}
+    </ButtonSquare>
   )
 }

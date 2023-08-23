@@ -1,13 +1,7 @@
 {
   "extends": "stylelint-config-schoenwaldnils",
+  "customSyntax": "postcss-styled-syntax",
   "rules": {
-    "number-leading-zero": "always",
-    "declaration-colon-newline-after": null,
-    "declaration-block-semicolon-newline-after": null,
-    "rule-empty-line-before": null,
-    "value-list-comma-newline-after": null
-  },
-  "processors": [
-    "stylelint-processor-styled-components"
-  ]
+    "media-query-no-invalid": null
+  }
 }

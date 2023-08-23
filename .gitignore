@@ -8,5 +8,6 @@ _serverless/lib/
 node_modules
 .next
 .env
+.env.local
 storybook-static
 tsconfig.tsbuildinfo

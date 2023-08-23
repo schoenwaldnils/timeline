@@ -1,26 +1,15 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-// const withBundleAnalyzer = require('@next/bundle-analyzer')()
-const withPWA = require('next-pwa')
-const sharedConfig = require('./webpack.sharedConfig.js')
-const runtimeCaching = require('next-pwa/cache')
-const { i18n } = require('./next-i18next.config')
-const process = require('process')
+const withNextIntl = require('next-intl/plugin')(
+  // This is the default (also the `src` folder is supported out of the box)
+  './src/utils/i18n.ts',
+)
 
-const config = {
-  i18n,
+const sharedConfig = require('./webpack.sharedConfig.js')
+
+/** @type {import('next').NextConfig} */
+module.exports = withNextIntl({
   reactStrictMode: true,
-  pwa: {
-    disable: process.env.NODE_ENV === 'development',
-    dest: 'public',
-    register: true,
-    skipWaiting: true,
-    runtimeCaching,
-    buildExcludes: [/middleware-manifest.json$/],
-  },
   webpack: sharedConfig,
   images: {
     domains: ['ctfassets.net', 'images.ctfassets.net'],
   },
-}
-
-module.exports = withPWA(config)
+})

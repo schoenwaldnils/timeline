@@ -1,4 +1,4 @@
-import { getTimePeriod } from '@/js/utils'
+import { getTimePeriod } from '@/utils/utils'
 
 export const getTimelineWidth = (
   startYear: number,

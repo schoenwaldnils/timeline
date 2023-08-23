@@ -1,12 +1,13 @@
+'use client'
 import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
+import { useTranslations } from 'next-intl'
 
-import { useStore } from '@/components/Store'
+import { useStore } from '@/hooks/useStore'
 
 const Wrapper = styled.div`
   display: flex;
   align-items: baseline;
+  gap: 1ch;
   font-size: 0.675rem;
   text-transform: capitalize;
 `
@@ -15,7 +16,7 @@ const Indicator = styled.div`
   position: relative;
   width: 101px;
   height: 6px;
-  margin-left: 5px;
+  margin-left: 4px;
   border-bottom: 1px solid;
 
   &::before,
@@ -37,16 +38,15 @@ const Indicator = styled.div`
   }
 `
 
-export const ScaleIndicator: FC = () => {
-  const { t } = useTranslation()
-  const { store } = useStore()
+export const ScaleIndicator = () => {
+  const t = useTranslations()
+  const scale = useStore((state) => state.scale)
 
-  const yearsPer100Pixel = 100 / store.scale
+  const yearsPer100Pixel = 100 / scale
 
   return (
     <Wrapper>
-      {yearsPer100Pixel} {t('time.year', { count: yearsPer100Pixel })}{' '}
-      <Indicator />
+      <Indicator /> {yearsPer100Pixel} {t('time.year_other')}
     </Wrapper>
   )
 }

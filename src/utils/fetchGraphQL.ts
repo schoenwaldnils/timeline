@@ -11,7 +11,7 @@ export const fetchGraphQL = async (
         Authorization: `Bearer ${
           preview
             ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
-            : process.env.CONTENTFUL_ACCESS_TOKEN
+            : process.env.CONTENTFUL_DELIVERY_TOKEN
         }`,
       },
       body: JSON.stringify({ query }),

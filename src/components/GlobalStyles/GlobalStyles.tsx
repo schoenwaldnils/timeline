@@ -1,17 +1,13 @@
+'use client'
 import { Global } from '@emotion/react'
-import { FC } from 'react'
 
-import { useStore } from '@/components/Store'
+import { useStore } from '@/hooks/useStore'
 
 import base from './base'
 import { themeDark, themeLight } from './theme'
 
-export const GlobalStyles: FC = () => {
-  const { store } = useStore()
-  return (
-    <>
-      <Global styles={store.themeIsDark ? themeDark : themeLight} />
-      <Global styles={base} />
-    </>
-  )
+export const GlobalStyles = () => {
+  const theme = useStore((state) => state.theme)
+
+  return <Global styles={[theme === 'light' ? themeLight : themeDark, base]} />
 }

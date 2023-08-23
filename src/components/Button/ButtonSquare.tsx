@@ -16,6 +16,10 @@ const Button = styled(ButtonPlain)`
   background-color: var(--Button-backgroundColor);
   border-radius: 4px;
   box-shadow: 0 0.125rem 0.25rem 0 #0007;
+
+  &:disabled {
+    color: var(--Button-color--disabled);
+  }
 `
 
 export const ButtonSquare: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (

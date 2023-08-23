@@ -1,16 +1,17 @@
 import { FC } from 'react'
 
 import { Timespan as TimespanType } from '@/@types/Timespan'
-import { CHANGE_CONTENT, useStore } from '@/components/Store'
 
 import { TimespanView } from './TimespanView'
+import { useStore } from '@/hooks/useStore'
 
 export const Timespan: FC<TimespanType> = (props) => {
   const { id } = props
 
-  const { dispatch } = useStore()
+  const setSidebarId = useStore((state) => state.setSidebarId)
+
   const handleClick = () => {
-    dispatch({ type: CHANGE_CONTENT, contentId: id })
+    setSidebarId(id)
   }
 
   return (

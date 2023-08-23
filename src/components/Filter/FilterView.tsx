@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
 import { ChangeEvent, FC, forwardRef, MouseEvent, Ref } from 'react'
+import { useTranslations } from 'next-intl'
 
 import { Tooltip } from '@/components/Tooltip'
 
@@ -29,7 +29,7 @@ const Icon = styled(FilterIcon)`
   font-size: 1.25rem;
 
   > path {
-    fill: currentColor;
+    fill: currentcolor;
   }
 `
 
@@ -58,37 +58,37 @@ const Checkbox = styled.input`
 interface FilterViewProps {
   isActive?: boolean
   toggleIsActive: (event: MouseEvent) => void
-  handleChange: (event: ChangeEvent) => void
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void
   filterState: {
-    personsAreActive: boolean
-    timesAreActive: boolean
-    eventsAreActive: boolean
+    showPersons: boolean
+    showTimes: boolean
+    showEvents: boolean
   }
   ref?: Ref<HTMLDivElement>
 }
 
 export const FilterView: FC<FilterViewProps> = forwardRef(
   ({ isActive = false, toggleIsActive, handleChange, filterState }, ref) => {
-    const { t } = useTranslation()
+    const t = useTranslations()
 
     const filterElements = [
       {
         id: 'persons',
         label: t('ui.person', { count: 2 }),
         name: 'personsAreActive',
-        value: filterState.personsAreActive,
+        value: filterState.showPersons,
       },
       {
         id: 'times',
         label: t('ui.time', { count: 2 }),
         name: 'timesAreActive',
-        value: filterState.timesAreActive,
+        value: filterState.showTimes,
       },
       {
         id: 'events',
         label: t('ui.event', { count: 2 }),
         name: 'eventsAreActive',
-        value: filterState.eventsAreActive,
+        value: filterState.showEvents,
       },
     ]
 

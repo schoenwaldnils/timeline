@@ -30,7 +30,7 @@ export default css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--body-textColor);
-    text-rendering: optimizeLegibility;
+    text-rendering: optimizelegibility;
     background-color: var(--body-backgroundColor);
   }
 

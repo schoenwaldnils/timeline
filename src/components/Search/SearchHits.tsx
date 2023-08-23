@@ -1,10 +1,11 @@
+'use client'
 import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
+import { useTranslations } from 'next-intl'
 import { Index, useHits } from 'react-instantsearch-hooks'
 
-import { useStore } from '@/components/Store'
 import { HR } from '@/components/Typography'
+import { useStore } from '@/hooks/useStore'
 
 import { ReactComponent as AlgoliaLogoBlue } from './algolia-blue.svg'
 import { ReactComponent as AlgoliaLogoWhite } from './algolia-white.svg'
@@ -49,10 +50,10 @@ const Hits: FC<{
   type: 'person' | 'time' | 'event'
   onHitClick: () => void
 }> = ({ type, onHitClick }) => {
-  const { t } = useTranslation()
+  const t = useTranslations()
   const { hits, results } = useHits()
 
-  const typeString = t(`ui.${type}`, { count: hits.length })
+  const typeString = t('ui')
 
   if (!hits.length) {
     return (
@@ -68,7 +69,7 @@ const Hits: FC<{
   return (
     <>
       <HitsTitle>
-        {results.nbHits} <HitsType>{typeString}</HitsType>
+        {results?.nbHits} <HitsType>{typeString}</HitsType>
       </HitsTitle>
       {hits.map((hit) => (
         <SearchHit
@@ -85,15 +86,17 @@ const Hits: FC<{
 }
 
 export const SearchHits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
-  const {
-    store: { themeIsDark },
-  } = useStore()
+  const themeIsDark = useStore((state) => state.theme === 'dark')
+
   return (
     <SearchHitsContainer>
-      {indicies.map((index: 'person' | 'time' | 'event') => (
+      {indicies.map((index) => (
         <>
           <Index key={`index-${index}`} indexName={index}>
-            <Hits type={index} onHitClick={onHitClick} />
+            <Hits
+              type={index as 'person' | 'time' | 'event'}
+              onHitClick={onHitClick}
+            />
           </Index>
           <HR />
         </>

@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
+import { useTranslations } from 'next-intl'
+import { HTMLAttributes } from 'react'
 
 import { ButtonSquare } from '@/components/Button'
-import { SET_SCALE, useStore } from '@/components/Store'
+import { useStore } from '@/hooks/useStore'
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,56 +15,26 @@ const ButtonSpaced = styled(ButtonSquare)`
   }
 `
 
-export const Scaling: FC = (props) => {
-  const { t } = useTranslation()
-  const { store, dispatch } = useStore()
-  const map = {
-    1: 1 / 8,
-    2: 1 / 6,
-    3: 1 / 4,
-    4: 1 / 3,
-    5: 1 / 2, // 200 years = 100px
-    6: 1,
-    7: 2,
-    8: 4,
-    9: 8,
-    10: 16,
-  }
-
-  const [valueKey] = Object.keys(map).filter((key) => map[key] === store.scale)
-
-  const value = parseInt(valueKey, 10)
-
-  const MIN_SCALE = 1
-  const MAX_SCALE = 8
-
-  const increaseScale = () => {
-    dispatch({
-      type: SET_SCALE,
-      scale: parseFloat(map[value + 1]),
-    })
-  }
-
-  const decreaseScale = () => {
-    dispatch({
-      type: SET_SCALE,
-      scale: parseFloat(map[value - 1]),
-    })
-  }
+export const Scaling = (props: HTMLAttributes<HTMLDivElement>) => {
+  const t = useTranslations()
+  const scaleUp = useStore((state) => state.scaleUp)
+  const scaleDown = useStore((state) => state.scaleDown)
+  const scaleMaxed = useStore((state) => state.scaleMaxed)
+  const scaleFloored = useStore((state) => state.scaleFloored)
 
   return (
     <Wrapper {...props}>
       <ButtonSpaced
-        onClick={decreaseScale}
-        disabled={value <= MIN_SCALE}
+        onClick={scaleDown}
+        disabled={scaleFloored}
         title={t('ui.scale-down')}
         aria-label={t('ui.scale-down')}
       >
         -
       </ButtonSpaced>
       <ButtonSpaced
-        onClick={increaseScale}
-        disabled={value >= MAX_SCALE}
+        onClick={scaleUp}
+        disabled={scaleMaxed}
         title={t('ui.scale-up')}
         aria-label={t('ui.scale-up')}
       >
