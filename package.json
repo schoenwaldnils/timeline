@@ -41,7 +41,7 @@
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/builder-webpack5": "^6.5.9",
     "@storybook/manager-webpack5": "^6.5.9",
-    "@svgr/webpack": "^6.2.1",
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "^18.0.0",
     "accept-language": "^3.0.18",
     "algoliasearch": "^4.13.1",
