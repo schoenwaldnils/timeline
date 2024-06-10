@@ -1,50 +1,47 @@
 import orderBy from 'lodash/orderBy'
 
-import { Event } from '@/@types/Event'
-import { CEvent, CPerson, CTime } from '@/@types/generated/contentful'
-import { Parent } from '@/@types/Parent'
-import { Person } from '@/@types/Person'
-import { Time } from '@/@types/Time'
+import { AlgoliaIndex } from '@/@types/algolia.d'
+import { Child } from '@/@types/Child.d'
+import { Data, FormatedData } from '@/@types/Data.d'
+import { Event } from '@/@types/Event.d'
+import {
+  Event as CEvent,
+  Person as CPerson,
+  Time as CTime,
+} from '@/@types/generated/contentful.d'
+import { Parent } from '@/@types/Parent.d'
+import { Person } from '@/@types/Person.d'
+import { Time } from '@/@types/Time.d'
 
 import { getTimePeriod } from '../utils'
 import { updateEventProps } from './updateEventProps'
 
-const findParent = (
-  linkedFrom,
+const findParents = (
+  linkedFrom: CPerson['linkedFrom'],
   id: string,
-  type: 'male' | 'female',
-): string | undefined => {
-  const parents = (linkedFrom.personCollection.items as CPerson[]).filter(
-    ({ gender, childsCollection }) => {
-      if (gender !== type) return false
-      const childIDs =
-        childsCollection.items &&
-        Object.keys(childsCollection.items).map(
-          (key) => childsCollection.items[key].sys.id,
-        )
-      if (!childIDs) return false
+): Parent[] => {
+  const parents = (linkedFrom?.personCollection?.items as CPerson[]).filter(
+    ({ childsCollection }) => {
+      const childIDs = childsCollection?.items
+        .filter((i) => i?.sys.id)
+        .map((i) => i?.sys.id)
+      if (!childIDs?.length) return false
       if (childIDs.includes(id)) return true
       return false
     },
-  )
+  ) as unknown as Parent[]
 
-  const parent = parents[0] || undefined
+  if (!parents.length) return []
 
-  if (!parent) return undefined
-  return parent.sys.id
+  return parents
 }
 
 export function formatPerson(oldData: CPerson): Person {
-  const data = {
-    type: 'person',
+  const data: Person = {
     id: oldData.sys.id,
-    name: oldData.name,
-    image: oldData.image && {
-      src: oldData.image.url,
-      width: oldData.image.width,
-      height: oldData.image.height,
-    },
-    gender: oldData.gender,
+    name: oldData.name!,
+    image: undefined,
+    gender: oldData.gender!,
     startYear: oldData.startYear,
     startBlurriness: oldData.startBlurriness,
     endYear: oldData.endYear,
@@ -54,30 +51,38 @@ export function formatPerson(oldData: CPerson): Person {
         ? getTimePeriod(oldData.startYear, oldData.endYear)
         : undefined,
     stillActive: oldData.stillActive,
-    fatherID: findParent(oldData.linkedFrom, oldData.sys.id, 'male'),
-    motherID: findParent(oldData.linkedFrom, oldData.sys.id, 'female'),
+    parents: findParents(oldData.linkedFrom, oldData.sys.id),
     spouse: [],
     childs: [],
     wolLink: oldData.wolLink,
     richText: oldData.richText?.json,
   }
 
+  if (oldData.image?.url && oldData.image.width && oldData.image.height) {
+    data.image = {
+      src: oldData.image.url,
+      width: oldData.image.width,
+      height: oldData.image.height,
+    }
+  }
+
   if (oldData.spouseCollection && oldData.spouseCollection.items.length) {
-    const spouse = oldData.spouseCollection.items.map(
-      ({ sys: { id }, name }) => {
-        return { id, name }
-      },
-    )
+    const spouse = oldData.spouseCollection.items
+      .map(({ sys: { id }, name, gender }) => {
+        if (!id || !name || !gender) {
+          return null
+        }
+        return { id, name, gender }
+      })
+      .filter(Boolean)
 
     data.spouse = orderBy(spouse, ['name'])
   }
 
   if (oldData.childsCollection && oldData.childsCollection.items.length) {
     const childs = oldData.childsCollection.items.map(
-      ({ sys: { id }, name }) => {
-        return { id, name }
-      },
-    )
+      ({ sys, name, gender }) => ({ sys, name, gender }),
+    ) as Child[]
 
     data.childs = orderBy(childs, ['name'])
   }
@@ -85,27 +90,23 @@ export function formatPerson(oldData: CPerson): Person {
   return data
 }
 
-export function formatParent(oldData: CPerson): Parent {
-  return {
-    type: 'parent',
-    name: oldData.name,
-  }
-}
-
 export function formatTime(oldData: CTime): Time {
-  const data = {
-    type: 'time',
+  const data: Time = {
     id: oldData.sys.id,
     name: oldData.name,
-    image: oldData.image && {
-      src: oldData.image.url,
-      width: oldData.image.width,
-      height: oldData.image.height,
-    },
+    image: undefined,
     startYear: oldData.startYear,
     endYear: oldData.endYear,
     richText: oldData.richText?.json,
     wolLink: oldData.wolLink,
+  }
+
+  if (oldData.image?.url && oldData.image.width && oldData.image.height) {
+    data.image = {
+      src: oldData.image.url,
+      width: oldData.image.width,
+      height: oldData.image.height,
+    }
   }
 
   return data
@@ -114,18 +115,40 @@ export function formatTime(oldData: CTime): Time {
 export function formatEvent(oldData: CEvent): Event {
   const year = oldData.year === 2020 ? new Date().getFullYear() : oldData.year
 
-  const data = {
+  const data: Event = {
     id: oldData.sys.id,
-    name: oldData.name,
-    image: oldData.image && {
-      src: oldData.image.url,
-      width: oldData.image.width,
-      height: oldData.image.height,
-    },
-    year,
+    name: oldData.name!,
+    image: undefined,
+    year: year!,
     richText: oldData.richText?.json,
     wolLink: oldData.wolLink,
   }
 
+  if (oldData.image?.url && oldData.image.width && oldData.image.height) {
+    data.image = {
+      src: oldData.image.url,
+      width: oldData.image.width,
+      height: oldData.image.height,
+    }
+  }
+
   return updateEventProps(data)
+}
+
+export const formatData = <T extends AlgoliaIndex>(
+  type: T,
+  data: Data<T>,
+): FormatedData<T> | null => {
+  if (!data) return null
+
+  switch (type) {
+    case 'person':
+      return formatPerson(data as unknown as CPerson) as FormatedData<T>
+    case 'event':
+      return formatEvent(data as unknown as CEvent) as FormatedData<T>
+    case 'time':
+      return formatTime(data as unknown as CTime) as FormatedData<T>
+    default:
+      return null
+  }
 }

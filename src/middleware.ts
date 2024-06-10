@@ -1,4 +1,5 @@
 import createMiddleware from 'next-intl/middleware'
+
 import { i18n } from '../i18n-config'
 
 const locales = [...i18n.locales]

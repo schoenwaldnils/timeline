@@ -1,114 +1,74 @@
-'use client'
-import styled from '@emotion/styled'
-import { FC } from 'react'
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { Index, useHits } from 'react-instantsearch-hooks'
 
+import { AlgoliaHit, AlgoliaIndex } from '@/@types/algolia.d'
 import { HR } from '@/components/Typography'
 import { useStore } from '@/hooks/useStore'
 
 import { ReactComponent as AlgoliaLogoBlue } from './algolia-blue.svg'
 import { ReactComponent as AlgoliaLogoWhite } from './algolia-white.svg'
+import css from './Search.module.css'
 import { HitType, SearchHit } from './SearchHit'
 
-const SearchHitsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-height: 80vh;
-  font-size: 12px;
-`
+const indicies: AlgoliaIndex[] = ['person', 'time', 'event']
 
-const AlgoliaLogoWrapper = styled.a`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: 0.5ch;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 1rem;
-  color: inherit;
-  text-decoration: none;
-
-  > svg {
-    width: 4em !important;
-  }
-`
-
-const HitsTitle = styled.div`
-  margin: 0.25em;
-  font-size: 1.5em;
-  color: var(--Search-titleColor);
-`
-
-const HitsType = styled.span`
-  text-transform: capitalize;
-`
-
-const indicies = ['person', 'time', 'event']
-
-const Hits: FC<{
-  type: 'person' | 'time' | 'event'
-  onHitClick: () => void
-}> = ({ type, onHitClick }) => {
+const Hits = <T extends AlgoliaIndex>({
+  type,
+  onHitClick,
+}: {
+  type: T
+  onHitClick?: () => void
+}) => {
   const t = useTranslations()
-  const { hits, results } = useHits()
-
-  const typeString = t('ui')
-
-  if (!hits.length) {
-    return (
-      <HitsTitle>
-        {t(`ui.not-found`, {
-          type: t(`ui.${type}`, { count: 1 }),
-          context: type === 'person' ? 'female' : null,
-        })}
-      </HitsTitle>
-    )
-  }
+  const { hits, results } = useHits<AlgoliaHit<T>>()
 
   return (
     <>
-      <HitsTitle>
-        {results?.nbHits} <HitsType>{typeString}</HitsType>
-      </HitsTitle>
-      {hits.map((hit) => (
-        <SearchHit
-          key={hit.objectID}
-          {...({
-            onHitClick,
-            type,
-            ...hit,
-          } as unknown as HitType)}
-        />
-      ))}
+      <div className={css.Search_hitsTitle}>
+        {results?.nbHits}{' '}
+        <span className={css.Search_hitsType}>
+          {t(`ui.${type}`, { count: results?.nbHits })}
+        </span>
+      </div>
+      <div className={css.Search_hitsList}>
+        {hits.map((hit) => (
+          <SearchHit
+            key={hit.objectID}
+            {...({
+              type,
+              ...hit,
+            } as unknown as HitType)}
+            onHitClick={onHitClick}
+          />
+        ))}
+      </div>
     </>
   )
 }
 
-export const SearchHits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
+export const SearchHits = ({ onHitClick }: { onHitClick?: () => void }) => {
   const themeIsDark = useStore((state) => state.theme === 'dark')
 
   return (
-    <SearchHitsContainer>
+    <div className={css.Search_hits}>
       {indicies.map((index) => (
         <>
           <Index key={`index-${index}`} indexName={index}>
-            <Hits
-              type={index as 'person' | 'time' | 'event'}
-              onHitClick={onHitClick}
-            />
+            <Hits type={index as AlgoliaIndex} onHitClick={onHitClick} />
           </Index>
           <HR />
         </>
       ))}
-      <AlgoliaLogoWrapper
+      <Link
+        className={css.Search_algoliaLogo}
         href="https://www.algolia.com/"
         target="_blank"
         rel="nofollow"
       >
         <span>Search by</span>
         {themeIsDark ? <AlgoliaLogoWhite /> : <AlgoliaLogoBlue />}
-      </AlgoliaLogoWrapper>
-    </SearchHitsContainer>
+      </Link>
+    </div>
   )
 }

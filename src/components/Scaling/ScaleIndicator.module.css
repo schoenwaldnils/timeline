@@ -1,0 +1,33 @@
+.ScaleIndicator {
+  display: flex;
+  align-items: baseline;
+  gap: 1ch;
+  font-size: 0.675rem;
+  text-transform: capitalize;
+}
+
+.ScaleIndicator_line {
+  position: relative;
+  width: 101px;
+  height: 6px;
+  margin-left: 4px;
+  border-bottom: 1px solid;
+}
+
+.ScaleIndicator_line::before,
+.ScaleIndicator_line::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  border-left: 1px solid;
+}
+
+.ScaleIndicator_line::before {
+  left: 0;
+}
+
+.ScaleIndicator_line::after {
+  right: 0;
+}

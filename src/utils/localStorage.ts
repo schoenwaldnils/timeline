@@ -10,13 +10,17 @@ export const setLocalStorage = (key: string, value: string | number): void => {
   window.localStorage.setItem(key, stringValue)
 }
 
-export const getLocalStorage = (key: string): string => {
-  if (typeof window === 'undefined') return null
+export const getLocalStorage = (key: string): string | null => {
+  if (typeof window === 'undefined') {
+    return null
+  }
   return window.localStorage.getItem(key)
 }
 
 export const removeLocalStorage = (key: string): void => {
-  if (typeof window === 'undefined') return null
+  if (typeof window === 'undefined') {
+    return
+  }
   return window.localStorage.removeItem(key)
 }
 
@@ -35,12 +39,16 @@ export const setSessionStorage = (
   window.sessionStorage.setItem(key, stringValue)
 }
 
-export const getSessionStorage = (key: string): string => {
-  if (typeof window === 'undefined') return null
+export const getSessionStorage = (key: string): string | null => {
+  if (typeof window === 'undefined') {
+    return null
+  }
   return window.sessionStorage.getItem(key)
 }
 
 export const removeSessionStorage = (key: string): void => {
-  if (typeof window === 'undefined') return null
+  if (typeof window === 'undefined') {
+    return
+  }
   return window.sessionStorage.removeItem(key)
 }

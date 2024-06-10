@@ -1,0 +1,9 @@
+query personEntryQuery(
+  $id: String!
+  $locale: String!
+  $preview: Boolean = false
+) {
+  person(id: $id, locale: $locale, preview: $preview) {
+    ...Person
+  }
+}

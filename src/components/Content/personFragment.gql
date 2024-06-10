@@ -1,0 +1,57 @@
+fragment Person on Person {
+  sys {
+    id
+  }
+  linkedFrom {
+    personCollection(locale: "en") {
+      items {
+        sys {
+          id
+        }
+        gender
+        nameEN: name(locale: "en")
+        nameDE: name(locale: "de")
+        childsCollection {
+          items {
+            sys {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+  name
+  image {
+    fileName
+    url
+    width
+    height
+  }
+  gender
+  startYear
+  startBlurriness
+  endYear
+  endBlurriness
+  stillActive
+  spouseCollection {
+    items {
+      sys {
+        id
+      }
+      name
+    }
+  }
+  childsCollection {
+    items {
+      sys {
+        id
+      }
+      name
+    }
+  }
+  wolLink
+  richText {
+    json
+  }
+}

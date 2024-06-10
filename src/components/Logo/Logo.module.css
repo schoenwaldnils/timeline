@@ -1,0 +1,25 @@
+.Logo {
+  flex-shrink: 0;
+}
+
+.Logo_svg__icon {
+  font-size: 2rem;
+  color: var(--Logo-textColor);
+}
+
+.Logo_svg__logo {
+  display: none;
+}
+
+/* sm */
+@media (min-width: 481px) {
+  .Logo_svg__icon {
+    display: none;
+  }
+
+  .Logo_svg__logo {
+    display: block;
+    font-size: 2.5rem;
+    color: var(--Logo-textColor);
+  }
+}

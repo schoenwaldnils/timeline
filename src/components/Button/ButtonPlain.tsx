@@ -1,18 +1,10 @@
-import styled from '@emotion/styled'
-import { ButtonHTMLAttributes, FC } from 'react'
+import { ButtonHTMLAttributes } from 'react'
 
-const Button = styled.button`
-  padding: 0;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  cursor: pointer;
-  background: none;
-  border: 0;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-appearance: none;
-`
+import css from './Button.module.css'
 
-export const ButtonPlain: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (
-  props,
-) => <Button {...props} />
+export const ButtonPlain = ({
+  className,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <button {...props} className={[css.Button, className].join(' ')} />
+)

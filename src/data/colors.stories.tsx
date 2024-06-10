@@ -1,8 +1,5 @@
-import styled from '@emotion/styled'
 import Color from 'color'
-import { FC } from 'react'
-
-import { viewportsJs } from '@/utils/viewports'
+import { ReactNode } from 'react'
 
 import { colors, shades, themeColors } from './colors'
 
@@ -12,31 +9,35 @@ export default {
 
 const isDark = (color: string) => Color(color).isDark()
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 0.5rem;
+const Wrapper = ({ children }: { children: ReactNode }) => (
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gridGap: '0.5rem',
+    }}
+  >
+    {children}
+  </div>
+)
 
-  @media ${viewportsJs.sm} {
-    grid-template-columns: repeat(5, 1fr);
-  }
+const Box = ({ children, color }: { children: ReactNode; color: string }) => (
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '5rem',
+      fontSize: '14px',
+      color: color && isDark(color) ? '#fff' : '#000',
+      backgroundColor: color,
+    }}
+  >
+    {children}
+  </div>
+)
 
-  @media ${viewportsJs.md} {
-    grid-template-columns: repeat(6, 1fr);
-  }
-`
-
-const Box = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 5rem;
-  font-size: 14px;
-  color: ${({ color }) => (color && isDark(color) ? '#fff' : '#000')};
-  background-color: ${({ color }) => color};
-`
-
-export const Colors: FC = () => (
+export const Colors = () => (
   <>
     <h1>Shades</h1>
     <Wrapper>

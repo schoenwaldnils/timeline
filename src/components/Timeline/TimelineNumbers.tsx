@@ -1,40 +1,6 @@
-import styled from '@emotion/styled'
-import { FC } from 'react'
+import { useCallback } from 'react'
 
-interface WrapperProps {
-  paddingLeft: number
-}
-
-const TimelineNumbersWrapper = styled.div<WrapperProps>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  height: 100%;
-  padding-left: ${({ paddingLeft }) => `${paddingLeft}px`};
-  color: var(--TimelineNumbers-color);
-  pointer-events: none;
-`
-
-interface NumberProps {
-  width: number
-  number: number
-}
-
-const Number = styled.div<NumberProps>`
-  flex-shrink: 0;
-  width: ${({ width, number }) => `${number === 0 ? width - 1 : width}px`};
-  font-family: monospace;
-  font-size: 12px;
-  border-left: 1px solid var(--TimelineNumbers-lineColor);
-
-  &::before {
-    content: ${({ number }) => `"${number === 0 ? 1 : number}"`};
-    display: block;
-    margin: 0.25em;
-    white-space: nowrap;
-  }
-`
+import css from './Timeline.module.css'
 
 interface TimelineNumbersProps {
   startYear: number
@@ -42,11 +8,11 @@ interface TimelineNumbersProps {
   scale: number
 }
 
-export const TimelineNumbers: FC<TimelineNumbersProps> = ({
+export const TimelineNumbers = ({
   startYear,
   endYear,
   scale,
-}) => {
+}: TimelineNumbersProps) => {
   const numberWidth = 100 // TODO: make adjustable
 
   const startIsNegative = startYear <= 0
@@ -71,24 +37,47 @@ export const TimelineNumbers: FC<TimelineNumbersProps> = ({
     numbers.push((numberWidth / scale) * i)
   }
 
-  const smallerLastNumer = endRemainder !== 0
-  const lastNumberWidth = smallerLastNumer && endRemainder
+  const smallerLastNumber = endRemainder !== 0
+  const lastNumberWidth = smallerLastNumber ? endRemainder : 0
 
-  const getWidth = (number, key) => {
-    if (number === 0) return numberWidth - 1
-    if (key === numbers.length - 1 && smallerLastNumer) return lastNumberWidth
-    return numberWidth
-  }
+  const getWidth = useCallback(
+    (number: number, key: number): number => {
+      if (number === 0) {
+        return numberWidth - 1
+      }
+
+      if (key === numbers.length - 1 && smallerLastNumber) {
+        return lastNumberWidth
+      }
+
+      return numberWidth
+    },
+    [lastNumberWidth, numberWidth, numbers.length, smallerLastNumber],
+  )
 
   return (
-    <TimelineNumbersWrapper paddingLeft={startRemainder}>
-      {numbers.map((number, key) => (
-        <Number
-          key={`timelineNumber-${number}`}
-          width={getWidth(number, key)}
-          number={number === 0 ? 1 : number}
-        />
-      ))}
-    </TimelineNumbersWrapper>
+    <div
+      className={css.Timeline_numbers}
+      style={{
+        paddingLeft: `${startRemainder}px`,
+      }}
+    >
+      {numbers.map((number, key) => {
+        const width = getWidth(number, key)
+        const numberNotNull = number === 0 ? 1 : number
+
+        return (
+          <div
+            className={css.Timeline_numberBlock}
+            style={{
+              width,
+            }}
+            key={`timelineNumber-${number}`}
+          >
+            <div className={css.Timeline_number}>{numberNotNull}</div>
+          </div>
+        )
+      })}
+    </div>
   )
 }

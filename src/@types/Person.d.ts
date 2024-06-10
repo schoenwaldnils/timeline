@@ -1,10 +1,12 @@
 import { Document } from '@contentful/rich-text-types'
 
+import { Child } from './Child.d'
 import { Parent } from './Parent.d'
 
 export type Person = {
   id: string
   name: string
+  gender: string
   image?: {
     src: string
     width: number
@@ -16,11 +18,9 @@ export type Person = {
   endBlurriness?: number
   age?: number
   spouse?: Person[]
-  fatherID?: string
-  father?: Parent
-  motherID?: string
-  mother?: Parent
-  childs?: Person[]
+  stillActive?: boolean
+  parents?: Parent[]
+  childs?: Child[]
   richText?: Document
-  wolLink: string
+  wolLink?: string
 }

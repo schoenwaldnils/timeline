@@ -9,7 +9,7 @@ export function positionEvents(events: TimelineEvent[]): TimelineEvent[] {
 
     const endWithMargin = Math.floor(start + name.length * 8 + 10)
 
-    const testRow = (row = 0) => {
+    const testRow = (row = 0): number => {
       if (Number.isInteger(occupiedSpace[row])) {
         if (start >= occupiedSpace[row]) {
           occupiedSpace[row] = endWithMargin

@@ -1,11 +1,10 @@
+import '@/components/GlobalStyles/index.css'
+
 import { Analytics } from '@vercel/analytics/react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider, useLocale } from 'next-intl'
 import { ReactNode } from 'react'
-
-import { GlobalStyles } from '@/components/GlobalStyles'
-import { NextAppDirEmotionCacheProvider } from '@/components/NextAppDirEmotionCacheProvider'
 
 import { i18n } from '../../../i18n-config'
 
@@ -37,12 +36,9 @@ export default async function Root({
   return (
     <html lang={locale}>
       <body>
-        <NextAppDirEmotionCacheProvider options={{ key: 'timeline-app' }}>
-          <GlobalStyles />
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </NextAppDirEmotionCacheProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
         <Analytics />
       </body>
     </html>

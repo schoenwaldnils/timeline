@@ -1,29 +1,7 @@
-import styled from '@emotion/styled'
-import { ButtonHTMLAttributes, FC } from 'react'
+import { ButtonHTMLAttributes } from 'react'
 
-import { ButtonPlain } from './ButtonPlain'
+import css from './Button.module.css'
 
-const Button = styled(ButtonPlain)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.5em;
-  height: 1.5em;
-  font-family: monospace;
-  font-size: 1rem;
-  line-height: 1;
-  color: var(--Button-color);
-  background-color: var(--Button-backgroundColor);
-  border-radius: 4px;
-  box-shadow: 0 0.125rem 0.25rem 0 #0007;
-
-  &:disabled {
-    color: var(--Button-color--disabled);
-  }
-`
-
-export const ButtonSquare: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (
-  props,
-) => {
-  return <Button {...props} />
-}
+export const ButtonSquare = (
+  props: ButtonHTMLAttributes<HTMLButtonElement>,
+) => <button {...props} className={css.Button__square} />

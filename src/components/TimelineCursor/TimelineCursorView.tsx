@@ -1,26 +1,9 @@
-import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'next-intl'
 import { CSSProperties, FC, useEffect, useMemo, useState } from 'react'
 
-import { pixelToYear } from '@/js/calcTimes'
+import { pixelToYear } from '@/utils/calcTimes'
 
-const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: var(--TimelineCursor-left);
-  width: 1px;
-  height: 100%;
-  pointer-events: none;
-  background-color: var(--TimelineCursor-color);
-`
-
-const Time = styled.div`
-  position: absolute;
-  top: 1.5rem;
-  left: 5px;
-  color: var(--TimelineCursor-color);
-  white-space: nowrap;
-`
+import css from './TimelineCursor.module.css'
 
 interface TimelineCursorViewProps {
   pixelYear: number
@@ -31,20 +14,12 @@ export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
   pixelYear,
   scale,
 }) => {
-  const { t } = useTranslation()
+  const t = useTranslations()
   const [tempPixelYear, setTempPixelYear] = useState(pixelYear)
 
   useEffect(() => {
     requestAnimationFrame(() => setTempPixelYear(pixelYear))
   }, [pixelYear])
-
-  const properties = useMemo(
-    () =>
-      ({
-        '--TimelineCursor-left': `${tempPixelYear}px`,
-      } as CSSProperties),
-    [tempPixelYear],
-  )
 
   const year = useMemo(
     () => Math.floor(pixelToYear(pixelYear / scale)),
@@ -54,13 +29,20 @@ export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
   const isNegative = year <= 0
 
   return (
-    <Wrapper style={properties}>
-      <Time>
+    <div
+      className={css.TimelineCursor}
+      style={
+        {
+          '--TimelineCursor-left': `${tempPixelYear}px`,
+        } as CSSProperties
+      }
+    >
+      <div className={css.TimelineCursor_time}>
         {isNegative ? year * -1 : year}{' '}
         {isNegative
           ? t('time.extension-negative')
           : t('time.extension-positive')}
-      </Time>
-    </Wrapper>
+      </div>
+    </div>
   )
 }

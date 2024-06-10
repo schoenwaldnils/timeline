@@ -1,45 +1,43 @@
-import styled from '@emotion/styled'
+'use client'
+
 import { useTranslations } from 'next-intl'
 import { HTMLAttributes } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 
 import { ButtonSquare } from '@/components/Button'
-import { useStore } from '@/hooks/useStore'
+import { useScaleStore } from '@/hooks/useScaleStore'
 
-const Wrapper = styled.div`
-  display: flex;
-`
-
-const ButtonSpaced = styled(ButtonSquare)`
-  & + & {
-    margin-left: 0.25em;
-  }
-`
+import css from './Scaling.module.css'
 
 export const Scaling = (props: HTMLAttributes<HTMLDivElement>) => {
   const t = useTranslations()
-  const scaleUp = useStore((state) => state.scaleUp)
-  const scaleDown = useStore((state) => state.scaleDown)
-  const scaleMaxed = useStore((state) => state.scaleMaxed)
-  const scaleFloored = useStore((state) => state.scaleFloored)
+  const { scaleUp, scaleDown, scaleMaxed, scaleFloored } = useScaleStore(
+    useShallow((state) => ({
+      scaleUp: state.scaleUp,
+      scaleDown: state.scaleDown,
+      scaleMaxed: state.scaleMaxed,
+      scaleFloored: state.scaleFloored,
+    })),
+  )
 
   return (
-    <Wrapper {...props}>
-      <ButtonSpaced
+    <div className={css.Scaling} {...props}>
+      <ButtonSquare
         onClick={scaleDown}
         disabled={scaleFloored}
         title={t('ui.scale-down')}
         aria-label={t('ui.scale-down')}
       >
         -
-      </ButtonSpaced>
-      <ButtonSpaced
+      </ButtonSquare>
+      <ButtonSquare
         onClick={scaleUp}
         disabled={scaleMaxed}
         title={t('ui.scale-up')}
         aria-label={t('ui.scale-up')}
       >
         +
-      </ButtonSpaced>
-    </Wrapper>
+      </ButtonSquare>
+    </div>
   )
 }

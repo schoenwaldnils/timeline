@@ -12,7 +12,7 @@ export const updateTimeProps = (time: Timespan): Timespan => {
     type,
   } = time
 
-  const { pixelStart, pixelEnd, duration, pixelDuration } = calcTimes({
+  const calcedTimes = calcTimes({
     startYear,
     startBlurriness,
     endYear,
@@ -21,12 +21,12 @@ export const updateTimeProps = (time: Timespan): Timespan => {
     type,
   })
 
+  if (!calcedTimes) {
+    return time
+  }
+
   return {
     ...time,
-    type,
-    pixelStart,
-    pixelEnd,
-    duration,
-    pixelDuration,
+    ...calcedTimes,
   }
 }

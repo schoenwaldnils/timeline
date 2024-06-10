@@ -1,0 +1,33 @@
+.small {
+  margin-bottom: 0.5em;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.h1,
+.h2,
+.h3 {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.h1 {
+  font-size: 2rem;
+}
+
+.h2 {
+  font-size: 1.5rem;
+}
+
+.h3 {
+  font-size: 1.25rem;
+}
+
+.h1:first-of-type,
+.h2:first-of-type,
+.h3:first-of-type {
+  margin-top: 0;
+}

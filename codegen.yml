@@ -1,11 +1,13 @@
 schema:
   - ? https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}/environments/${CONTENTFUL_ENVIRONMENT}
     : headers:
-        Authorization: 'Bearer ${CONTENTFUL_DELIVERY_TOKEN}'
+        Authorization: 'Bearer ${NEXT_PUBLIC_CONTENTFUL_DELIVERY_TOKEN}'
 generates:
   src/@types/generated/contentful.d.ts:
     plugins:
       - typescript
+    config:
+      maybeValue: 'T'
   # src/:
   #   documents: 'src/**/*.gql'
   #   preset: near-operation-file

@@ -4,18 +4,15 @@
   "approx": "ca.",
   "contentful-edit": "In Contentful editieren",
   "relations": {
-    "spouse_one": "Ehepartner",
-    "spouse_other": "Ehepartner",
+    "spouse": "Ehepartner",
     "father": "Vater",
     "mother": "Mutter",
-    "child_one": "Kind",
-    "child_other": "Kinder"
+    "child": "Kind{count, plural, =1 {} other {er}}"
   },
   "time": {
     "extension-positive": "u.Z.",
     "extension-negative": "v.u.Z.",
-    "year_one": "Jahr",
-    "year_other": "Jahre",
+    "year": "Jahr{count, plural, =1 {} other {e}}",
     "start": "Start",
     "end": "Ende",
     "duration": "Dauer",
@@ -33,12 +30,9 @@
     "scale-up": "vergrößern",
     "scale-down": "verkleinern",
     "filter-elements": "filter Elemente",
-    "person_one": "Person",
-    "person_other": "Personen",
-    "time_one": "Zeitabschnitt",
-    "time_other": "Zeitabschnitte",
-    "event_one": "Ereignis",
-    "event_other": "Ereignisse",
+    "person": "Person{count, plural, =1 {} other {en}}",
+    "time": "Zeitabschnitt{count, plural, =1 {} other {e}}",
+    "event": "Ereignis{count, plural, =1 {} other {e}}",
     "not-found": "Kein {{type}} gefunden",
     "not-found_female": "Keine {{type}} gefunden",
     "toggle-dark-mode": "zwischen hellem und dunklem Modus wechseln"

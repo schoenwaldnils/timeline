@@ -1,13 +1,12 @@
-export type Event = {
+export interface Event {
   id: string
-  name: string
   year: number
+  name: string
   image?: {
     src: string
     width: number
     height: number
   }
+  richText?: json
   wolLink?: string
-  pixelStart?: number
-  rowIndex?: number
 }

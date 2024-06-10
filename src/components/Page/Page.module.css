@@ -1,0 +1,35 @@
+.Page {
+  display: grid;
+  grid-template-areas:
+    'header'
+    'content';
+  grid-template-rows: max-content auto;
+  grid-template-columns: 100vw;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.Page_content {
+  position: relative;
+  grid-area: content;
+  overflow: auto;
+}
+
+.Page_sidebar {
+  position: relative;
+  grid-area: content;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.Page_config {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1rem;
+  z-index: var(--z-config);
+}
+
+.Page_config > *:not(:last-child) {
+  margin-bottom: 0.25rem;
+}

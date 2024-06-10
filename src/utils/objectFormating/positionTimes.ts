@@ -21,7 +21,7 @@ export function positionTimes(
 
     if (item.type === 'person' || item.type === 'time') {
       const tempEnd = (item as Timespan).pixelEnd
-      const isTooSmall = tempEnd - start < 30
+      const isTooSmall = tempEnd - start < 30 // TODO: 1px = 1 year. should scale with store.scale
       end = Math.floor(isTooSmall ? start + 50 : tempEnd + 10)
     }
 
@@ -29,7 +29,7 @@ export function positionTimes(
       end = Math.floor(start + item.name.length * 8 + 10)
     }
 
-    const testRow = (row = 0) => {
+    const testRow = (row = 0): number => {
       if (Number.isInteger(occupiedSpace[row])) {
         if (start >= occupiedSpace[row]) {
           occupiedSpace[row] = end

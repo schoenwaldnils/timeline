@@ -1,12 +1,5 @@
 import { YEARS_AFTER_ZERO, YEARS_BEFORE_ZERO } from '@/data/constants'
 
-// function maxEnd(value) {
-//   if (value > YEARS_AFTER_ZERO) {
-//     return YEARS_AFTER_ZERO
-//   }
-//   return value
-// }
-
 interface Props {
   startYear: number
   startBlurriness?: number
@@ -21,38 +14,55 @@ export const calcTimes = ({
   endYear,
   stillActive,
   type,
-}: Props): {
-  pixelStart: number
-  pixelEnd: number
-  duration: number
-  pixelDuration: number
-} => {
+}: Props):
+  | {
+      pixelStart: number
+      pixelEnd: number
+      duration: number
+      pixelDuration: number
+    }
+  | {
+      pixelStart: number
+    }
+  | null => {
   let correctedEndYear = endYear
   let pixelStart: number
   let pixelEnd: number
 
-  if ((type === 'person' && stillActive) || (type === 'time' && !endYear)) {
+  if (
+    (type === 'person' && stillActive) ||
+    (type === 'time' && (!endYear || endYear === 0))
+  ) {
     correctedEndYear = YEARS_AFTER_ZERO
   }
 
-  if (startYear) {
-    pixelStart = startYear + YEARS_BEFORE_ZERO
-    if (pixelStart >= 0) {
-      pixelStart -= 1
+  if (!startYear) {
+    return null
+  }
+
+  pixelStart = startYear + YEARS_BEFORE_ZERO
+
+  if (startYear >= 0) {
+    pixelStart -= 1
+  }
+
+  if (!correctedEndYear) {
+    return {
+      pixelStart,
     }
   }
 
-  if (correctedEndYear) {
-    pixelEnd = correctedEndYear + YEARS_BEFORE_ZERO
-    if (correctedEndYear + YEARS_BEFORE_ZERO >= 0) {
-      pixelEnd -= 1
-    }
+  pixelEnd = correctedEndYear + YEARS_BEFORE_ZERO
+  pixelEnd += 1
+
+  if (correctedEndYear > 0) {
+    pixelEnd -= 1
   }
 
   return {
     pixelStart,
     pixelEnd,
-    duration: endYear ? pixelEnd - pixelStart : null,
+    duration: startYear - correctedEndYear,
     pixelDuration: pixelEnd - pixelStart,
   }
 }

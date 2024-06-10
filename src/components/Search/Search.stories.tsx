@@ -1,28 +1,22 @@
-import styled from '@emotion/styled'
-import { FC } from 'react'
-
-import { Search as SearchComponent } from './Search'
+import { Search } from './Search'
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
 
 export default {
   title: 'Search',
-  component: SearchComponent,
+  component: Search,
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  > * + * {
-    margin-top: 1rem;
-  }
-`
-
-export const Search: FC = () => (
-  <Container>
-    <SearchComponent />
+export const search = () => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1rem',
+    }}
+  >
+    <Search />
     <SearchBar />
-    <SearchHits onHitClick={() => null} />
-  </Container>
+    <SearchHits />
+  </div>
 )

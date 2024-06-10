@@ -1,39 +1,22 @@
 'use client'
-import styled from '@emotion/styled'
-import { FC, useCallback, useEffect, useRef } from 'react'
+import { useTranslations } from 'next-intl'
+import { useCallback, useEffect, useRef } from 'react'
 import { useSearchBox } from 'react-instantsearch-hooks'
 
-import { shades } from '@/data/colors'
-import { useTranslations } from 'next-intl'
+import css from './Search.module.css'
 
-const Wrapper = styled.input`
-  width: 12rem;
-  max-width: 100%;
-  height: 2rem;
-  padding: 0.5em 0.75em;
-  font-size: 1rem;
-  border: 1px solid ${shades.cb6};
-  border-radius: 4px;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-appearance: none;
-
-  :focus {
-    outline: 0;
-  }
-`
-
-export const SearchBar: FC = () => {
+export const SearchBar = () => {
   const { query, refine, clear } = useSearchBox()
 
   const t = useTranslations()
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    inputRef.current.focus()
+    inputRef.current?.focus()
   }, [])
 
   const onChange = useCallback(
-    (value) => {
+    (value?: string) => {
       if (value) {
         refine(value)
       } else {
@@ -45,7 +28,8 @@ export const SearchBar: FC = () => {
 
   return (
     <form noValidate action="" role="search">
-      <Wrapper
+      <input
+        className={css.Search_input}
         ref={inputRef}
         type="search"
         value={query}

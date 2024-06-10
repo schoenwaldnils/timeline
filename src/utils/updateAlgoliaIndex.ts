@@ -8,6 +8,12 @@ interface Options {
   indexName: 'person' | 'timespan' | 'event'
 }
 
+export interface AlgoliaError {
+  name: string
+  message: string
+  status: number
+}
+
 export const updateAlgoliaIndex = async (
   entries: AlgoliaPerson[],
   { applicationId, apiKey, indexName }: Options,
@@ -20,7 +26,7 @@ export const updateAlgoliaIndex = async (
     .then(({ objectIDs }) => {
       return objectIDs
     })
-    .catch((error) => {
+    .catch((error: AlgoliaError) => {
       throw error
     })
 }

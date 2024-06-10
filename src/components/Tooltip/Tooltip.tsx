@@ -1,23 +1,17 @@
-import styled from '@emotion/styled'
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
-import { zIndexes } from '@/data/constants'
+import css from './Tooltip.module.css'
 
 type TooltipType = {
   alignRight?: boolean
   children: ReactNode
+  className?: string
 }
 
-const TooltipWrapper = styled.div<TooltipType>`
-  position: absolute;
-  top: calc(100% + 7px);
-  z-index: ${zIndexes.tooltip};
-  padding: 0.25rem;
-  overflow: auto;
-  background-color: var(--Tooltip-backgroundColor);
-  border-radius: 4px;
-  box-shadow: 0 0.125rem 0.25rem 0 #0007;
-  ${(p) => (p.alignRight ? 'right: 0;' : 'left: 0;')}
-`
-
-export const Tooltip: FC<TooltipType> = (props) => <TooltipWrapper {...props} />
+export const Tooltip = ({ alignRight, className, ...props }: TooltipType) => (
+  <div
+    {...props}
+    className={[css.Tooltip, className].join(' ')}
+    style={alignRight ? { right: 0 } : { left: 0 }}
+  />
+)

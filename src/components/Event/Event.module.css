@@ -1,0 +1,38 @@
+.Event {
+  composes: Button from '../Button/Button.module.css';
+
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  grid-area: events;
+  width: fit-content;
+  height: 2em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  color: var(--Event-color);
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: var(--Event-backgroundColor);
+}
+
+.Event::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-event);
+  display: block;
+  width: 1px;
+  height: 100vh;
+  min-height: calc(100vh + 50vh);
+  background-color: var(--red);
+}
+
+.Event:hover,
+.Event:focus {
+  z-index: var(--z-eventFocus);
+}
+
+.Event:focus::before {
+  outline: 0;
+}

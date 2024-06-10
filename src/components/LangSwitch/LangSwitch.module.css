@@ -1,0 +1,63 @@
+.LangSwitch {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.LangSwitch_button {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+.LangSwitch_svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+  font-size: 1.5rem;
+}
+
+.LangSwitch_text {
+  display: none;
+}
+
+/* sm */
+@media (min-width: 481px) {
+  .LangSwitch_text {
+    display: block;
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--LangSwitch-color);
+  }
+}
+
+.LangSwitch_tooltip {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.LangSwitch_item {
+  display: block;
+  padding: 1em;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+  text-decoration: none;
+}
+
+.LangSwitch_item:disabled {
+  color: var(--LangSwitch-buttonDisabled);
+  cursor: inherit;
+}

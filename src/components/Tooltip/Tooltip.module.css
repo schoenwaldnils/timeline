@@ -1,0 +1,10 @@
+.Tooltip {
+  position: absolute;
+  top: calc(100% + 7px);
+  z-index: var(--z-tooltip);
+  padding: 0.25rem;
+  overflow: auto;
+  background-color: var(--Tooltip-backgroundColor);
+  border-radius: 4px;
+  box-shadow: 0 0.125rem 0.25rem 0 #0007;
+}

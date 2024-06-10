@@ -1,23 +1,42 @@
-import styled from '@emotion/styled'
 import { useTranslations } from 'next-intl'
-import { ButtonHTMLAttributes } from 'react'
+import { ButtonHTMLAttributes, useEffect } from 'react'
 import { WiDaySunny, WiMoonAltWaningCrescent5 } from 'react-icons/wi'
 
+import { Theme } from '@/@types/Theme.d'
 import { ButtonSquare } from '@/components/Button'
+import { USER_THEME_KEY } from '@/data/constants'
 import { useStore } from '@/hooks/useStore'
 
 const IconLight = WiDaySunny
 
-const IconDark = styled(WiMoonAltWaningCrescent5)`
-  transform: rotate(-30deg);
-`
+const IconDark = () => (
+  <WiMoonAltWaningCrescent5 style={{ transform: 'rotate(-30deg)' }} />
+)
 
 export type ThemeSwitchProps = ButtonHTMLAttributes<HTMLButtonElement>
 
 export const ThemeSwitch = (props: ThemeSwitchProps) => {
   const t = useTranslations()
-  const themeIsDark = useStore((state) => state.theme === 'dark')
+  const theme = useStore((state) => state.theme)
   const toggleTheme = useStore((state) => state.toggleTheme)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    window.localStorage.setItem(USER_THEME_KEY, theme as unknown as string)
+
+    const root = document.querySelector(':root')
+
+    if (theme === Theme.Dark) {
+      root?.classList.add('dark')
+      root?.classList.remove('light')
+    } else {
+      root?.classList.add('light')
+      root?.classList.remove('dark')
+    }
+  }, [theme])
 
   return (
     <ButtonSquare
@@ -26,7 +45,7 @@ export const ThemeSwitch = (props: ThemeSwitchProps) => {
       title={t('ui.toggle-dark-mode')}
       aria-label={t('ui.toggle-dark-mode')}
     >
-      {themeIsDark ? <IconLight /> : <IconDark />}
+      {theme === Theme.Dark ? <IconLight /> : <IconDark />}
     </ButtonSquare>
   )
 }

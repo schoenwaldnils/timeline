@@ -1,0 +1,16 @@
+fragment Event on Event {
+  sys {
+    id
+  }
+  name
+  year
+  image {
+    url
+    width
+    height
+  }
+  richText {
+    json
+  }
+  wolLink
+}

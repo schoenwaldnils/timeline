@@ -12,9 +12,9 @@ const props = {
   toggleIsActive: action('toggleIsActive'),
   handleChange: action('handleChange'),
   filterState: {
-    personsAreActive: true,
-    timesAreActive: true,
-    eventsAreActive: true,
+    showPersons: true,
+    showTimes: true,
+    showEvents: true,
   },
 }
 

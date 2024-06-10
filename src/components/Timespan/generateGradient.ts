@@ -1,9 +1,14 @@
-export function generateGradient(
-  startBlurriness: number,
-  endBlurriness: number,
-  color: string,
-  colorTransparent: string,
-): string {
+export function generateGradient({
+  startBlurriness,
+  endBlurriness,
+  color,
+  colorTransparent,
+}: {
+  startBlurriness?: number
+  endBlurriness?: number
+  color: string
+  colorTransparent: string
+}): string {
   if (!startBlurriness && !endBlurriness) {
     return color
   }
@@ -24,5 +29,5 @@ export function generateGradient(
     to right,
     ${left}
     ${right}
-  );`
+  )`
 }

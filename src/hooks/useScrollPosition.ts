@@ -1,12 +1,19 @@
-import { LegacyRef, useCallback, useEffect, useRef } from 'react'
+import { RefObject, useCallback, useEffect, useRef } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 
-import { getLocalStorage, setLocalStorage } from '@/utils/localStorage'
+import { Coordinates } from '@/@types/Scroll'
+
+import { useScrollStore } from './useScrollStore'
 
 const isBrowser = typeof window !== 'undefined'
 
-const STORAGE_NAME = 'scrollPosition'
+const positionNotNull = (
+  position: Coordinates | null,
+): position is Coordinates => {
+  return position?.left !== 0 && position?.top !== 0
+}
 
-function getScrollPosition(element: HTMLElement) {
+const getScrollPosition = (element: HTMLElement): Coordinates => {
   if (!isBrowser || !element) return { left: 0, top: 0 }
 
   const position = element.getBoundingClientRect()
@@ -14,86 +21,80 @@ function getScrollPosition(element: HTMLElement) {
   return { left: position.left * -1, top: position.top * -1 }
 }
 
-const loadLocalScroll = () => {
-  const localScroll = getLocalStorage(STORAGE_NAME)
-  return JSON.parse(localScroll)
-}
-
-const saveLocalScroll = (scrollP: { left: number; top: number }) => {
-  setLocalStorage(STORAGE_NAME, JSON.stringify(scrollP))
-}
-
-export function useScrollPosition(): [
-  LegacyRef<HTMLDivElement>,
-  LegacyRef<HTMLDivElement>,
-] {
-  const localScroll = loadLocalScroll() || {}
-  const position = useRef({
-    left: localScroll.left || 0,
-    top: localScroll.top || 0,
-  })
-
-  const elementRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  const handleScroll = useCallback(() => {
-    if (elementRef.current) {
-      const currPos = getScrollPosition(elementRef.current)
-
-      if (
-        !position.current ||
-        currPos.left !== position.current.left ||
-        currPos.top !== position.current.top
-      ) {
-        saveLocalScroll(currPos)
-      }
-
-      position.current = currPos
-    }
-  }, [elementRef])
-
-  const handleScaleChanged = useCallback(
-    (e: CustomEvent) => {
-      const storeScale = e.detail.store.scale
-      const actionScale = e.detail.action.scale
-
-      const multiplier = storeScale > actionScale ? 0.5 : 2
-
-      const halfWindowWidth = window.innerWidth / 2
-      const centerPosition = position.current.left + halfWindowWidth
-      const centerPositionScaled = centerPosition * multiplier
-      const newScaledLeft = centerPositionScaled - halfWindowWidth
-
-      const scaledScrollPosition = {
-        left: newScaledLeft,
-        top: position.current.top,
-      }
-
-      containerRef.current?.scrollTo(scaledScrollPosition)
-    },
-    [containerRef, position],
+export function useScrollPosition(
+  containerRef?: HTMLDivElement,
+): RefObject<HTMLDivElement> {
+  const { position, setScroll } = useScrollStore(
+    useShallow((state) => ({
+      position: state.scroll,
+      setScroll: state.setScroll,
+    })),
   )
 
-  useEffect(() => {
-    if (!isBrowser) return
+  const elementRef = useRef<HTMLDivElement>(null)
 
-    if (containerRef.current) {
-      containerRef.current.scrollTo(position.current)
+  const handleScroll = useCallback(
+    (e: Event) => {
+      console.log('handleScroll', e)
+      if (elementRef.current) {
+        console.log(elementRef.current)
+        const currPos = getScrollPosition(elementRef.current)
+        console.log({ currPos })
+
+        if (
+          !position ||
+          currPos.left !== position.left ||
+          currPos.top !== position.top
+        ) {
+          setScroll(currPos)
+        }
+      }
+    },
+    [elementRef, position, setScroll],
+  )
+
+  // const handleScaleChanged = useCallback(
+  //   (e: CustomEvent) => {
+  //     const storeScale = e.detail.store.scale
+  //     const actionScale = e.detail.action.scale
+
+  //     const multiplier = storeScale > actionScale ? 0.5 : 2
+
+  //     const halfWindowWidth = window.innerWidth / 2
+  //     const centerPosition = position.left + halfWindowWidth
+  //     const centerPositionScaled = centerPosition * multiplier
+  //     const newScaledLeft = centerPositionScaled - halfWindowWidth
+
+  //     const scaledScrollPosition = {
+  //       left: newScaledLeft,
+  //       top: position.top,
+  //     }
+
+  //     containerRef.current?.scrollTo(scaledScrollPosition)
+  //   },
+  //   [containerRef, position],
+  // )
+
+  useEffect(() => {
+    if (containerRef && positionNotNull(position)) {
+      containerRef.scrollTo(position)
     }
 
-    containerRef.current?.addEventListener('scroll', () => handleScroll(), {
+    console.log(containerRef)
+
+    containerRef?.addEventListener('scroll', (e) => handleScroll(e), {
       passive: true,
     })
 
-    window.addEventListener('scaleChanged', handleScaleChanged, {
-      passive: true,
-    })
+    // window.addEventListener('scaleChanged', handleScaleChanged, {
+    //   passive: true,
+    // })
 
     return () => {
-      window.removeEventListener('scaleChanged', handleScaleChanged)
+      // window.removeEventListener('scaleChanged', handleScaleChanged)
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [position, containerRef, handleScroll, handleScaleChanged])
+  }, [position, containerRef, handleScroll])
 
-  return [containerRef, elementRef]
+  return elementRef
 }

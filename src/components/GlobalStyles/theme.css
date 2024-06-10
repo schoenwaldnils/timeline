@@ -1,0 +1,91 @@
+/**
+ * 1. setting transparent to rgba value due to a safari bug
+ *    https://css-tricks.com/thing-know-gradients-transparent-black/
+ */
+:root:not(.light):not(.dark),
+.light {
+  /* set defaults */
+  --body-textColor: var(--cb2);
+  --body-linkColor: var(--greenDarker);
+  --body-linkColorHover: var(--cb4);
+  --body-backgroundColor: var(--cb10);
+
+  --Header-color: var(--cb3);
+  --Header-backgroundColor: #fff;
+
+  --Logo-textColor: #000;
+
+  --Tooltip-backgroundColor: #fff;
+
+  --Search-titleColor: var(--greenDarker);
+
+  --LangSwitch-color: var(--greenDarker);
+  --LangSwitch-buttonDisabled: var(--cb6);
+
+  --TimelineNumbers-color: var(--cb3);
+  --TimelineNumbers-lineColor: var(--cb6);
+
+  --Timespan-color: var(--cb0);
+  --Timespan-backgroundColor--person: var(--green);
+  --Timespan-backgroundColor--personT: var(--greenT); /* 1 */
+  --Timespan-backgroundColor--time: var(--yellow);
+  --Timespan-backgroundColor--timeT: var(--yellowT); /* 1 */
+
+  --Event-color: #fff;
+  --Event-backgroundColor: var(--cb2);
+
+  --TimelineCursor-color: var(--cb3);
+
+  --Sidebar-color: var(--cb0);
+  --Sidebar-backgroundColor: #fff;
+  --Sidebar-iconColor: #fff;
+  --Sidebar-iconBackgroundColor: var(--green);
+
+  --Button-color: var(--greenDarker);
+  --Button-color--disabled: var(--cb7);
+  --Button-backgroundColor: #fff;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --body-textColor: var(--cb7);
+  --body-linkColor: var(--green);
+  --body-linkColorHover: var(--cb6);
+  --body-backgroundColor: var(--cb0);
+
+  --Header-color: var(--cb7);
+  --Header-backgroundColor: var(--cb1);
+
+  --Logo-textColor: #fff;
+
+  --Tooltip-backgroundColor: var(--cb1);
+
+  --Search-titleColor: var(--green);
+
+  --LangSwitch-color: var(--green);
+  --LangSwitch-buttonDisabled: var(--cb3);
+
+  --TimelineNumbers-color: var(--cb4);
+  --TimelineNumbers-lineColor: var(--cb2);
+
+  --Timespan-color: #fff;
+  --Timespan-backgroundColor--person: var(--greenDark);
+  --Timespan-backgroundColor--personT: var(--greenDarkT); /* 1 */
+  --Timespan-backgroundColor--time: var(--brown);
+  --Timespan-backgroundColor--timeT: var(--brownT); /* 1 */
+
+  --Event-color: var(--cb7);
+  --Event-backgroundColor: var(--cb2);
+
+  --TimelineCursor-color: var(--cb7);
+
+  --Sidebar-color: var(--cb10);
+  --Sidebar-backgroundColor: var(--cb1);
+  --Sidebar-iconColor: #fff;
+  --Sidebar-iconBackgroundColor: var(--greenDark);
+
+  --Button-color: #fff;
+  --Button-color--disabled: var(--cb4);
+  --Button-backgroundColor: var(--cb2);
+}

@@ -1,6 +1,6 @@
 import arraySort from 'array-sort'
 
-import { CEvent, CPerson, CTime } from '@/@types/generated/contentful'
+import type { Event, Person, Time } from '@/@types/generated/contentful'
 import { TimelineEvent } from '@/@types/TimelineEvent'
 import { Timespan } from '@/@types/Timespan'
 import { Store } from '@/hooks/useStore'
@@ -16,9 +16,9 @@ const showInTimeline = ({ pixelStart, pixelEnd }: Timespan) => {
 }
 
 export type ContentfulTimelineData = {
-  persons: { items: CPerson[] }
-  times: { items: CTime[] }
-  events: { items: CEvent[] }
+  persons: { items: Person[] }
+  times: { items: Time[] }
+  events: { items: Event[] }
 }
 
 export type TimelineData = {
@@ -44,9 +44,19 @@ export const formatTimelineData = (
 
   const formatedTimespans = [
     ...persons.map((e) =>
-      updateTimeProps({ ...e, type: 'person', id: e.sys.id }),
+      updateTimeProps({
+        ...e,
+        type: 'person',
+        id: e.sys.id,
+      } as unknown as Timespan),
     ),
-    ...times.map((e) => updateTimeProps({ ...e, type: 'time', id: e.sys.id })),
+    ...times.map((e) =>
+      updateTimeProps({
+        ...e,
+        type: 'time',
+        id: e.sys.id,
+      } as unknown as Timespan),
+    ),
   ]
   const filteredTimespans = formatedTimespans.filter((t) => showInTimeline(t))
   const sortetTimespans = arraySort(filteredTimespans, 'startYear')
@@ -56,20 +66,21 @@ export const formatTimelineData = (
     'pixelDuration',
     'startBlurriness',
     'endBlurriness',
-  ]) as Timespan[]
+  ])
 
   // EVENTS
   const events = (showEvents && data.events.items) || []
   const formatedEvents = events.map((e) => formatEvent(e))
+
   const indexedEvents = formatedEvents
-    .filter((e) => e.pixelStart)
+    .filter((e) => e?.year)
     .map(
       (e, key) =>
         ({
           ...e,
           type: 'event',
           zIndex: formatedEvents.length - key,
-          pixelStart: scaleNumber(e.pixelStart!, scale),
+          pixelStart: scaleNumber(e!.year!, scale),
         }) as TimelineEvent,
     )
 

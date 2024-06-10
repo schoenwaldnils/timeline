@@ -1,0 +1,9 @@
+query eventEntryQuery(
+  $id: String!
+  $locale: String!
+  $preview: Boolean = false
+) {
+  event(id: $id, locale: $locale, preview: $preview) {
+    ...Event
+  }
+}
