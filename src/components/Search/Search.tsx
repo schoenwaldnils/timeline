@@ -1,9 +1,9 @@
 'use client'
-import { ClickAwayListener } from '@material-ui/core'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { ReactComponent as SearchIcon } from '../../svgs/searchIcon.svg'
+import { ClickAwayListener } from '../ClickAwayListener'
 import css from './Search.module.css'
 import { SearchContainer } from './SearchContainer'
 

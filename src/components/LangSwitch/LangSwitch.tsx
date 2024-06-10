@@ -1,10 +1,10 @@
 'use client'
 
-import { ClickAwayListener } from '@material-ui/core'
 import { useState } from 'react'
 
 import { useStore } from '@/hooks/useStore'
 
+import { ClickAwayListener } from '../ClickAwayListener'
 import { LangSwitchView } from './LangSwitchView'
 
 export const LangSwitch = () => {
