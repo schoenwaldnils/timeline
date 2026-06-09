@@ -1,0 +1,7 @@
+node_modules
+CHANGELOG.md
+.changeset
+.claude
+pnpm-lock.yaml
+storybook-static
+.kiro/specs

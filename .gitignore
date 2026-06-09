@@ -11,3 +11,10 @@ node_modules
 .env.local
 storybook-static
 tsconfig.tsbuildinfo
+.vercel
+.env*
+
+# test artifacts
+test-results
+playwright-report
+coverage

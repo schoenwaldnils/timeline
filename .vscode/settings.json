@@ -1,5 +1,9 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.useFlatConfig": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#27af90",
     "activityBar.activeBorder": "#f5e5f9",
