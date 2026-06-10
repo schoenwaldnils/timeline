@@ -7,7 +7,7 @@ import { useShallow } from 'zustand/react/shallow'
 
 import { useSidebarStore } from '@/hooks/useSidebarStore'
 
-import { ContentfulContent } from '../Contentful'
+import { SidebarContent } from '../SidebarContent'
 import css from './Sidebar.module.css'
 
 export const Sidebar = () => {
@@ -42,7 +42,7 @@ export const Sidebar = () => {
       }
     >
       <div className={css.Sidebar_content}>
-        {type && id && <ContentfulContent type={type} id={id} />}
+        {type && id && <SidebarContent type={type} id={id} />}
       </div>
 
       <button

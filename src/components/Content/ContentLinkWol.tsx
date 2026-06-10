@@ -2,11 +2,11 @@ import { parse as qsParse, stringify as qsStringify } from 'qs'
 
 import { A } from '@/components/Typography'
 
-interface ContentfulLinkProps {
+interface LinkToWOLProps {
   wolLink: string
 }
 
-export const LinkToWOL = ({ wolLink }: ContentfulLinkProps) => {
+export const LinkToWOL = ({ wolLink }: LinkToWOLProps) => {
   let pathName = wolLink
   let paragraph: string | undefined
 

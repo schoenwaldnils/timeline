@@ -5,13 +5,7 @@ import { FormatedData } from '@/@types/Data'
 import { ContentEvent, ContentPerson, ContentTime } from '@/components/Content'
 import { useFetchSidebarData } from '@/hooks/useFetchSidebarData'
 
-export const ContentfulContent = <T extends AlgoliaIndex>({
-  type,
-  id,
-}: {
-  type: T
-  id: string
-}) => {
+export const SidebarContent = <T extends AlgoliaIndex>({ type, id }: { type: T; id: string }) => {
   const { data } = useFetchSidebarData({ type, id })
 
   if (!data) return null
