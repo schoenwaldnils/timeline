@@ -9,7 +9,7 @@ const getScroll = (defaultScroll = { left: 0, top: 0 }): Coordinates => {
   if (typeof window !== 'undefined') {
     const localScroll = window.localStorage.getItem(USER_SCROLL_POSITION_KEY)
 
-    return localScroll ? JSON.parse(localScroll) : defaultScroll
+    return localScroll ? (JSON.parse(localScroll) as Coordinates) : defaultScroll
   }
 
   return defaultScroll
@@ -17,10 +17,7 @@ const getScroll = (defaultScroll = { left: 0, top: 0 }): Coordinates => {
 
 const setLocalScroll = (scroll: Coordinates) => {
   if (typeof window !== 'undefined') {
-    window.localStorage.setItem(
-      USER_SCROLL_POSITION_KEY,
-      JSON.stringify(scroll),
-    )
+    window.localStorage.setItem(USER_SCROLL_POSITION_KEY, JSON.stringify(scroll))
   }
 }
 

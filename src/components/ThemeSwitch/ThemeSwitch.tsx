@@ -2,16 +2,14 @@ import { useTranslations } from 'next-intl'
 import { ButtonHTMLAttributes, useEffect } from 'react'
 import { WiDaySunny, WiMoonAltWaningCrescent5 } from 'react-icons/wi'
 
-import { Theme } from '@/@types/Theme.d'
+import { Theme } from '@/@types/Theme'
 import { ButtonSquare } from '@/components/Button'
 import { USER_THEME_KEY } from '@/data/constants'
 import { useStore } from '@/hooks/useStore'
 
 const IconLight = WiDaySunny
 
-const IconDark = () => (
-  <WiMoonAltWaningCrescent5 style={{ transform: 'rotate(-30deg)' }} />
-)
+const IconDark = () => <WiMoonAltWaningCrescent5 style={{ transform: 'rotate(-30deg)' }} />
 
 export type ThemeSwitchProps = ButtonHTMLAttributes<HTMLButtonElement>
 
@@ -25,7 +23,7 @@ export const ThemeSwitch = (props: ThemeSwitchProps) => {
       return
     }
 
-    window.localStorage.setItem(USER_THEME_KEY, theme as unknown as string)
+    window.localStorage.setItem(USER_THEME_KEY, theme)
 
     const root = document.querySelector(':root')
 

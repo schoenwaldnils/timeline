@@ -6,24 +6,18 @@ import { RefObject } from 'react'
 import { YEARS_AFTER_ZERO, YEARS_BEFORE_ZERO } from '@/data/constants'
 import { useScaleStore } from '@/hooks/useScaleStore'
 import { useStore } from '@/hooks/useStore'
-import {
-  ContentfulTimelineData,
-  formatTimelineData,
-} from '@/utils/objectFormating/formatTimelineData'
+import { formatTimelineData, TimelineQueryData } from '@/utils/objectFormating/formatTimelineData'
 
-const TimelineView = dynamic(
-  () => import('./TimelineView').then((m) => m.TimelineView),
-  {
-    ssr: false,
-  },
-)
+const TimelineView = dynamic(() => import('./TimelineView').then((m) => m.TimelineView), {
+  ssr: false,
+})
 
 export const Timeline = ({
   data,
   containerRef,
 }: {
-  data: ContentfulTimelineData
-  containerRef: RefObject<HTMLDivElement>
+  data: TimelineQueryData
+  containerRef: RefObject<HTMLDivElement | null>
 }) => {
   const scale = useScaleStore((state) => state.scale)
   const filter = useStore((state) => state.filter)

@@ -21,7 +21,7 @@ export const ContentTime = ({
   const t = useTranslations()
 
   return (
-    <ContentTemplate title={name} image={image} idContentful={id}>
+    <ContentTemplate title={name} image={image} editType="time" editId={id}>
       <TableList>
         <TableListItem title={t('time.start')}>
           {startYear ? OurTime(startYear) : t('unknown')}

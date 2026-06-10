@@ -1,4 +1,4 @@
-module.exports = (config = {}) => {
+export default (config = {}) => {
   config.module.rules.push({
     test: /\.(graphql|gql)$/,
     exclude: /node_modules/,

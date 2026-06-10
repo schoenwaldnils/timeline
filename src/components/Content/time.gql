@@ -1,9 +1,0 @@
-query timeEntryQuery(
-  $id: String!
-  $locale: String!
-  $preview: Boolean = false
-) {
-  time(id: $id, locale: $locale, preview: $preview) {
-    ...Time
-  }
-}

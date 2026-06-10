@@ -14,7 +14,8 @@ export const LinkToWOL = ({ wolLink }: ContentfulLinkProps) => {
     let paragraphPlain: string
     ;[pathName, paragraphPlain] = wolLink.split('#')
 
-    paragraph = String(qsParse(paragraphPlain).h)
+    const h = qsParse(paragraphPlain).h
+    paragraph = typeof h === 'string' ? h : undefined
   }
 
   const pathParts = pathName.split('/')
@@ -36,9 +37,7 @@ export const LinkToWOL = ({ wolLink }: ContentfulLinkProps) => {
     paragraph,
   }
 
-  const jwFinderLink = `https://www.jw.org/finder?${qsStringify(
-    jwFinderParams,
-  )}`
+  const jwFinderLink = `https://www.jw.org/finder?${qsStringify(jwFinderParams)}`
 
   return (
     <div style={{ marginBottom: '1em' }}>

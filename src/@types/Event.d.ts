@@ -1,3 +1,5 @@
+import type { RichTextContent } from './RichText.d'
+
 export interface Event {
   id: string
   year: number
@@ -7,6 +9,6 @@ export interface Event {
     width: number
     height: number
   }
-  richText?: json
+  richText?: RichTextContent
   wolLink?: string
 }

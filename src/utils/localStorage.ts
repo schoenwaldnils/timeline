@@ -24,10 +24,7 @@ export const removeLocalStorage = (key: string): void => {
   return window.localStorage.removeItem(key)
 }
 
-export const setSessionStorage = (
-  key: string,
-  value: string | number,
-): void => {
+export const setSessionStorage = (key: string, value: string | number): void => {
   let stringValue: string
 
   if (typeof value === 'number') {

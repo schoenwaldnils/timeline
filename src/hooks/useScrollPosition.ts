@@ -7,9 +7,7 @@ import { useScrollStore } from './useScrollStore'
 
 const isBrowser = typeof window !== 'undefined'
 
-const positionNotNull = (
-  position: Coordinates | null,
-): position is Coordinates => {
+const positionNotNull = (position: Coordinates | null): position is Coordinates => {
   return position?.left !== 0 && position?.top !== 0
 }
 
@@ -22,8 +20,8 @@ const getScrollPosition = (element: HTMLElement): Coordinates => {
 }
 
 export function useScrollPosition(
-  containerRef?: HTMLDivElement,
-): RefObject<HTMLDivElement> {
+  containerRef?: RefObject<HTMLDivElement | null>,
+): RefObject<HTMLDivElement | null> {
   const { position, setScroll } = useScrollStore(
     useShallow((state) => ({
       position: state.scroll,
@@ -33,25 +31,15 @@ export function useScrollPosition(
 
   const elementRef = useRef<HTMLDivElement>(null)
 
-  const handleScroll = useCallback(
-    (e: Event) => {
-      console.log('handleScroll', e)
-      if (elementRef.current) {
-        console.log(elementRef.current)
-        const currPos = getScrollPosition(elementRef.current)
-        console.log({ currPos })
+  const handleScroll = useCallback(() => {
+    if (elementRef.current) {
+      const currPos = getScrollPosition(elementRef.current)
 
-        if (
-          !position ||
-          currPos.left !== position.left ||
-          currPos.top !== position.top
-        ) {
-          setScroll(currPos)
-        }
+      if (!position || currPos.left !== position.left || currPos.top !== position.top) {
+        setScroll(currPos)
       }
-    },
-    [elementRef, position, setScroll],
-  )
+    }
+  }, [position, setScroll])
 
   // const handleScaleChanged = useCallback(
   //   (e: CustomEvent) => {
@@ -76,23 +64,17 @@ export function useScrollPosition(
   // )
 
   useEffect(() => {
-    if (containerRef && positionNotNull(position)) {
-      containerRef.scrollTo(position)
+    const container = containerRef?.current
+    if (!container) return
+
+    if (positionNotNull(position)) {
+      container.scrollTo(position)
     }
 
-    console.log(containerRef)
-
-    containerRef?.addEventListener('scroll', (e) => handleScroll(e), {
-      passive: true,
-    })
-
-    // window.addEventListener('scaleChanged', handleScaleChanged, {
-    //   passive: true,
-    // })
+    container.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
-      // window.removeEventListener('scaleChanged', handleScaleChanged)
-      window.removeEventListener('scroll', handleScroll)
+      container.removeEventListener('scroll', handleScroll)
     }
   }, [position, containerRef, handleScroll])
 

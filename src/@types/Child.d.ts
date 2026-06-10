@@ -1,1 +1,5 @@
-export type Child = Pick<CPerson, 'sys' | 'name' | 'gender'>
+export type Child = {
+  id: string
+  name: string
+  gender: string
+}

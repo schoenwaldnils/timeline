@@ -29,10 +29,7 @@ export const calcTimes = ({
   let pixelStart: number
   let pixelEnd: number
 
-  if (
-    (type === 'person' && stillActive) ||
-    (type === 'time' && (!endYear || endYear === 0))
-  ) {
+  if ((type === 'person' && stillActive) || (type === 'time' && (!endYear || endYear === 0))) {
     correctedEndYear = YEARS_AFTER_ZERO
   }
 

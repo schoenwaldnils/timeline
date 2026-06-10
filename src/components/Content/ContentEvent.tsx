@@ -11,11 +11,9 @@ export const ContentEvent = ({ id, name, year, image, wolLink }: Event) => {
   const t = useTranslations()
 
   return (
-    <ContentTemplate title={name} image={image} idContentful={id}>
+    <ContentTemplate title={name} image={image} editType="event" editId={id}>
       <TableList>
-        <TableListItem title={t('time.year', { count: 1 })}>
-          {OurTime(year)}
-        </TableListItem>
+        <TableListItem title={t('time.year', { count: 1 })}>{OurTime(year)}</TableListItem>
       </TableList>
 
       {wolLink && <LinkToWOL wolLink={wolLink} />}

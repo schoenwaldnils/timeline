@@ -19,12 +19,7 @@ interface FilterViewProps {
 
 export const FilterView = forwardRef(
   (
-    {
-      isActive = false,
-      toggleIsActive,
-      handleChange,
-      filterState,
-    }: FilterViewProps,
+    { isActive = false, toggleIsActive, handleChange, filterState }: FilterViewProps,
     ref: Ref<HTMLDivElement>,
   ) => {
     const t = useTranslations('ui')

@@ -2,10 +2,9 @@
 
 import dynamic from 'next/dynamic'
 
-const ThemeSwitch = dynamic(
-  () => import('../ThemeSwitch').then((mod) => mod.ThemeSwitch),
-  { ssr: false },
-)
+const ThemeSwitch = dynamic(() => import('../ThemeSwitch').then((mod) => mod.ThemeSwitch), {
+  ssr: false,
+})
 
 const Scaling = dynamic(() => import('../Scaling').then((mod) => mod.Scaling), {
   ssr: false,

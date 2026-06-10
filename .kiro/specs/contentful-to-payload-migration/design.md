@@ -4,6 +4,16 @@
 
 This design document outlines the architecture and implementation approach for migrating the Bible timeline visualization application from Contentful CMS to Payload CMS. The migration maintains all existing functionality while providing better developer experience, improved performance, and reduced vendor lock-in. The design ensures a seamless transition with parallel system operation during migration and comprehensive rollback capabilities.
 
+> **As-built note (2026-06-10).** This design predates implementation; a few decisions changed.
+> The dev database is **local Docker Postgres (port 5434) via `@payloadcms/db-postgres`**, with
+> Neon used only in production through the same `DATABASE_URI` — not separate Neon dev/prod
+> projects. The data migration runs **offline** from a committed `contentful-export/export.json`
+> (official `contentful-cli` export) into the Payload local API, rather than calling the
+> Contentful API live during migration. Frontend data uses the **Payload local API** (server
+> components + a server action for the sidebar), not the REST API. Search indexing is done with
+> **collection `afterChange`/`afterDelete` hooks + a `reindex:algolia` script**. See
+> `docs/migration-status.md` for the authoritative as-built record.
+
 ## Architecture
 
 ### Current Architecture Analysis

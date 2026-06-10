@@ -11,16 +11,14 @@ export function positionTimes(
 } {
   const occupiedSpace = [0]
 
-  const items = [...events, ...times].sort(
-    (a, b) => a.pixelStart - b.pixelStart,
-  )
+  const items = [...events, ...times].sort((a, b) => a.pixelStart - b.pixelStart)
 
   const positionedItems = items.map((item) => {
     const start = item.pixelStart
     let end: number // placeholder
 
     if (item.type === 'person' || item.type === 'time') {
-      const tempEnd = (item as Timespan).pixelEnd
+      const tempEnd = item.pixelEnd
       const isTooSmall = tempEnd - start < 30 // TODO: 1px = 1 year. should scale with store.scale
       end = Math.floor(isTooSmall ? start + 50 : tempEnd + 10)
     }
@@ -54,8 +52,6 @@ export function positionTimes(
     positionedTimes: positionedItems.filter(
       (i) => i.type === 'person' || i.type === 'time',
     ) as Timespan[],
-    positionedEvents: positionedItems.filter(
-      (i) => i.type === 'event',
-    ) as TimelineEvent[],
+    positionedEvents: positionedItems.filter((i) => i.type === 'event'),
   }
 }

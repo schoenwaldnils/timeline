@@ -8,15 +8,8 @@ declare module '*.svg' {
   export default value
 }
 
-declare module '*.gql' {
-  import { DocumentNode } from 'graphql'
-
-  const value: DocumentNode
-  export default value
-}
-
 // type UnionToIntersection<U> = (
-//   U extends unknown ? (k: U) => void : never
+//  U extends unknown ? (k: U) => void : never
 // ) extends (k: infer I) => void
 //   ? I
 //   : never

@@ -8,11 +8,7 @@ interface TimelineNumbersProps {
   scale: number
 }
 
-export const TimelineNumbers = ({
-  startYear,
-  endYear,
-  scale,
-}: TimelineNumbersProps) => {
+export const TimelineNumbers = ({ startYear, endYear, scale }: TimelineNumbersProps) => {
   const numberWidth = 100 // TODO: make adjustable
 
   const startIsNegative = startYear <= 0
@@ -24,8 +20,7 @@ export const TimelineNumbers = ({
 
   const end = (endIsNegative ? endYear * -1 : endYear) * scale
   const endRemainder = end % numberWidth
-  const endQuotient =
-    Math.floor(end / numberWidth) - (endRemainder === 0 ? 1 : 0)
+  const endQuotient = Math.floor(end / numberWidth) - (endRemainder === 0 ? 1 : 0)
 
   const numbers = []
 

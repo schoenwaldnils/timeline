@@ -1,4 +1,4 @@
-import { Document } from '@contentful/rich-text-types'
+import type { RichTextContent } from './RichText.d'
 
 export type Time = {
   id: string
@@ -6,7 +6,7 @@ export type Time = {
   startYear?: number
   endYear?: number
   duration?: number
-  richText?: Document
+  richText?: RichTextContent
   image?: {
     src: string
     width: number

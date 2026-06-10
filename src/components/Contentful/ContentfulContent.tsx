@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+'use client'
 
 import { AlgoliaIndex } from '@/@types/algolia'
 import { FormatedData } from '@/@types/Data'
@@ -12,34 +12,18 @@ export const ContentfulContent = <T extends AlgoliaIndex>({
   type: T
   id: string
 }) => {
-  const { data, error, refetch } = useFetchSidebarData({
-    type,
-    id,
-  })
+  const { data } = useFetchSidebarData({ type, id })
 
-  useEffect(() => {
-    refetch()
-  }, [id, refetch])
+  if (!data) return null
 
-  const Component = useCallback(() => {
-    if (!data) return null
-
-    switch (type) {
-      case 'person':
-        return <ContentPerson {...(data as FormatedData<'person'>)} />
-      case 'time':
-        return <ContentTime {...(data as FormatedData<'time'>)} />
-      case 'event':
-        return <ContentEvent {...(data as FormatedData<'event'>)} />
-      default:
-        return null
-    }
-  }, [data, type])
-
-  if (error) {
-    console.error(error)
-    return null
+  switch (type) {
+    case 'person':
+      return <ContentPerson {...(data as FormatedData<'person'>)} />
+    case 'time':
+      return <ContentTime {...data} />
+    case 'event':
+      return <ContentEvent {...(data as FormatedData<'event'>)} />
+    default:
+      return null
   }
-
-  return <Component />
 }

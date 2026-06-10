@@ -29,7 +29,7 @@ export type AlgoliaIndex = 'person' | 'time' | 'event'
 export type AlgoliaHit<T> = T extends 'person'
   ? AlgoliaPerson
   : T extends 'time'
-  ? AlgoliaTime
-  : T extends 'event'
-  ? AlgoliaEvent
-  : never
+    ? AlgoliaTime
+    : T extends 'event'
+      ? AlgoliaEvent
+      : never

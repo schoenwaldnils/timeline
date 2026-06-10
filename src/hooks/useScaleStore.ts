@@ -16,8 +16,7 @@ const higherScale = (scale: number) => {
   return index < scales.length - 1 ? scales[index + 1] : scale
 }
 
-const isMaxScale = (scale: number) =>
-  scales.indexOf(scale) === scales.length - 1
+const isMaxScale = (scale: number) => scales.indexOf(scale) === scales.length - 1
 const isMinScale = (scale: number) => scales.indexOf(scale) === 0
 
 const getScale = (defaultScale = 1): number => {

@@ -2,15 +2,10 @@
 
 import { create } from 'zustand'
 
-import { Theme } from '@/@types/Theme.d'
-import {
-  USER_FILTER_KEY,
-  USER_LOCALE_KEY,
-  USER_THEME_KEY,
-} from '@/data/constants'
+import { Theme } from '@/@types/Theme'
+import { USER_FILTER_KEY, USER_LOCALE_KEY, USER_THEME_KEY } from '@/data/constants'
+import { i18n, Locale } from '@/i18n-config'
 import type { Dictionary } from '@/utils/getDictionary'
-
-import { i18n, Locale } from '../../i18n-config'
 
 type Filter = {
   showPersons: boolean
@@ -62,19 +57,10 @@ const getFilter = (): Filter => {
   return defaultFilter
 }
 
-const getTheme = (
-  set: (
-    partial:
-      | Store
-      | Partial<Store>
-      | ((state: Store) => Store | Partial<Store>),
-    replace?: boolean | undefined,
-  ) => void,
-): Theme => {
+const getTheme = (set: (partial: Partial<Store>) => void): Theme => {
   if (typeof window !== 'undefined') {
     const localTheme = window.localStorage.getItem(USER_THEME_KEY) as Theme
-    const query =
-      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
+    const query = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
 
     const matchedTheme = query.matches ? Theme.Dark : Theme.Light
 

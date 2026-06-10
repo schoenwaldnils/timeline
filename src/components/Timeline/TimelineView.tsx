@@ -19,7 +19,7 @@ interface TimelineViewProps {
   startYear: number
   endYear: number
   scale?: number
-  containerRef?: RefObject<HTMLDivElement>
+  containerRef?: RefObject<HTMLDivElement | null>
 }
 
 export const TimelineView = ({
@@ -31,9 +31,7 @@ export const TimelineView = ({
   scale = 1,
   containerRef,
 }: TimelineViewProps) => {
-  const mousePosition = useMousePosition(containerRef?.current || undefined)
-
-  console.log(containerRef)
+  const mousePosition = useMousePosition(containerRef)
 
   const width = getTimelineWidth(startYear, endYear, scale)
   const isTouchDevice = checkForTouchDevice()

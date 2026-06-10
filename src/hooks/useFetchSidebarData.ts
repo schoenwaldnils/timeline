@@ -1,34 +1,12 @@
-import {
-  ApolloError,
-  ApolloQueryResult,
-  DocumentNode,
-  gql,
-  OperationVariables,
-  useSuspenseQuery,
-} from '@apollo/client'
+'use client'
+
 import { useLocale } from 'next-intl'
+import { useEffect, useState } from 'react'
 
-import { AlgoliaIndex } from '@/@types/algolia.d'
-import { Data, FormatedData } from '@/@types/Data'
-import eventQuery from '@/components/Content/event.gql'
-import eventFragment from '@/components/Content/eventFragment.gql'
-import personQuery from '@/components/Content/person.gql'
-import personFragment from '@/components/Content/personFragment.gql'
-import timeQuery from '@/components/Content/time.gql'
-import timeFragment from '@/components/Content/timeFragment.gql'
-import { formatData } from '@/utils/objectFormating/formatData'
-
-const queries = {
-  person: personQuery,
-  event: eventQuery,
-  time: timeQuery,
-} satisfies Record<AlgoliaIndex, DocumentNode>
-
-const fragments = {
-  person: personFragment,
-  event: eventFragment,
-  time: timeFragment,
-} satisfies Record<AlgoliaIndex, DocumentNode>
+import type { AlgoliaIndex } from '@/@types/algolia.d'
+import type { FormatedData } from '@/@types/Data.d'
+import type { Locale } from '@/i18n-config'
+import { fetchContentData } from '@/lib/fetchContentData'
 
 export const useFetchSidebarData = <T extends AlgoliaIndex>({
   type,
@@ -38,29 +16,27 @@ export const useFetchSidebarData = <T extends AlgoliaIndex>({
   id: string
 }): {
   data: FormatedData<T> | null
-  error?: ApolloError
-  refetch: (
-    variables?: Partial<OperationVariables> | undefined,
-  ) => Promise<ApolloQueryResult<Data<T>>>
 } => {
-  const locale = useLocale()
+  const locale = useLocale() as Locale
+  const [data, setData] = useState<FormatedData<T> | null>(null)
 
-  const query = gql`
-    ${type && queries[type]}
-    ${type && fragments[type]}
-  `
+  useEffect(() => {
+    let active = true
+    setData(null)
 
-  const { data, error, refetch } = useSuspenseQuery<Data<T>>(query, {
-    variables: { locale, type, id },
-  })
+    fetchContentData(type, id, locale)
+      .then((result) => {
+        if (active) setData(result)
+      })
+      .catch((error: unknown) => {
+        console.error(error)
+        if (active) setData(null)
+      })
 
-  if (error) {
-    console.error(error)
-  }
+    return () => {
+      active = false
+    }
+  }, [type, id, locale])
 
-  return {
-    data: data ? formatData(type, data[type]) : null,
-    error,
-    refetch,
-  }
+  return { data }
 }

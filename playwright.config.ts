@@ -1,8 +1,8 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test'
 
 // The dev server runs on port 3002 with `--experimental-https` (self-signed cert),
 // so the baseURL is https and TLS errors are ignored.
-const baseURL = 'https://localhost:3002';
+const baseURL = 'https://localhost:3002'
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -23,4 +23,4 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
-});
+})

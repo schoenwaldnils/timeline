@@ -6,6 +6,4 @@ export default {
   argTypes: { toggleTheme: { action: 'toggle theme' } },
 }
 
-export const theme_switch = (props: ThemeSwitchProps) => (
-  <ThemeSwitch {...props} />
-)
+export const theme_switch = (props: ThemeSwitchProps) => <ThemeSwitch {...props} />

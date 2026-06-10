@@ -2,7 +2,7 @@
   "meta-description": "Übersicht biblischer Personen und Events",
   "unknown": "unbekannt",
   "approx": "ca.",
-  "contentful-edit": "In Contentful editieren",
+  "admin-edit": "Bearbeiten",
   "relations": {
     "spouse": "Ehepartner",
     "father": "Vater",

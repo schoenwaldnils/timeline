@@ -1,83 +1,45 @@
-/* eslint-disable react/display-name */
 import {
-  documentToReactComponents,
-  Options,
-} from '@contentful/rich-text-react-renderer'
-import { BLOCKS, Document, INLINES } from '@contentful/rich-text-types'
-import { Children, ReactNode } from 'react'
+  type JSXConvertersFunction,
+  RichText as PayloadRichText,
+} from '@payloadcms/richtext-lexical/react'
 
-import {
-  A,
-  H1,
-  H2,
-  H3,
-  HR,
-  LI,
-  OL,
-  P,
-  QUOTE,
-  UL,
-} from '@/components/Typography'
+import type { RichTextContent } from '@/@types/RichText.d'
+import { A, H1, H2, H3, HR, LI, OL, P, QUOTE, UL } from '@/components/Typography'
 
-const options: Options = {
-  renderNode: {
-    [BLOCKS.HEADING_1]: (node: unknown, children: ReactNode) => (
-      <H1>{children}</H1>
-    ),
-    [BLOCKS.HEADING_2]: (node: unknown, children: ReactNode) => (
-      <H2>{children}</H2>
-    ),
-    [BLOCKS.HEADING_3]: (node: unknown, children: ReactNode) => (
-      <H3>{children}</H3>
-    ),
-    [BLOCKS.UL_LIST]: (node: unknown, children: ReactNode) => (
-      <UL>{children}</UL>
-    ),
-    [BLOCKS.OL_LIST]: (node: unknown, children: ReactNode) => (
-      <OL>{children}</OL>
-    ),
-    [BLOCKS.LIST_ITEM]: (node: unknown, children: ReactNode) => (
-      <LI>{children}</LI>
-    ),
-    [BLOCKS.PARAGRAPH]: (node: unknown, children: ReactNode) => {
-      if (
-        !children ||
-        (Children.toArray(children).length === 1 &&
-          Children.toArray(children)[0] === '')
-      ) {
-        return null
-      }
-      return <P>{children}</P>
-    },
-    [BLOCKS.QUOTE]: (node: unknown, children: ReactNode) => (
-      <QUOTE>{children}</QUOTE>
-    ),
-    [BLOCKS.HR]: () => <HR />,
-    // [BLOCKS.EMBEDDED_ENTRY]: node => {
-    //   const { target } = node.data
-    //   const { id } = target.sys.contentType.sys
-
-    //   const customComponents = {}
-
-    //   switch (id) {
-    //     case 'contentKomponente':
-    //       return customComponents[target.fields.id]
-
-    //     default:
-    //       return null
-    //   }
-    // },
-
-    [INLINES.HYPERLINK]: (node, children: ReactNode) => {
-      const {
-        data: { uri },
-      } = node
-      return <A href={uri}>{children}</A>
-    },
+const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
+  ...defaultConverters,
+  heading: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children })
+    switch (node.tag) {
+      case 'h1':
+        return <H1>{children}</H1>
+      case 'h2':
+        return <H2>{children}</H2>
+      default:
+        return <H3>{children}</H3>
+    }
   },
-}
+  paragraph: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children })
+    if (!children.length) return null
+    return <P>{children}</P>
+  },
+  quote: ({ node, nodesToJSX }) => <QUOTE>{nodesToJSX({ nodes: node.children })}</QUOTE>,
+  horizontalrule: () => <HR />,
+  list: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children })
+    return node.listType === 'number' ? <OL>{children}</OL> : <UL>{children}</UL>
+  },
+  listitem: ({ node, nodesToJSX }) => <LI>{nodesToJSX({ nodes: node.children })}</LI>,
+  link: ({ node, nodesToJSX }) => (
+    <A href={node.fields?.url ?? '#'}>{nodesToJSX({ nodes: node.children })}</A>
+  ),
+  autolink: ({ node, nodesToJSX }) => (
+    <A href={node.fields?.url ?? '#'}>{nodesToJSX({ nodes: node.children })}</A>
+  ),
+})
 
-export const RichText = ({ content }: { content?: Document }) => {
+export const RichText = ({ content }: { content?: RichTextContent }) => {
   if (!content) return null
-  return <>{documentToReactComponents(content, options)}</>
+  return <PayloadRichText converters={converters} data={content} disableContainer />
 }

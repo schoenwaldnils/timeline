@@ -5,6 +5,4 @@ export default {
   component: Event,
 }
 
-export const event = () => (
-  <Event type="event" id="test" pixelStart={50} name="Test Event" />
-)
+export const event = () => <Event type="event" id="test" pixelStart={50} name="Test Event" />

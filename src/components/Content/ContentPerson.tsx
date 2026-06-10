@@ -1,7 +1,6 @@
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { useCallback, useMemo } from 'react'
 
-import { Parent } from '@/@types/Parent'
 import { Person } from '@/@types/Person.d'
 import { OurTime } from '@/components/OurTime'
 import { RichText } from '@/components/RichText'
@@ -26,14 +25,10 @@ export const ContentPerson = ({
   richText,
   wolLink,
 }: Person) => {
-  const locale = useLocale()
   const t = useTranslations()
   const setSidebar = useSidebarStore((state) => state.setSidebar)
 
-  const setPerson = useCallback(
-    (id: string) => setSidebar({ type: 'person', id }),
-    [setSidebar],
-  )
+  const setPerson = useCallback((id: string) => setSidebar({ type: 'person', id }), [setSidebar])
 
   const yearBlur = useCallback(
     (type: 'start' | 'end', year: number, blur?: number): string => {
@@ -55,17 +50,11 @@ export const ContentPerson = ({
     [t],
   )
 
-  const father = useMemo(
-    () => parents?.find((p) => p.gender === 'male'),
-    [parents],
-  )
-  const mother = useMemo(
-    () => parents?.find((p) => p.gender === 'female'),
-    [parents],
-  )
+  const father = useMemo(() => parents?.find((p) => p.gender === 'male'), [parents])
+  const mother = useMemo(() => parents?.find((p) => p.gender === 'female'), [parents])
 
   return (
-    <ContentTemplate title={name} idContentful={id}>
+    <ContentTemplate title={name} editType="person" editId={id}>
       <TableList>
         {startYear && (
           <TableListItem title={t('time.born')}>
@@ -87,30 +76,22 @@ export const ContentPerson = ({
 
         {father && (
           <TableListItem title={t('relations.father')}>
-            <TextButton onClick={() => setPerson(father.sys.id)}>
-              {father[`name${locale.toUpperCase()}` as keyof Parent]}
-            </TextButton>
+            <TextButton onClick={() => setPerson(father.id)}>{father.name}</TextButton>
           </TableListItem>
         )}
 
         {mother && (
           <TableListItem title={t('relations.mother')}>
-            <TextButton onClick={() => setPerson(mother.sys.id)}>
-              {mother[`name${locale.toUpperCase()}` as keyof Parent]}
-            </TextButton>
+            <TextButton onClick={() => setPerson(mother.id)}>{mother.name}</TextButton>
           </TableListItem>
         )}
 
         {spouse.length >= 2 && (
-          <TableListItem
-            title={t('relations.spouse', { count: spouse.length })}
-          >
+          <TableListItem title={t('relations.spouse', { count: spouse.length })}>
             <UL>
               {spouse.map(({ id: spouseID, name: spouseName }) => (
                 <LI key={`spouse-${spouseID}`}>
-                  <TextButton onClick={() => setPerson(spouseID)}>
-                    {spouseName}
-                  </TextButton>
+                  <TextButton onClick={() => setPerson(spouseID)}>{spouseName}</TextButton>
                 </LI>
               ))}
             </UL>
@@ -119,18 +100,16 @@ export const ContentPerson = ({
 
         {spouse.length === 1 && (
           <TableListItem title={t('relations.spouse', { count: 1 })}>
-            <TextButton onClick={() => setPerson(spouse[0].id)}>
-              {spouse[0].name}
-            </TextButton>
+            <TextButton onClick={() => setPerson(spouse[0].id)}>{spouse[0].name}</TextButton>
           </TableListItem>
         )}
 
         {childs.length >= 2 && (
           <TableListItem title={t('relations.child', { count: childs.length })}>
             <UL>
-              {childs.map(({ sys: { id }, name }) => (
-                <LI key={`child-${id}`}>
-                  <TextButton onClick={() => setPerson(id)}>{name}</TextButton>
+              {childs.map(({ id: childID, name: childName }) => (
+                <LI key={`child-${childID}`}>
+                  <TextButton onClick={() => setPerson(childID)}>{childName}</TextButton>
                 </LI>
               ))}
             </UL>
@@ -139,9 +118,7 @@ export const ContentPerson = ({
 
         {childs.length === 1 && (
           <TableListItem title={t('relations.child', { count: 1 })}>
-            <TextButton onClick={() => setPerson(childs[0].sys.id)}>
-              {childs[0].name}
-            </TextButton>
+            <TextButton onClick={() => setPerson(childs[0].id)}>{childs[0].name}</TextButton>
           </TableListItem>
         )}
       </TableList>

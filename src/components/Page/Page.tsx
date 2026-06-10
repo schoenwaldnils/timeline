@@ -6,18 +6,14 @@ import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import { Timeline } from '@/components/Timeline'
 import { useScrollPosition } from '@/hooks/useScrollPosition'
-import { ContentfulTimelineData } from '@/utils/objectFormating/formatTimelineData'
+import { TimelineQueryData } from '@/utils/objectFormating/formatTimelineData'
 
 import { Config } from './Config'
 import css from './Page.module.css'
 
-export const Page = ({
-  timelineData,
-}: {
-  timelineData: ContentfulTimelineData
-}) => {
+export const Page = ({ timelineData }: { timelineData: TimelineQueryData }) => {
   const ref = useRef<HTMLDivElement>(null)
-  const elementRef = useScrollPosition(ref.current || undefined)
+  const elementRef = useScrollPosition(ref)
 
   return (
     <div className={css.Page}>

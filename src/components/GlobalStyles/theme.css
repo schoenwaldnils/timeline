@@ -19,7 +19,8 @@
 
   --Search-titleColor: var(--greenDarker);
 
-  --LangSwitch-color: var(--greenDarker);
+  /* greenDark (≥4.5:1 on white) keeps the label WCAG AA legible; greenDarker fails. */
+  --LangSwitch-color: var(--greenDark);
   --LangSwitch-buttonDisabled: var(--cb6);
 
   --TimelineNumbers-color: var(--cb3);

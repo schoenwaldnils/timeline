@@ -10,10 +10,7 @@ interface TimelineCursorViewProps {
   scale: number
 }
 
-export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
-  pixelYear,
-  scale,
-}) => {
+export const TimelineCursorView: FC<TimelineCursorViewProps> = ({ pixelYear, scale }) => {
   const t = useTranslations()
   const [tempPixelYear, setTempPixelYear] = useState(pixelYear)
 
@@ -21,10 +18,7 @@ export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
     requestAnimationFrame(() => setTempPixelYear(pixelYear))
   }, [pixelYear])
 
-  const year = useMemo(
-    () => Math.floor(pixelToYear(pixelYear / scale)),
-    [pixelYear, scale],
-  )
+  const year = useMemo(() => Math.floor(pixelToYear(pixelYear / scale)), [pixelYear, scale])
 
   const isNegative = year <= 0
 
@@ -39,9 +33,7 @@ export const TimelineCursorView: FC<TimelineCursorViewProps> = ({
     >
       <div className={css.TimelineCursor_time}>
         {isNegative ? year * -1 : year}{' '}
-        {isNegative
-          ? t('time.extension-negative')
-          : t('time.extension-positive')}
+        {isNegative ? t('time.extension-negative') : t('time.extension-positive')}
       </div>
     </div>
   )

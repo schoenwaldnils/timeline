@@ -1,15 +1,19 @@
 'use client'
-import algoliasearch from 'algoliasearch/lite'
+import { liteClient as algoliasearch } from 'algoliasearch/lite'
 import { FC, ReactNode } from 'react'
-import { InstantSearch } from 'react-instantsearch-hooks'
+import { InstantSearch } from 'react-instantsearch'
 
 const searchClient = algoliasearch(
-  'P7R800RWY1',
-  '1cc2cbd4cb591bff961c96a29a782ff5',
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID ?? '',
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY ?? '',
 )
 
 export const SearchProvider: FC<{ children: ReactNode }> = ({ children }) => (
-  <InstantSearch indexName="person" searchClient={searchClient}>
+  <InstantSearch
+    indexName="person"
+    searchClient={searchClient}
+    future={{ preserveSharedStateOnUnmount: true }}
+  >
     {children}
   </InstantSearch>
 )

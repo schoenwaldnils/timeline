@@ -59,8 +59,7 @@ export const SearchHit = ({
   //   : (defaultImages[type] as string)
 
   const searchWords =
-    _highlightResult[`name_${locale}` as keyof _HighlightResult]
-      ?.matchedWords || []
+    _highlightResult[`name_${locale}` as keyof _HighlightResult]?.matchedWords || []
 
   const hitName = hit[`name_${locale}` as keyof typeof hit] as string
 
@@ -76,15 +75,11 @@ export const SearchHit = ({
       className={css.Search_hit}
       style={{
         height: `${IMAGE_SIZE}px`,
-        borderLeftColor: typeColors[type as keyof typeof typeColors],
+        borderLeftColor: typeColors[type],
       }}
       onClick={onHitClickHandler}
     >
-      <Highlighter
-        searchWords={searchWords}
-        autoEscape={true}
-        textToHighlight={hitName}
-      />
+      <Highlighter searchWords={searchWords} autoEscape={true} textToHighlight={hitName} />
       {/* <Image src={imgSrc} width={IMAGE_SIZE} alt={hitName} /> */}
     </ButtonPlain>
   )

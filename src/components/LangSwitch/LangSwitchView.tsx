@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl'
 import { forwardRef, MouseEvent, Ref } from 'react'
 
 import { Tooltip } from '@/components/Tooltip'
+import { i18n } from '@/i18n-config'
 
-import { i18n } from '../../../i18n-config'
 import { ReactComponent as LangIcon } from './langIcon.svg'
 import css from './LangSwitch.module.css'
 
@@ -18,11 +18,7 @@ interface LangSwitchViewProps {
 
 export const LangSwitchView = forwardRef(
   (
-    {
-      isActive = false,
-      toggleIsActive,
-      handleButtonClick,
-    }: LangSwitchViewProps,
+    { isActive = false, toggleIsActive, handleButtonClick }: LangSwitchViewProps,
     ref: Ref<HTMLDivElement>,
   ) => {
     const t = useTranslations()
@@ -61,7 +57,6 @@ export const LangSwitchView = forwardRef(
                 className={css.LangSwitch_item}
                 key={locale}
                 onClick={() => handleButtonClick(locale)}
-                locale={locale}
                 href={redirectedPathName(locale)}
               >
                 {locales[locale]}

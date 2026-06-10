@@ -1,7 +1,12 @@
-import { Document } from '@contentful/rich-text-types'
+import type { Child } from './Child.d'
+import type { Parent } from './Parent.d'
+import type { RichTextContent } from './RichText.d'
 
-import { Child } from './Child.d'
-import { Parent } from './Parent.d'
+export type RelatedPerson = {
+  id: string
+  name: string
+  gender: string
+}
 
 export type Person = {
   id: string
@@ -17,10 +22,10 @@ export type Person = {
   endYear?: number
   endBlurriness?: number
   age?: number
-  spouse?: Person[]
+  spouse?: RelatedPerson[]
   stillActive?: boolean
   parents?: Parent[]
   childs?: Child[]
-  richText?: Document
+  richText?: RichTextContent
   wolLink?: string
 }

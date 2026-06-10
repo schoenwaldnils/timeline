@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions'
 import { FC } from 'react'
 
 import { FilterView } from './FilterView'
@@ -9,8 +8,8 @@ export default {
 }
 
 const props = {
-  toggleIsActive: action('toggleIsActive'),
-  handleChange: action('handleChange'),
+  toggleIsActive: () => {},
+  handleChange: () => {},
   filterState: {
     showPersons: true,
     showTimes: true,

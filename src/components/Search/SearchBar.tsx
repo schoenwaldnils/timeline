@@ -1,7 +1,7 @@
 'use client'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef } from 'react'
-import { useSearchBox } from 'react-instantsearch-hooks'
+import { useSearchBox } from 'react-instantsearch'
 
 import css from './Search.module.css'
 

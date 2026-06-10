@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { RefObject, useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 const isBrowser = typeof window !== 'undefined'
 
 const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect
 
 export const useMousePosition = (
-  scrollContainerRef?: HTMLDivElement,
+  scrollContainerRef?: RefObject<HTMLDivElement | null>,
 ): {
   x: number
   y: number
@@ -21,8 +21,9 @@ export const useMousePosition = (
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (scrollContainerRef) {
-        const refBound = scrollContainerRef.getBoundingClientRect()
+      const scrollContainer = scrollContainerRef?.current
+      if (scrollContainer) {
+        const refBound = scrollContainer.getBoundingClientRect()
         setMousePosition({
           x: e.clientX,
           y: e.clientY,

@@ -1,36 +1,16 @@
-import {
-  Children,
-  cloneElement,
-  FunctionComponent,
-  HTMLAttributes,
-  MutableRefObject,
-  ReactElement,
-  RefCallback,
-  useEffect,
-  useRef,
-} from 'react'
+import { FunctionComponent, ReactNode, useEffect, useRef } from 'react'
 
 type FocusEvents = 'focusin' | 'focusout'
 type MouseEvents = 'click' | 'mousedown' | 'mouseup'
 type TouchEvents = 'touchstart' | 'touchend'
 type Events = FocusEvent | MouseEvent | TouchEvent
 
-interface Props extends HTMLAttributes<HTMLElement> {
+interface Props {
   onClickAway: (event: Events) => void
   focusEvent?: FocusEvents
   mouseEvent?: MouseEvents
   touchEvent?: TouchEvents
-  children: ReactElement
-}
-
-const eventTypeMapping = {
-  click: 'onClick',
-  focusin: 'onFocus',
-  focusout: 'onFocus',
-  mousedown: 'onMouseDown',
-  mouseup: 'onMouseUp',
-  touchstart: 'onTouchStart',
-  touchend: 'onTouchEnd',
+  children: ReactNode
 }
 
 export const ClickAwayListener: FunctionComponent<Props> = ({
@@ -40,61 +20,35 @@ export const ClickAwayListener: FunctionComponent<Props> = ({
   mouseEvent = 'click',
   touchEvent = 'touchend',
 }) => {
-  const node = useRef<HTMLElement | null>(null)
-  const bubbledEventTarget = useRef<EventTarget | null>(null)
-  const mountedRef = useRef(false)
+  const node = useRef<HTMLDivElement>(null)
+  const mounted = useRef(false)
 
   /**
-   * Prevents the bubbled event from getting triggered immediately
-   * https://github.com/facebook/react/issues/20074
+   * Ignore the event that mounted this listener so the same click can't trigger
+   * onClickAway immediately. https://github.com/facebook/react/issues/20074
    */
   useEffect(() => {
-    setTimeout(() => {
-      mountedRef.current = true
+    const timer = setTimeout(() => {
+      mounted.current = true
     }, 0)
 
     return () => {
-      mountedRef.current = false
+      clearTimeout(timer)
+      mounted.current = false
     }
   }, [])
-
-  const handleBubbledEvents =
-    (type: string) =>
-    (event: Events): void => {
-      bubbledEventTarget.current = event.target
-
-      const handler = children?.props[type]
-
-      if (handler) {
-        handler(event)
-      }
-    }
-
-  const handleChildRef = (childRef: HTMLElement) => {
-    node.current = childRef
-
-    const { ref } = children as typeof children & {
-      ref: RefCallback<HTMLElement> | MutableRefObject<HTMLElement>
-    }
-
-    if (typeof ref === 'function') {
-      ref(childRef)
-    } else if (ref) {
-      ref.current = childRef
-    }
-  }
 
   useEffect(() => {
     const nodeDocument = node.current?.ownerDocument ?? document
 
     const handleEvents = (event: Events): void => {
-      if (!mountedRef.current) return
+      if (!mounted.current) return
 
-      if (
-        (node.current && node.current.contains(event.target as Node)) ||
-        bubbledEventTarget.current === event.target ||
-        !nodeDocument.contains(event.target as Node)
-      ) {
+      const target = event.target as Node | null
+      if (!target) return
+
+      // Inside the wrapped element, or already detached from the document.
+      if (node.current?.contains(target) || !nodeDocument.contains(target)) {
         return
       }
 
@@ -112,16 +66,9 @@ export const ClickAwayListener: FunctionComponent<Props> = ({
     }
   }, [focusEvent, mouseEvent, onClickAway, touchEvent])
 
-  const mappedMouseEvent = eventTypeMapping[mouseEvent]
-  const mappedTouchEvent = eventTypeMapping[touchEvent]
-  const mappedFocusEvent = eventTypeMapping[focusEvent]
-
-  return Children.only(
-    cloneElement(children as ReactElement, {
-      ref: handleChildRef,
-      [mappedFocusEvent]: handleBubbledEvents(mappedFocusEvent),
-      [mappedMouseEvent]: handleBubbledEvents(mappedMouseEvent),
-      [mappedTouchEvent]: handleBubbledEvents(mappedTouchEvent),
-    }),
+  return (
+    <div ref={node} style={{ display: 'contents' }}>
+      {children}
+    </div>
   )
 }

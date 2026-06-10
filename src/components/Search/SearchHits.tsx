@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { Index, useHits } from 'react-instantsearch-hooks'
+import { Fragment } from 'react'
+import { Index, useHits } from 'react-instantsearch'
 
-import { AlgoliaHit, AlgoliaIndex } from '@/@types/algolia.d'
+import { AlgoliaIndex } from '@/@types/algolia.d'
+import { Theme } from '@/@types/Theme'
 import { HR } from '@/components/Typography'
 import { useStore } from '@/hooks/useStore'
 
@@ -20,19 +22,19 @@ const Hits = <T extends AlgoliaIndex>({
   type: T
   onHitClick?: () => void
 }) => {
-  const t = useTranslations()
-  const { hits, results } = useHits<AlgoliaHit<T>>()
+  const t = useTranslations('ui')
+  const { items, results } = useHits()
 
   return (
     <>
       <div className={css.Search_hitsTitle}>
         {results?.nbHits}{' '}
         <span className={css.Search_hitsType}>
-          {t(`ui.${type}`, { count: results?.nbHits })}
+          {t(type as 'person', { count: results?.nbHits ?? 0 })}
         </span>
       </div>
       <div className={css.Search_hitsList}>
-        {hits.map((hit) => (
+        {items.map((hit) => (
           <SearchHit
             key={hit.objectID}
             {...({
@@ -48,17 +50,17 @@ const Hits = <T extends AlgoliaIndex>({
 }
 
 export const SearchHits = ({ onHitClick }: { onHitClick?: () => void }) => {
-  const themeIsDark = useStore((state) => state.theme === 'dark')
+  const themeIsDark = useStore((state) => state.theme === Theme.Dark)
 
   return (
     <div className={css.Search_hits}>
       {indicies.map((index) => (
-        <>
-          <Index key={`index-${index}`} indexName={index}>
-            <Hits type={index as AlgoliaIndex} onHitClick={onHitClick} />
+        <Fragment key={`index-${index}`}>
+          <Index indexName={index}>
+            <Hits type={index} onHitClick={onHitClick} />
           </Index>
           <HR />
-        </>
+        </Fragment>
       ))}
       <Link
         className={css.Search_algoliaLogo}
