@@ -18,19 +18,22 @@ export const useFetchSidebarData = <T extends AlgoliaIndex>({
   data: FormatedData<T> | null
 } => {
   const locale = useLocale() as Locale
-  const [data, setData] = useState<FormatedData<T> | null>(null)
+  const key = `${type}:${id}:${locale}`
+  const [result, setResult] = useState<{
+    key: string
+    data: FormatedData<T> | null
+  }>({ key, data: null })
 
   useEffect(() => {
     let active = true
-    setData(null)
 
     fetchContentData(type, id, locale)
-      .then((result) => {
-        if (active) setData(result)
+      .then((data) => {
+        if (active) setResult({ key: `${type}:${id}:${locale}`, data })
       })
       .catch((error: unknown) => {
         console.error(error)
-        if (active) setData(null)
+        if (active) setResult({ key: `${type}:${id}:${locale}`, data: null })
       })
 
     return () => {
@@ -38,5 +41,7 @@ export const useFetchSidebarData = <T extends AlgoliaIndex>({
     }
   }, [type, id, locale])
 
-  return { data }
+  // Stale results from a previous type/id/locale are masked by the key check,
+  // so no synchronous reset inside the effect is needed.
+  return { data: result.key === key ? result.data : null }
 }
