@@ -5,3 +5,4 @@ CHANGELOG.md
 pnpm-lock.yaml
 storybook-static
 .kiro/specs
+graphify-out
