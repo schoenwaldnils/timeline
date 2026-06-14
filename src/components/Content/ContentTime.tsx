@@ -15,13 +15,12 @@ export const ContentTime = ({
   endYear,
   duration,
   richText,
-  image,
   wolLink,
 }: Time) => {
   const t = useTranslations()
 
   return (
-    <ContentTemplate title={name} image={image} editType="time" editId={id}>
+    <ContentTemplate title={name} editType="time" editId={id}>
       <TableList>
         <TableListItem title={t('time.start')}>
           {startYear ? OurTime(startYear) : t('unknown')}

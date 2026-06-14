@@ -7,11 +7,11 @@ import { TableList, TableListItem } from '@/components/TableList'
 import { LinkToWOL } from './ContentLinkWol'
 import { ContentTemplate } from './ContentTemplate'
 
-export const ContentEvent = ({ id, name, year, image, wolLink }: Event) => {
+export const ContentEvent = ({ id, name, year, wolLink }: Event) => {
   const t = useTranslations()
 
   return (
-    <ContentTemplate title={name} image={image} editType="event" editId={id}>
+    <ContentTemplate title={name} editType="event" editId={id}>
       <TableList>
         <TableListItem title={t('time.year', { count: 1 })}>{OurTime(year)}</TableListItem>
       </TableList>
