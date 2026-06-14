@@ -1,12 +1,21 @@
 name: lighthouse
 
+# DISABLED — kept for later fix and reuse.
+# Only `workflow_dispatch` is active, so this never runs automatically; it can
+# still be triggered manually from the Actions tab to test fixes.
+# Before re-enabling on push/PR, fix:
+#   - `runs-on: ubuntu-18.04` below is a removed runner → use `ubuntu-latest`
+#   - bump the outdated actions (actions/checkout@v2, etc.)
+#   - ensure the VERCEL_TOKEN / AWS_* secrets still exist
+# To re-enable, uncomment the push/pull_request triggers below.
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #     - main
 
 jobs:
   wait-for-vercel-deployment:
