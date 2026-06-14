@@ -1,0 +1,40 @@
+{
+  "meta-description": "Übersicht biblischer Personen und Events",
+  "unknown": "unbekannt",
+  "approx": "ca.",
+  "admin-edit": "Bearbeiten",
+  "relations": {
+    "spouse": "Ehepartner",
+    "father": "Vater",
+    "mother": "Mutter",
+    "child": "Kind{count, plural, =1 {} other {er}}"
+  },
+  "time": {
+    "extension-positive": "u.Z.",
+    "extension-negative": "v.u.Z.",
+    "year": "Jahr{count, plural, =1 {} other {e}}",
+    "start": "Start",
+    "end": "Ende",
+    "duration": "Dauer",
+    "ongoing": "andauernd",
+    "born": "geboren",
+    "died": "gestorben",
+    "span": "Lebensdauer"
+  },
+  "ui": {
+    "close-sidebar": "Seitenleiste schließen",
+    "change-language": "Sprache ändern",
+    "language": "Deutsch",
+    "search": "Suchen",
+    "change-scaling": "Skalierung ändern",
+    "scale-up": "vergrößern",
+    "scale-down": "verkleinern",
+    "filter-elements": "filter Elemente",
+    "person": "Person{count, plural, =1 {} other {en}}",
+    "time": "Zeitabschnitt{count, plural, =1 {} other {e}}",
+    "event": "Ereignis{count, plural, =1 {} other {e}}",
+    "not-found": "Kein {{type}} gefunden",
+    "not-found_female": "Keine {{type}} gefunden",
+    "toggle-dark-mode": "zwischen hellem und dunklem Modus wechseln"
+  }
+}

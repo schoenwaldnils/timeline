@@ -1,0 +1,28 @@
+.Link {
+  color: var(--body-linkColor);
+  text-decoration: none;
+  transition: 150ms;
+}
+
+.Link:hover {
+  color: var(--body-linkColorHover);
+}
+
+.TextButton {
+  margin: 0 -0.5em;
+  padding: 0 0.5em;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: var(--body-linkColor);
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 0;
+  transition: color 150ms;
+}
+
+.TextButton:hover {
+  color: var(--body-linkColorHover);
+}

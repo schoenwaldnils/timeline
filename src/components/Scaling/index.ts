@@ -1,2 +1,2 @@
-export * from './Scaling'
 export * from './ScaleIndicator'
+export * from './Scaling'

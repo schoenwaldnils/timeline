@@ -1,0 +1,41 @@
+.Filter {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.IconButton {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  color: inherit;
+  background: none;
+  border: 0;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+}
+
+.Icon {
+  display: block;
+  width: 1em;
+  height: 1em;
+  font-size: 1.25rem;
+}
+
+.Icon path {
+  fill: currentcolor;
+}
+
+.Label {
+  display: flex;
+  width: max-content;
+  padding: 0.5em 0.7em;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+.Checkbox {
+  margin: 0 0.75em 0 0;
+}

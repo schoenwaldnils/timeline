@@ -1,17 +1,17 @@
-import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
+import { useTranslations } from 'next-intl'
+import { useCallback, useMemo } from 'react'
 
 import { Person } from '@/@types/Person.d'
 import { OurTime } from '@/components/OurTime'
 import { RichText } from '@/components/RichText'
-import { CHANGE_CONTENT, useStore } from '@/components/Store'
-import { TableList } from '@/components/TableList'
+import { TableList, TableListItem } from '@/components/TableList'
 import { LI, TextButton, UL } from '@/components/Typography'
+import { useSidebarStore } from '@/hooks/useSidebarStore'
 
 import { LinkToWOL } from './ContentLinkWol'
-import { ContentBox, ContentTemplate } from './ContentTemplate'
+import { ContentTemplate } from './ContentTemplate'
 
-export const ContentPerson: FC<Person> = ({
+export const ContentPerson = ({
   id,
   name,
   startYear,
@@ -20,155 +20,112 @@ export const ContentPerson: FC<Person> = ({
   endBlurriness,
   age,
   spouse = [],
-  fatherID,
-  father,
-  motherID,
-  mother,
+  parents,
   childs = [],
   richText,
   wolLink,
-}) => {
-  const { dispatch } = useStore()
-  const { t } = useTranslation()
+}: Person) => {
+  const t = useTranslations()
+  const setSidebar = useSidebarStore((state) => state.setSidebar)
 
-  const changeContent = (newId: string) => {
-    dispatch({
-      type: CHANGE_CONTENT,
-      contentId: newId,
-    })
-  }
+  const setPerson = useCallback((id: string) => setSidebar({ type: 'person', id }), [setSidebar])
 
-  const yearBlur = (
-    year: number,
-    blur: number,
-    type: 'start' | 'end',
-  ): string => {
-    if (!blur) return OurTime(year)
+  const yearBlur = useCallback(
+    (type: 'start' | 'end', year: number, blur?: number): string => {
+      if (!blur) {
+        return OurTime(year)
+      }
 
-    let blurYear = year + blur / 2
+      let blurYear = year + blur / 2
 
-    if (type === 'end') {
-      blurYear = year - blur / 2
-    }
+      if (type === 'end') {
+        blurYear = year - blur / 2
+      }
 
-    const blurAmount = blur / 2
-    const blurString = blurAmount <= 20 ? '' : blurAmount
+      const blurAmount = blur / 2
+      const blurString = blurAmount <= 20 ? '' : blurAmount
 
-    return `${t('approx')} ${OurTime(blurYear)} (+-${blurString})`
-  }
+      return `${t('approx')} ${OurTime(blurYear)} (+-${blurString})`
+    },
+    [t],
+  )
 
-  let list: Record<string, unknown> = {}
-
-  if (startYear) {
-    list = {
-      ...list,
-      [t('time.born')]: yearBlur(startYear, startBlurriness, 'start'),
-    }
-  }
-
-  if (endYear) {
-    list = {
-      ...list,
-      [t('time.died')]: yearBlur(endYear, endBlurriness, 'end'),
-    }
-  }
-
-  if (age && !startBlurriness && !endBlurriness) {
-    list = {
-      ...list,
-      [t('time.span')]: `${age} ${t('time.year', { count: age })}`,
-    }
-  }
-
-  if (father) {
-    list = {
-      ...list,
-      [t('relations.father')]: (
-        <TextButton onClick={() => changeContent(fatherID)}>
-          {father as unknown as string}
-        </TextButton>
-      ),
-    }
-  }
-
-  if (mother) {
-    list = {
-      ...list,
-      [t('relations.mother')]: (
-        <TextButton onClick={() => changeContent(motherID)}>
-          {mother as unknown as string}
-        </TextButton>
-      ),
-    }
-  }
-
-  if (spouse.length >= 2) {
-    list = {
-      ...list,
-      [t('relations.spouse', { count: spouse.length })]: (
-        <UL>
-          {spouse.map(({ id: spouseID, name: spouseName }) => (
-            <LI key={`spouse-${spouseID}`}>
-              <TextButton onClick={() => changeContent(spouseID)}>
-                {spouseName}
-              </TextButton>
-            </LI>
-          ))}
-        </UL>
-      ),
-    }
-  } else if (spouse.length === 1) {
-    list = {
-      ...list,
-      [t('relations.spouse', { count: 1 })]: (
-        <TextButton onClick={() => changeContent(spouse[0].id)}>
-          {spouse[0].name}
-        </TextButton>
-      ),
-    }
-  }
-
-  if (childs.length >= 2) {
-    list = {
-      ...list,
-      [t('relations.child', { count: childs.length })]: (
-        <UL>
-          {childs.map(({ id: childsID, name: childsName }) => (
-            <LI key={`child-${childsID}`}>
-              <TextButton onClick={() => changeContent(childsID)}>
-                {childsName}
-              </TextButton>
-            </LI>
-          ))}
-        </UL>
-      ),
-    }
-  } else if (childs.length === 1) {
-    list = {
-      ...list,
-      [t('relations.child', { count: 1 })]: (
-        <TextButton onClick={() => changeContent(childs[0].id)}>
-          {childs[0].name}
-        </TextButton>
-      ),
-    }
-  }
+  const father = useMemo(() => parents?.find((p) => p.gender === 'male'), [parents])
+  const mother = useMemo(() => parents?.find((p) => p.gender === 'female'), [parents])
 
   return (
-    <ContentTemplate title={name} idContentful={id}>
-      <ContentBox>
-        <TableList list={list} />
-      </ContentBox>
-      {richText && (
-        <ContentBox>
-          <RichText content={richText} />
-        </ContentBox>
-      )}
-      {wolLink && (
-        <ContentBox>
-          <LinkToWOL wolLink={wolLink} />
-        </ContentBox>
-      )}
+    <ContentTemplate title={name} editType="person" editId={id}>
+      <TableList>
+        {startYear && (
+          <TableListItem title={t('time.born')}>
+            {yearBlur('start', startYear, startBlurriness)}
+          </TableListItem>
+        )}
+
+        {endYear && (
+          <TableListItem title={t('time.died')}>
+            {yearBlur('end', endYear, endBlurriness)}
+          </TableListItem>
+        )}
+
+        {age && !startBlurriness && !endBlurriness && (
+          <TableListItem title={t('time.span')}>
+            {age} {t('time.year', { count: age })}
+          </TableListItem>
+        )}
+
+        {father && (
+          <TableListItem title={t('relations.father')}>
+            <TextButton onClick={() => setPerson(father.id)}>{father.name}</TextButton>
+          </TableListItem>
+        )}
+
+        {mother && (
+          <TableListItem title={t('relations.mother')}>
+            <TextButton onClick={() => setPerson(mother.id)}>{mother.name}</TextButton>
+          </TableListItem>
+        )}
+
+        {spouse.length >= 2 && (
+          <TableListItem title={t('relations.spouse', { count: spouse.length })}>
+            <UL>
+              {spouse.map(({ id: spouseID, name: spouseName }) => (
+                <LI key={`spouse-${spouseID}`}>
+                  <TextButton onClick={() => setPerson(spouseID)}>{spouseName}</TextButton>
+                </LI>
+              ))}
+            </UL>
+          </TableListItem>
+        )}
+
+        {spouse.length === 1 && (
+          <TableListItem title={t('relations.spouse', { count: 1 })}>
+            <TextButton onClick={() => setPerson(spouse[0].id)}>{spouse[0].name}</TextButton>
+          </TableListItem>
+        )}
+
+        {childs.length >= 2 && (
+          <TableListItem title={t('relations.child', { count: childs.length })}>
+            <UL>
+              {childs.map(({ id: childID, name: childName }) => (
+                <LI key={`child-${childID}`}>
+                  <TextButton onClick={() => setPerson(childID)}>{childName}</TextButton>
+                </LI>
+              ))}
+            </UL>
+          </TableListItem>
+        )}
+
+        {childs.length === 1 && (
+          <TableListItem title={t('relations.child', { count: 1 })}>
+            <TextButton onClick={() => setPerson(childs[0].id)}>{childs[0].name}</TextButton>
+          </TableListItem>
+        )}
+      </TableList>
+
+      {richText && <RichText content={richText} />}
+
+      {wolLink && <LinkToWOL wolLink={wolLink} />}
     </ContentTemplate>
   )
 }

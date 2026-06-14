@@ -8,5 +8,21 @@ _serverless/lib/
 node_modules
 .next
 .env
+.env.local
 storybook-static
 tsconfig.tsbuildinfo
+next-env.d.ts
+.vercel
+.env*
+
+# scratch / local dumps
+tmp
+
+# test artifacts
+test-results
+playwright-report
+coverage
+certificates
+media
+contentful-export
+.env*.local

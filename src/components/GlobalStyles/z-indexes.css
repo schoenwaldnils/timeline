@@ -1,0 +1,10 @@
+:root {
+  --z-tooltip: 8;
+  --z-header: 7;
+  --z-sidebar: 6;
+  --z-config: 5;
+  --z-eventFocus: 4;
+  --z-timespan: 3;
+  --z-event: 2;
+  --z-timelineContent: 1;
+}

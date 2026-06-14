@@ -1,22 +1,35 @@
-import { ClickAwayListener } from '@material-ui/core'
-import { FC, useState } from 'react'
+'use client'
 
-import { SET_FILTER, useStore } from '@/components/Store'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 
+import { USER_FILTER_KEY } from '@/data/constants'
+import { useStore } from '@/hooks/useStore'
+
+import { ClickAwayListener } from '../ClickAwayListener'
 import { FilterView } from './FilterView'
 
 export const Filter: FC = () => {
-  const { store, dispatch } = useStore()
+  const { filter, setFilter } = useStore(
+    useShallow((state) => ({
+      filter: state.filter,
+      setFilter: state.setFilter,
+    })),
+  )
   const [isActive, setIsActive] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+    window.localStorage.setItem(USER_FILTER_KEY, JSON.stringify(filter))
+  }, [filter])
 
   const toggleIsActive = () => setIsActive(!isActive)
 
-  const handleChange = (clickedRef) => {
-    dispatch({
-      type: SET_FILTER,
-      filter: {
-        [clickedRef.target.name]: clickedRef.target.checked,
-      },
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFilter({
+      [event.target.name]: event.target.checked,
     })
   }
 
@@ -26,7 +39,7 @@ export const Filter: FC = () => {
         isActive={isActive}
         toggleIsActive={toggleIsActive}
         handleChange={handleChange}
-        filterState={store.filter}
+        filterState={filter}
       />
     </ClickAwayListener>
   )

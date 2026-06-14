@@ -1,4 +1,5 @@
 export type Parent = {
-  type: 'parent'
+  id: string
+  gender: string
   name: string
 }

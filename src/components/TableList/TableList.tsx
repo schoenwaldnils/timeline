@@ -1,27 +1,14 @@
-import styled from '@emotion/styled'
-import { FC, Fragment } from 'react'
+import { ReactNode } from 'react'
 
-const List = styled.div`
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-gap: 1em;
-`
+import css from './TableList.module.css'
 
-const ListItem = styled.div``
+export const TableList = ({ children }: { children: ReactNode }) => (
+  <div className={css.TableList}>{children}</div>
+)
 
-const ListKey = styled(ListItem)`
-  text-transform: capitalize;
-`
-
-export const TableList: FC<{
-  list: Record<string, unknown>
-}> = ({ list }) => (
-  <List>
-    {Object.keys(list).map((key) => (
-      <Fragment key={key}>
-        <ListKey>{key}:</ListKey>
-        <ListItem>{list[key] as string}</ListItem>
-      </Fragment>
-    ))}
-  </List>
+export const TableListItem = ({ title, children }: { title: string; children: ReactNode }) => (
+  <>
+    <div className={css.TableList_key}>{title}:</div>
+    <div>{children}</div>
+  </>
 )

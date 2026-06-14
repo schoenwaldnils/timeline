@@ -1,63 +1,22 @@
-import styled from '@emotion/styled'
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
-import { ContentfulLink } from '@/components/ContentfulLink'
-import { Image } from '@/components/Image'
+import { AlgoliaIndex } from '@/@types/algolia'
+import { AdminLink } from '@/components/AdminLink'
 import { H1 } from '@/components/Typography'
 
-const Box = styled.div`
-  margin-bottom: 1em;
-
-  :last-child {
-    margin-bottom: 0;
-  }
-`
-
-export interface ContentBoxProps {
-  children: ReactNode
-}
-
-export const ContentBox: FC<ContentBoxProps> = ({ children }) => (
-  <Box>{children}</Box>
-)
-
 export interface ContentTemplateProps {
-  idContentful?: string
+  editType?: AlgoliaIndex
+  editId?: string
   title?: string
-  image?: {
-    src: string
-    width: number
-    height: number
-  }
   children: ReactNode
 }
 
-export const ContentTemplate: FC<ContentTemplateProps> = ({
-  idContentful,
-  title,
-  image,
-  children,
-}) => (
+export const ContentTemplate = ({ editType, editId, title, children }: ContentTemplateProps) => (
   <>
-    {image && (
-      <Box>
-        <Image
-          src={image.src}
-          width={image.width}
-          height={image.height}
-          alt={title}
-        />
-      </Box>
-    )}
-
     {title && <H1>{title}</H1>}
 
-    {children && <Box>{children}</Box>}
+    {children}
 
-    {idContentful && (
-      <Box>
-        <ContentfulLink id={idContentful} />
-      </Box>
-    )}
+    {editType && editId && <AdminLink collection={editType} id={editId} />}
   </>
 )

@@ -1,0 +1,9 @@
+.TableList {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-gap: 1em;
+}
+
+.TableList_key {
+  text-transform: capitalize;
+}

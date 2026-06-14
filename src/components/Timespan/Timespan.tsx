@@ -1,24 +1,57 @@
-import { FC } from 'react'
+'use client'
 
-import { Timespan as TimespanType } from '@/@types/Timespan'
-import { CHANGE_CONTENT, useStore } from '@/components/Store'
+import type { Timespan as TimespanProps } from '@/@types/Timespan.d'
+import { useSidebarStore } from '@/hooks/useSidebarStore'
 
-import { TimespanView } from './TimespanView'
+import { generateGradient } from './generateGradient'
+import css from './Timespan.module.css'
 
-export const Timespan: FC<TimespanType> = (props) => {
-  const { id } = props
+const timeColors = {
+  person: 'var(--Timespan-backgroundColor--person)',
+  time: 'var(--Timespan-backgroundColor--time)',
+}
 
-  const { dispatch } = useStore()
+const transparentColors = {
+  person: 'var(--Timespan-backgroundColor--personT)',
+  time: 'var(--Timespan-backgroundColor--timeT)',
+}
+
+export const Timespan = ({
+  id,
+  type,
+  name,
+  startBlurriness,
+  endBlurriness,
+  pixelStart,
+  pixelDuration,
+  rowIndex,
+}: TimespanProps) => {
+  const setSidebar = useSidebarStore((state) => state.setSidebar)
+
   const handleClick = () => {
-    dispatch({ type: CHANGE_CONTENT, contentId: id })
+    setSidebar({ type, id })
   }
 
+  const background = generateGradient({
+    startBlurriness,
+    endBlurriness,
+    color: timeColors[type],
+    colorTransparent: transparentColors[type],
+  })
+
   return (
-    <TimespanView
-      {...{
-        ...props,
-        changeContent: handleClick,
+    <button
+      className={css.Timespan}
+      style={{
+        width: pixelDuration,
+        marginTop: `calc(${rowIndex} * (2em + 4px))`,
+        marginLeft: pixelStart,
+        background: background,
       }}
-    />
+      tabIndex={0}
+      onClick={handleClick}
+    >
+      <div className={css.Timespan_name}>{name}</div>
+    </button>
   )
 }

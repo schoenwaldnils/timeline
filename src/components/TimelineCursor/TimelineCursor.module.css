@@ -1,0 +1,17 @@
+.TimelineCursor {
+  position: absolute;
+  top: 0;
+  left: var(--TimelineCursor-left);
+  width: 1px;
+  height: 100%;
+  pointer-events: none;
+  background-color: var(--TimelineCursor-color);
+}
+
+.TimelineCursor_time {
+  position: absolute;
+  top: 1.5rem;
+  left: 5px;
+  color: var(--TimelineCursor-color);
+  white-space: nowrap;
+}

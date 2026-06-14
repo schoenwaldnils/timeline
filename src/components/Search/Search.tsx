@@ -1,41 +1,33 @@
-import styled from '@emotion/styled'
-import { ClickAwayListener } from '@material-ui/core'
-import dynamic from 'next/dynamic'
-import { useTranslation } from 'next-i18next'
-import { FC, useState } from 'react'
+'use client'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 import { ReactComponent as SearchIcon } from '../../svgs/searchIcon.svg'
+import { ClickAwayListener } from '../ClickAwayListener'
+import css from './Search.module.css'
+import { SearchContainer } from './SearchContainer'
 
-const SearchContainer = dynamic(() => import('./SearchContainer'), {
-  ssr: false,
-})
-
-const Wrapper = styled.div`
-  position: relative;
-`
-
-const Button = styled.button`
-  font-size: 1.25rem;
-  cursor: pointer;
-`
-
-export const Search: FC = () => {
-  const { t } = useTranslation()
+export const Search = () => {
+  const t = useTranslations()
   const [isActive, setIsActive] = useState(false)
 
   if (isActive) {
     return (
-      <ClickAwayListener onClickAway={() => isActive && setIsActive(false)}>
-        <Wrapper>
+      <ClickAwayListener onClickAway={() => setIsActive(false)}>
+        <div className={css.Search}>
           <SearchContainer onHitClick={() => setIsActive(false)} />
-        </Wrapper>
+        </div>
       </ClickAwayListener>
     )
   }
 
   return (
-    <Button aria-label={t('ui.search')} onClick={() => setIsActive(true)}>
+    <button
+      className={css.Search_button}
+      aria-label={t('ui.search')}
+      onClick={() => setIsActive(true)}
+    >
       <SearchIcon />
-    </Button>
+    </button>
   )
 }

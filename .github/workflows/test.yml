@@ -1,4 +1,4 @@
-name: test
+name: schoen-world
 
 on:
   push:
@@ -6,49 +6,37 @@ on:
       - main
   pull_request:
     branches:
-      - main
-
-permissions:
-  contents: read
-  pull-requests: write
+      - '**'
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/setup-node@v2
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
-      - name: npm install
-        run: npm ci
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: lint ts
-        run: npm run lint:ts
+        run: pnpm lint:ts
+
+      - name: lint md
+        run: pnpm lint:md
 
       - name: lint types
-        run: npm run lint:types
-
-      - name: lint css
-        run: npm run lint:css
-
-  build:
-    runs-on: ubuntu-latest
-    env:
-      NODE_ENV: production
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: npm install
-        run: npm ci
+        run: pnpm lint:types
 
       - name: build
-        run: npm run build
+        run: pnpm build

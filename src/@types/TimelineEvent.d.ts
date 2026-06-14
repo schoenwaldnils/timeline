@@ -4,5 +4,4 @@ export type TimelineEvent = {
   name: string
   pixelStart: number
   rowIndex?: number
-  zIndex?: number
 }

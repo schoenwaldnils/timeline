@@ -1,0 +1,42 @@
+.Timeline {
+  --paddingTop: 4rem;
+
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 2rem;
+  font-size: 12px;
+}
+
+.Timeline_content {
+  z-index: var(--z-timelineContent);
+  display: grid;
+  grid-template-areas:
+    'events'
+    'times';
+  grid-gap: 0.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.Timeline_numbers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  height: 100%;
+  color: var(--TimelineNumbers-color);
+  pointer-events: none;
+}
+
+.Timeline_numberBlock {
+  flex-shrink: 0;
+  font-family: monospace;
+  font-size: 12px;
+  border-left: 1px solid var(--TimelineNumbers-lineColor);
+}
+
+.Timeline_number {
+  display: block;
+  margin: 0.25em;
+  white-space: nowrap;
+}

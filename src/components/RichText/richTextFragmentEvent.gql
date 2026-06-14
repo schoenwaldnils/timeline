@@ -1,0 +1,19 @@
+fragment EventRichText on EventRichText {
+  json
+  links {
+    entries {
+      block {
+        __typename
+        sys {
+          id
+        }
+      }
+      inline {
+        __typename
+        sys {
+          id
+        }
+      }
+    }
+  }
+}

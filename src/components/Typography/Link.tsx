@@ -1,53 +1,23 @@
-import styled from '@emotion/styled'
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC } from 'react'
 
-const StyledA = styled.a`
-  color: var(--body-linkColor);
-  text-decoration: none;
-  cursor: pointer;
-  transition: 150ms;
+import css from './Link.module.css'
 
-  :hover {
-    color: var(--body-linkColorHover);
-  }
-`
-
-export const A: FC<AnchorHTMLAttributes<HTMLAnchorElement>> = ({
-  href,
-  ...props
-}) => {
-  if (href.includes('http') && !href.includes('localhost:3003')) {
+export const A: FC<AnchorHTMLAttributes<HTMLAnchorElement>> = ({ href, children, ...props }) => {
+  if (href?.includes('http') && !href.includes('localhost')) {
     return (
-      <StyledA
-        {...{ href, ...props }}
-        target="_blank"
-        rel="noopener noreferrer"
-      />
+      <a className={css.Link} {...{ href, ...props }} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
     )
   }
 
-  return <StyledA {...{ href, ...props }} />
+  return (
+    <a className={css.Link} href={href} {...props}>
+      {children}
+    </a>
+  )
 }
 
-const StyledButton = styled.button`
-  margin: 0 -0.5em;
-  padding: 0 0.5em;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  color: var(--body-linkColor);
-  text-align: left;
-  cursor: pointer;
-  background: none;
-  border: none;
-  border-radius: 0;
-  transition: color 150ms;
-
-  :hover {
-    color: var(--body-linkColorHover);
-  }
-`
-
-export const TextButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (
-  props,
-) => <StyledButton {...props} />
+export const TextButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
+  <button className={css.TextButton} {...props} />
+)

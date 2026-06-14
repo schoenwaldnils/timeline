@@ -1,111 +1,76 @@
-import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
-import { Index, useHits } from 'react-instantsearch-hooks'
+import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Fragment } from 'react'
+import { Index, useHits } from 'react-instantsearch'
 
-import { useStore } from '@/components/Store'
+import { AlgoliaIndex } from '@/@types/algolia.d'
+import { Theme } from '@/@types/Theme'
 import { HR } from '@/components/Typography'
+import { useStore } from '@/hooks/useStore'
 
 import { ReactComponent as AlgoliaLogoBlue } from './algolia-blue.svg'
 import { ReactComponent as AlgoliaLogoWhite } from './algolia-white.svg'
+import css from './Search.module.css'
 import { HitType, SearchHit } from './SearchHit'
 
-const SearchHitsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-height: 80vh;
-  font-size: 12px;
-`
+const indicies: AlgoliaIndex[] = ['person', 'time', 'event']
 
-const AlgoliaLogoWrapper = styled.a`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: 0.5ch;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 1rem;
-  color: inherit;
-  text-decoration: none;
-
-  > svg {
-    width: 4em !important;
-  }
-`
-
-const HitsTitle = styled.div`
-  margin: 0.25em;
-  font-size: 1.5em;
-  color: var(--Search-titleColor);
-`
-
-const HitsType = styled.span`
-  text-transform: capitalize;
-`
-
-const indicies = ['person', 'time', 'event']
-
-const Hits: FC<{
-  type: 'person' | 'time' | 'event'
-  onHitClick: () => void
-}> = ({ type, onHitClick }) => {
-  const { t } = useTranslation()
-  const { hits, results } = useHits()
-
-  const typeString = t(`ui.${type}`, { count: hits.length })
-
-  if (!hits.length) {
-    return (
-      <HitsTitle>
-        {t(`ui.not-found`, {
-          type: t(`ui.${type}`, { count: 1 }),
-          context: type === 'person' ? 'female' : null,
-        })}
-      </HitsTitle>
-    )
-  }
+const Hits = <T extends AlgoliaIndex>({
+  type,
+  onHitClick,
+}: {
+  type: T
+  onHitClick?: () => void
+}) => {
+  const t = useTranslations('ui')
+  const { items, results } = useHits()
 
   return (
     <>
-      <HitsTitle>
-        {results.nbHits} <HitsType>{typeString}</HitsType>
-      </HitsTitle>
-      {hits.map((hit) => (
-        <SearchHit
-          key={hit.objectID}
-          {...({
-            onHitClick,
-            type,
-            ...hit,
-          } as unknown as HitType)}
-        />
-      ))}
+      <div className={css.Search_hitsTitle}>
+        {results?.nbHits}{' '}
+        <span className={css.Search_hitsType}>
+          {t(type as 'person', { count: results?.nbHits ?? 0 })}
+        </span>
+      </div>
+      <div className={css.Search_hitsList}>
+        {items.map((hit) => (
+          <SearchHit
+            key={hit.objectID}
+            {...({
+              type,
+              ...hit,
+            } as unknown as HitType)}
+            onHitClick={onHitClick}
+          />
+        ))}
+      </div>
     </>
   )
 }
 
-export const SearchHits: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
-  const {
-    store: { themeIsDark },
-  } = useStore()
+export const SearchHits = ({ onHitClick }: { onHitClick?: () => void }) => {
+  const themeIsDark = useStore((state) => state.theme === Theme.Dark)
+
   return (
-    <SearchHitsContainer>
-      {indicies.map((index: 'person' | 'time' | 'event') => (
-        <>
-          <Index key={`index-${index}`} indexName={index}>
+    <div className={css.Search_hits}>
+      {indicies.map((index) => (
+        <Fragment key={`index-${index}`}>
+          <Index indexName={index}>
             <Hits type={index} onHitClick={onHitClick} />
           </Index>
           <HR />
-        </>
+        </Fragment>
       ))}
-      <AlgoliaLogoWrapper
+      <Link
+        className={css.Search_algoliaLogo}
         href="https://www.algolia.com/"
         target="_blank"
         rel="nofollow"
       >
         <span>Search by</span>
         {themeIsDark ? <AlgoliaLogoWhite /> : <AlgoliaLogoBlue />}
-      </AlgoliaLogoWrapper>
-    </SearchHitsContainer>
+      </Link>
+    </div>
   )
 }

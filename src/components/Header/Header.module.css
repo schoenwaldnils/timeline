@@ -1,0 +1,33 @@
+.Header {
+  position: relative;
+  z-index: var(--z-header);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5rem;
+  height: max-content;
+  padding: 0.5rem;
+  line-height: 1;
+  color: var(--Header-color);
+  background-color: var(--Header-backgroundColor);
+  box-shadow: 0 -1rem 0.75rem 1rem rgba(0 0 0 / 25%);
+}
+
+.Header_nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* sm */
+@media (min-width: 481px) {
+  .Header {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    gap: 1.5rem;
+  }
+
+  .Header_nav {
+    gap: 1.5rem;
+  }
+}

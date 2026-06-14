@@ -1,52 +1,21 @@
-import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
+'use client'
 
-import { useStore } from '@/components/Store'
+import { useTranslations } from 'next-intl'
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: baseline;
-  font-size: 0.675rem;
-  text-transform: capitalize;
-`
+import { useScaleStore } from '@/hooks/useScaleStore'
 
-const Indicator = styled.div`
-  position: relative;
-  width: 101px;
-  height: 6px;
-  margin-left: 5px;
-  border-bottom: 1px solid;
+import css from './ScaleIndicator.module.css'
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 1px;
-    height: 100%;
-    border-left: 1px solid;
-  }
+export const ScaleIndicator = () => {
+  const t = useTranslations()
+  const scale = useScaleStore((state) => state.scale)
 
-  &::before {
-    left: 0;
-  }
-
-  &::after {
-    right: 0;
-  }
-`
-
-export const ScaleIndicator: FC = () => {
-  const { t } = useTranslation()
-  const { store } = useStore()
-
-  const yearsPer100Pixel = 100 / store.scale
+  const yearsPer100Pixel = 100 / scale
 
   return (
-    <Wrapper>
-      {yearsPer100Pixel} {t('time.year', { count: yearsPer100Pixel })}{' '}
-      <Indicator />
-    </Wrapper>
+    <div className={css.ScaleIndicator}>
+      <div className={css.ScaleIndicator_line} /> {yearsPer100Pixel}{' '}
+      {t('time.year', { count: yearsPer100Pixel })}
+    </div>
   )
 }

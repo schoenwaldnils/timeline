@@ -1,48 +1,16 @@
-import styled from '@emotion/styled'
-import { FC } from 'react'
-import { mergeRefs } from 'react-merge-refs'
+import { RefObject } from 'react'
 
 import { TimelineEvent } from '@/@types/TimelineEvent.d'
 import { Timespan as TimespanType } from '@/@types/Timespan.d'
 import { Event } from '@/components/Event'
 import { TimelineCursor } from '@/components/TimelineCursor'
 import { Timespan } from '@/components/Timespan'
-import { zIndexes } from '@/data/constants'
 import { useMousePosition } from '@/hooks/useMousePosition'
-import { useScrollPosition } from '@/hooks/useScrollPosition'
-import { checkForTouchDevice } from '@/js/checkForTouchDevice'
+import { checkForTouchDevice } from '@/utils/checkForTouchDevice'
 
 import { getTimelineWidth } from './getTimelineWidth'
+import css from './Timeline.module.css'
 import { TimelineNumbers } from './TimelineNumbers'
-
-const TimelineWrapper = styled.div``
-
-interface ContainerProps {
-  rows: number
-  width: number
-  scale: number
-}
-
-const TimelineContainer = styled.div<ContainerProps>`
-  --paddingTop: 4rem;
-  position: relative;
-  width: ${({ width }) => `${width}px`};
-  height: calc(${(p) => p.rows} * (2em + 5px) + var(--paddingTop));
-  min-height: 100%;
-  padding-bottom: 2rem;
-  font-size: 12px;
-`
-
-const Content = styled.div`
-  z-index: ${zIndexes.timelineContent};
-  display: grid;
-  grid-template-areas:
-    'times'
-    'events';
-  grid-gap: 0.5rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-`
 
 interface TimelineViewProps {
   rows: number
@@ -51,48 +19,44 @@ interface TimelineViewProps {
   startYear: number
   endYear: number
   scale?: number
-  ref?: HTMLElement
+  containerRef?: RefObject<HTMLDivElement | null>
 }
 
-export const TimelineView: FC<TimelineViewProps> = ({
+export const TimelineView = ({
   rows,
   events = [],
   timespans = [],
   startYear,
   endYear,
   scale = 1,
-}) => {
-  const { mousePosition, scrollRef } = useMousePosition()
-  const [containerRef, elementRef] = useScrollPosition()
+  containerRef,
+}: TimelineViewProps) => {
+  const mousePosition = useMousePosition(containerRef)
 
   const width = getTimelineWidth(startYear, endYear, scale)
   const isTouchDevice = checkForTouchDevice()
   const showCursor = !!(!isTouchDevice && mousePosition.xElement)
 
   return (
-    <TimelineWrapper ref={containerRef}>
-      <TimelineContainer
-        ref={mergeRefs([elementRef, scrollRef])}
-        rows={rows}
-        width={width}
-        scale={scale}
-      >
-        <TimelineNumbers
-          startYear={startYear}
-          endYear={endYear}
-          scale={scale}
-        />
+    <div
+      className={css.Timeline}
+      style={{
+        width,
+        height: `calc(${rows} * (2em + 5px) + var(--paddingTop))`,
+      }}
+      ref={containerRef}
+    >
+      <TimelineNumbers startYear={startYear} endYear={endYear} scale={scale} />
 
-        <Content>
-          {events.map((event) => (
-            <Event {...event} key={event.id} />
-          ))}
-          {timespans.map((timespan) => (
-            <Timespan {...timespan} key={timespan.id} />
-          ))}
-        </Content>
-        {showCursor && <TimelineCursor pixelYear={mousePosition.xElement} />}
-      </TimelineContainer>
-    </TimelineWrapper>
+      <div className={css.Timeline_content}>
+        {events.map((event) => (
+          <Event {...event} key={event.id} />
+        ))}
+        {timespans.map((timespan) => (
+          <Timespan {...timespan} key={timespan.id} />
+        ))}
+      </div>
+      {showCursor && <TimelineCursor pixelYear={mousePosition.xElement} />}
+    </div>
   )
 }

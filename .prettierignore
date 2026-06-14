@@ -1,11 +1,8 @@
-build/
-__temp__/
-out/
 .next/
+out/
+build/
 node_modules/
-/infrastructure/
-bundles/
-scripts/
-
-generated
-codegen.yml
+storybook-static/
+pnpm-lock.yaml
+next-env.d.ts
+src/@types/generated/

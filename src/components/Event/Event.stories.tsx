@@ -1,15 +1,8 @@
-import { action } from '@storybook/addon-actions'
-import { FC } from 'react'
-
-import { EventView } from './EventView'
+import { Event } from './Event'
 
 export default {
   title: 'Event',
-  component: EventView,
+  component: Event,
 }
 
-export const Event: FC = () => (
-  <EventView pixelStart={50} changeContent={action('changeContent')}>
-    Test Event
-  </EventView>
-)
+export const event = () => <Event type="event" id="test" pixelStart={50} name="Test Event" />

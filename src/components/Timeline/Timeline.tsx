@@ -1,22 +1,37 @@
-import { FC } from 'react'
+'use client'
 
-import { useStore } from '@/components/Store'
+import dynamic from 'next/dynamic'
+import { RefObject } from 'react'
+
 import { YEARS_AFTER_ZERO, YEARS_BEFORE_ZERO } from '@/data/constants'
-import { TimelineData } from '@/js/objectFormating/formatTimelineData'
+import { useScaleStore } from '@/hooks/useScaleStore'
+import { useStore } from '@/hooks/useStore'
+import { formatTimelineData, TimelineQueryData } from '@/utils/objectFormating/formatTimelineData'
 
-import { TimelineView } from './TimelineView'
+const TimelineView = dynamic(() => import('./TimelineView').then((m) => m.TimelineView), {
+  ssr: false,
+})
 
-export const Timeline: FC<{ data: TimelineData }> = ({ data }) => {
-  const { store } = useStore()
+export const Timeline = ({
+  data,
+  containerRef,
+}: {
+  data: TimelineQueryData
+  containerRef: RefObject<HTMLDivElement | null>
+}) => {
+  const scale = useScaleStore((state) => state.scale)
+  const filter = useStore((state) => state.filter)
+  const formatedData = formatTimelineData(data, scale, filter)
 
   return (
     <TimelineView
-      rows={data.rows}
-      timespans={data.timespans}
-      events={data.events}
+      rows={formatedData.rows}
+      timespans={formatedData.timespans}
+      events={formatedData.events}
       startYear={YEARS_BEFORE_ZERO}
       endYear={YEARS_AFTER_ZERO}
-      scale={store.scale}
+      scale={scale}
+      containerRef={containerRef}
     />
   )
 }

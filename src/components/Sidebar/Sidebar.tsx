@@ -1,32 +1,61 @@
-import { FC, useState } from 'react'
+'use client'
 
-import { ContentfulContent } from '@/components/Contentful'
-import { CLOSE_SIDEBAR, useStore } from '@/components/Store'
+import { useTranslations } from 'next-intl'
+import { MdVerticalAlignBottom } from 'react-icons/md'
+import { useSwipeable } from 'react-swipeable'
+import { useShallow } from 'zustand/react/shallow'
 
-import { SidebarView } from './SidebarView'
+import { useSidebarStore } from '@/hooks/useSidebarStore'
 
-interface SidebarProps {
-  isActive: boolean
-  contentId: string
-}
+import { SidebarContent } from '../SidebarContent'
+import css from './Sidebar.module.css'
 
-export const Sidebar: FC<SidebarProps> = ({ isActive = false, contentId }) => {
-  const { dispatch } = useStore()
-  const [state, setState] = useState({ id: undefined, content: null })
+export const Sidebar = () => {
+  const { active, type, id, hideSidebar } = useSidebarStore(
+    useShallow((state) => ({
+      active: state.active,
+      type: state.type,
+      id: state.id,
+      hideSidebar: state.hideSidebar,
+    })),
+  )
 
-  if (contentId && contentId !== state.id) {
-    setState({ id: contentId, content: <ContentfulContent id={contentId} /> })
-  }
-
-  const handleCloseSidebar = () => {
-    dispatch({ type: CLOSE_SIDEBAR })
-  }
+  const t = useTranslations()
+  const handlers = useSwipeable({
+    onSwipedRight: hideSidebar,
+    delta: 30,
+  })
 
   return (
-    <SidebarView isActive={isActive} closeSidebar={handleCloseSidebar}>
-      {state.content}
-    </SidebarView>
+    <div
+      className={css.Sidebar}
+      role="dialog"
+      {...handlers}
+      style={
+        active
+          ? {
+              opacity: 1,
+              transform: 'translateX(-100%)',
+              transition: 'transform 300ms, opacity 50ms 0ms',
+            }
+          : {}
+      }
+    >
+      <div className={css.Sidebar_content}>
+        {type && id && <SidebarContent type={type} id={id} />}
+      </div>
+
+      <button
+        className={css.Sidebar_close}
+        onClick={hideSidebar}
+        aria-label={t('ui.close-sidebar')}
+      >
+        <MdVerticalAlignBottom
+          style={{
+            transform: 'rotate(-90deg)',
+          }}
+        />
+      </button>
+    </div>
   )
 }
-
-export default Sidebar

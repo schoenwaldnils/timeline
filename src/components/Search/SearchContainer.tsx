@@ -1,35 +1,31 @@
-import { FC } from 'react'
-import { useHits } from 'react-instantsearch-hooks'
+import { useHits } from 'react-instantsearch'
 
 import { Tooltip } from '@/components/Tooltip'
 
+import css from './Search.module.css'
 import { SearchBar } from './SearchBar'
 import { SearchHits } from './SearchHits'
 import { SearchProvider } from './SearchProvider'
 
-const SearchBox: FC<{ onHitClick: () => void }> = ({ onHitClick }) => {
+const SearchBox = ({ onHitClick }: { onHitClick: () => void }) => {
   const { results } = useHits()
 
   return (
-    <>
+    <div className={css.Search}>
       <SearchBar />
-      {results.query && (
+      {results?.query && (
         <Tooltip>
           <SearchHits onHitClick={onHitClick} />
         </Tooltip>
       )}
-    </>
+    </div>
   )
 }
 
-export const SearchContainer: FC<{ onHitClick: () => void }> = ({
-  onHitClick,
-}) => {
+export const SearchContainer = ({ onHitClick }: { onHitClick: () => void }) => {
   return (
     <SearchProvider>
       <SearchBox onHitClick={onHitClick} />
     </SearchProvider>
   )
 }
-
-export default SearchContainer

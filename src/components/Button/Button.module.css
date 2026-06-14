@@ -1,0 +1,32 @@
+.Button {
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+}
+
+.Button:disabled {
+  color: var(--Button-color--disabled);
+}
+
+.Button__square {
+  composes: Button;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5em;
+  height: 1.5em;
+  font-family: monospace;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--Button-color);
+  background-color: var(--Button-backgroundColor);
+  border-radius: 4px;
+  box-shadow: 0 0.125rem 0.25rem 0 #0007;
+}

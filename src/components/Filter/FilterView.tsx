@@ -1,131 +1,85 @@
-import styled from '@emotion/styled'
-import { useTranslation } from 'next-i18next'
-import { ChangeEvent, FC, forwardRef, MouseEvent, Ref } from 'react'
+import { useTranslations } from 'next-intl'
+import { ChangeEvent, forwardRef, MouseEvent, Ref } from 'react'
 
 import { Tooltip } from '@/components/Tooltip'
 
+import css from './Filter.module.css'
 import { ReactComponent as FilterIcon } from './filterIcon.svg'
-
-const Wrapper = styled.div`
-  position: relative;
-  flex-shrink: 0;
-`
-
-const IconButton = styled.button`
-  display: flex;
-  align-items: center;
-  padding: 0;
-  color: inherit;
-  background: none;
-  border: 0;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-appearance: none;
-`
-
-const Icon = styled(FilterIcon)`
-  display: block;
-  width: 1em;
-  height: 1em;
-  font-size: 1.25rem;
-
-  > path {
-    fill: currentColor;
-  }
-`
-
-const Label = styled.label`
-  padding: 0.5em 0.7em;
-  font-family: inherit;
-  font-size: 0.75rem;
-  font-weight: 300;
-  line-height: 1;
-  text-transform: capitalize;
-`
-
-const InputEl = styled.div`
-  display: flex;
-  width: max-content;
-
-  > ${Label} {
-    flex-shrink: 0;
-  }
-`
-
-const Checkbox = styled.input`
-  margin: 0 0.75em 0 0;
-`
 
 interface FilterViewProps {
   isActive?: boolean
   toggleIsActive: (event: MouseEvent) => void
-  handleChange: (event: ChangeEvent) => void
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void
   filterState: {
-    personsAreActive: boolean
-    timesAreActive: boolean
-    eventsAreActive: boolean
+    showPersons: boolean
+    showTimes: boolean
+    showEvents: boolean
   }
-  ref?: Ref<HTMLDivElement>
 }
 
-export const FilterView: FC<FilterViewProps> = forwardRef(
-  ({ isActive = false, toggleIsActive, handleChange, filterState }, ref) => {
-    const { t } = useTranslation()
+export const FilterView = forwardRef(
+  (
+    { isActive = false, toggleIsActive, handleChange, filterState }: FilterViewProps,
+    ref: Ref<HTMLDivElement>,
+  ) => {
+    const t = useTranslations('ui')
 
     const filterElements = [
       {
         id: 'persons',
-        label: t('ui.person', { count: 2 }),
-        name: 'personsAreActive',
-        value: filterState.personsAreActive,
+        label: t('person', { count: 2 }),
+        name: 'showPersons',
+        value: filterState.showPersons,
       },
       {
         id: 'times',
-        label: t('ui.time', { count: 2 }),
-        name: 'timesAreActive',
-        value: filterState.timesAreActive,
+        label: t('time', { count: 2 }),
+        name: 'showTimes',
+        value: filterState.showTimes,
       },
       {
         id: 'events',
-        label: t('ui.event', { count: 2 }),
-        name: 'eventsAreActive',
-        value: filterState.eventsAreActive,
+        label: t('event', { count: 2 }),
+        name: 'showEvents',
+        value: filterState.showEvents,
       },
     ]
 
     return (
-      <Wrapper ref={ref}>
-        <IconButton
+      <div className={css.Filter} ref={ref}>
+        <button
+          className={css.IconButton}
           onClick={toggleIsActive}
-          aria-label={t('ui.filter-elements')}
+          aria-label={t('filter-elements')}
         >
-          <Icon
+          <FilterIcon
+            className={css.Icon}
             aria-hidden="true"
             focusable="false"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentcolor"
           />
-        </IconButton>
+        </button>
 
         {isActive && (
           <Tooltip alignRight>
             {filterElements.map(({ id, name, label, value }) => (
-              <InputEl key={`checkbox_${id}`}>
-                <Label htmlFor={`checkbox_${id}`}>
-                  <Checkbox
-                    id={`checkbox_${id}`}
-                    type="checkbox"
-                    name={name}
-                    onChange={handleChange}
-                    checked={value}
-                  />
-                  {label}
-                </Label>
-              </InputEl>
+              <label className={css.Label} key={`checkbox_${id}`}>
+                <input
+                  className={css.Checkbox}
+                  id={`checkbox_${id}`}
+                  type="checkbox"
+                  name={name}
+                  onChange={handleChange}
+                  checked={value}
+                />
+                {label}
+              </label>
             ))}
           </Tooltip>
         )}
-      </Wrapper>
+      </div>
     )
   },
 )

@@ -1,0 +1,8 @@
+{
+  "environmentId": "master",
+  "exportDir": "contentful-export",
+  "contentFile": "export.json",
+  "downloadAssets": true,
+  "saveFile": true,
+  "includeDrafts": true
+}

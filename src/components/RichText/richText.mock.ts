@@ -1,529 +1,86 @@
-import { BLOCKS, Document } from '@contentful/rich-text-types'
+import type { RichTextContent } from '@/@types/RichText.d'
 
-export const richText: Document = {
-  nodeType: BLOCKS.DOCUMENT,
-  data: {},
-  content: [
-    {
-      nodeType: BLOCKS.HEADING_1,
-      data: {},
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Heading1',
-          marks: [],
-          data: {},
-        },
-      ],
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Lorem',
-          marks: [],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: ' ipsum dolor',
-          marks: [
-            {
-              type: 'italic',
-            },
-          ],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: ' sit ',
-          marks: [],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: 'amet',
-          marks: [
-            {
-              type: 'bold',
-            },
-          ],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: ' consectetur ',
-          marks: [],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: 'adipisicing',
-          marks: [
-            {
-              type: 'underline',
-            },
-          ],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value:
-            ' elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. Aliquam, itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.UL_LIST,
-      content: [
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          data: {},
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Lorem',
-                  marks: [],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-          ],
-        },
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Ipsum',
-                  marks: [],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-          ],
-          data: {},
-        },
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Dolor',
-                  marks: [],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-            {
-              nodeType: BLOCKS.UL_LIST,
-              content: [
-                {
-                  nodeType: BLOCKS.LIST_ITEM,
-                  content: [
-                    {
-                      nodeType: BLOCKS.PARAGRAPH,
-                      content: [
-                        {
-                          nodeType: 'text',
-                          value: 'Sit',
-                          marks: [],
-                          data: {},
-                        },
-                      ],
-                      data: {},
-                    },
-                  ],
-                  data: {},
-                },
-                {
-                  nodeType: BLOCKS.LIST_ITEM,
-                  content: [
-                    {
-                      nodeType: BLOCKS.PARAGRAPH,
-                      content: [
-                        {
-                          nodeType: 'text',
-                          value: 'Amet',
-                          marks: [],
-                          data: {},
-                        },
-                      ],
-                      data: {},
-                    },
-                  ],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-          ],
-          data: {},
-        },
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Modi',
-                  marks: [],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-          ],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. Aliquam, itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.OL_LIST,
-      content: [
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          data: {},
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Lorem',
-                  marks: [],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-          ],
-        },
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Ipsum',
-                  marks: [],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-            {
-              nodeType: BLOCKS.OL_LIST,
-              content: [
-                {
-                  nodeType: BLOCKS.LIST_ITEM,
-                  content: [
-                    {
-                      nodeType: BLOCKS.PARAGRAPH,
-                      content: [
-                        {
-                          nodeType: 'text',
-                          value: 'Dolor',
-                          marks: [],
-                          data: {},
-                        },
-                      ],
-                      data: {},
-                    },
-                    {
-                      nodeType: BLOCKS.OL_LIST,
-                      content: [
-                        {
-                          nodeType: BLOCKS.LIST_ITEM,
-                          content: [
-                            {
-                              nodeType: BLOCKS.PARAGRAPH,
-                              content: [
-                                {
-                                  nodeType: 'text',
-                                  value: 'Sit',
-                                  marks: [],
-                                  data: {},
-                                },
-                              ],
-                              data: {},
-                            },
-                            {
-                              nodeType: BLOCKS.OL_LIST,
-                              content: [
-                                {
-                                  nodeType: BLOCKS.LIST_ITEM,
-                                  content: [
-                                    {
-                                      nodeType: BLOCKS.PARAGRAPH,
-                                      content: [
-                                        {
-                                          nodeType: 'text',
-                                          value: 'Amet',
-                                          marks: [],
-                                          data: {},
-                                        },
-                                      ],
-                                      data: {},
-                                    },
-                                  ],
-                                  data: {},
-                                },
-                              ],
-                              data: {},
-                            },
-                          ],
-                          data: {},
-                        },
-                      ],
-                      data: {},
-                    },
-                  ],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-          ],
-          data: {},
-        },
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Modi',
-                  marks: [],
-                  data: {},
-                },
-              ],
-              data: {},
-            },
-          ],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. Aliquam, itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.QUOTE,
-      content: [
-        {
-          nodeType: BLOCKS.PARAGRAPH,
-          data: {},
-          content: [
-            {
-              nodeType: 'text',
-              value: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-              marks: [],
-              data: {},
-            },
-          ],
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. Aliquam, itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.HR,
-      content: [],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. ',
-          marks: [],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: 'Aliquam',
-          marks: [
-            {
-              type: 'code',
-            },
-          ],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: ', itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value: "<Query query={personById} variables={{ id, locale: 'de' }}>",
-          marks: [
-            {
-              type: 'code',
-            },
-          ],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. Aliquam, itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.EMBEDDED_ASSET,
-      content: [],
-      data: {
-        target: {
-          sys: {
-            id: '7QNjYQCgQ8qaaikGqm2eG',
-            type: 'Link',
-            linkType: 'Asset',
-          },
-        },
+const text = (value: string, format = 0) => ({
+  type: 'text',
+  detail: 0,
+  format,
+  mode: 'normal',
+  style: '',
+  text: value,
+  version: 1,
+})
+
+const paragraph = (...children: ReturnType<typeof text>[]) => ({
+  type: 'paragraph',
+  children,
+  direction: 'ltr' as const,
+  format: '' as const,
+  indent: 0,
+  version: 1,
+  textFormat: 0,
+})
+
+const heading = (tag: 'h1' | 'h2' | 'h3', value: string) => ({
+  type: 'heading',
+  tag,
+  children: [text(value)],
+  direction: 'ltr' as const,
+  format: '' as const,
+  indent: 0,
+  version: 1,
+})
+
+const listItem = (value: string) => ({
+  type: 'listitem',
+  children: [text(value)],
+  direction: 'ltr' as const,
+  format: '' as const,
+  indent: 0,
+  version: 1,
+  value: 1,
+})
+
+const list = (listType: 'bullet' | 'number', ...values: string[]) => ({
+  type: 'list',
+  listType,
+  start: 1,
+  tag: listType === 'number' ? 'ol' : 'ul',
+  children: values.map(listItem),
+  direction: 'ltr' as const,
+  format: '' as const,
+  indent: 0,
+  version: 1,
+})
+
+const LOREM =
+  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor.'
+
+export const richText: RichTextContent = {
+  root: {
+    type: 'root',
+    children: [
+      heading('h1', 'Heading1'),
+      paragraph(text('Lorem'), text(' ipsum dolor', 2), text(' sit '), text('amet', 1)),
+      list('bullet', 'Lorem', 'Ipsum', 'Dolor'),
+      paragraph(text(LOREM)),
+      list('number', 'Lorem', 'Ipsum', 'Dolor'),
+      {
+        type: 'quote',
+        children: [text('Lorem ipsum dolor sit amet consectetur adipisicing elit.')],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
       },
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. Aliquam, itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.HEADING_2,
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Heading2',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. Aliquam, itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.HEADING_3,
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Heading3',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: 'text',
-          value:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, neque? Odio dolorem, possimus nostrum velit suscipit non dolor. Quidem placeat veniam commodi! Hic facilis fugiat possimus aliquid. Aliquam, itaque omnis!',
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-  ],
+      { type: 'horizontalrule', version: 1 },
+      heading('h2', 'Heading2'),
+      paragraph(text(LOREM)),
+      heading('h3', 'Heading3'),
+      paragraph(text(LOREM)),
+    ],
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+    version: 1,
+  },
 }

@@ -1,21 +1,17 @@
-import { FC } from 'react'
-
-import { TableList as TableListComponent } from './index'
+import { TableList, TableListItem } from './index'
 
 export default {
   title: 'Table List',
-  component: TableListComponent,
+  component: TableList,
   parameters: {
     percy: { skip: true },
   },
 }
 
-export const TableList: FC = () => (
-  <TableListComponent
-    list={{
-      TestItem1: 'Lorem',
-      TestItem2: 'Ipsum',
-      TestItem3: 'Dolor',
-    }}
-  />
+export const tableList = () => (
+  <TableList>
+    <TableListItem title="TestItem1">Lorem</TableListItem>
+    <TableListItem title="TestItem2">Ipsum</TableListItem>
+    <TableListItem title="TestItem3">Dolor</TableListItem>
+  </TableList>
 )

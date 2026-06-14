@@ -1,18 +1,12 @@
-import styled from '@emotion/styled'
 import { parse as qsParse, stringify as qsStringify } from 'qs'
-import { FC } from 'react'
 
 import { A } from '@/components/Typography'
 
-const Wrapper = styled.div`
-  margin-bottom: 1em;
-`
-
-interface ContentfulLinkProps {
+interface LinkToWOLProps {
   wolLink: string
 }
 
-export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
+export const LinkToWOL = ({ wolLink }: LinkToWOLProps) => {
   let pathName = wolLink
   let paragraph: string | undefined
 
@@ -20,7 +14,8 @@ export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
     let paragraphPlain: string
     ;[pathName, paragraphPlain] = wolLink.split('#')
 
-    paragraph = String(qsParse(paragraphPlain).h)
+    const h = qsParse(paragraphPlain).h
+    paragraph = typeof h === 'string' ? h : undefined
   }
 
   const pathParts = pathName.split('/')
@@ -42,15 +37,13 @@ export const LinkToWOL: FC<ContentfulLinkProps> = ({ wolLink }) => {
     paragraph,
   }
 
-  const jwFinderLink = `https://www.jw.org/finder?${qsStringify(
-    jwFinderParams,
-  )}`
+  const jwFinderLink = `https://www.jw.org/finder?${qsStringify(jwFinderParams)}`
 
   return (
-    <Wrapper>
+    <div style={{ marginBottom: '1em' }}>
       <A href={jwFinderLink} target="_blank" rel="noopener noreferrer">
         WOL-link
       </A>
-    </Wrapper>
+    </div>
   )
 }

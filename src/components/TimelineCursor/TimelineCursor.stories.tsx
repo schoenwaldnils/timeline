@@ -1,6 +1,3 @@
-import styled from '@emotion/styled'
-import { FC } from 'react'
-
 import { TimelineCursorView } from './TimelineCursorView'
 
 export default {
@@ -11,16 +8,16 @@ export default {
   },
 }
 
-const Wrapper = styled.div`
-  width: 1500px;
-  height: 400px;
-  background-color: #ff000050;
-`
-
-export const TimelineCursor: FC = () => {
+export const TimelineCursor = () => {
   return (
-    <Wrapper>
+    <div
+      style={{
+        width: '1500px',
+        height: '400px',
+        backgroundColor: '#ff000050',
+      }}
+    >
       <TimelineCursorView pixelYear={100} scale={1} />
-    </Wrapper>
+    </div>
   )
 }

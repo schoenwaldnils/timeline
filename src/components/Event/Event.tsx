@@ -1,34 +1,23 @@
-import { FC } from 'react'
+'use client'
 
-import { TimelineEvent } from '@/@types/TimelineEvent.d'
-import { CHANGE_CONTENT, useStore } from '@/components/Store'
+import type { TimelineEvent } from '@/@types/TimelineEvent.d'
+import { useSidebarStore } from '@/hooks/useSidebarStore'
 
-import { EventView } from './EventView'
+import css from './Event.module.css'
 
-export const Event: FC<TimelineEvent> = ({
-  id,
-  name,
-  pixelStart,
-  rowIndex,
-  zIndex,
-}) => {
-  const { dispatch } = useStore()
-
-  const changeContent = () => {
-    dispatch({
-      type: CHANGE_CONTENT,
-      contentId: id,
-    })
-  }
+export const Event = ({ id, name, pixelStart, rowIndex }: TimelineEvent) => {
+  const setSidebar = useSidebarStore((state) => state.setSidebar)
 
   return (
-    <EventView
-      pixelStart={pixelStart}
-      rowIndex={rowIndex}
-      zIndex={zIndex}
-      changeContent={changeContent}
+    <button
+      className={css.Event}
+      style={{
+        marginTop: `calc(${rowIndex} * (2em + 4px))`,
+        marginLeft: `${pixelStart}px`,
+      }}
+      onClick={() => setSidebar({ type: 'event', id })}
     >
       {name}
-    </EventView>
+    </button>
   )
 }

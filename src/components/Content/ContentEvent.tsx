@@ -1,30 +1,22 @@
-import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
+import { useTranslations } from 'next-intl'
 
 import { Event } from '@/@types/Event.d'
 import { OurTime } from '@/components//OurTime'
-import { TableList } from '@/components/TableList'
+import { TableList, TableListItem } from '@/components/TableList'
 
 import { LinkToWOL } from './ContentLinkWol'
-import { ContentBox, ContentTemplate } from './ContentTemplate'
+import { ContentTemplate } from './ContentTemplate'
 
-export const ContentEvent: FC<Event> = ({ id, name, year, image, wolLink }) => {
-  const { t } = useTranslation()
+export const ContentEvent = ({ id, name, year, wolLink }: Event) => {
+  const t = useTranslations()
+
   return (
-    <ContentTemplate title={name} image={image} idContentful={id}>
-      <ContentBox>
-        <TableList
-          list={{
-            [t('time.year', { count: 1 })]: OurTime(year),
-          }}
-        />
-      </ContentBox>
+    <ContentTemplate title={name} editType="event" editId={id}>
+      <TableList>
+        <TableListItem title={t('time.year', { count: 1 })}>{OurTime(year)}</TableListItem>
+      </TableList>
 
-      {wolLink && (
-        <ContentBox>
-          <LinkToWOL wolLink={wolLink} />
-        </ContentBox>
-      )}
+      {wolLink && <LinkToWOL wolLink={wolLink} />}
     </ContentTemplate>
   )
 }

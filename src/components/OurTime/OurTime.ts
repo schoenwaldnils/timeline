@@ -1,8 +1,8 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
 export const OurTime = (year: number): string => {
-  const { t } = useTranslation()
+  const t = useTranslations()
 
   const timeExtension = useMemo(() => t('time.extension-positive'), [t])
 

@@ -1,0 +1,22 @@
+.Timespan {
+  composes: Button from '../Button/Button.module.css';
+
+  position: absolute;
+  z-index: var(--z-timespan);
+  display: flex;
+  align-items: center;
+  grid-area: times;
+  height: 2em;
+  margin-bottom: 1px;
+  padding: 0 0.5em;
+  color: var(--Timespan-color);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.Timespan_name {
+  position: sticky;
+  left: 0.5em;
+}
