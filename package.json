@@ -7,16 +7,21 @@
   "scripts": {
     "dev": "next dev -p 3002 --experimental-https",
     "build": "next build",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
+    "lint:types": "tsc --noEmit",
+    "lint:ts": "eslint",
+    "lint:ts-fix": "eslint --fix",
     "lint:md": "remark . --frail --quiet",
-    "lint:md:fix": "remark . --output --quiet",
-    "test:types": "tsc --noEmit",
+    "lint:md-fix": "remark . --output --quiet",
+    "lint": "pnpm lint:types && pnpm lint:ts && pnpm lint:md",
+    "lint-fix": "pnpm lint:ts-fix && pnpm lint:md-fix",
     "test:int": "vitest run --config ./vitest.config.mts",
     "test:e2e": "playwright test",
     "test": "pnpm test:types && pnpm test:int && pnpm test:e2e && pnpm lint",
     "generate:importmap": "payload generate:importmap",
     "generate:payload-types": "payload generate:types",
+    "migrate": "payload migrate",
+    "migrate:create": "payload migrate:create",
+    "migrate:status": "payload migrate:status",
     "generate:favicons": "real-favicon generate faviconDescription.json faviconData.json public/assets/images/favicons",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
@@ -44,6 +49,9 @@
     "email": "nils@schoen.world"
   },
   "license": "ISC",
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",

@@ -1,0 +1,42 @@
+name: schoen-world
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: lint ts
+        run: pnpm lint:ts
+
+      - name: lint md
+        run: pnpm lint:md
+
+      - name: lint types
+        run: pnpm lint:types
+
+      - name: build
+        run: pnpm build

@@ -17,7 +17,7 @@ Built with [Payload CMS](https://payloadcms.com/) (content + admin), [Next.js](h
    ```
 
 2. **Configure env** — copy `.env.example` to `.env` and fill in the secrets
-   (`PAYLOAD_SECRET`, the `ALGOLIA_*` keys, etc.). `DATABASE_URI` already points at the
+   (`PAYLOAD_SECRET`, the `ALGOLIA_*` keys, etc.). `POSTGRES_URL` already points at the
    local Docker Postgres.
 
 3. **Start the dev server** (Next.js + Payload admin, HTTPS on port `3002`):
@@ -57,5 +57,8 @@ pnpm reindex:algolia       # populate the search indices
 
 ## Production
 
-Set `DATABASE_URI` to the Neon pooled connection string and the `ALGOLIA_*` / `PAYLOAD_SECRET`
-secrets in the deployment environment. Run `pnpm build` then `pnpm start`.
+Deployed on Vercel + Neon. The DB connection (`POSTGRES_URL`, pooled) comes from the
+Vercel/Neon integration automatically; add the app secrets (`PAYLOAD_SECRET`, `CRON_SECRET`,
+`PREVIEW_SECRET`, the three `ALGOLIA_*` keys) in the Vercel project env. The Vercel build
+command runs `payload migrate` (against the unpooled URL) before `next build`. See
+`docs/database-setup.md` for the migration workflow.

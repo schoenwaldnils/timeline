@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "POSTGRES_URL=\"$POSTGRES_URL_NON_POOLING\" pnpm payload migrate && pnpm build"
+}
