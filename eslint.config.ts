@@ -60,7 +60,10 @@ export default defineConfig([
       // ESLint's `Plugin` index signature under `defineConfig`'s stricter types,
       // though the runtime shape is a valid plugin.
       'react-hooks': reactHooks as ESLint.Plugin,
-      '@next/next': nextPlugin,
+      // @next/eslint-plugin-next is typed against @types/eslint, whose rule/config
+      // shapes no longer line up with the @eslint/core types behind `defineConfig`.
+      // The runtime shape is a valid plugin, so launder it through `unknown`.
+      '@next/next': nextPlugin as unknown as ESLint.Plugin,
       'simple-import-sort': simpleImportSort,
     },
     rules: {

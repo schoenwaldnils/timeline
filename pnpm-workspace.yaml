@@ -1,0 +1,21 @@
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  bufferutil: true
+  esbuild: true
+  sharp: true
+  simple-git-hooks: true
+  spawn-sync: true
+  utf-8-validate: true
+minimumReleaseAgeExclude:
+  - '@playwright/test@1.61.0'
+  - '@vitest/expect@4.1.9'
+  - '@vitest/mocker@4.1.9'
+  - '@vitest/pretty-format@4.1.9'
+  - '@vitest/runner@4.1.9'
+  - '@vitest/snapshot@4.1.9'
+  - '@vitest/spy@4.1.9'
+  - '@vitest/utils@4.1.9'
+  - playwright-core@1.61.0
+  - playwright@1.61.0
+  - vitest@4.1.9
