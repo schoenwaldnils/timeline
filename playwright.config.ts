@@ -1,8 +1,12 @@
 import { defineConfig, devices } from '@playwright/test'
 
-// The dev server runs on port 3002 with `--experimental-https` (self-signed cert),
-// so the baseURL is https and TLS errors are ignored.
-const baseURL = 'https://localhost:3002'
+const isCI = !!process.env.CI
+
+// In CI the suite runs against a production server (`next start`, plain http) so it
+// exercises the build that ships — and with NODE_ENV=production Payload's schema
+// `push` is off, keeping the run read-only. Locally it runs against the dev server
+// (`next dev --experimental-https`, self-signed cert → https, TLS errors ignored).
+const baseURL = isCI ? 'http://localhost:3002' : 'https://localhost:3002'
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -17,17 +21,20 @@ export default defineConfig({
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: 'pnpm dev',
+    // CI reuses the `.next` produced by the earlier build step; locally we spin up
+    // the dev server (and reuse one if it's already running).
+    command: isCI ? 'pnpm start' : 'pnpm dev',
     url: baseURL,
     ignoreHTTPSErrors: true,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !isCI,
     timeout: 120_000,
     env: {
       // Algolia is mocked at the network layer in tests (see tests/e2e/fixtures.ts),
       // but the lite client is constructed at module load and throws on an empty
       // appId. next.config.js derives the client-side NEXT_PUBLIC_ALGOLIA_* vars
       // from these server-side ones, so set the production names (see .env.example)
-      // to dummy values to let the dev server boot.
+      // to dummy values to let the dev server boot. In CI these are baked in at
+      // build time instead (see .github/workflows/test.yml).
       ALGOLIA_APPLICATION_ID: 'e2e-test-app-id',
       ALGOLIA_API_KEY: 'e2e-test-search-key',
     },

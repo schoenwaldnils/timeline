@@ -11,6 +11,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+      PREVIEW_SECRET: ${{ secrets.PREVIEW_SECRET }}
+      CRON_SECRET: ${{ secrets.CRON_SECRET }}
+      ALGOLIA_APPLICATION_ID: e2e-test-app-id
+      ALGOLIA_API_KEY: e2e-test-search-key
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
@@ -29,8 +36,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
       - name: test types
         run: pnpm test:types
+
+      - name: build
+        run: pnpm build
 
       - name: test e2e
         run: pnpm test:e2e
@@ -43,6 +56,3 @@ jobs:
 
       - name: lint md
         run: pnpm lint:md
-
-      - name: build
-        run: pnpm build
