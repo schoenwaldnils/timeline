@@ -22,5 +22,14 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
+    env: {
+      // Algolia is mocked at the network layer in tests (see tests/e2e/fixtures.ts),
+      // but the lite client is constructed at module load and throws on an empty
+      // appId. next.config.js derives the client-side NEXT_PUBLIC_ALGOLIA_* vars
+      // from these server-side ones, so set the production names (see .env.example)
+      // to dummy values to let the dev server boot.
+      ALGOLIA_APPLICATION_ID: 'e2e-test-app-id',
+      ALGOLIA_API_KEY: 'e2e-test-search-key',
+    },
   },
 })
