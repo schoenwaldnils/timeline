@@ -29,14 +29,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: test types
+        run: pnpm test:types
+
+      - name: test e2e
+        run: pnpm test:e2e
+
+      - name: test int
+        run: pnpm test:int
+
       - name: lint ts
         run: pnpm lint:ts
 
       - name: lint md
         run: pnpm lint:md
-
-      - name: lint types
-        run: pnpm lint:types
 
       - name: build
         run: pnpm build
