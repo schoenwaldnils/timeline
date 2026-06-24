@@ -7,7 +7,10 @@ import { expect, test } from '@playwright/test'
 // Vercel-bundled serverless runtime — the only place function file-tracing
 // failures (e.g. a missing native .so) actually surface. Asserting the HTTP
 // status, not just the URL, is what catches a 500.
-const paths = ['/de', '/en', '/sw.js']
+// The two locale roots — the real pages. (`/sw.js` appeared in the crash logs
+// only because the sharp failure 500'd every route; it's not implemented and
+// returns 404 on a healthy deploy, so it's not a smoke target.)
+const paths = ['/de', '/en']
 
 for (const path of paths) {
   test(`${path} returns 200`, async ({ page }) => {
