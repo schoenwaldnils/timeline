@@ -21,6 +21,7 @@ tmp
 # test artifacts
 test-results
 playwright-report
+.playwright-cli
 coverage
 certificates
 media
