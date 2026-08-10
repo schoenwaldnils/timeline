@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 
 import type { AlgoliaIndex } from '@/@types/algolia.d'
 import type { FormatedData } from '@/@types/Data.d'
-import type { Locale } from '@/i18n-config'
 import { fetchContentData } from '@/lib/fetchContentData'
 
 export const useFetchSidebarData = <T extends AlgoliaIndex>({
@@ -17,7 +16,7 @@ export const useFetchSidebarData = <T extends AlgoliaIndex>({
 }): {
   data: FormatedData<T> | null
 } => {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
   const key = `${type}:${id}:${locale}`
   const [result, setResult] = useState<{
     key: string

@@ -1,9 +1,10 @@
+import { getLocale } from 'next-intl/server'
+
 import { Page } from '@/components/Page'
-import { Locale } from '@/i18n-config'
 import { fetchTimelineData } from '@/lib/fetchTimelineData'
 
-export default async function IndexPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params
+export default async function IndexPage() {
+  const locale = await getLocale()
   const timelineData = await fetchTimelineData(locale)
 
   return <Page timelineData={timelineData} />
