@@ -1,0 +1,5 @@
+- [x] fix language of wol links
+- on reload stay at horizontal scroll position
+- fix blurryness. use year +-, or keep min start + blur
+- speed up sidebar content loading
+- add events of child biths to person content page if child birth year is defined and has no blurriness
