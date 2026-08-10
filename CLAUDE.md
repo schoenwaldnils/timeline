@@ -27,3 +27,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Algolia indexing is in collection hooks** (`src/collections/hooks/algolia.ts`),
   not a plugin; it no-ops without `ALGOLIA_*` env or when `DISABLE_ALGOLIA=true`.
   After bulk DB changes, run `pnpm reindex:algolia` rather than relying on the hooks.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

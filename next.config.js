@@ -36,6 +36,10 @@ const svgrOptions = {
 export default withPayload(
   withNextIntl('./src/utils/i18n.ts')({
     reactStrictMode: true,
+    // No `experimental.cacheComponents`/`dynamicIO`/`ppr` here yet. `src/utils/i18n.ts`
+    // resolves the locale via `next/root-params`, which has known interactions with
+    // Cache Components (e.g. `dynamicParams = false` doesn't work under it) — re-check
+    // https://next-intl.dev/blog/nextjs-root-params before turning any of those on.
     webpack: sharedConfig,
     turbopack: {
       rules: {

@@ -5,7 +5,6 @@ import { create } from 'zustand'
 import { Theme } from '@/@types/Theme'
 import { USER_FILTER_KEY, USER_LOCALE_KEY, USER_THEME_KEY } from '@/data/constants'
 import { i18n, Locale } from '@/i18n-config'
-import type { Dictionary } from '@/utils/getDictionary'
 
 type Filter = {
   showPersons: boolean
@@ -15,8 +14,6 @@ type Filter = {
 
 export interface Store {
   locale: Locale
-  dictionary: Dictionary
-  setDictionary: (dictionary: Dictionary) => void
   filter: Filter
   setFilter: (filter: Partial<Store['filter']>) => void
   theme: Theme
@@ -79,8 +76,6 @@ const getTheme = (set: (partial: Partial<Store>) => void): Theme => {
 
 export const useStore = create<Store>((set) => ({
   locale: getLocale(),
-  dictionary: {} as Dictionary,
-  setDictionary: (dictionary) => set(() => ({ dictionary })),
   filter: getFilter(),
   setFilter: (filter: Partial<Store['filter']>) =>
     set((state) => ({ filter: { ...state.filter, ...filter } })),
