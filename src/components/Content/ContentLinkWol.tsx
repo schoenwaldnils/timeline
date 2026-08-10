@@ -1,12 +1,22 @@
+import { useLocale } from 'next-intl'
 import { parse as qsParse, stringify as qsStringify } from 'qs'
 
 import { A } from '@/components/Typography'
+import { Locale } from '@/i18n-config'
 
 interface LinkToWOLProps {
   wolLink: string
 }
 
+// JW.org uses its own legacy per-language codes rather than ISO locale codes.
+const wtLocaleByLocale: Record<Locale, string> = {
+  en: 'E',
+  de: 'X',
+}
+
 export const LinkToWOL = ({ wolLink }: LinkToWOLProps) => {
+  const locale = useLocale()
+
   let pathName = wolLink
   let paragraph: string | undefined
 
@@ -22,16 +32,13 @@ export const LinkToWOL = ({ wolLink }: LinkToWOLProps) => {
 
   const docid = pathParts[pathParts.length - 1]
 
-  const localePlain = pathParts[pathParts.length - 2]
-  const [, wtlocale] = localePlain ? localePlain.split('-') : []
-
-  if (!docid || !wtlocale) {
-    console.error('"docid" or "wtlocale" missing!')
+  if (!docid) {
+    console.error('"docid" missing!')
     return null
   }
 
   const jwFinderParams = {
-    wtlocale: wtlocale.toUpperCase(),
+    wtlocale: wtLocaleByLocale[locale],
     docid,
     srcid: 'link',
     paragraph,
