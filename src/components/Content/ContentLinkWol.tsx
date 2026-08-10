@@ -15,7 +15,7 @@ const wtLocaleByLocale: Record<Locale, string> = {
 }
 
 export const LinkToWOL = ({ wolLink }: LinkToWOLProps) => {
-  const locale = useLocale() as Locale
+  const locale = useLocale()
 
   let pathName = wolLink
   let paragraph: string | undefined
