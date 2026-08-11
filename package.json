@@ -101,7 +101,7 @@
     "@types/array-sort": "^1.0.3",
     "@types/color": "^4.2.1",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
-    "@types/jsdom": "^28.0.3",
+    "@types/jsdom": "^30.0.0",
     "@types/lodash": "^4.17.25",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^26.1.2",
