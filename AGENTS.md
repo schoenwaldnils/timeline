@@ -1,14 +1,13 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for coding agents working in this repository.
 
 ## Read first
 
 - **`README.md`** — architecture overview, scripts/commands, local dev setup, env
   vars, the Algolia and Contentful→Payload migration workflows, testing, and
   deployment. Read it before acting; setup and architecture docs live there, not here.
-- [`~/.claude/docs/component-based-development.md`](~/.claude/docs/component-based-development.md) — UI/component conventions for this React/Next.js codebase.
-- [`~/.claude/docs/linting-and-formatting.md`](~/.claude/docs/linting-and-formatting.md) — ESLint / Prettier / remark / a11y tooling.
+- Follow the repository's UI/component conventions and its ESLint, Prettier, remark, and accessibility tooling.
 
 ## Behavioural rules
 
